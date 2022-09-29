@@ -1,6 +1,6 @@
 
 import React, { useContext, useEffect, useState } from 'react';
-import { Box, Grid, useTheme , Theme, makeStyles, Menu, MenuItem, ListItemText} from '@material-ui/core';
+import { Box, Grid, useTheme , Theme, makeStyles, Menu, MenuItem, ListItemText, Button, Typography} from '@material-ui/core';
 import { Helmet } from 'react-helmet-async';
 import ButtonComp from './../../../../components/ButtonComp/index';
 import { LoginDrawerContext } from './../../../../contexts/LoginDrawerContext';
@@ -13,6 +13,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuPosition: {
     position: 'absolute',
+  },
+  headerTextStyle: {
+    color: theme.Colors.blueMediumDark,
+    fontSize: theme.MetricsSizes.regular,
+    fontWeight: theme.fontWeight.regular,
+    paddingTop: theme.spacing(2),
   }
 }));
 function HeaderRightContent() {
@@ -28,6 +34,13 @@ function HeaderRightContent() {
   };
   return (
     <Grid className={classes.outerContainer}>
+      <Typography className={classes.headerTextStyle}>
+        Home
+        About Us
+        Services
+        Gallery
+        Contact Us
+      
        <ButtonComp    
           aria-controls="login-button-menu"
           aria-haspopup="true"      
@@ -38,8 +51,8 @@ function HeaderRightContent() {
           btnBorderRadius={theme.MetricsSizes.tiny}     
           onClickButton={handleCustomerButtonClick}
         >
-          </ButtonComp>
-  
+        </ButtonComp>
+        </Typography>
         
     </Grid>
   );

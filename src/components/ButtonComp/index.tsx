@@ -15,7 +15,7 @@ type ThemeProps = {
 const useStyles = makeStyles<Theme, ThemeProps>((theme) => {
   return {
     container: {
-      display: 'flex',
+      //display: 'flex',
       width: (props) => props.btnWidth || '100%',
       alignItems: 'center',
       justifyContent: 'center',
