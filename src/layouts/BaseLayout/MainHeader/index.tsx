@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         position: "sticky",
         zIndex: 2,
         top: 0,
-        border: '1px solid blue',
         background: theme.Colors.whitePure,
     },
     leftContainer:{

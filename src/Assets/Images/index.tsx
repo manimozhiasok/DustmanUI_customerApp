@@ -15,6 +15,7 @@ import { ReactComponent as FilterIcon } from './filter.svg'; */
 import DustmanLogoHorizontal from './DustmanLogoHorizontal.svg';
 import  LandingPageArc from './LandingPageArc.svg';
 import PatternDotted from './PatternDotted.svg';
+import LandingPageRecyclingImage from './LandingPageRecyclingImage.svg';
 
 /* import PriceSheet from './PriceSheet.svg';
 import NewOrder from './NewOrder.svg';
@@ -38,7 +39,8 @@ export {
   LogoutIcon, */
   DustmanLogoHorizontal,
   LandingPageArc,
-  PatternDotted
+  PatternDotted,
+  LandingPageRecyclingImage
   /* PriceSheet,
  NewOrder,
    Scheduled,

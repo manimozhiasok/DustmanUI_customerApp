@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import {LandingPageArc} from 'src/Assets/Images'
 import { ButtonComp } from 'src/components';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import {PatternDotted} from 'src/Assets/Images';
+import {PatternDotted, LandingPageRecyclingImage} from 'src/Assets/Images';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
@@ -21,11 +21,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.Colors.blueMediumDark,
   },
   titleStyle: {
-    //fontFamily: 'Space Grotesk',
-    //fontSize: theme.MetricsSizes.xx_large,
-    //fontWeight: theme.fontWeight.bold
-    fontSize: 42,
-    fontWeight: 700,
+    fontFamily: 'Space Grotesk',
+    fontSize: theme.MetricsSizes.xx_large,
+    fontWeight: theme.fontWeight.bold
   },
   subTitleStyle: {
     color: theme.Colors.blueMediumDark,
@@ -38,6 +36,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxHeight: theme.spacing(50),
     maxWidth: theme.spacing(50),
     position: 'absolute',
+  },
+  patternDottedPosition: {
+    position: 'absolute',
+    bottom: 0,
+    width: theme.spacing(53),
   },
   buttonContainer: {
     paddingTop: theme.spacing(3),
@@ -64,7 +67,7 @@ function LandingPageLeftContent() {
           backgroundColor={theme.Colors.primary}     
           iconImage={<ArrowForwardIcon />}   
         ></ButtonComp>
-        <img src={PatternDotted} alt="Pattern Image" className={classes.imageArcPosition}/>
+        <img src={PatternDotted} alt="Pattern Image" className={classes.patternDottedPosition}/>
         </Box>
     </Grid>
     </>
