@@ -7,15 +7,18 @@ import { SidebarProvider } from 'src/contexts/SidebarContext';
 import * as serviceWorker from 'src/serviceWorker';
 import { UserInfoProvider } from './contexts/UserContext';
 import './Translations';
+import { LoginDrawerProvider } from 'src/contexts/LoginDrawerContext';
 
 ReactDOM.render(
   <HelmetProvider>
     <SidebarProvider>
+      <LoginDrawerProvider>
       <UserInfoProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </UserInfoProvider>
+      </LoginDrawerProvider>
     </SidebarProvider>
   </HelmetProvider>,
   document.getElementById('root')

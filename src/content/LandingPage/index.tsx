@@ -1,10 +1,12 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Drawer, Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import { Helmet } from 'react-helmet-async';
 import LandingPageRightContent from './LandingPageRightContent';
 import LandingPageLeftContent from './LandingPageLeftContent';
 import { NoEncryption } from '@material-ui/icons';
+import Login from '../Login';
+import { LoginDrawerContext } from 'src/contexts/LoginDrawerContext';
 
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -19,14 +21,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   rightContainer:{
     width: '57%',
-  }
+  },
+ 
 }));
 function LandingPage() {
   const classes = useStyles();
   const theme: Theme = useTheme();
-  
+  const { isLoginDrawerOpen, closeLoginDrawer } = useContext(LoginDrawerContext);
   return (
-    <Box>
+    <Box onClick={()=>closeLoginDrawer()}>
     <Grid container direction="row" className={classes.outerContainer}>
       <Grid item className={classes.leftContainer}>
         <LandingPageLeftContent />
@@ -35,6 +38,12 @@ function LandingPage() {
         <LandingPageRightContent />
       </Grid>
     </Grid>
+    <Drawer 
+      
+      open={isLoginDrawerOpen} 
+      anchor={"right"} >
+      <Login />
+    </Drawer>
     </Box>
   );
 }

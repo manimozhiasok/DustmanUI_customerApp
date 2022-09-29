@@ -1,8 +1,9 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Grid, useTheme , Theme, makeStyles, Menu, MenuItem, ListItemText} from '@material-ui/core';
 import { Helmet } from 'react-helmet-async';
 import ButtonComp from './../../../../components/ButtonComp/index';
+import { LoginDrawerContext } from './../../../../contexts/LoginDrawerContext';
 
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -18,8 +19,12 @@ function HeaderRightContent() {
   const theme: Theme = useTheme();
   const classes = useStyles();
   
+  const { toggleLoginDrawer, isLoginDrawerOpen } = useContext(LoginDrawerContext);
+
   const handleCustomerButtonClick = () => {
-    
+    toggleLoginDrawer();
+    console.log("button clicked");
+    console.log(isLoginDrawerOpen);
   };
   return (
     <Grid className={classes.outerContainer}>
