@@ -29,7 +29,7 @@ function LandingPage() {
   const theme: Theme = useTheme();
   const { isLoginDrawerOpen, closeLoginDrawer } = useContext(LoginDrawerContext);
   return (
-    <Box onClick={()=>closeLoginDrawer()}>
+    <Box >
     <Grid container direction="row" className={classes.outerContainer}>
       <Grid item className={classes.leftContainer}>
         <LandingPageLeftContent />
