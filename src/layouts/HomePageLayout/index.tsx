@@ -8,7 +8,7 @@ import { ReactNode } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
   rootMainContainer: {
-   
+   //border: "2px solid red"
   }
 }));
 
@@ -24,9 +24,9 @@ const HomePageLayout = ({children}:HomePageLayoutProps) => {
     <Grid>
       <MainHeader />
       <Grid className={styles.rootMainContainer}>
-        <BoxComp>
+        
         {children || <Outlet />}
-        </BoxComp>
+        
       </Grid> 
       <Footer />
     </Grid>

@@ -16,7 +16,14 @@ import DustmanLogoHorizontal from './DustmanLogoHorizontal.svg';
 import  LandingPageArc from './LandingPageArc.svg';
 import PatternDotted from './PatternDotted.svg';
 import LandingPageRecyclingImage from './LandingPageRecyclingImage.svg';
-
+import BookYourPageImage from './BookYourPageImage.svg';
+import ChooseCategoryIcon from './ChooseCategoryIcon.svg';
+import TrashDetailsIcon from './TrashDetailsIcon.svg';
+import SelectVechicleIcon from './SelectVechicleIcon.svg';
+import ScheduleYourPickupIcon from './ScheduleYourPickupIcon.svg';
+import PickupAddressIcon from './PickupAddressIcon.svg';
+import OrderConfirmationIcon from './OrderConfirmationIcon.svg';
+import OrderSuccessIcon from './OrderSuccessIcon.svg';
 /* import PriceSheet from './PriceSheet.svg';
 import NewOrder from './NewOrder.svg';
 import Scheduled from './Scheduled.svg';
@@ -40,7 +47,15 @@ export {
   DustmanLogoHorizontal,
   LandingPageArc,
   PatternDotted,
-  LandingPageRecyclingImage
+  LandingPageRecyclingImage,
+  BookYourPageImage,
+  ChooseCategoryIcon,
+  TrashDetailsIcon,
+  SelectVechicleIcon,
+  ScheduleYourPickupIcon,
+  PickupAddressIcon,
+  OrderConfirmationIcon,
+  OrderSuccessIcon
   /* PriceSheet,
  NewOrder,
    Scheduled,
