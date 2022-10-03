@@ -29,8 +29,7 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
         fontWeight: theme.fontWeight.bold,
       },
       tabOptionsContainer:{
-        border: '0.5px solid',
-        borderColor: theme.Colors.greyDark,
+
       }
 
   })

@@ -18,7 +18,8 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
     outerContainer: {
       border: '0.5px solid',
       borderColor: theme.Colors.greyDark,
-      width: '100%'
+      width: '100%',
+      marginBottom: theme.spacing(3)
     },
     imageContainer: {
         padding: theme.spacing(3,2,3.5,3)

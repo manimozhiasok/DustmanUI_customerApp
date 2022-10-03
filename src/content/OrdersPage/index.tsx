@@ -16,12 +16,27 @@ const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
     margin:theme.spacing(2.5,0,2.5,0),
     background: theme.Colors.whitePure,
+    height: theme.spacing(78),
     
+  },
+  tabContainer:{
+    border: '0.5px solid',
+    borderColor: theme.Colors.greyDark,
+  },
+  tabContentOuterContainer: {
+    height: theme.spacing(65.50),
+    overflowY: 'scroll',
+  
   },
   tabContentContainer: {
     marginRight: theme.spacing(2),
     border: '0.5px solid',
     borderColor: theme.Colors.greyDark,
+    
+    
+  },
+  eachOrderContainer: {
+    paddingLeft: theme.spacing(2)
   }
 
 
@@ -54,28 +69,41 @@ function OrdersPage() {
     {
       displayImage: Wood,
       orderId: 123456789,
+    },
+    {
+      displayImage: Aluminium,
+      orderId: 123456789,
+    },
+    {
+      displayImage: Wood,
+      orderId: 123456789,
+    },
+    {
+      displayImage: Wood,
+      orderId: 123456789,
     }
 ];
   return (
     <Grid container className={classes.outerContainer}>
       <Grid container className={classes.contentContainer}>
-        <Grid item>
+        <Grid item className={classes.tabContainer}>
         <OrdersAndProfileTab 
           displayContent={OrdersTabItems}
           onTabChange={handleSetSelectedTab}
+          height='100%'
         />
         </Grid>
-        <Grid item xs={true}>
+        <Grid item xs={true} className={classes.tabContentOuterContainer}>
           <TabContent 
               value={tabToDisplay} 
               index={0}
               className={classes.tabContentContainer}
           >
-            
+          <div className={classes.eachOrderContainer}>
            <OrderListingComponent 
               displayContent={ordersList}
            />
-
+          </div>
           </TabContent>
 
           <TabContent 
