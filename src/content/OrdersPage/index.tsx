@@ -3,6 +3,8 @@ import { Theme , useTheme} from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import OrdersAndProfileTab from 'src/components/OrdersAndProfileTab';
+import OrderListingComponent from 'src/components/OrderListingComponent';
+import { Aluminium, Wood } from 'src/Assets/Images';
 
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,21 +41,43 @@ function OrdersPage() {
     const { children, value, index } = props;
     return value === index && <Grid>{children}</Grid>;
   }
+
+  const ordersList = [
+    {
+      displayImage: Aluminium,
+      orderId: 123456789,
+    },
+    {
+      displayImage: Wood,
+      orderId: 123456789,
+    },
+    {
+      displayImage: Wood,
+      orderId: 123456789,
+    }
+];
   return (
     <Grid container className={classes.outerContainer}>
       <Grid container className={classes.contentContainer}>
+        <Grid item>
         <OrdersAndProfileTab 
           displayContent={OrdersTabItems}
           onTabChange={handleSetSelectedTab}
-          
         />
+        </Grid>
+        <Grid item xs={true}>
           <TabContent 
               value={tabToDisplay} 
               index={0}
               className={classes.tabContentContainer}
           >
-            Pending Ordershcfgh
+            
+           <OrderListingComponent 
+              displayContent={ordersList}
+           />
+
           </TabContent>
+
           <TabContent 
             value={tabToDisplay} 
             index={1}
@@ -68,6 +92,7 @@ function OrdersPage() {
             >
            Completed orders
           </TabContent>
+          </Grid>
       </Grid>
       </Grid>
     );

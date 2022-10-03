@@ -40,7 +40,6 @@ const AccordionComponent = ({
   displayContent,
   onTabChange,
   }: {
-  children?: JSX.Element | any;
   backgroundColor?: string;
   height?: string;
   displayContent?: {

@@ -24,6 +24,8 @@ import ScheduleYourPickupIcon from './ScheduleYourPickupIcon.svg';
 import PickupAddressIcon from './PickupAddressIcon.svg';
 import OrderConfirmationIcon from './OrderConfirmationIcon.svg';
 import OrderSuccessIcon from './OrderSuccessIcon.svg';
+import Aluminium from './Aluminium.svg';
+import Wood from './Wood.svg';
 /* import PriceSheet from './PriceSheet.svg';
 import NewOrder from './NewOrder.svg';
 import Scheduled from './Scheduled.svg';
@@ -55,7 +57,9 @@ export {
   ScheduleYourPickupIcon,
   PickupAddressIcon,
   OrderConfirmationIcon,
-  OrderSuccessIcon
+  OrderSuccessIcon,
+  Aluminium,
+  Wood
   /* PriceSheet,
  NewOrder,
    Scheduled,

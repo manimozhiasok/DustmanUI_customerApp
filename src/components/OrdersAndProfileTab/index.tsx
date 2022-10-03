@@ -58,6 +58,7 @@ const OrdersAndProfileTab = ({
   const handleTabChange = (event, value) => {
     setTabToDisplay(value);
     onTabChange(value);
+    
   };
 
   return (
