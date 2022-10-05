@@ -3,6 +3,7 @@ import { Theme , useTheme} from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import OrdersAndProfileTab from 'src/components/OrdersAndProfileTab';
+import { CompletedOrdersIcon, PendingOrdersIcon, ConfirmedOrdersIcon } from 'src/Assets/Images';
 
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -22,7 +23,19 @@ function Profile() {
   const classes = useStyles();
   const theme: Theme = useTheme();
   const [tabToDisplay, setTabToDisplay] = useState(0);
-  const OrdersTabItems = ["My Account","Change Language","Change User Type"];
+  const OrdersTabItems = [
+    {
+      tabIcon: PendingOrdersIcon,
+      tabItem: "My Account",
+    },
+    {
+      tabIcon: ConfirmedOrdersIcon,
+      tabItem: "Change Language",
+    },
+    {
+      tabIcon: CompletedOrdersIcon,
+      tabItem: "Change User Type",
+    }];
 
   const handleSetSelectedTab = (value) => {
     setTabToDisplay(value);

@@ -5,7 +5,9 @@ import {
   Theme,
   Typography,
   createStyles,
-  Divider
+  Divider,
+  Backdrop,
+  useTheme
 } from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -19,9 +21,6 @@ type Props = {
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
   createStyles({
-    selectedTab: {
-     
-    },
     tabContent: {
         textTransform: 'capitalize',
         color: theme.Colors.primary,
@@ -30,6 +29,17 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
       },
       tabOptionsContainer:{
 
+      },
+      textStyle:{
+        paddingLeft: theme.spacing(2)
+      },
+      tabIndicator:{
+        width: '5px',
+        left: "0px",
+      },
+      selectedTab: {
+        color: theme.Colors.whitePure,
+        background: theme.Colors.secondary,
       }
 
   })
@@ -44,7 +54,10 @@ const OrdersAndProfileTab = ({
   children?: JSX.Element | any;
   backgroundColor?: string;
   height?: string;
-  displayContent?: string[];
+  displayContent?: {
+    tabIcon: any,
+    tabItem: string,
+  }[];
   onTabChange?: any;
   }) => {
   const classes = useStyles({
@@ -52,6 +65,7 @@ const OrdersAndProfileTab = ({
     height,
     NumOfTabs: displayContent.length
   });
+  const theme = useTheme();
   const [tabToDisplay, setTabToDisplay] = useState(0);
 
   const handleTabChange = (event, value) => {
@@ -66,7 +80,11 @@ const OrdersAndProfileTab = ({
           value={tabToDisplay}
           onChange={handleTabChange}
           orientation="vertical"
+          indicatorColor="primary"
           className={classes.tabOptionsContainer}
+          classes={{
+            indicator: classes.tabIndicator,
+          }}
         >
           {displayContent.map((item, index) => {
             return (
@@ -74,13 +92,22 @@ const OrdersAndProfileTab = ({
                 key={index}
                 value={index}
                 label={
-                  <div className={classes.contentContainer}>
+                  <Grid container direction='row' className={classes.contentContainer}>
+                    <img 
+                      src={item.tabIcon} 
+                      alt="icon" 
+                      
+                      />
+                      
                     <Typography className={classes.textStyle}>
-                      {item}
+                      {item.tabItem}
                     </Typography>
-                  </div>
+                  </Grid>
                 }
                 className={classes.tabContent}
+                classes={{
+                  selected: classes.selectedTab,
+                }}
               />
             );
           })}

@@ -26,7 +26,10 @@ import OrderConfirmationIcon from './OrderConfirmationIcon.svg';
 import OrderSuccessIcon from './OrderSuccessIcon.svg';
 import Aluminium from './Aluminium.svg';
 import Wood from './Wood.svg';
-/* import PriceSheet from './PriceSheet.svg';
+import PendingOrdersIcon from './PendingOrdersIcon.svg';
+import ConfirmedOrdersIcon from './ConfirmedOrdersIcon.svg';
+import CompletedOrdersIcon from './CompletedOrdersIcon.svg';
+/* impPendingOrdersIconort PriceSheet from './PriceSheet.svg';
 import NewOrder from './NewOrder.svg';
 import Scheduled from './Scheduled.svg';
 import Completed from './Completed.svg';
@@ -59,7 +62,10 @@ export {
   OrderConfirmationIcon,
   OrderSuccessIcon,
   Aluminium,
-  Wood
+  Wood,
+  PendingOrdersIcon,
+  ConfirmedOrdersIcon,
+  CompletedOrdersIcon
   /* PriceSheet,
  NewOrder,
    Scheduled,
