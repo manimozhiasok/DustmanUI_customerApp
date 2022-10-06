@@ -1,25 +1,25 @@
 import { Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import './carousel.css';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrowForward: {
-    top: '100%',
+    top: '50%',
     position: 'absolute',
     zIndex: 1,
-    transform: 'translateY(50%)',
+    transform: 'translateY(-50%)',
     right: theme.spacing(2),
     width: '48px',
     height: '48px'
   },
   arrowBack: {
-    top: '100%',
+    top: '50%',
     position: 'absolute',
     zIndex: 1,
-    transform: 'translateY(50%)',
-    right: theme.spacing(7),
+    left: -6,
+    transform: 'translateY(-50%)',
     width: '48px',
     height: '48px'
   },
@@ -31,10 +31,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   carouselContainer: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    overflowX: 'scroll'
   },
   carouselContentWrapper: {
-    overflow: 'hidden',
     width: '100%',
     height: '100%'
   }
@@ -71,7 +71,7 @@ const Carousel = (props) => {
     setTouchPosition(touchDown);
   };
 
-  const handleTouchMove = (e) => {
+  const handleTouchMove = (e) => {  
     const touchDown = touchPosition;
 
     if (touchDown === null) {
@@ -97,8 +97,8 @@ const Carousel = (props) => {
       <Grid className={classes.carouselWrapper}>
         <Grid
           className={classes.carouselContentWrapper}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
+          // onTouchStart={handleTouchStart}
+          // onTouchMove={handleTouchMove}
         >
           <Grid
             className={`carousel-content show-${show}`}
@@ -111,7 +111,7 @@ const Carousel = (props) => {
         </Grid>
         {currentIndex > 0 && (
           <IconButton onClick={handlePrevClick} className={classes.arrowBack}>
-            <ChevronLeftIcon />
+            <ArrowBackIcon />
           </IconButton>
         )}
         {currentIndex < length - show && (
@@ -119,7 +119,7 @@ const Carousel = (props) => {
             onClick={handleNextClick}
             className={classes.arrowForward}
           >
-            <ChevronRightIcon />
+            <ArrowForwardIcon />
           </IconButton>
         )}
       </Grid>
