@@ -13,13 +13,13 @@ import { ReactComponent as LogoutIcon } from './logout.svg';
 import { ReactComponent as SortIcon } from './sort.svg';
 import { ReactComponent as FilterIcon } from './filter.svg'; */
 import DustmanLogoHorizontal from './DustmanLogoHorizontal.svg';
-import  LandingPageArc from './LandingPageArc.svg';
+import LandingPageArc from './LandingPageArc.svg';
 import PatternDotted from './PatternDotted.svg';
 import LandingPageRecyclingImage from './LandingPageRecyclingImage.svg';
 import BookYourPageImage from './BookYourPageImage.svg';
 import ChooseCategoryIcon from './ChooseCategoryIcon.svg';
 import TrashDetailsIcon from './TrashDetailsIcon.svg';
-import SelectVechicleIcon from './SelectVechicleIcon.svg';
+import SelectVehicleIcon from './SelectVehicleIcon.svg';
 import ScheduleYourPickupIcon from './ScheduleYourPickupIcon.svg';
 import PickupAddressIcon from './PickupAddressIcon.svg';
 import OrderConfirmationIcon from './OrderConfirmationIcon.svg';
@@ -37,7 +37,7 @@ import Cancelled from './Cancelled.svg';
 import RupeeSign from './RupeeSign.svg';
 import Plastic from './Plastic.svg'; */
 export {
- /* CustomerOrderIcon,
+  /* CustomerOrderIcon,
    EnquiryMgIcon,
   OverViewIcon,
   PriceMgIcon,
@@ -56,7 +56,7 @@ export {
   BookYourPageImage,
   ChooseCategoryIcon,
   TrashDetailsIcon,
-  SelectVechicleIcon,
+  SelectVehicleIcon,
   ScheduleYourPickupIcon,
   PickupAddressIcon,
   OrderConfirmationIcon,

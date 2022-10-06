@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Grid,
   makeStyles,
+  Grid,
   Theme,
   Typography,
   createStyles,
-  Divider,
   Accordion,
   AccordionSummary,
   AccordionDetails
@@ -21,16 +20,14 @@ type Props = {
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
   createStyles({
-    titleStyle: {
-     
+    titleStyle: {},
+    titleContainerStyle: {
+      padding: theme.spacing(3, 3, 3, 4)
     },
-    titleContainerStyle:{
-      padding: theme.spacing(3,3,3,4),
-    },
-    eachAccordianStyle:{
-      margin:theme.spacing(2.5,0,2.5,0),
+    eachAccordionStyle: {
+      margin: theme.spacing(2.5, 0, 2.5, 0),
+      boxShadow: 'none'
     }
-    
   })
 );
 
@@ -38,48 +35,44 @@ const AccordionComponent = ({
   backgroundColor,
   height,
   displayContent,
-  onTabChange,
-  }: {
+  onTabChange
+}: {
   backgroundColor?: string;
   height?: string;
   displayContent?: {
-    summaryHeading: string,
-    content: any,
-    displayIcon: any
+    summaryHeading: string;
+    content: any;
+    displayIcon: any;
   }[];
   onTabChange?: any;
-  }) => {
+}) => {
   const classes = useStyles({
     bgColor: backgroundColor,
     height,
     NumOfTabs: displayContent.length
   });
 
-
   return (
-    <div>
-    {displayContent.map((item, index) => {
+    <Grid>
+      {displayContent.map((item, index) => {
         return (
-            <Accordion key={index} className={classes.eachAccordianStyle}>
-            
-            <AccordionSummary 
+          <Accordion key={index} className={classes.eachAccordionStyle}>
+            <AccordionSummary
               className={classes.titleContainerStyle}
               expandIcon={<ExpandMoreIcon />}
-              >
-              <IconTileComponent 
-                iconToDisplay={item.displayIcon}
-              />
-              <Typography className={classes.titleStyle}> {item.summaryHeading}</Typography>
+            >
+              <IconTileComponent iconToDisplay={item.displayIcon} />
+              <Typography className={classes.titleStyle}>
+                {item.summaryHeading}
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Typography>
-                    {item.content}
-                </Typography>
+              <Grid>{item.content}</Grid>
             </AccordionDetails>
-            </Accordion>
-            );
-        })}
- </div>
+          </Accordion>
+        );
+      })}
+    </Grid>
   );
 };
 

@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Grid, makeStyles, Tab, Tabs, Theme, useTheme } from '@material-ui/core';
+import React from 'react';
+import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 
+const useStyles = makeStyles((theme: Theme) => ({}));
 
-
-const useStyles = makeStyles((theme: Theme) => ({
-
-  
-}));
 function ChooseCategoryComponent() {
   const classes = useStyles();
-  const theme: Theme = useTheme();
+  const theme = useTheme();
 
-  return (
-   
-      <Grid >
-          ChooseCategoryComponent goes Here
-    </Grid>
-  );
+  return <Grid>ChooseCategoryComponent goes Here</Grid>;
 }
 
 export default ChooseCategoryComponent;

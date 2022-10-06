@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Grid, makeStyles, Tab, Tabs, Theme, useTheme } from '@material-ui/core';
+import React from 'react';
+import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import PlaceIcon from '@material-ui/icons/Place';
 
+const useStyles = makeStyles((theme: Theme) => ({}));
 
-const useStyles = makeStyles((theme: Theme) => ({
-
-  
-}));
 function AddressDisplay() {
   const classes = useStyles();
   const theme: Theme = useTheme();
-  const address = "no 13, 4th cross street, sakthi nagar, kilambakkam";
+  const address = 'no 13, 4th cross street, sakthi nagar, kilambakkam';
   return (
-   
-      <Grid >
-          <PlaceIcon />{address}
-        </Grid>
+    <Grid>
+      <PlaceIcon />
+      {address}
+    </Grid>
   );
 }
 

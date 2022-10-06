@@ -1,23 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Grid, makeStyles, Tab, Tabs, Theme, useTheme } from '@material-ui/core';
-import { ChooseCategoryComponent } from 'src/components';
+import React from 'react';
+import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 
+const useStyles = makeStyles((theme: Theme) => ({}));
 
-
-const useStyles = makeStyles((theme: Theme) => ({
-
-  
-}));
 function PickupAddress() {
   const classes = useStyles();
-  const theme: Theme = useTheme();
+  const theme = useTheme();
 
-  return (
-   
-      <Grid >
-           PickupAddress goes here
-    </Grid>
-  );
+  return <Grid>PickupAddress goes here</Grid>;
 }
 
 export default PickupAddress;
