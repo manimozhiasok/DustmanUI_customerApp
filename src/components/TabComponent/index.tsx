@@ -47,7 +47,7 @@ const TabComponent = ({
   });
   const [tabToDisplay, setTabToDisplay] = useState(0);
 
-  const handleTabChange = (value) => {
+  const handleTabChange = (event, value) => {
     setTabToDisplay(value);
     onTabChange(value);
   };
