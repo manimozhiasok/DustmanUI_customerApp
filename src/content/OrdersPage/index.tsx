@@ -5,7 +5,9 @@ import { Grid } from '@material-ui/core';
 import OrdersAndProfileTab from 'src/components/OrdersAndProfileTab';
 import OrderListingComponent from 'src/components/OrderListingComponent';
 import { Aluminium, Wood } from 'src/Assets/Images';
-import { CompletedOrdersIcon, PendingOrdersIcon, ConfirmedOrdersIcon } from 'src/Assets/Images';
+import { CompletedOrdersIcon} from 'src/Assets/Images';
+import { ConfirmedOrdersIcon} from 'src/Assets/Images';
+import { PendingOrdersIcon} from 'src/Assets/Images';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -46,7 +48,7 @@ function OrdersPage() {
   const classes = useStyles();
   const theme: Theme = useTheme();
   const [tabToDisplay, setTabToDisplay] = useState(0);
-  const OrdersTabItems = [
+   const OrdersTabItems = [
     {
       tabIcon: PendingOrdersIcon,
       tabItem: "Pending",
@@ -58,7 +60,7 @@ function OrdersPage() {
     {
       tabIcon: CompletedOrdersIcon,
       tabItem: "Completed",
-    }];
+    }]; 
 
 
   const handleSetSelectedTab = (value) => {
@@ -99,7 +101,6 @@ function OrdersPage() {
   return (
     <Grid container className={classes.outerContainer}>
       <Grid container className={classes.contentContainer}>
-       
         <Grid item className={classes.tabContainer}>
         <OrdersAndProfileTab 
           displayContent={OrdersTabItems}
@@ -133,6 +134,9 @@ function OrdersPage() {
             className={classes.tabContentContainer}
             >
            Completed orders
+
+           
+           
           </TabContent>
           </Grid>
       </Grid>
