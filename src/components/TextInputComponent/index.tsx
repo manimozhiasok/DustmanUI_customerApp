@@ -10,6 +10,7 @@ type StyleProps = {
   width?: string | number;
   height?: string | number;
   borderColor?: string;
+  txtColor?: string;
 };
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -22,7 +23,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.MetricsSizes.small_xxx,
       fontWeight: theme.fontWeight.medium,
       background: theme.Colors.white,
-      color: theme.Colors.inputText
+      color: (props) => props.txtColor || theme.Colors.inputText
     },
     '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
       borderColor: (props) => props.borderColor || theme.Colors.lightGrey,
@@ -44,6 +45,7 @@ type Props = TextFieldProps & {
   variant?: string;
   borderColor?: string;
   isError?: boolean;
+  txtColor?: string;
 };
 
 const TextInputComponent = (props: Props) => {
@@ -57,11 +59,13 @@ const TextInputComponent = (props: Props) => {
     inputHeight,
     borderColor,
     isError = false,
+    txtColor,
     ...rest
   } = props;
   const styles = useStyles({
     width: inputWidth,
     height: inputHeight,
+    txtColor: txtColor,
     borderColor: (isError && theme.Colors.redPrimary) || borderColor
   });
   return (

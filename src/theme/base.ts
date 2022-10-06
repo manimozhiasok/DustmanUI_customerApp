@@ -71,6 +71,7 @@ declare module '@material-ui/core/styles' {
       mediumGrey: string;
       mediumBlack: string;
       greyScale: string;
+      deepGrey: string;
     };
     general: {
       borderRadiusSm: number;
@@ -162,6 +163,7 @@ declare module '@material-ui/core/styles' {
       lightGrey: string;
       navBlue: string;
       inputText: string;
+      deepGrey: string;
     };
     general: {
       borderRadiusSm: number;
