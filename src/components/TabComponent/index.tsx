@@ -9,7 +9,6 @@ import {
 } from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import DividerLine from 'src/components/DividerLine';
 
 type Props = {
   bgColor: string;
@@ -19,16 +18,13 @@ type Props = {
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
   createStyles({
-    selectedTab: {
-     
-    },
+    selectedTab: {},
     tabContent: {
-        textTransform: 'capitalize',
-        color: theme.Colors.primary,
-        fontSize: theme.MetricsSizes.regular,
-        fontWeight: theme.fontWeight.bold,
-      }
-
+      textTransform: 'capitalize',
+      color: theme.Colors.primary,
+      fontSize: theme.MetricsSizes.regular,
+      fontWeight: theme.fontWeight.bold
+    }
   })
 );
 
@@ -36,14 +32,14 @@ const TabComponent = ({
   backgroundColor,
   height,
   displayContent,
-  onTabChange,
-  }: {
+  onTabChange
+}: {
   children?: JSX.Element | any;
   backgroundColor?: string;
   height?: string;
   displayContent?: string[];
   onTabChange?: any;
-  }) => {
+}) => {
   const classes = useStyles({
     bgColor: backgroundColor,
     height,
@@ -57,32 +53,26 @@ const TabComponent = ({
   };
 
   return (
-    <>
-       <Tabs
-          value={tabToDisplay}
-          onChange={handleTabChange}
-        >
-          {displayContent.map((item, index) => {
-            return (
-              <Tab
-                key={index}
-                value={index}
-                label={
-                  <div className={classes.contentContainer}>
-                    <Typography className={classes.textStyle}>
-                      {item}
-                    </Typography>
-                  </div>
-                }
-                className={classes.tabContent}
-              />
-            );
-          })}
-        </Tabs>
-        <Divider className={classes.horizontalDivider} />
-        </>
+    <Grid>
+      <Tabs value={tabToDisplay} onChange={handleTabChange}>
+        {displayContent.map((item, index) => {
+          return (
+            <Tab
+              key={index}
+              value={index}
+              label={
+                <div className={classes.contentContainer}>
+                  <Typography className={classes.textStyle}>{item}</Typography>
+                </div>
+              }
+              className={classes.tabContent}
+            />
+          );
+        })}
+      </Tabs>
+      <Divider className={classes.horizontalDivider} />
+    </Grid>
   );
 };
 
 export default TabComponent;
- 

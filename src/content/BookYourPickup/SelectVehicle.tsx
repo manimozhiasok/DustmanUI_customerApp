@@ -3,11 +3,11 @@ import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
-function OrderConfirmation() {
+function SelectVehicle() {
   const classes = useStyles();
   const theme = useTheme();
 
-  return <Grid>OrderConfirmation goes here</Grid>;
+  return <Grid>SelectVehicle goes here</Grid>;
 }
 
-export default OrderConfirmation;
+export default SelectVehicle;

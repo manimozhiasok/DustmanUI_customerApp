@@ -55,7 +55,7 @@ const OrdersAndProfileTab = ({
   backgroundColor?: string;
   height?: string;
   displayContent?: {
-    tabIcon: any,
+    tabIcon?: any,
     tabItem: string,
   }[];
   onTabChange?: any;
@@ -93,12 +93,12 @@ const OrdersAndProfileTab = ({
                 value={index}
                 label={
                   <Grid container direction='row' className={classes.contentContainer}>
-                    <img 
+                     <img 
                       src={item.tabIcon} 
                       alt="icon" 
                       
-                      />
-                      
+                      /> 
+                    
                     <Typography className={classes.textStyle}>
                       {item.tabItem}
                     </Typography>
@@ -112,7 +112,7 @@ const OrdersAndProfileTab = ({
             );
           })}
         </Tabs>
-        <Divider className={classes.horizontalDivider} />
+        
         </>
   );
 };
