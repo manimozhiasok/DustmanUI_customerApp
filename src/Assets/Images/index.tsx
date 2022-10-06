@@ -12,6 +12,7 @@ import { ReactComponent as SettingsIcon } from './settings.svg';
 import { ReactComponent as LogoutIcon } from './logout.svg';
 import { ReactComponent as SortIcon } from './sort.svg';
 import { ReactComponent as FilterIcon } from './filter.svg'; */
+
 import DustmanLogoHorizontal from './DustmanLogoHorizontal.svg';
 import  LandingPageArc from './LandingPageArc.svg';
 import PatternDotted from './PatternDotted.svg';
@@ -26,6 +27,15 @@ import OrderConfirmationIcon from './OrderConfirmationIcon.svg';
 import OrderSuccessIcon from './OrderSuccessIcon.svg';
 import Aluminium from './Aluminium.svg';
 import Wood from './Wood.svg';
+import All from './All.svg';
+import Carton from './Carton.svg';
+import Cart from './Cart.svg';
+import Cover from './Cover.svg';
+import Ewaste from './E-waste.svg';
+import General from './General.svg';
+import Iron from './Iron.svg';
+import Paper from './Paper.svg';
+import Plastic from './Plastic.svg';
 import PendingOrdersIcon from './PendingOrdersIcon.svg';
 import ConfirmedOrdersIcon from './ConfirmedOrdersIcon.svg';
 import CompletedOrdersIcon from './CompletedOrdersIcon.svg';
@@ -63,6 +73,15 @@ export {
   OrderSuccessIcon,
   Aluminium,
   Wood,
+  All,
+  Carton,
+  Cart,
+  Cover,
+  Ewaste,
+  General,
+  Iron,
+  Paper,
+  Plastic,
   PendingOrdersIcon,
   ConfirmedOrdersIcon,
   CompletedOrdersIcon

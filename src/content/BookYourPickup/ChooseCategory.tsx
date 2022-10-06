@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
   
 }));
+
 function ChooseCategory() {
   const classes = useStyles();
   const theme: Theme = useTheme();
