@@ -12,7 +12,8 @@ import { ReactComponent as SettingsIcon } from './settings.svg';
 import { ReactComponent as LogoutIcon } from './logout.svg';
 import { ReactComponent as SortIcon } from './sort.svg';
 import { ReactComponent as FilterIcon } from './filter.svg'; */
-
+import { ReactComponent as SunIcon } from './Sun.svg';
+import { ReactComponent as DateIcon } from './Date.svg';
 import DustmanLogoHorizontal from './DustmanLogoHorizontal.svg';
 import LandingPageArc from './LandingPageArc.svg';
 import PatternDotted from './PatternDotted.svg';
@@ -84,7 +85,9 @@ export {
   Plastic,
   PendingOrdersIcon,
   ConfirmedOrdersIcon,
-  CompletedOrdersIcon
+  CompletedOrdersIcon,
+  SunIcon,
+  DateIcon
   /* PriceSheet,
  NewOrder,
    Scheduled,

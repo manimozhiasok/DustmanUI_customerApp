@@ -39,7 +39,7 @@ type Props = ButtonProps & {
   height?: string | number;
   buttonText: string;
   buttonFontSize?: number;
-  onClickButton?: () => void;
+  onClickButton?: any;
   variant?: string;
   buttonTextColor?: string;
   buttonFontWeight?: number;
