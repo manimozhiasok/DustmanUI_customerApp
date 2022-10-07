@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Grid, makeStyles, Tab, Tabs, Theme, useTheme, Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel} from '@material-ui/core';
-import {General, Paper, Carton, Cart, Ewaste, All, Cover, Iron, Plastic, Aluminium, Wood } from 'src/Assets/Images';
-import { green } from '@material-ui/core/colors';
+import data from './CategoryData';
 
 const useStyles = makeStyles((theme: Theme) => ({
   eachItem:{
@@ -36,62 +35,62 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 function ChooseCategoryComponent() {
 
-  const data = [
-    {
-      id:'1',
-      img: General,
-      description:'General Waste'
-    },
-    {
-      id:'2',
-      img: Paper,
-      description:'Paper'
-    },
-    {
-      id:'3',
-      img: Carton,
-      description:'Carton Box'
-    },
-    {
-      id:'4',
-      img: Ewaste,
-      description:'E-Waste'
-    },
-    {
-      id:'5',
-      img: Cover,
-      description:'Packing Covers'
-    },
-    {
-      id:'6',
-      img: General,
-      description:'General Waste'
-    },
-    {
-      id:'7',
-      img: Iron,
-      description:'Iron'
-    },
-    {
-      id:'8',
-      img: Aluminium,
-      description:'Aluminium'
-    },
-    {
-      id:'9',
-      img: General,
-      description:'General Waste'
-    },
-    {
-      id:'10',
-      img: Paper,
-      description:'Paper Waste'
-    },
-    {
-      id:'11',
-      img: Carton,
-      description:'Carton Waste'
-    },
+  // const data = [
+  //   {
+  //     id:'1',
+  //     img: General,
+  //     description:'General Waste'
+  //   },
+  //   {
+  //     id:'2',
+  //     img: Paper,
+  //     description:'Paper'
+  //   },
+  //   {
+  //     id:'3',
+  //     img: Carton,
+  //     description:'Carton Box'
+  //   },
+  //   {
+  //     id:'4',
+  //     img: Ewaste,
+  //     description:'E-Waste'
+  //   },
+  //   {
+  //     id:'5',
+  //     img: Cover,
+  //     description:'Packing Covers'
+  //   },
+  //   {
+  //     id:'6',
+  //     img: General,
+  //     description:'General Waste'
+  //   },
+  //   {
+  //     id:'7',
+  //     img: Iron,
+  //     description:'Iron'
+  //   },
+  //   {
+  //     id:'8',
+  //     img: Aluminium,
+  //     description:'Aluminium'
+  //   },
+  //   {
+  //     id:'9',
+  //     img: General,
+  //     description:'General Waste'
+  //   },
+  //   {
+  //     id:'10',
+  //     img: Paper,
+  //     description:'Paper Waste'
+  //   },
+  //   {
+  //     id:'11',
+  //     img: Carton,
+  //     description:'Carton Waste'
+  //   },
     // {
     //   id:'12',
     //   img: General,
@@ -107,7 +106,7 @@ function ChooseCategoryComponent() {
     //   img: Carton,
     //   description:'Carton Waste'
     // },
-  ]
+  // ]
 
   const [value, setValue] = React.useState('');
 
