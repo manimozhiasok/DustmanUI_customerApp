@@ -37,12 +37,14 @@ const defaultColors = {
     a700: '#343434',
     a600: '#4B506D',
     a500: '#585858',
+    a800: '#4F4F4F',
     100: '#F2F2F2'
   },
   BLACK: {
     900: ' #000000',
     800: '#252733',
-    700: '#808080'
+    700: '#808080',
+    a700: '#454545'
   },
   ORANGE: {
     900: '#FF3B30'
@@ -85,7 +87,9 @@ const Colors = {
   mediumBlack: defaultColors.BLACK[700],
   greyScale: defaultColors.GREY['a600'],
   deepGrey: defaultColors.GREY['a500'],
+  secondaryBlack: defaultColors.BLACK['a700'],
   lightWhiteGrey: defaultColors.GREY['100'],
+  darkGrey: defaultColors.GREY['a800']
 };
 
 const fontWeight = {
@@ -125,6 +129,7 @@ export const MetricsSizes = {
   large_xxx: 48,
 
   x_large: 52,
+  xl_large: 54,
   xx_large: 64
 };
 

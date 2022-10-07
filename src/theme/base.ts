@@ -28,6 +28,7 @@ declare module '@material-ui/core/styles' {
       large_xxx: number;
 
       x_large: number;
+      xl_large: number;
       xx_large: number;
     };
     fontWeight: {
@@ -72,8 +73,10 @@ declare module '@material-ui/core/styles' {
       mediumBlack: string;
       greyScale: string;
       deepGrey: string;
+      secondaryBlack: string;
       lightWhiteGrey: string;
       greyScaleMedium: string;
+      darkGrey:string;
     };
     general: {
       borderRadiusSm: number;
@@ -128,6 +131,7 @@ declare module '@material-ui/core/styles' {
       large_xx: number;
       large_xxx: number;
 
+      xl_large: number;
       xx_large: number;
     };
     fontWeight: {
@@ -166,8 +170,10 @@ declare module '@material-ui/core/styles' {
       navBlue: string;
       inputText: string;
       deepGrey: string;
+      secondaryBlack:string;
       lightWhiteGrey: string;
       greyScaleMedium: string;
+      darkGrey:string;
     };
     general: {
       borderRadiusSm: number;

@@ -10,7 +10,9 @@ type StyleProps = {
   width?: string | number;
   height?: string | number;
   borderColor?: string;
+  bgColor?: string;
   txtColor?: string;
+  placeHolderColor?: string;
 };
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -22,8 +24,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       padding: theme.spacing(0, 1.8),
       fontSize: theme.MetricsSizes.small_xxx,
       fontWeight: theme.fontWeight.medium,
-      background: theme.Colors.white,
-      color: (props) => props.txtColor || theme.Colors.inputText
+      backgroundColor: (props) => props.bgColor || theme.Colors.white,
+      color: (props) => props.txtColor || theme.Colors.inputText,
+      "&::placeholder": {
+        color: (props) => props.placeHolderColor || null
+      }
     },
     '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
       borderColor: (props) => props.borderColor || theme.Colors.lightGrey,
@@ -46,6 +51,8 @@ type Props = TextFieldProps & {
   borderColor?: string;
   isError?: boolean;
   txtColor?: string;
+  backgroundColor?: string;
+  placeHolderColor?: string;
 };
 
 const TextInputComponent = (props: Props) => {
@@ -60,12 +67,16 @@ const TextInputComponent = (props: Props) => {
     borderColor,
     isError = false,
     txtColor,
+    backgroundColor,
+    placeHolderColor,
     ...rest
   } = props;
   const styles = useStyles({
     width: inputWidth,
     height: inputHeight,
     txtColor: txtColor,
+    bgColor: backgroundColor,
+    placeHolderColor: placeHolderColor,
     borderColor: (isError && theme.Colors.redPrimary) || borderColor
   });
   return (
