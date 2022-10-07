@@ -29,6 +29,10 @@ import Wood from './Wood.svg';
 import PendingOrdersIcon from './PendingOrdersIcon.svg';
 import ConfirmedOrdersIcon from './ConfirmedOrdersIcon.svg';
 import CompletedOrdersIcon from './CompletedOrdersIcon.svg';
+import bike from './bike.svg';
+import vehicleImage from './vehicleImage.svg';
+import checkImage from './checkImage.svg';
+
 /* impPendingOrdersIconort PriceSheet from './PriceSheet.svg';
 import NewOrder from './NewOrder.svg';
 import Scheduled from './Scheduled.svg';
@@ -65,7 +69,11 @@ export {
   Wood,
   PendingOrdersIcon,
   ConfirmedOrdersIcon,
-  CompletedOrdersIcon
+  CompletedOrdersIcon,
+  bike,
+  vehicleImage,
+  checkImage
+
   /* PriceSheet,
  NewOrder,
    Scheduled,
