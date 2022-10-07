@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) => ({}));
 
 function AddressDisplay() {
   const classes = useStyles();
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   const address = 'no 13, 4th cross street, sakthi nagar, kilambakkam';
   return (
     <Grid>
