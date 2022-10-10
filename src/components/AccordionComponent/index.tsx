@@ -10,7 +10,7 @@ import {
   AccordionDetails
 } from '@material-ui/core';
 import IconTileComponent from '../IconTileComponent';
-
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 type Props = {
   bgColor: string;
@@ -90,7 +90,7 @@ const AccordionComponent = ({
   isProfile?: boolean;
   summaryPadding?: any;
   accBorderColor?: any;
-  expandMoreIcon?:any;
+  expandMoreIcon?: any;
 }) => {
   const classes = useStyles({
     bgColor: backgroundColor,
