@@ -8,26 +8,40 @@ import {
 } from '@material-ui/core';
 import { checkImage } from 'src/Assets';
 
-const useStyles = makeStyles((theme: Theme) => ({}));
+const useStyles = makeStyles((theme: Theme) => ({
+  text: {
+    color: theme.Colors.black,
+    fontWeight: theme.fontWeight.bold,
+    fontSize: theme.MetricsSizes.regular
+  },
+  subText: {
+    color: theme.Colors.lightBlueGrey,
+    fontWeight: theme.fontWeight.regular,
+    fontSize: theme.MetricsSizes.small_x
+  },
+  mainContainer: {
+    textAlign: 'center',
+    width: 650,
+    height: 303
+  }
+}));
 
 function OrderSuccess() {
   const classes = useStyles();
   const theme = useTheme();
 
   return (
-    <Grid container>
+    <Grid container className={classes.mainContainer}>
       <Grid item xs={12}>
-        <div style={{ textAlign: 'center' }}>
-          <img src={checkImage} width={'93.85px'} height={'93.85px'} />
-        </div>
+        <img src={checkImage} width={'93.85px'} height={'93.85px'} />
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h3" style={{ textAlign: 'center' }}>
+        <Typography className={classes.text}>
           Order Successfully Placed.
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h5" style={{ textAlign: 'center', marginTop: 10 }}>
+        <Typography className={classes.subText}>
           Your order was successfull !
           <br />
           Just wait until Dustman arrive at your home.
