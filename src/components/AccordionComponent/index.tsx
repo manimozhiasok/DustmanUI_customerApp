@@ -10,21 +10,26 @@ import {
   AccordionDetails
 } from '@material-ui/core';
 import IconTileComponent from '../IconTileComponent';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 type Props = {
   bgColor: string;
   height: string;
   NumOfTabs: number;
+  withBorder: boolean;
+  summaryPadding?: any;
+  accBorderColor?: any;
 };
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
   createStyles({
     eachAccordianOuterContainer: {
-      position:"relative"
+      position:"relative",
+      border: (props)=> props.withBorder ? '0.5px solid' : 'none',
+      borderColor: (props) => {return props.accBorderColor ? props.accBorderColor : theme.Colors.black}
     },
     titleContainerStyle: {
-      padding: theme.spacing(3, 3, 3, 4)
+      padding: (props)=>{return props.summaryPadding} //theme.spacing(3, 3, 3, 4)
     },
     eachAccordionStyle: {
       margin: theme.spacing(2.5, 0, 2.5, 0),
@@ -46,7 +51,12 @@ const AccordionComponent = ({
   backgroundColor,
   height,
   displayContent,
-  onTabChange
+  onTabChange,
+  withBorder,
+  isProfile,
+  summaryPadding,
+  accBorderColor,
+  expandMoreIcon
 }: {
   backgroundColor?: string;
   height?: string;
@@ -56,11 +66,19 @@ const AccordionComponent = ({
     displayIcon: any;
   }[];
   onTabChange?: any;
+  withBorder?: boolean;
+  isProfile?: boolean;
+  summaryPadding?: any;
+  accBorderColor?: any;
+  expandMoreIcon?:any;
 }) => {
   const classes = useStyles({
     bgColor: backgroundColor,
     height,
-    NumOfTabs: displayContent.length
+    NumOfTabs: displayContent.length,
+    withBorder,
+    summaryPadding,
+    accBorderColor
   });
 
   return (
@@ -70,14 +88,14 @@ const AccordionComponent = ({
       {displayContent.map((item, index) => {
         return (
           <Grid key={index} container direction='row' className={classes.eachAccordianOuterContainer}>
-          {(displayContent.length>index+1) && <Grid item className={classes.line} />}
+          { !isProfile && (displayContent.length>index+1) && <Grid item className={classes.line} />}
           <Grid item style={{width:'100%'}}>
           <Accordion key={index} className={classes.eachAccordionStyle}>
             <AccordionSummary
               className={classes.titleContainerStyle}
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={expandMoreIcon ? expandMoreIcon : ''}
             >
-              <IconTileComponent iconToDisplay={item.displayIcon} />
+              { !isProfile && <IconTileComponent iconToDisplay={item.displayIcon} /> }
               <Typography className={classes.titleStyle}>
                 {item.summaryHeading}
               </Typography>
