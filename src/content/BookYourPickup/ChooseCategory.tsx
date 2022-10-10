@@ -10,7 +10,7 @@ function ChooseCategory() {
 
   return (
     <Grid>
-      <ChooseCategoryComponent />,
+      <ChooseCategoryComponent />
     </Grid>
   );
 }

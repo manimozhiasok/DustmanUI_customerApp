@@ -15,13 +15,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: theme.Colors.whitePure
   },
   outerContainer: {
-    margin: theme.spacing(2.5, 0, 2.5, 0),
-    background: theme.Colors.whitePure,
-    height: theme.spacing(78)
+    margin: theme.spacing(1.75, 0, 1.75, 0),
+    background: theme.Colors.whitePure
+    // height: theme.spacing(78)
   },
   tabContainer: {
     border: '0.5px solid',
-    borderColor: theme.Colors.greyDark
+    borderColor: theme.Colors.greyDark,
+    marginRight: theme.spacing(2)
   },
   tabContentOuterContainer: {
     height: theme.spacing(65.5),
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderColor: theme.Colors.greyDark
   },
   eachOrderContainer: {
-    paddingLeft: theme.spacing(2)
+    // paddingLeft: theme.spacing(2)
   }
 }));
 
@@ -41,6 +42,7 @@ function OrdersPage() {
   const classes = useStyles();
   const theme = useTheme();
   const [tabToDisplay, setTabToDisplay] = useState(0);
+
   const OrdersTabItems = [
     {
       tabIcon: PendingOrdersIcon,

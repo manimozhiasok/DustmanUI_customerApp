@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box, Grid, Typography, useTheme } from '@material-ui/core';
-import { Helmet } from 'react-helmet-async';
+import { Box, Typography, useTheme } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { ButtonComp, Loader } from 'src/components';
