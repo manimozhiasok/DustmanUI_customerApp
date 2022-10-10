@@ -43,9 +43,6 @@ const Slot = (props: Prop) => {
           },
           index: string
         ) => {
-          {
-            console.log('slotgrid', slot);
-          }
           return(
             <>
           <Grid item xs={4}>

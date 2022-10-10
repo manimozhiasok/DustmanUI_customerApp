@@ -56,7 +56,7 @@ export const Content = ({ imgUrl, key, handleClickImage }: Prop) => {
   );
 };
 
-export const LeftContent = () => {
+export const LeftContent = ({edit,handleData}) => {
   const theme = useTheme();
   const classes = useStyles();
   return (
@@ -66,13 +66,15 @@ export const LeftContent = () => {
         labelColor={theme.Colors.deepGrey}
         txtColor={theme.Colors.secondaryBlack}
         backgroundColor={theme.Colors.lightWhiteGrey}
-        placeholderText="Newspaper, Aluminium, Copper"
+        value={edit.getValue('order_items').toString()}
         borderColor={theme.Colors.lightWhiteGrey}
         inputHeight={theme.MetricsSizes.large_xxx}
+        onChange={handleData}
       />
       <TextInputComponent
         inputLabel="Approximate Weight"
         placeholderText="Enter approx. Weight"
+        value={edit.getValue('quantity_kg')}
         labelColor={theme.Colors.deepGrey}
         txtColor={theme.Colors.secondaryBlack}
         backgroundColor={theme.Colors.lightWhiteGrey}

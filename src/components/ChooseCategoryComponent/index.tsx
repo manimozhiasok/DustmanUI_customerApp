@@ -13,20 +13,6 @@ import {
   FormGroup,
   FormControlLabel
 } from '@material-ui/core';
-import {
-  General,
-  Paper,
-  Carton,
-  Cart,
-  Ewaste,
-  All,
-  Cover,
-  Iron,
-  Plastic,
-  Aluminium,
-  Wood
-} from 'src/Assets/Images';
-import data from './CategoryData';
 
 const useStyles = makeStyles((theme: Theme) => ({
   eachItem: {
@@ -46,36 +32,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   checkbox: {
     zIndex: 9,
-    //left:'120px',
     left: '50px',
-    top: '-20px'
-    //background: 'green',
+    top: '-20px',
+    color: "#00e676",
+    "&:not($checked) .MuiIconButton-label:after": {
+      backgroundColor: "pink",
+    }
   },
   description: {
-    // border: '1px solid blue',
-    // marginTop:theme.spacing(5),
-    // padding:theme.spacing(12, 0, 0, 3),
     paddingTop: theme.spacing(9),
     textAlign: 'center'
   },
   checkBoxContainer: {
-    // padding: theme.spacing(5, 5),
     position: 'relative'
   }
 }));
-function ChooseCategoryComponent() {
-  const [value, setValue] = React.useState('');
-  const [selected, setSelected] = useState();
 
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setValue(event.target.value);
-  //   console.log('event', event.target);
-  // };
+type ChooseProps = {
+  onChange?: (e: any) => void;
+  data?: any;
+};
 
-  const handleClick = (e, index) => {
-    setSelected(index);
-    console.log('index', index);
-  };
+function ChooseCategoryComponent({ onChange, data }: ChooseProps) {
 
   const classes = useStyles();
   const theme = useTheme();
@@ -102,17 +80,17 @@ function ChooseCategoryComponent() {
                           <>
                             <Checkbox
                               key={index}
-                              onClick={(e) => handleClick(e, index)}
+                              value={item.description}
+                              name={item.description}
+                              id={item.id}
+                              onChange={onChange}
                               className={classes.checkbox}
                             />
                             <img
                               src={item.img}
-                              alt="Images"
-                              className={
-                                selected === index
-                                  ? classes.imageStyle
-                                  : classes.image
-                              }
+                              id={item.id}
+                              alt="Image Not Found"
+                              className={classes.image}
                             />
                           </>
                         }

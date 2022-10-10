@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getCurrentFieldValue, isEmpty } from 'src/Utils';
 
 export const useEdit = (initial) => {
-  const [edits, setEdits] = useState({});
+  const [edits, setEdits] = useState(initial);
 
   const reset = () => {
     setEdits({});

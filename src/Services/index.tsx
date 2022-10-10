@@ -1,4 +1,5 @@
 import { authService } from './authService';
+import { customerService } from './customerService';
 
 import { userService } from './userService';
 
@@ -7,6 +8,6 @@ import { userService } from './userService';
 export const API_SERVICES = {
   authService,
   userService,
-
+  customerService
   // overViewServices
 };

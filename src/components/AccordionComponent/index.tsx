@@ -21,7 +21,7 @@ type Props = {
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
   createStyles({
     eachAccordianOuterContainer: {
-      position:"relative"
+      position: 'relative'
     },
     titleContainerStyle: {
       padding: theme.spacing(3, 3, 3, 4)
@@ -30,14 +30,13 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
       margin: theme.spacing(2.5, 0, 2.5, 0),
       boxShadow: 'none'
     },
-    line:{
-      borderRight: "2px dashed",
+    line: {
+      borderRight: '2px dashed',
       borderColor: theme.Colors.primary,
-      height: "100%",
-      position: "absolute",
+      height: '100%',
+      position: 'absolute',
       left: '-25px',
       top: '50px'
-
     }
   })
 );
@@ -64,33 +63,38 @@ const AccordionComponent = ({
   });
 
   return (
-    
-    
     <Grid>
       {displayContent.map((item, index) => {
         return (
-          <Grid key={index} container direction='row' className={classes.eachAccordianOuterContainer}>
-          {(displayContent.length>index+1) && <Grid item className={classes.line} />}
-          <Grid item style={{width:'100%'}}>
-          <Accordion key={index} className={classes.eachAccordionStyle}>
-            <AccordionSummary
-              className={classes.titleContainerStyle}
-              expandIcon={<ExpandMoreIcon />}
-            >
-              <IconTileComponent iconToDisplay={item.displayIcon} />
-              <Typography className={classes.titleStyle}>
-                {item.summaryHeading}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Grid>{item.content}</Grid>
-            </AccordionDetails>
-          </Accordion>
+          <Grid
+            key={index}
+            container
+            direction="row"
+            className={classes.eachAccordianOuterContainer}
+          >
+            {displayContent.length > index + 1 && (
+              <Grid item className={classes.line} />
+            )}
+            <Grid item style={{ width: '100%' }}>
+              <Accordion key={index} className={classes.eachAccordionStyle}>
+                <AccordionSummary
+                  className={classes.titleContainerStyle}
+                  expandIcon={<ExpandMoreIcon />}
+                >
+                  <IconTileComponent iconToDisplay={item.displayIcon} />
+                  <Typography className={classes.titleStyle}>
+                    {item.summaryHeading}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Grid>{item.content}</Grid>
+                </AccordionDetails>
+              </Accordion>
+            </Grid>
           </Grid>
-    </Grid>
         );
       })}
-   </Grid> 
+    </Grid>
   );
 };
 

@@ -24,11 +24,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function TrashDetails() {
+function TrashDetails({ edit,data}) {
   const classes = useStyles();
   const theme = useTheme();
   const [photo, setPhoto] = useState(PhotoAlternateLogo);
   const [text, setText] = useState('Choose your trash pictures');
+  const [selectedValue, setSelectedValue] = useState([])
 
   const handleClickImage = (e) => {
     console.log('event', e.target.src);
@@ -37,10 +38,17 @@ function TrashDetails() {
     console.log('text',text);
   };
 
+  const handleData = () => {
+    setSelectedValue(edit.edits.order_items)
+    console.log('selectedItems new',selectedValue);
+    
+  }
+  useEffect(()=>handleData)
+
   return (
     <Grid container spacing={3} justifyContent="center">
       <Grid item xs={5}>
-        <LeftContent />
+        <LeftContent edit={edit} handleData={handleData}/>
       </Grid>
       <Grid item xs={5}>
         <div
