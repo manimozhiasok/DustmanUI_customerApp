@@ -43,7 +43,12 @@ import CompletedOrdersIcon from './CompletedOrdersIcon.svg';
 import bike from './bike.svg';
 import vehicleImage from './vehicleImage.svg';
 import checkImage from './checkImage.svg';
-
+import Image from './Image.svg';
+import Location from './Location.svg';
+import MapPin from './MapPin.svg';
+import MapTrifold from './MapTrifold.svg'
+import Phone from './Phone.svg';
+import Scales from './Scales.svg';
 /* impPendingOrdersIconort PriceSheet from './PriceSheet.svg';
 import NewOrder from './NewOrder.svg';
 import Scheduled from './Scheduled.svg';
@@ -94,8 +99,13 @@ export {
   DateIcon,
   bike,
   vehicleImage,
-  checkImage
-
+  checkImage,
+  Image,
+  Location,
+  MapPin,
+  MapTrifold,
+  Phone,
+  Scales
   /* PriceSheet,
  NewOrder,
    Scheduled,

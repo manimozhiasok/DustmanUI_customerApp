@@ -108,7 +108,7 @@ function BookYourPickup() {
     },
     {
       summaryHeading: 'Order Confirmation',
-      content: <OrderConfirmation edit={edit}/>,
+      content: <OrderConfirmation/>,
       displayIcon: OrderConfirmationIcon
     },
     {

@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) => {
     rightContainer: {
       color: theme.Colors.mediumGrey,
       marginBottom: theme.MetricsSizes.regular_x
+    },
+    rightStyle:{
+      marginLeft:theme.spacing(1)
     }
   };
 });
@@ -31,13 +34,13 @@ const DialogContentDetails = (props: Props) => {
     <>
       {contentDetails.map((item: any, index: number) => {
         return (
-          <Grid container xs={10} key={index}>
-            <Grid xs={3}>
+          <Grid container xs={12} key={index}>
+            <Grid item>
               <Typography variant="h4" className={classes.leftContentStyle}>
                 {item.content}:
               </Typography>
             </Grid>
-            <Grid xs={6}>
+            <Grid item className={classes.rightStyle}>
               {item.isLink ? (
                 <LinkComp title={item.value} />
               ) : (

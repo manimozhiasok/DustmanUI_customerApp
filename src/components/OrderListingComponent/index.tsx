@@ -3,10 +3,10 @@ import {
   Grid,
   makeStyles,
   Theme,
-  Typography,
   createStyles,
-  Divider
 } from '@material-ui/core';
+import { ButtonComp } from 'src/components';
+import PendingModal from 'src/content/OrdersPage/PendingModal';
 
 type Props = {
   bgColor: string;
@@ -48,8 +48,24 @@ const OrderListingComponent = ({
     bgColor: backgroundColor,
     height
   });
+  const [modalOpen, setModalOpen] = useState<any>({ open: false });
+
+  const onClickButton = () => {
+    setModalOpen({
+      open: true,
+    });
+  };
+
   return (
     <>
+          <ButtonComp
+          btnBorderRadius={20}
+          buttonText={'Details'}
+          buttonFontSize={12}
+          btnWidth={50}
+          height="25px"
+          onClickButton={() => onClickButton()}
+        />
       {displayContent.map((item, index) => {
         return (
           <Grid
@@ -84,6 +100,12 @@ const OrderListingComponent = ({
           </Grid>
         );
       })}
+       {modalOpen.open && (
+          <PendingModal
+            onClose={() => setModalOpen({ open: false })}
+            {...modalOpen}
+          />
+        )}
     </>
   );
 };
