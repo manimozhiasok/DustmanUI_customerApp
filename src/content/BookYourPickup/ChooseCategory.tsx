@@ -6,15 +6,15 @@ const useStyles = makeStyles((theme: Theme) => ({}));
 
 function ChooseCategory({ edit, data }) {
   const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItemId, setSelectedItemId] = useState([]);
   const classes = useStyles();
   const theme = useTheme();
-
   const handleChange = (e) => {
     console.log('event', e);
     let targetId = Number(e.target.id);
     const checkedValue = e.target.value;
     console.log(selectedItems.find((itemId) => itemId === targetId));
-    if (selectedItems.find((itemId) => itemId === targetId)) {
+    if (selectedItems.find((val) => val === checkedValue)) {
       console.log('code to remove item');
     } else {
       selectedItems.push(checkedValue);

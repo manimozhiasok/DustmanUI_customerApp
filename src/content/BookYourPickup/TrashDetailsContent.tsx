@@ -69,7 +69,7 @@ export const LeftContent = ({ edit, handleData }) => {
         value={edit.getValue('order_items').toString()}
         borderColor={theme.Colors.lightWhiteGrey}
         inputHeight={theme.MetricsSizes.large_xxx}
-        onChange={handleData}
+        //onChange={handleData}
       />
       <TextInputComponent
         inputLabel="Approximate Weight"
@@ -92,7 +92,8 @@ export const LeftContent = ({ edit, handleData }) => {
       </Typography>
       <TextareaAutosize
         minRows={5}
-        cols={28}
+        cols={30}
+        value={edit.getValue('description')}
         placeholder="Any instructions for our pickup executive"
         className={classes.textAreaStyle}
       />

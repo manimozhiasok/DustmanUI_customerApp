@@ -83,6 +83,7 @@ function ChooseCategoryComponent({ onChange, data }: ChooseProps) {
                               name={item.description}
                               id={item.id}
                               onChange={onChange}
+                              // iconStyle={{fill: 'white'}}
                               className={classes.checkbox}
                             />
                             <img
