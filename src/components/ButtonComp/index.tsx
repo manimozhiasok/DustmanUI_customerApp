@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, Button, ButtonProps } from '@material-ui/core';
 
-
 type ThemeProps = {
   bgColor?: string;
   height?: string | number;
@@ -15,7 +14,7 @@ type ThemeProps = {
 const useStyles = makeStyles<Theme, ThemeProps>((theme) => {
   return {
     container: {
-      //display: 'flex',
+      display: 'flex',
       width: (props) => props.btnWidth || '100%',
       alignItems: 'center',
       justifyContent: 'center',
@@ -27,6 +26,9 @@ const useStyles = makeStyles<Theme, ThemeProps>((theme) => {
       borderRadius: (props) =>
         props.btnBorderRadius || theme.MetricsSizes.tiny_xx,
       textTransform: 'none',
+      '&.MuiButton-contained': {
+        boxShadow: 'none'
+      },
       '&:hover': {
         backgroundColor: (props) => props.bgColor || theme.Colors.secondary
       }
@@ -45,6 +47,8 @@ type Props = ButtonProps & {
   buttonFontWeight?: number;
   btnWidth?: string | number;
   btnBorderRadius?: number;
+  onBrowseButtonClick?: any;
+  isBrowseButton?: boolean;
   iconImage?: any;
 };
 
@@ -61,6 +65,8 @@ const ButtonComp = (props: Props) => {
     btnBorderRadius,
     onClickButton,
     iconImage,
+    isBrowseButton,
+    onBrowseButtonClick,
     ...rest
   } = props;
   const classes = useStyles({
@@ -72,14 +78,35 @@ const ButtonComp = (props: Props) => {
     btnWidth,
     btnBorderRadius
   });
+
+  if (isBrowseButton)
+    return (
+      <Button
+        className={classes.container}
+        //component="label"
+        variant={variant}
+        onClick={onClickButton}
+        endIcon={iconImage}
+      >
+        {buttonText}
+        <input
+          type="file"
+          //accept="application/pdf,image/jpg,image/jpeg"
+          hidden
+          //multiple
+          onChange={onBrowseButtonClick}
+        />
+      </Button>
+    );
+
   return (
     <Button
       className={classes.container}
       disableElevation
-      {...rest}
       variant={variant}
       onClick={onClickButton}
       endIcon={iconImage}
+      {...rest}
     >
       {buttonText}
     </Button>

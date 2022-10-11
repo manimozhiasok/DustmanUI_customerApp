@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 9,
     left: '50px',
     top: '-20px',
-    color: "#00e676",
+    color: "#C4C4C4",
+    fill: 'red',
     "&:not($checked) .MuiIconButton-label:after": {
       backgroundColor: "pink",
     }
@@ -84,6 +85,7 @@ function ChooseCategoryComponent({ onChange, data }: ChooseProps) {
                               name={item.description}
                               id={item.id}
                               onChange={onChange}
+                              // iconStyle={{fill: 'white'}}
                               className={classes.checkbox}
                             />
                             <img

@@ -31,7 +31,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 const initialValues = {
   quantity_kg: 20,
   order_items: [],
-  description: '', // order_images:[ //     { //       image_url:"image1" //     }, //     { //       image_url:"image2" //     } // ],
+  description: 'dfghjskdfgfgvcf', 
+  order_images:[
+    { image_url:"image1"  }, 
+    { image_url:"image2" }
+  ],
   order_address: {
     address_line1: 'address_line1',
     address_line2: 'address_line2',
