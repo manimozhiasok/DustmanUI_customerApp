@@ -33,6 +33,8 @@ import bike from './bike.svg';
 import vehicleImage from './vehicleImage.svg';
 import checkImage from './checkImage.svg';
 import AvatarCustomer from './AvatarCustomer.svg';
+import locationIcon from './locationIcon.svg';
+import weightIcon from './weightIcon.svg';
 
 /* impPendingOrdersIconort PriceSheet from './PriceSheet.svg';
 import NewOrder from './NewOrder.svg';
@@ -75,6 +77,8 @@ export {
   vehicleImage,
   checkImage,
   AvatarCustomer,
+  locationIcon,
+  weightIcon
 
   /* PriceSheet,
  NewOrder,

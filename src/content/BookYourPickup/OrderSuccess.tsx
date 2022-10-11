@@ -7,6 +7,7 @@ import {
   useTheme
 } from '@material-ui/core';
 import { checkImage } from 'src/Assets';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 function OrderSuccess() {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Grid container className={classes.mainContainer}>
@@ -36,15 +38,13 @@ function OrderSuccess() {
         <img src={checkImage} width={'93.85px'} height={'93.85px'} />
       </Grid>
       <Grid item xs={12}>
-        <Typography className={classes.text}>
-          Order Successfully Placed.
-        </Typography>
+        <Typography className={classes.text}>{t('orderPlaced')}</Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography className={classes.subText}>
-          Your order was successfull !
+          {t('orderConfirm')}
           <br />
-          Just wait until Dustman arrive at your home.
+          {t('orderDescription')}
         </Typography>
       </Grid>
     </Grid>

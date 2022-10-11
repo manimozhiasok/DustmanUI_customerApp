@@ -18,6 +18,7 @@ import PickupAddress from './PickupAddress';
 import OrderConfirmation from './OrderConfirmation';
 import OrderSuccess from './OrderSuccess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {}
@@ -26,40 +27,41 @@ const useStyles = makeStyles((theme: Theme) => ({
 function BookYourPickup() {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const bookYourPickupAccordionContent = [
     {
-      summaryHeading: 'Choose Category',
+      summaryHeading: t('chooseCategory'),
       content: <ChooseCategory />,
       displayIcon: ChooseCategoryIcon
     },
     {
-      summaryHeading: 'Trash Details',
+      summaryHeading: t('trashDetails'),
       content: <TrashDetails />,
       displayIcon: TrashDetailsIcon
     },
     {
-      summaryHeading: 'Select Vehicle',
+      summaryHeading: t('selectVehicle'),
       content: <SelectVehicle />,
       displayIcon: SelectVehicleIcon
     },
     {
-      summaryHeading: 'Schedule Your Pickup',
+      summaryHeading: t('scheduleYourPickup'),
       content: <ScheduleYourPickup />,
       displayIcon: ScheduleYourPickupIcon
     },
     {
-      summaryHeading: 'Pickup Address',
+      summaryHeading: t('pickupAddress'),
       content: <PickupAddress />,
       displayIcon: PickupAddressIcon
     },
     {
-      summaryHeading: 'Order Confirmation',
+      summaryHeading: t('orderConfirmation'),
       content: <OrderConfirmation />,
       displayIcon: OrderConfirmationIcon
     },
     {
-      summaryHeading: 'Order Success',
+      summaryHeading: t('orderSuccess'),
       content: <OrderSuccess />,
       displayIcon: OrderSuccessIcon
     }
@@ -67,10 +69,10 @@ function BookYourPickup() {
 
   return (
     <Grid className={classes.outerContainer}>
-      <AccordionComponent 
-        displayContent={bookYourPickupAccordionContent} 
-        summaryPadding = {theme.spacing(4.25, 6.5)}
-        summaryMargin = {theme.spacing(2.5, 0)}
+      <AccordionComponent
+        displayContent={bookYourPickupAccordionContent}
+        summaryPadding={theme.spacing(4.25, 6.5)}
+        summaryMargin={theme.spacing(2.5, 0)}
         expandMoreIcon={<ExpandMoreIcon />}
       />
     </Grid>

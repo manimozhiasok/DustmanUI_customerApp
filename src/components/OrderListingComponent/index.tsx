@@ -7,6 +7,8 @@ import {
   createStyles,
   Divider
 } from '@material-ui/core';
+import { locationIcon, weightIcon } from 'src/Assets';
+import ButtonComp from '../ButtonComp';
 
 type Props = {
   bgColor: string;
@@ -28,7 +30,10 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
       height: '100%',
       justifyContent: 'space-evenly'
     },
-    actionButtonsContainer: {}
+    actionButtonsContainer: {
+      display: 'flex'
+      //justifyContent: 'space-between'
+    }
   })
 );
 
@@ -42,6 +47,9 @@ const OrderListingComponent = ({
   displayContent: {
     displayImage: any;
     orderId: number;
+    category: string;
+    weight: string;
+    place: string;
   }[];
 }) => {
   const classes = useStyles({
@@ -70,8 +78,46 @@ const OrderListingComponent = ({
                     className={classes.contentContainer}
                   >
                     <Grid item>ORDER#{item.orderId}</Grid>
+                    <Grid item>
+                      <Grid
+                        style={{ display: 'flex' }}
+                        justifyContent="space-between"
+                        direction="row"
+                      >
+                        <Typography>Category:{item.category}</Typography>
+                        <div style={{ marginLeft: 35 }}>
+                          <img src={weightIcon} />
+                          <span>{item.weight}</span>
+                        </div>
+                        <div style={{ marginLeft: 35 }}>
+                          <img src={locationIcon} />
+                          <span>{item.place}</span>
+                        </div>
+                      </Grid>
+                    </Grid>
                     <Grid item className={classes.actionButtonsContainer}>
-                      Buttons
+                      <ButtonComp
+                        buttonText={'VIEW DETAILS'}
+                        backgroundColor="#FCFCFC"
+                        buttonFontSize={10}
+                        variant="outlined"
+                        buttonTextColor="#6CB044"
+                        buttonFontWeight={500}
+                        btnBorderRadius={8}
+                        height={'30px'}
+                        btnWidth={'150px'}
+                        style={{ marginRight: 10 }}
+                      />
+                      <ButtonComp
+                        buttonText={'CANCEL'}
+                        buttonFontSize={10}
+                        variant="contained"
+                        buttonTextColor="#FFFFFF"
+                        buttonFontWeight={500}
+                        btnBorderRadius={8}
+                        height={'30px'}
+                        btnWidth={'72px'}
+                      />
                     </Grid>
                   </Grid>
                 </Grid>

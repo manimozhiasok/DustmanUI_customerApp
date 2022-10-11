@@ -30,5 +30,16 @@
   "forgetPassword": " Forget Password",
   "login": "Log in",
   "poweredBy": "Powered by ",
-  "unitiveTechnologies": "Unitive Technologies"
+  "unitiveTechnologies": "Unitive Technologies",
+  "orderSuccess":"Order Success",
+  "orderPlaced":"Order Successfully Placed",
+  "orderConfirm":"Your order was Successfull !",
+  "orderDescription":"Just wait until Dustman arrive at your home.",
+  "vehicleChoose":" What vehicle you think will be right fit to pick your trash",
+  "selectVehicle":"Select Vehicle",
+  "chooseCategory":"Choose Category",
+  "trashDetails":"Trash Details",
+  "scheduleYourPickup":"Schedule Your Pickup",
+  "pickupAddress":"Pickup Address",
+  "orderConfirmation":"Order Confirmation"
 }
