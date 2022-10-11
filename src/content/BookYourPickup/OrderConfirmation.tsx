@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     // padding:theme.spacing(0, 0, 0, 0)
   },
   mainContainer: {
-    padding: theme.spacing(1, 37, 0, 3)
+    padding: theme.spacing(1, 0)
     // border:'1px solid green'
   },
   leftContainer: {
@@ -28,14 +28,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     fontFamily: 'Source Serif Pro',
     fontWeight: theme.fontWeight.bold,
-    fontSize:  theme.MetricsSizes.regular,
+    fontSize: theme.MetricsSizes.regular,
     color: theme.Colors.darkBlue
   },
   subtitle: {
     paddingTop: theme.spacing(1),
     fontFamily: 'DM Sans',
     fontWeight: theme.fontWeight.regular,
-    fontSize:  theme.MetricsSizes.tiny_xxx,
+    fontSize: theme.MetricsSizes.tiny_xxx,
     color: theme.Colors.mediumBlack
   },
   outerContainer: {

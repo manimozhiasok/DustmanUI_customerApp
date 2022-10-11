@@ -111,16 +111,18 @@ const AccordionComponent = ({
             direction="row"
             className={classes.eachAccordionOuterContainer}
           >
-            {displayContent.length > index + 1 && (
+            {!isProfile && displayContent.length > index + 1 && (
               <Grid item className={classes.line} />
             )}
             <Grid item className={classes.root}>
               <Accordion key={index} className={classes.accordionStyle}>
                 <AccordionSummary
                   className={classes.accordionSummaryStyle}
-                  expandIcon={<ExpandMoreIcon />}
+                  expandIcon={expandMoreIcon ? expandMoreIcon : ''}
                 >
-                  <IconTileComponent iconToDisplay={item.displayIcon} />
+                  {!isProfile && (
+                    <IconTileComponent iconToDisplay={item.displayIcon} />
+                  )}
                   <Typography className={classes.titleStyle}>
                     {item.summaryHeading}
                   </Typography>

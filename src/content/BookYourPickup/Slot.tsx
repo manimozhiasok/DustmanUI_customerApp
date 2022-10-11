@@ -43,51 +43,59 @@ const Slot = (props: Prop) => {
           },
           index: string
         ) => {
-          return(
+          return (
             <>
-          <Grid item xs={4}>
-            <ButtonComp
-              id={index}
-              buttonText={slot.text}
-              buttonFontSize={theme.MetricsSizes.small_xx}
-              btnWidth={100}
-              buttonFontWeight={theme.fontWeight.regular}
-              height={theme.MetricsSizes.large_x}
-              backgroundColor={
-                activeButtonId === index
-                  ? theme.Colors.secondary
-                  : theme.Colors.lightWhiteGrey
-              }
-              buttonTextColor={
-                activeButtonId === index
-                  ? theme.Colors.white
-                  : theme.Colors.black
-              }
-              startIcon={
-                <SunIcon
-                  fontSize="small"
-                  stroke={
+              <Grid item xs={4}>
+                <ButtonComp
+                  id={index}
+                  buttonText={slot.text}
+                  buttonFontSize={theme.MetricsSizes.small_xx}
+                  btnWidth={100}
+                  buttonFontWeight={theme.fontWeight.regular}
+                  height={theme.MetricsSizes.large_x}
+                  backgroundColor={
+                    activeButtonId === index
+                      ? theme.Colors.secondary
+                      : theme.Colors.lightWhiteGrey
+                  }
+                  buttonTextColor={
                     activeButtonId === index
                       ? theme.Colors.white
                       : theme.Colors.black
                   }
+                  startIcon={
+                    <SunIcon
+                      fontSize="small"
+                      stroke={
+                        activeButtonId === index
+                          ? theme.Colors.white
+                          : theme.Colors.black
+                      }
+                    />
+                  }
+                  onClickButton={(e) => handleClick(e, index)}
                 />
-              }
-              onClickButton={(e) => handleClick(e, index)}
-            />
-            <div className={classes.date}>
-              <Grid container>
-                <Grid item xs={2}>
-                  <DateIcon />
-                </Grid>
-                <Grid item xs={10} style={{ padding: 2, fontSize:theme.MetricsSizes.tiny_xx, fontWeight:theme.fontWeight.regular }}>
-                  {slot.time}
-                </Grid>
+                <div className={classes.date}>
+                  <Grid container>
+                    <Grid item xs={2}>
+                      <DateIcon />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={10}
+                      style={{
+                        padding: 2,
+                        fontSize: theme.MetricsSizes.tiny_xx,
+                        fontWeight: theme.fontWeight.regular
+                      }}
+                    >
+                      {slot.time}
+                    </Grid>
+                  </Grid>
+                </div>
               </Grid>
-            </div>
-          </Grid>
-          </>
-          )
+            </>
+          );
         }
       )}
     </Grid>

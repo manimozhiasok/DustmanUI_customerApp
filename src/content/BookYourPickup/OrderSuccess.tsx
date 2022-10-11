@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   mainContainer: {
     textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
     width: 650,
     height: 303
   }
@@ -31,7 +33,7 @@ function OrderSuccess() {
   const theme = useTheme();
 
   return (
-    <Grid container className={classes.mainContainer}>
+    <Grid container className={classes.mainContainer} justifyContent="center">
       <Grid item xs={12}>
         <img src={checkImage} width={'93.85px'} height={'93.85px'} />
       </Grid>

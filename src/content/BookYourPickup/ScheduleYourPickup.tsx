@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, makeStyles, Theme} from '@material-ui/core';
+import { Grid, makeStyles, Theme } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -9,11 +9,10 @@ import Slot from './Slot';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
-    
     dialogPaper: {
       width: 847,
       height: 900,
-      padding: theme.spacing(2, 2, 2, 5),
+      // padding: theme.spacing(2, 2, 2, 5),
       borderRadius: theme.MetricsSizes.regular
     },
     buttonStyle: {
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     cardStyle: {
       boxShadow: '0px 8.93293px 26.7988px rgba(5, 16, 55, 0.1)',
-      padding:theme.spacing(0, 0, 0, 0)
+      padding: theme.spacing(0, 0, 0, 0)
     },
     heading: {
       fontFamily: 'DM Sans',
@@ -32,28 +31,26 @@ const useStyles = makeStyles((theme: Theme) => {
       padding: theme.spacing(1, 0),
       fontWeight: theme.fontWeight.bold
     },
-    listItemStyle:{
+    listItemStyle: {
       display: 'flex',
-      alignItems: 'center',
-      padding: theme.spacing(2, 0)
+      alignItems: 'center'
+      // padding: theme.spacing(2, 0)
     },
-    containerStyle:{
+    containerStyle: {
       color: theme.Colors.blueDark,
       fontSize: theme.MetricsSizes.small_xxx,
       fontWeight: theme.fontWeight.regular,
       marginTop: theme.MetricsSizes.tiny_x
     },
-    typoStyle:{
+    typoStyle: {
       color: theme.Colors.primary,
       fontWeight: theme.fontWeight.medium
     },
-    calendarContainerStyle:{
-      padding: theme.spacing(2, 0, 10, 7) 
+    calendarContainerStyle: {
+      // padding: theme.spacing(2, 0, 10, 7)
     }
   };
 });
-
-
 
 const ScheduleYourPickup = () => {
   const [value, onChange] = useState(new Date());
@@ -76,55 +73,45 @@ const ScheduleYourPickup = () => {
     setActiveButtonId(id);
   };
 
-
-
-  
   useEffect(() => {
     //api call to get data
   }, []);
 
-    
-    return (
-      <>
-        <Grid
-          container
-          spacing={3}
-          className={classes.calendarContainerStyle}>
-          <Grid item xs={5}>
-            <Card className={classes.cardStyle}>
-              <Calendar
-                onChange={onChange}
-                value={value}
-                formatShortWeekday={(
-                  locale: any,
-                  value: { getDay: () => string | number }
-                ) => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][value.getDay()]}      
-                prev2Label={null}
-                next2Label={null}
-                defaultView="month"
-                calendarType="US"
-              />
-            </Card>
-          </Grid>
-          <Grid item xs={6}>
-            <Grid container direction="column">
-              <Grid item xs={12} className={classes.heading}>
-                Slot
-              </Grid>
-
-              <Slot
-                timeSlotDetails={timeSlotDetails}
-                activeButtonId={activeButtonId}
-                handleClick={handleClick}
-              />
+  return (
+    <>
+      <Grid container spacing={3} className={classes.calendarContainerStyle}>
+        <Grid item xs={5}>
+          <Card className={classes.cardStyle}>
+            <Calendar
+              onChange={onChange}
+              value={value}
+              formatShortWeekday={(
+                locale: any,
+                value: { getDay: () => string | number }
+              ) => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][value.getDay()]}
+              prev2Label={null}
+              next2Label={null}
+              defaultView="month"
+              calendarType="US"
+            />
+          </Card>
+        </Grid>
+        <Grid item xs={6}>
+          <Grid container direction="column">
+            <Grid item xs={12} className={classes.heading}>
+              Slot
             </Grid>
+
+            <Slot
+              timeSlotDetails={timeSlotDetails}
+              activeButtonId={activeButtonId}
+              handleClick={handleClick}
+            />
           </Grid>
         </Grid>
-      </>
-    );
-  };
-
-
-
+      </Grid>
+    </>
+  );
+};
 
 export default ScheduleYourPickup;

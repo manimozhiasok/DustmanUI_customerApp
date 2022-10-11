@@ -16,7 +16,12 @@ function PickupAddress() {
 
   return (
     <>
-      <Grid container spacing={2} justifyContent="center" style={{paddingBottom: theme.spacing(8.8)}}>
+      <Grid
+        container
+        spacing={2}
+        // justifyContent="center"
+        style={{ paddingBottom: theme.spacing(8.8) }}
+      >
         <Grid item xs={10}>
           <TextInputComponent
             placeholderText="House / Flat No."
@@ -61,7 +66,7 @@ function PickupAddress() {
         </Grid>
         <Grid item xs={10}>
           <TextInputComponent
-            placeholderText="Mobile Number"       
+            placeholderText="Mobile Number"
             txtColor={theme.Colors.secondaryBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />

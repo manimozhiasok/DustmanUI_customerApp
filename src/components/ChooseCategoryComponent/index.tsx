@@ -17,7 +17,7 @@ import {
 const useStyles = makeStyles((theme: Theme) => ({
   eachItem: {
     height: '220px',
-    padding: theme.spacing(1, 1, 7, 4)
+    padding: theme.spacing(1, 0)
   },
   container: {
     height: '500px',
@@ -34,9 +34,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 9,
     left: '50px',
     top: '-20px',
-    color: "#00e676",
-    "&:not($checked) .MuiIconButton-label:after": {
-      backgroundColor: "pink",
+    color: '#00e676',
+    '&:not($checked) .MuiIconButton-label:after': {
+      backgroundColor: 'pink'
     }
   },
   description: {
@@ -54,7 +54,6 @@ type ChooseProps = {
 };
 
 function ChooseCategoryComponent({ onChange, data }: ChooseProps) {
-
   const classes = useStyles();
   const theme = useTheme();
 

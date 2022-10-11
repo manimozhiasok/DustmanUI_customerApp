@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const initialValues = {
   quantity_kg: 20,
   order_items: [],
-  description: '', // order_images:[ //     { //       image_url:"image1" //     }, //     { //       image_url:"image2" //     } // ],
+  description: '',
+  // order_images:[ //     { //       image_url:"image1" //     }, //     { //       image_url:"image2" //     } // ],
   order_address: {
     address_line1: 'address_line1',
     address_line2: 'address_line2',
@@ -56,7 +57,7 @@ function BookYourPickup() {
   const edit = useEdit(initialValues);
 
   console.log('edit.edits index', edit.edits);
-  
+
   // const handleCreateData = async() => {
   //   try {
   //     let userData = { ...initialValues, ...edit.edits };
@@ -79,16 +80,15 @@ function BookYourPickup() {
   //   }
   // }
 
-
   const bookYourPickupAccordionContent = [
     {
       summaryHeading: 'Choose Category',
-      content: <ChooseCategory edit={edit} data={data}/>,
+      content: <ChooseCategory edit={edit} data={data} />,
       displayIcon: ChooseCategoryIcon
     },
     {
       summaryHeading: 'Trash Details',
-      content: <TrashDetails edit={edit} data={data}/>,
+      content: <TrashDetails edit={edit} data={data} />,
       displayIcon: TrashDetailsIcon
     },
     {
@@ -120,9 +120,9 @@ function BookYourPickup() {
 
   return (
     <Grid className={classes.outerContainer}>
-      <AccordionComponent 
-        displayContent={bookYourPickupAccordionContent} 
-        summaryPadding = {theme.spacing(3, 3, 3, 4)}
+      <AccordionComponent
+        displayContent={bookYourPickupAccordionContent}
+        summaryPadding={theme.spacing(3, 3, 3, 4)}
         expandMoreIcon={<ExpandMoreIcon />}
       />
     </Grid>
