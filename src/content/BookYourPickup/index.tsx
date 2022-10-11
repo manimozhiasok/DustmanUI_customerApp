@@ -69,7 +69,8 @@ function BookYourPickup() {
     <Grid className={classes.outerContainer}>
       <AccordionComponent 
         displayContent={bookYourPickupAccordionContent} 
-        summaryPadding = {theme.spacing(3, 3, 3, 4)}
+        summaryPadding = {theme.spacing(4.25, 6.5)}
+        summaryMargin = {theme.spacing(2.5, 0)}
         expandMoreIcon={<ExpandMoreIcon />}
       />
     </Grid>

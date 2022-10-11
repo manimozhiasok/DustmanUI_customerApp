@@ -9,7 +9,7 @@ import { SelectVehicleIcon } from 'src/Assets/Images';
 import { ScheduleYourPickupIcon } from 'src/Assets/Images';
 import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
-import { OrderSuccessIcon } from 'src/Assets/Images';
+import { AvatarCustomer } from 'src/Assets/Images';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function MyAccount() {
+function MyAccount({accordionExpanded}:{accordionExpanded?:number}) {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -36,7 +36,7 @@ function MyAccount() {
     {
       summaryHeading: '',
       content: "Profile",
-      displayIcon: ChooseCategoryIcon
+      displayIcon: AvatarCustomer
     }
 ];
     const myAccountContent = [
@@ -74,8 +74,10 @@ function MyAccount() {
             displayContent={myProfileContent} 
             withBorder
             isProfile
+            isMyAccount
             accBorderColor={theme.Colors.greyDark}
             expandMoreIcon={<ExpandMoreIcon style={{  transform: "rotate(270deg)",}} />}
+            
         />
         </Grid>
         <Grid item className={classes.contentContainer2}>
@@ -85,6 +87,7 @@ function MyAccount() {
             isProfile
             //accBorderColor={theme.Colors.greyDark}
             expandMoreIcon={<ExpandMoreIcon />}
+            accordionExpanded={accordionExpanded}
         />
         </Grid>
     </Grid>

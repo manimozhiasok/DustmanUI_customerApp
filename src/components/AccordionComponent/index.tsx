@@ -16,9 +16,10 @@ type Props = {
   bgColor: string;
   height: string;
   NumOfTabs: number;
-  withBorder: boolean;
+  withBorder?: boolean;
   summaryPadding?: any;
   accBorderColor?: any;
+  summaryMargin?: any;
 };
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
@@ -35,17 +36,22 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
         margin: theme.spacing(2.5, 0)
       }
     },
-    eachAccordionOuterContainer: {
-      position: 'relative'
+    eachAccordianOuterContainer: {
+      position:"relative",
+      border: (props)=> props.withBorder ? '0.5px solid' : 'none',
+      borderColor: (props) => {return props.accBorderColor ? props.accBorderColor : theme.Colors.black}
+    },
+    titleContainerStyle: {
+      //padding: (props)=>{return props.summaryPadding} //theme.spacing(3, 3, 3, 4)
     },
     accordionSummaryStyle: {
-      padding: theme.spacing(4.25, 6.5),
+      padding: (props)=>{return props.summaryPadding} ,
       '& .MuiAccordionSummary-expandIcon.Mui-expanded': {
         display: 'none'
       }
     },
     accordionStyle: {
-      margin: theme.spacing(2.5, 0),
+      margin: (props)=>{return props.summaryMargin} ,
       boxShadow: 'none'
     },
     line: {
@@ -76,7 +82,10 @@ const AccordionComponent = ({
   isProfile,
   summaryPadding,
   accBorderColor,
-  expandMoreIcon
+  expandMoreIcon,
+  summaryMargin,
+  isMyAccount,
+  accordionExpanded
 }: {
   backgroundColor?: string;
   height?: string;
@@ -91,14 +100,18 @@ const AccordionComponent = ({
   summaryPadding?: any;
   accBorderColor?: any;
   expandMoreIcon?:any;
+  summaryMargin?: any;
+  isMyAccount?: boolean;
+  accordionExpanded?:number;
 }) => {
-  const classes = useStyles({
+  const classes = useStyles({ 
     bgColor: backgroundColor,
     height,
     NumOfTabs: displayContent.length,
     withBorder,
     summaryPadding,
-    accBorderColor
+    accBorderColor,
+    summaryMargin
   });
 
   return (
@@ -109,18 +122,19 @@ const AccordionComponent = ({
             key={index}
             container
             direction="row"
-            className={classes.eachAccordionOuterContainer}
+            className={classes.eachAccordianOuterContainer}
           >
-            {displayContent.length > index + 1 && (
-              <Grid item className={classes.line} />
-            )}
+          { !isProfile && 
+            (displayContent.length>index+1) && 
+              <Grid item className={classes.line} />}
             <Grid item className={classes.root}>
-              <Accordion key={index} className={classes.accordionStyle}>
+              <Accordion key={index} className={classes.accordionStyle} >
                 <AccordionSummary
                   className={classes.accordionSummaryStyle}
-                  expandIcon={<ExpandMoreIcon />}
+                  expandIcon={expandMoreIcon ? expandMoreIcon : ''}
                 >
-                  <IconTileComponent iconToDisplay={item.displayIcon} />
+                  { !isProfile && <IconTileComponent iconToDisplay={item.displayIcon} /> }
+                  { isMyAccount && <img src={item.displayIcon} alt="image" /> }
                   <Typography className={classes.titleStyle}>
                     {item.summaryHeading}
                   </Typography>

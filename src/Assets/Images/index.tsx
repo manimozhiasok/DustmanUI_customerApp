@@ -32,6 +32,7 @@ import CompletedOrdersIcon from './CompletedOrdersIcon.svg';
 import bike from './bike.svg';
 import vehicleImage from './vehicleImage.svg';
 import checkImage from './checkImage.svg';
+import AvatarCustomer from './AvatarCustomer.svg';
 
 /* impPendingOrdersIconort PriceSheet from './PriceSheet.svg';
 import NewOrder from './NewOrder.svg';
@@ -72,7 +73,8 @@ export {
   CompletedOrdersIcon,
   bike,
   vehicleImage,
-  checkImage
+  checkImage,
+  AvatarCustomer,
 
   /* PriceSheet,
  NewOrder,
