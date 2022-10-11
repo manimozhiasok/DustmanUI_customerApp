@@ -10,7 +10,7 @@ import {
   AccordionDetails
 } from '@material-ui/core';
 import IconTileComponent from '../IconTileComponent';
-
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 type Props = {
   bgColor: string;

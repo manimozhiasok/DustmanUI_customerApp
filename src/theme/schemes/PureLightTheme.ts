@@ -11,7 +11,8 @@ const defaultColors = {
     400: '#718096',
     300: '#E6EDFF',
     dark: '#263238',
-    200: '#010A44'
+    200: '#010A44',
+    100:'#103D43'
   },
   GREEN: {
     900: '#6CB044',
@@ -21,7 +22,8 @@ const defaultColors = {
   WHITE: {
     900: '#FFFF',
     800: '#718096',
-    700: '#F5F5F5'
+    700: '#F5F5F5',
+    500:'#EFEFEF'
   },
   GREY: {
     900: '#667080',
@@ -39,7 +41,9 @@ const defaultColors = {
   BLACK: {
     900: ' #000000',
     800: '#252733',
-    700: '#808080'
+    700: '#808080',
+    500:'#454545',
+    100:'#7B6F72'
   },
   ORANGE: {
     900: '#FF3B30'
@@ -79,7 +83,11 @@ const Colors = {
   lightGrey: defaultColors.GREY[200],
   mediumGrey: defaultColors.GREY['a700'],
   mediumBlack: defaultColors.BLACK[700],
-  greyScale: defaultColors.GREY['a600']
+  greyScale: defaultColors.GREY['a600'],
+  blackGrey:defaultColors.BLACK[100],
+  lightBlack:defaultColors.BLACK[500],
+  whiteGrey:defaultColors.WHITE[500],
+  lightBlueGrey:defaultColors.BLUE[100]
 };
 
 const fontWeight = {
