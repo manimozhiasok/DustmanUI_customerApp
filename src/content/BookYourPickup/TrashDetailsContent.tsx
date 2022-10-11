@@ -1,4 +1,5 @@
 import {
+  Grid,
   InputAdornment,
   makeStyles,
   TextareaAutosize,
@@ -60,44 +61,50 @@ export const LeftContent = ({ edit, handleData }) => {
   const theme = useTheme();
   const classes = useStyles();
   return (
-    <>
-      <TextInputComponent
-        inputLabel="Category"
-        labelColor={theme.Colors.deepGrey}
-        txtColor={theme.Colors.secondaryBlack}
-        backgroundColor={theme.Colors.lightWhiteGrey}
-        value={edit.getValue('order_items').toString()}
-        borderColor={theme.Colors.lightWhiteGrey}
-        inputHeight={theme.MetricsSizes.large_xxx}
-        //onChange={handleData}
-      />
-      <TextInputComponent
-        inputLabel="Approximate Weight"
-        placeholderText="Enter approx. Weight"
-        value={edit.getValue('quantity_kg')}
-        labelColor={theme.Colors.deepGrey}
-        txtColor={theme.Colors.secondaryBlack}
-        backgroundColor={theme.Colors.lightWhiteGrey}
-        borderColor={theme.Colors.lightWhiteGrey}
-        inputHeight={theme.MetricsSizes.large_xxx}
-        InputProps={{
-          endAdornment: <InputAdornment position="start">kg.</InputAdornment>,
-          style: {
-            backgroundColor: theme.Colors.lightWhiteGrey
-          }
-        }}
-      />
-      <Typography className={classes.textStyle}>
-        Description <label className={classes.optionStyle}>(Optional)</label>
-      </Typography>
-      <TextareaAutosize
-        minRows={5}
-        cols={30}
-        value={edit.getValue('description')}
-        placeholder="Any instructions for our pickup executive"
-        className={classes.textAreaStyle}
-      />
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <TextInputComponent
+          inputLabel="Category"
+          labelColor={theme.Colors.deepGrey}
+          txtColor={theme.Colors.secondaryBlack}
+          backgroundColor={theme.Colors.lightWhiteGrey}
+          value={edit.getValue('order_items').toString()}
+          borderColor={theme.Colors.lightWhiteGrey}
+          inputHeight={theme.MetricsSizes.large_xxx}
+          //onChange={handleData}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextInputComponent
+          inputLabel="Approximate Weight"
+          placeholderText="Enter approx. Weight"
+          value={edit.getValue('quantity_kg')}
+          labelColor={theme.Colors.deepGrey}
+          txtColor={theme.Colors.secondaryBlack}
+          backgroundColor={theme.Colors.lightWhiteGrey}
+          borderColor={theme.Colors.lightWhiteGrey}
+          inputHeight={theme.MetricsSizes.large_xxx}
+          InputProps={{
+            endAdornment: <InputAdornment position="start">kg.</InputAdornment>,
+            style: {
+              backgroundColor: theme.Colors.lightWhiteGrey
+            }
+          }}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography className={classes.textStyle}>
+          Description <label className={classes.optionStyle}>(Optional)</label>
+        </Typography>
+        <TextareaAutosize
+          minRows={5}
+          cols={31}
+          value={edit.getValue('description')}
+          placeholder="Any instructions for our pickup executive"
+          className={classes.textAreaStyle}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

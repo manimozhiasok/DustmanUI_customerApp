@@ -22,49 +22,49 @@ function PickupAddress() {
         // justifyContent="center"
         style={{ paddingBottom: theme.spacing(8.8) }}
       >
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <TextInputComponent
             placeholderText="House / Flat No."
             txtColor={theme.Colors.secondaryBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <TextInputComponent
             placeholderText="Apartment / Street Name / Area"
             txtColor={theme.Colors.secondaryBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <TextInputComponent
             placeholderText="State"
             txtColor={theme.Colors.secondaryBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={6}>
           <TextInputComponent
             placeholderText="City"
             txtColor={theme.Colors.secondaryBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={6}>
           <TextInputComponent
             placeholderText="Pincode"
             txtColor={theme.Colors.secondaryBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <TextInputComponent
             placeholderText="Landmark"
             txtColor={theme.Colors.secondaryBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <TextInputComponent
             placeholderText="Mobile Number"
             txtColor={theme.Colors.secondaryBlack}
