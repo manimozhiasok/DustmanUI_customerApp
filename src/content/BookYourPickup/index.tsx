@@ -22,6 +22,7 @@ import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import data from './CategoryData';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {}
@@ -119,7 +120,11 @@ function BookYourPickup() {
 
   return (
     <Grid className={classes.outerContainer}>
-      <AccordionComponent displayContent={bookYourPickupAccordionContent} />
+      <AccordionComponent 
+        displayContent={bookYourPickupAccordionContent} 
+        summaryPadding = {theme.spacing(3, 3, 3, 4)}
+        expandMoreIcon={<ExpandMoreIcon />}
+      />
     </Grid>
   );
 }

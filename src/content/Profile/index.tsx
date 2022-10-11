@@ -8,6 +8,7 @@ import {
   PendingOrdersIcon,
   ConfirmedOrdersIcon
 } from 'src/Assets/Images';
+import MyAccount from './MyAccount';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -15,9 +16,25 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: theme.Colors.whitePure
   },
   outerContainer: {
-    margin: theme.spacing(2.5, 0, 2.5, 0),
+    margin: theme.spacing(1.75, 0, 1.75, 0),
     background: theme.Colors.whitePure
-  }
+    // height: theme.spacing(78)
+  },
+  tabContainer: {
+    border: '0.5px solid',
+    borderColor: theme.Colors.greyDark,
+    marginRight: theme.spacing(2)
+  },
+  tabContentOuterContainer: {
+    height: theme.spacing(65.5),
+    overflowY: 'scroll'                                               
+  },
+  tabContentContainer: {
+    marginRight: theme.spacing(2),
+    border: '0.5px solid',
+    borderColor: theme.Colors.greyDark
+  },
+
 }));
 
 function Profile() {
@@ -50,22 +67,42 @@ function Profile() {
   return (
     <Grid container className={classes.outerContainer}>
       <Grid container className={classes.contentContainer}>
-        <OrdersAndProfileTab
-          displayContent={OrdersTabItems}
-          onTabChange={handleSetSelectedTab}
-        />
-        <TabContent value={tabToDisplay} index={0}>
-          Pending Orders
-        </TabContent>
-        <TabContent value={tabToDisplay} index={1}>
-          Confirmed Orders
-        </TabContent>
-        <TabContent value={tabToDisplay} index={2}>
-          Completed orders
-        </TabContent>
+        <Grid item className={classes.tabContainer}>
+          <OrdersAndProfileTab
+            displayContent={OrdersTabItems}
+            onTabChange={handleSetSelectedTab}
+            height="100%"
+          />
+        </Grid>
+        <Grid item xs={true} className={classes.tabContentOuterContainer}>
+          <TabContent
+            value={tabToDisplay}
+            index={0}
+            className={classes.tabContentContainer}
+          >
+            <MyAccount />
+          </TabContent>
+          <TabContent
+            value={tabToDisplay}
+            index={1}
+            className={classes.tabContentContainer}
+          >
+            Change Language
+          </TabContent>
+          <TabContent
+            value={tabToDisplay}
+            index={2}
+            className={classes.tabContentContainer}
+          >
+           Change User Type
+          </TabContent>
+        </Grid>
       </Grid>
     </Grid>
-  );
+
+
+
+      );
 }
 
 export default Profile;

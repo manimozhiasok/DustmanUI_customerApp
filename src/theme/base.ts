@@ -78,6 +78,10 @@ declare module '@material-ui/core/styles' {
       greyScaleMedium: string;
       darkGrey:string;
       darkBlue:string;
+      lightBlack:string;
+      blackGrey:string;
+      whiteGrey:string;
+      lightBlueGrey:string;
     };
     general: {
       borderRadiusSm: number;
@@ -176,6 +180,10 @@ declare module '@material-ui/core/styles' {
       greyScaleMedium: string;
       darkGrey:string;
       darkBlue:string;
+      lightBlack:string;
+      blackGrey:string;
+      whiteGrey:string;
+      lightBlueGrey:string;
     };
     general: {
       borderRadiusSm: number;
