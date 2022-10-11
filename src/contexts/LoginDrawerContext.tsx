@@ -13,7 +13,7 @@ export const LoginDrawerContext = createContext<LoginDrawerContext>(
 export const LoginDrawerProvider: FC = ({ children }) => {
   const [isLoginDrawerOpen, setIsLoginDrawerOpen] = useState(false);
   const closeLoginDrawer = () => {
-    setIsLoginDrawerOpen(false);
+    setIsLoginDrawerOpen(!isLoginDrawerOpen);
   };
   const toggleLoginDrawer = () => {
     setIsLoginDrawerOpen(!isLoginDrawerOpen);

@@ -6,6 +6,8 @@ import ApplicationRoute from './ApplicationRoute';
 import LandingPage from './content/LandingPage';
 import HomePage from './content/HomePage';
 import HomePageLayout from './layouts/HomePageLayout';
+import CustomerLogin from './content/Login/CustomerLogin';
+import VerifyOtp from './content/Login/VerifyOtp';
 
 const routes: RouteObject[] = [
   {
@@ -14,11 +16,21 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <ApplicationRoute exact path="/" />
+        element: <ApplicationRoute />
       },
       {
         path: 'landing-page',
-        element: <LandingPage />
+        element: <LandingPage />,
+        children: [
+          {
+            path: 'customer-login',
+            element: <CustomerLogin />
+          },
+          {
+            path: 'verify-otp',
+            element: <VerifyOtp />
+          }
+        ]
       }
     ]
   },
@@ -27,9 +39,13 @@ const routes: RouteObject[] = [
     element: <HomePageLayout />,
     children: [
       {
+        path: '',
+        element: <Navigate to="customer-info" replace />
+      },
+      {
         path: 'customer-info',
         element: <HomePage />
-      },    
+      }
     ]
   }
 ];

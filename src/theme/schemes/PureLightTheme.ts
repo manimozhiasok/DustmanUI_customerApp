@@ -12,7 +12,7 @@ const defaultColors = {
     300: '#E6EDFF',
     dark: '#263238',
     200: '#010A44',
-    100:'#103D43'
+    100: '#103D43'
   },
   GREEN: {
     900: '#6CB044',
@@ -23,7 +23,7 @@ const defaultColors = {
     900: '#FFFF',
     800: '#718096',
     700: '#F5F5F5',
-    500:'#EFEFEF'
+    500: '#EFEFEF'
   },
   GREY: {
     900: '#667080',
@@ -42,8 +42,8 @@ const defaultColors = {
     900: ' #000000',
     800: '#252733',
     700: '#808080',
-    500:'#454545',
-    100:'#7B6F72'
+    500: '#454545',
+    100: '#7B6F72'
   },
   ORANGE: {
     900: '#FF3B30'
@@ -84,10 +84,10 @@ const Colors = {
   mediumGrey: defaultColors.GREY['a700'],
   mediumBlack: defaultColors.BLACK[700],
   greyScale: defaultColors.GREY['a600'],
-  blackGrey:defaultColors.BLACK[100],
-  lightBlack:defaultColors.BLACK[500],
-  whiteGrey:defaultColors.WHITE[500],
-  lightBlueGrey:defaultColors.BLUE[100]
+  blackGrey: defaultColors.BLACK[100],
+  lightBlack: defaultColors.BLACK[500],
+  whiteGrey: defaultColors.WHITE[500],
+  lightBlueGrey: defaultColors.BLUE[100]
 };
 
 const fontWeight = {
@@ -190,7 +190,7 @@ export const PureLightTheme = (options?: ThemeOptions) =>
           fontFamily: 'DM Sans'
         },
         h5: {
-          fontSize: 14,
+          fontSize: 18,
           fontFamily: 'DM Sans'
         },
         h6: {
