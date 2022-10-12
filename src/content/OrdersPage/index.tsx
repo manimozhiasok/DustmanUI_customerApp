@@ -8,6 +8,7 @@ import { Aluminium, Wood } from 'src/Assets/Images';
 import { CompletedOrdersIcon } from 'src/Assets/Images';
 import { ConfirmedOrdersIcon } from 'src/Assets/Images';
 import { PendingOrdersIcon } from 'src/Assets/Images';
+import OrderComponentNew from 'src/components/orderComponetNew';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -129,7 +130,8 @@ function OrdersPage() {
             className={classes.tabContentContainer}
           >
             <div className={classes.eachOrderContainer}>
-              <OrderListingComponent displayContent={ordersList} />
+              {/* <OrderListingComponent displayContent={ordersList} /> */}
+              <OrderComponentNew orderComponent={ordersList} />
             </div>
           </TabContent>
           <TabContent
