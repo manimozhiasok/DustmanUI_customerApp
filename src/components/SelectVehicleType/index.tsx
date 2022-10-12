@@ -7,6 +7,7 @@ import {
   Typography,
   useTheme
 } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 type Props = {
   dataContent: any[];
   onClick: () => void;
@@ -54,12 +55,13 @@ function SelectVehicleType({
 }) {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Grid container direction="row" spacing={2}>
       <Grid item xs={12}>
         <Typography className={classes.subHeading}>
-          What vehicle you think will be right fit to pick your trash
+          {t('vehicleChoose')}
         </Typography>
       </Grid>
       {dataContent.map((item, index) => {
@@ -70,15 +72,13 @@ function SelectVehicleType({
             key={index}
             onClick={onClick}
           >
-            <Typography className={classes.heading}>{item.heading}</Typography>
+            <Typography className={classes.heading}>{item.name}</Typography>
             <Grid
               style={{ display: 'flex' }}
               justifyContent="space-between"
               direction="row"
             >
-              <Typography className={classes.subText}>
-                {item.subHeading}
-              </Typography>
+              <Typography className={classes.subText}>{item.name}</Typography>
 
               <img
                 src={item.image}
@@ -92,7 +92,10 @@ function SelectVehicleType({
               />
             </Grid>
 
-            <Typography className={classes.subText}> {item.subText}</Typography>
+            <Typography className={classes.subText}>
+              {' '}
+              {item.description}
+            </Typography>
           </Grid>
         );
       })}

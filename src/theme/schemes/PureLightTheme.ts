@@ -24,7 +24,7 @@ const defaultColors = {
     900: '#FFFF',
     800: '#718096',
     700: '#F5F5F5',
-    500:'#EFEFEF'
+    500: '#EFEFEF'
   },
   GREY: {
     900: '#667080',
@@ -47,9 +47,8 @@ const defaultColors = {
     900: ' #000000',
     800: '#252733',
     700: '#808080',
-    a700: '#454545',
-    500:'#454545',
-    100:'#7B6F72'
+    500: '#454545',
+    100: '#7B6F72'
   },
   ORANGE: {
     900: '#FF3B30'
@@ -92,7 +91,6 @@ const Colors = {
   mediumBlack: defaultColors.BLACK[700],
   greyScale: defaultColors.GREY['a600'],
   deepGrey: defaultColors.GREY['a500'],
-  secondaryBlack: defaultColors.BLACK['a700'],
   lightWhiteGrey: defaultColors.GREY['100'],
   darkGrey: defaultColors.GREY['a800'],
   darkBlue: defaultColors.BLUE['a800'],
@@ -203,7 +201,7 @@ export const PureLightTheme = (options?: ThemeOptions) =>
           fontFamily: 'DM Sans'
         },
         h5: {
-          fontSize: 14,
+          fontSize: 18,
           fontFamily: 'DM Sans'
         },
         h6: {

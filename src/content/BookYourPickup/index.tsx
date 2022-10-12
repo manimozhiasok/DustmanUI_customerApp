@@ -23,6 +23,7 @@ import { HTTP_STATUSES } from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import data from './CategoryData';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {}
@@ -79,40 +80,41 @@ function BookYourPickup() {
   //     toast.error(err?.message);
   //   }
   // }
+  const { t } = useTranslation();
 
   const bookYourPickupAccordionContent = [
     {
-      summaryHeading: 'Choose Category',
-      content: <ChooseCategory edit={edit} data={data} />,
+      summaryHeading: t('chooseCategory'),
+      content: <ChooseCategory/>,
       displayIcon: ChooseCategoryIcon
     },
     {
-      summaryHeading: 'Trash Details',
-      content: <TrashDetails edit={edit} data={data} />,
+      summaryHeading: t('trashDetails'),
+      content: <TrashDetails />,
       displayIcon: TrashDetailsIcon
     },
     {
-      summaryHeading: 'Select Vehicle',
+      summaryHeading: t('selectVehicle'),
       content: <SelectVehicle />,
       displayIcon: SelectVehicleIcon
     },
     {
-      summaryHeading: 'Schedule Your Pickup',
+      summaryHeading: t('scheduleYourPickup'),
       content: <ScheduleYourPickup />,
       displayIcon: ScheduleYourPickupIcon
     },
     {
-      summaryHeading: 'Pickup Address',
+      summaryHeading: t('pickupAddress'),
       content: <PickupAddress />,
       displayIcon: PickupAddressIcon
     },
     {
-      summaryHeading: 'Order Confirmation',
-      content: <OrderConfirmation/>,
+      summaryHeading: t('orderConfirmation'),
+      content: <OrderConfirmation />,
       displayIcon: OrderConfirmationIcon
     },
     {
-      summaryHeading: 'Order Success',
+      summaryHeading: t('orderSuccess'),
       content: <OrderSuccess />,
       displayIcon: OrderSuccessIcon
     }
@@ -122,7 +124,8 @@ function BookYourPickup() {
     <Grid className={classes.outerContainer}>
       <AccordionComponent
         displayContent={bookYourPickupAccordionContent}
-        summaryPadding={theme.spacing(3, 3, 3, 4)}
+        summaryPadding={theme.spacing(4.25, 6.5)}
+        summaryMargin={theme.spacing(2.5, 0)}
         expandMoreIcon={<ExpandMoreIcon />}
       />
     </Grid>

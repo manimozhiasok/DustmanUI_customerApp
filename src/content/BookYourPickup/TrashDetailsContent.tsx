@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.MetricsSizes.small_xxx,
     fontWeight: theme.fontWeight.regular,
     padding: theme.spacing(1),
-    color: theme.Colors.secondaryBlack,
+    color: theme.Colors.lightBlack,
     borderColor: theme.Colors.lightWhiteGrey,
     backgroundColor: theme.Colors.lightWhiteGrey
   },
@@ -66,7 +66,7 @@ export const LeftContent = ({ edit, handleData }) => {
         <TextInputComponent
           inputLabel="Category"
           labelColor={theme.Colors.deepGrey}
-          txtColor={theme.Colors.secondaryBlack}
+          textColor={theme.Colors.lightBlack}
           backgroundColor={theme.Colors.lightWhiteGrey}
           value={edit.getValue('order_items').toString()}
           borderColor={theme.Colors.lightWhiteGrey}
@@ -80,7 +80,7 @@ export const LeftContent = ({ edit, handleData }) => {
           placeholderText="Enter approx. Weight"
           value={edit.getValue('quantity_kg')}
           labelColor={theme.Colors.deepGrey}
-          txtColor={theme.Colors.secondaryBlack}
+          textColor={theme.Colors.lightBlack}
           backgroundColor={theme.Colors.lightWhiteGrey}
           borderColor={theme.Colors.lightWhiteGrey}
           inputHeight={theme.MetricsSizes.large_xxx}

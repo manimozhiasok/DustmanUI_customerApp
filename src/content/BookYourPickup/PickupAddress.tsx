@@ -25,49 +25,49 @@ function PickupAddress() {
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="House / Flat No."
-            txtColor={theme.Colors.secondaryBlack}
+            textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="Apartment / Street Name / Area"
-            txtColor={theme.Colors.secondaryBlack}
+            textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="State"
-            txtColor={theme.Colors.secondaryBlack}
+            textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
         <Grid item xs={6}>
           <TextInputComponent
             placeholderText="City"
-            txtColor={theme.Colors.secondaryBlack}
+            textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
         <Grid item xs={6}>
           <TextInputComponent
             placeholderText="Pincode"
-            txtColor={theme.Colors.secondaryBlack}
+            textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="Landmark"
-            txtColor={theme.Colors.secondaryBlack}
+            textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="Mobile Number"
-            txtColor={theme.Colors.secondaryBlack}
+            textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>

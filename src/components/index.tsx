@@ -15,5 +15,6 @@ export { default as Loader } from './Loader';
 export { default as UHConfirmModal } from './UHConfirmModal';
 export { default as AccordionComponent } from './AccordionComponent';
 export { default as TabComponent } from './TabComponent';
-export { default as IconTileComponent} from './IconTileComponent';
-export { default as ChooseCategoryComponent} from './ChooseCategoryComponent';
+export { default as IconTileComponent } from './IconTileComponent';
+export { default as ChooseCategoryComponent } from './ChooseCategoryComponent';
+export { default as LoginHeaderComp } from './LoginHeaderComp';

@@ -70,27 +70,45 @@ function OrdersPage() {
   const ordersList = [
     {
       displayImage: Aluminium,
-      orderId: 123456789
+      orderId: 123456789,
+      category: 'Metals,NewsPaper',
+      weight: '25kg',
+      place: 'Ambattur'
     },
     {
       displayImage: Wood,
-      orderId: 123456789
+      orderId: 123456789,
+      category: 'Metals,NewsPaper',
+      weight: '55kg',
+      place: 'Ariyalur'
     },
     {
       displayImage: Wood,
-      orderId: 123456789
+      orderId: 123456789,
+      category: 'Metals,NewsPaper',
+      weight: '25kg',
+      place: 'Ambattur'
     },
     {
       displayImage: Aluminium,
-      orderId: 123456789
+      orderId: 123456789,
+      category: 'Metals,NewsPaper',
+      weight: '35kg',
+      place: 'Adayar'
     },
     {
       displayImage: Wood,
-      orderId: 123456789
+      orderId: 123456789,
+      category: 'Metals,NewsPaper',
+      weight: '25kg',
+      place: 'Ambattur'
     },
     {
       displayImage: Wood,
-      orderId: 123456789
+      orderId: 123456789,
+      category: 'Metals,NewsPaper',
+      weight: '31kg',
+      place: 'Adayar'
     }
   ];
 

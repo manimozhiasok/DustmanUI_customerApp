@@ -11,8 +11,9 @@ type StyleProps = {
   height?: string | number;
   borderColor?: string;
   bgColor?: string;
-  txtColor?: string;
   placeHolderColor?: string;
+  borderRadius?: number;
+  textColor?: string;
 };
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -25,10 +26,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.MetricsSizes.small_xxx,
       fontWeight: theme.fontWeight.medium,
       backgroundColor: (props) => props.bgColor || theme.Colors.white,
-      color: (props) => props.txtColor || theme.Colors.inputText,
       "&::placeholder": {
         color: (props) => props.placeHolderColor || null
-      }
+      },
+      color: (props) => props.textColor || theme.Colors.inputText
+    },
+    '& .MuiOutlinedInput-root': {
+      borderRadius: (props) => props.borderRadius ?? theme.MetricsSizes.tiny
     },
     '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
       borderColor: (props) => props.borderColor || theme.Colors.lightGrey,
@@ -50,9 +54,11 @@ type Props = TextFieldProps & {
   variant?: string;
   borderColor?: string;
   isError?: boolean;
-  txtColor?: string;
   backgroundColor?: string;
   placeHolderColor?: string;
+  inputStyles?: any;
+  inputBorderRadius?: number;
+  textColor?: string;
 };
 
 const TextInputComponent = (props: Props) => {
@@ -66,18 +72,21 @@ const TextInputComponent = (props: Props) => {
     inputHeight,
     borderColor,
     isError = false,
-    txtColor,
     backgroundColor,
     placeHolderColor,
+    inputStyles,
+    inputBorderRadius,
+    textColor,
     ...rest
   } = props;
   const styles = useStyles({
     width: inputWidth,
     height: inputHeight,
-    txtColor: txtColor,
     bgColor: backgroundColor,
     placeHolderColor: placeHolderColor,
-    borderColor: (isError && theme.Colors.redPrimary) || borderColor
+    borderColor: (isError && theme.Colors.redPrimary) || borderColor,
+    borderRadius: inputBorderRadius,
+    textColor
   });
   return (
     <>
@@ -95,7 +104,7 @@ const TextInputComponent = (props: Props) => {
       )}
       <TextField
         placeholder={placeholderText}
-        className={styles.subText}
+        className={`${styles.subText} ${inputStyles}`}
         size="medium"
         variant={variant}
         FormHelperTextProps={{ classes: { root: styles.helperRoot } }}

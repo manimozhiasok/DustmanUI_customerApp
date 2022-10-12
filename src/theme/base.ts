@@ -73,7 +73,6 @@ declare module '@material-ui/core/styles' {
       mediumBlack: string;
       greyScale: string;
       deepGrey: string;
-      secondaryBlack: string;
       lightWhiteGrey: string;
       greyScaleMedium: string;
       darkGrey:string;
@@ -175,7 +174,6 @@ declare module '@material-ui/core/styles' {
       navBlue: string;
       inputText: string;
       deepGrey: string;
-      secondaryBlack:string;
       lightWhiteGrey: string;
       greyScaleMedium: string;
       darkGrey:string;

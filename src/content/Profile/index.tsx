@@ -87,14 +87,14 @@ function Profile() {
             index={1}
             className={classes.tabContentContainer}
           >
-            Change Language
+            <MyAccount accordionExpanded = {0} />
           </TabContent>
           <TabContent
             value={tabToDisplay}
             index={2}
             className={classes.tabContentContainer}
           >
-           Change User Type
+           <MyAccount accordionExpanded = {1} />
           </TabContent>
         </Grid>
       </Grid>
