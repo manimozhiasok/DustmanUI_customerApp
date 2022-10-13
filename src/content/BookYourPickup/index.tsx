@@ -33,7 +33,7 @@ const initialValues = {
   quantity_kg: 20,
   order_items: [],
   description: 'dfghjskdfgfgvcf',
-  order_images: [{ image_url: 'image1' }, { image_url: 'image2' }],
+  order_images: [],
   order_address: {
     address_line1: 'address_line1',
     address_line2: 'address_line2',
@@ -41,6 +41,7 @@ const initialValues = {
     state: 'Tamil Nadu',
     city: 'Erode',
     pincode: '6200061',
+    landmark: '',
     mobile_number: '9629629952',
     map_location: 'map_url'
   },
@@ -80,17 +81,18 @@ function BookYourPickup() {
   //     toast.error(err?.message);
   //   }
   // }
+
   const { t } = useTranslation();
 
   const bookYourPickupAccordionContent = [
     {
       summaryHeading: t('chooseCategory'),
-      content: <ChooseCategory/>,
+      content: <ChooseCategory edit={edit} data={data} />,
       displayIcon: ChooseCategoryIcon
     },
     {
       summaryHeading: t('trashDetails'),
-      content: <TrashDetails />,
+      content: <TrashDetails edit={edit} />,
       displayIcon: TrashDetailsIcon
     },
     {
@@ -105,7 +107,7 @@ function BookYourPickup() {
     },
     {
       summaryHeading: t('pickupAddress'),
-      content: <PickupAddress />,
+      content: <PickupAddress edit={edit} />,
       displayIcon: PickupAddressIcon
     },
     {

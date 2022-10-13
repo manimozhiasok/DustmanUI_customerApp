@@ -16,8 +16,8 @@ import {
 
 const useStyles = makeStyles((theme: Theme) => ({
   eachItem: {
-    height: '220px',
-    padding: theme.spacing(1, 0)
+    height: '180px',
+    padding: theme.spacing(3, 0)
   },
   container: {
     height: '500px',
@@ -31,16 +31,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '5px solid red'
   },
   checkbox: {
-    zIndex: 9,
+    zIndex: 1,
     left: '50px',
-    top: '-20px',
-    color: '#00e676',
-    '&:not($checked) .MuiIconButton-label:after': {
-      backgroundColor: 'pink'
+    top: '-10px',
+    color: '#C4C4C4',
+    width: theme.MetricsSizes.regular,
+    height: theme.MetricsSizes.regular,
+    '&:not($checked).MuiCheckbox-colorSecondary': {
+      backgroundColor: '#C4C4C4',
+      padding: '0px',
+      borderRadius: '0px'
+    },
+    '&.MuiCheckbox-colorSecondary.Mui-checked': {
+      backgroundColor: theme.Colors.white
+    },
+    '&.MuiCheckbox-colorSecondary.Mui-checked:hover': {
+      backgroundColor: theme.Colors.white
     }
   },
   description: {
-    paddingTop: theme.spacing(9),
+    paddingTop: theme.spacing(12),
     textAlign: 'center'
   },
   checkBoxContainer: {
@@ -51,9 +61,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 type ChooseProps = {
   onChange?: (e: any) => void;
   data?: any;
+  selectedItemId?: any;
 };
 
-function ChooseCategoryComponent({ onChange, data }: ChooseProps) {
+function ChooseCategoryComponent({
+  onChange,
+  data,
+  selectedItemId
+}: ChooseProps) {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -62,42 +77,45 @@ function ChooseCategoryComponent({ onChange, data }: ChooseProps) {
       {data.map((item, index) => {
         return (
           <>
-            <Grid container xs={3} key={index} className={classes.eachItem}>
-              <Grid item xs={12}>
-                <div className={classes.checkBoxContainer}>
-                  <FormControl>
-                    <FormGroup>
-                      <FormControlLabel
+            <Grid
+              container
+              xs={3}
+              key={index}
+              justifyContent="center"
+              className={classes.eachItem}
+            >
+              <Grid className={classes.checkBoxContainer}>
+                <FormControlLabel
+                  value={item.description}
+                  labelPlacement="bottom"
+                  label={
+                    <div className={classes.description}>
+                      {item.description}
+                    </div>
+                  }
+                  control={
+                    <>
+                      <Checkbox
+                        key={index}
                         value={item.description}
-                        labelPlacement="bottom"
-                        label={
-                          <div className={classes.description}>
-                            {item.description}
-                          </div>
-                        }
-                        control={
-                          <>
-                            <Checkbox
-                              key={index}
-                              value={item.description}
-                              name={item.description}
-                              id={item.id}
-                              onChange={onChange}
-                              // iconStyle={{fill: 'white'}}
-                              className={classes.checkbox}
-                            />
-                            <img
-                              src={item.img}
-                              id={item.id}
-                              alt="Image Not Found"
-                              className={classes.image}
-                            />
-                          </>
+                        name={item.description}
+                        id={item.id}
+                        onChange={onChange}
+                        className={classes.checkbox}
+                      />
+                      <img
+                        src={item.img}
+                        id={item.id}
+                        alt="Image Not Found"
+                        className={
+                          selectedItemId === item.id
+                            ? classes.imageStyle
+                            : classes.image
                         }
                       />
-                    </FormGroup>
-                  </FormControl>
-                </div>
+                    </>
+                  }
+                />
               </Grid>
             </Grid>
           </>

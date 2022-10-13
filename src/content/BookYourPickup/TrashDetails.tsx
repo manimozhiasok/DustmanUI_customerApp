@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import Carousel from 'src/components/Carousel';
-import PhotoAlternateLogo from 'src/Assets/Images/photoAlternate.png';
-import { Content, imagesForSlide, LeftContent } from './TrashDetailsContent';
+import { Content, LeftContent } from './TrashDetailsContent';
 import { AddPhotoAlternate } from '@material-ui/icons';
 import { ButtonComp } from 'src/components';
 
@@ -11,123 +10,76 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     display: 'flex',
     flexDirection: 'column',
-    gap: '10px',
+    gap: theme.spacing(2),
     alignItems: 'center',
     width: '100%',
     height: '185px',
     fontSize: theme.MetricsSizes.small_xx,
     color: theme.Colors.darkGrey,
     fontWeight: theme.fontWeight.regular
+  },
+  iconStyle: {
+    color: '#828282',
+    width: '80px',
+    height: '80px'
+  },
+  gridStyle: {
+    marginTop: theme.spacing(2.5),
+    backgroundColor: theme.Colors.lightWhiteGrey,
+    padding: theme.spacing(1, 0, 1, 1),
+    borderRadius: theme.spacing(1)
   }
 }));
 
-function TrashDetails({ edit, data }) {
+function TrashDetails({ edit }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [photo, setPhoto] = useState(PhotoAlternateLogo);
   const [text, setText] = useState('Choose your trash pictures');
-  const [selectedValue, setSelectedValue] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [selectedFileName, setSelectedFileName] = useState();
-
-  const handleClickImage = (e) => {
-    console.log('event', e.target.src);
-    setPhoto(e.target.src);
-    setText('');
-    console.log('text', text);
-  };
-
-  const handleData = () => {
-    setSelectedValue(edit.edits.order_items);
-    //data.map((id) => {if(id === edit.edits.order_items)})
-    console.log('selectedItems new', selectedValue);
-  };
-  useEffect(() => handleData);
 
   const onUploadFiles = (e) => {
-    console.log('e from onUploadFiles', e);
-    console.log('e.target from onUploadFiles', e.target);
-    console.log('e.target.files', e.target.files);
-
-    // setSelectedFileName(e.target.files[0].name);
-    // console.log('e.target.files[0].name',e.target.files[0].name);
-
-    // var imageUrlTemp = URL.createObjectURL(e.target.files[0]);
-    // setSelectedFiles(imageUrlTemp);
-    //setSelectedFiles(URL.createObjectURL(e.target.files))
-    let images = [];
-    images.push(e.target.files);
-    for (let i = 0; i < images[0].length; i++) {
-      images.push(URL.createObjectURL(images[0][i]));
+    let selectedFile: any = URL.createObjectURL(e.target.files[0]);
+    console.log('selectedFile from upload list', e.target.files);
+    console.log('selectedFile from upload list next', e.target.files[0].name);
+    console.log('selectedFile from upload list next id', e.target.files.length);
+    if (selectedFiles.find((val) => val === selectedFile)) {
+      console.log('Duplicate value');
+      selectedFiles.splice(selectedFile);
+    } else {
+      selectedFiles.push(selectedFile);
     }
-    console.log('images', images);
-
-    setSelectedFiles(images);
-    // const { files } = e.target;
-
-    // const selecteds = [...[...files]];
-    // console.log('selecteds',selecteds);
-
-    // selecteds.find((i) => images.push(URL.createObjectURL(i)));
-    // // selecteds.forEach((i) => images.push(URL.createObjectURL(i)));
-    // setSelectedFiles(images);
+    console.log('selectedFiles length', selectedFiles.length);
+    edit.update({ order_images: selectedFiles });
+    console.log('selectedFiles from set', selectedFiles);
   };
 
   return (
     <Grid container spacing={2} justifyContent="center">
       <Grid item xs={6}>
-        <LeftContent edit={edit} handleData={handleData} />
+        <LeftContent edit={edit} />
       </Grid>
       <Grid item xs={6}>
-        <Grid
-          style={{
-            backgroundColor: theme.Colors.lightWhiteGrey,
-            padding: '3%',
-            borderRadius: '8px'
-          }}
-        >
+        <Grid className={classes.gridStyle}>
           <Grid className={classes.imageContainer}>
             <ButtonComp
-              buttonText={''}
-              iconImage={
-                <AddPhotoAlternate
-                  style={{ color: '#828282', width: '80px', height: '80px' }}
-                />
-              }
+              iconImage={<AddPhotoAlternate className={classes.iconStyle} />}
               backgroundColor={'transparent'}
-              onClickButton={onUploadFiles}
+              onBrowseButtonClick={onUploadFiles}
               isBrowseButton
             />
-            {/* <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={onUploadFiles}
-            /> */}
             {text}
           </Grid>
-          <Carousel show={3}>
-            {imagesForSlide.map((img, index) => {
-              return (
-                <Content
-                  key={index}
-                  imgUrl={img.imageUrl}
-                  handleClickImage={handleClickImage}
-                />
-              );
-            })}
-          </Carousel>
-          {/* <Carousel show={3}>
-            {selectedFiles.map((img) => {
+          <Carousel show={4}>
+            {edit.edits.order_images.map((img) => {
               return (
                 <Content
                   key={img}
                   imgUrl={img}
-                  handleClickImage={(e) => console.log(e)}
+                  handleClickImage={(e) => console.log('hi')}
                 />
               );
             })}
-          </Carousel> */}
+          </Carousel>
         </Grid>
       </Grid>
     </Grid>

@@ -10,33 +10,45 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     zIndex: 1,
     transform: 'translateY(-50%)',
-    right: theme.spacing(2),
-    width: '48px',
-    height: '48px'
+    right: theme.spacing(0.5),
+    width: theme.MetricsSizes.large_xxx,
+    height: theme.MetricsSizes.large_xxx,
+    background: theme.Colors.whiteLightGrey,
+    opacity: '0.3',
+    boxShadow: '1.09091px 2.18182px 4.36364px rgba(28, 28, 30, 0.06)'
   },
   arrowBack: {
     top: '50%',
     position: 'absolute',
     zIndex: 1,
-    left: -6,
+    left: theme.spacing(0.5),
     transform: 'translateY(-50%)',
-    width: '48px',
-    height: '48px'
+    width: theme.MetricsSizes.large_xxx,
+    height: theme.MetricsSizes.large_xxx,
+    background: theme.Colors.whiteLightGrey,
+    opacity: '0.3',
+    boxShadow: '1.09091px 2.18182px 4.36364px rgba(28, 28, 30, 0.06)'
   },
   carouselWrapper: {
     display: 'flex',
     width: '100%',
-    position: 'relative'
+    position: 'relative',
+    overflow: 'hidden'
   },
   carouselContainer: {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    overflowX: 'scroll'
+    // overflowX: 'scroll'
   },
   carouselContentWrapper: {
-    width: '100%',
-    height: '100%'
+    // width: '100%',
+    // height: '100%'
+    // overflowX: 'scroll'
+  },
+  iconStyle: {
+    color: theme.Colors.primaryGreen,
+    transform: 'matrix(1, 0, 0, 1, 0, 0)'
   }
 }));
 
@@ -55,14 +67,14 @@ const Carousel = (props) => {
   }, [children]);
 
   const handleNextClick = () => {
-    if (currentIndex < length - show) {
-      setCurrentIndex((prevState) => prevState + 1);
+    if (currentIndex < length ) {
+      setCurrentIndex((prevState) => prevState + 0.5);
     }
   };
 
   const handlePrevClick = () => {
     if (currentIndex > 0) {
-      setCurrentIndex((prevState) => prevState - 1);
+      setCurrentIndex((prevState) => prevState - 0.5);
     }
   };
 
@@ -111,15 +123,15 @@ const Carousel = (props) => {
         </Grid>
         {currentIndex > 0 && (
           <IconButton onClick={handlePrevClick} className={classes.arrowBack}>
-            <ArrowBackIcon />
+            <ArrowBackIcon style={{color: '#6BB043',transform: 'matrix(1, 0, 0, 1, 0, 0)'}}/>
           </IconButton>
         )}
-        {currentIndex < length - show && (
+        {currentIndex < length - show && currentIndex < length - (show-1) && (
           <IconButton
             onClick={handleNextClick}
             className={classes.arrowForward}
           >
-            <ArrowForwardIcon />
+            <ArrowForwardIcon style={{color: '#6BB043',transform: 'matrix(1, 0, 0, 1, 0, 0)'}}/>
           </IconButton>
         )}
       </Grid>

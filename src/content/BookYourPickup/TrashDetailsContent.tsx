@@ -1,4 +1,5 @@
 import {
+  Box,
   Grid,
   InputAdornment,
   makeStyles,
@@ -31,7 +32,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   imageStyle: {
     borderRadius: '6px',
     width: '80px',
-    height: '80px'
+    height: '80px',
+  },
+  gridStyle: {
+    paddingRight: theme.spacing(0.5)
   }
 }));
 
@@ -44,7 +48,7 @@ export const Content = ({ imgUrl, key, handleClickImage }: Prop) => {
   const classes = useStyles();
   return (
     <>
-      <div style={{ paddingRight: '5px' }}>
+      <Grid className={classes.gridStyle}>
         <img
           src={imgUrl}
           alt="image not found"
@@ -52,12 +56,12 @@ export const Content = ({ imgUrl, key, handleClickImage }: Prop) => {
           className={classes.imageStyle}
           onClick={handleClickImage}
         />
-      </div>
+      </Grid>
     </>
   );
 };
 
-export const LeftContent = ({ edit, handleData }) => {
+export const LeftContent = ({ edit }) => {
   const theme = useTheme();
   const classes = useStyles();
   return (
@@ -71,7 +75,6 @@ export const LeftContent = ({ edit, handleData }) => {
           value={edit.getValue('order_items').toString()}
           borderColor={theme.Colors.lightWhiteGrey}
           inputHeight={theme.MetricsSizes.large_xxx}
-          //onChange={handleData}
         />
       </Grid>
       <Grid item xs={12}>
@@ -108,36 +111,35 @@ export const LeftContent = ({ edit, handleData }) => {
   );
 };
 
-export const imagesForSlide = [
-  {
-    id: 2,
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr4bECuQKN8KRcAYPQwE03Vt5CZBWqPCTr9g&usqp=CAU'
-  },
-
-  {
-    id: 3,
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'
-  },
-  {
-    id: 3,
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
-  },
-  {
-    id: 4,
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
-  },
-  {
-    id: 5,
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
-  },
-  {
-    id: 6,
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
-  }
-];
+// export const imagesForSlide = [
+//   {
+//     id: 2,
+//     imageUrl:
+//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr4bECuQKN8KRcAYPQwE03Vt5CZBWqPCTr9g&usqp=CAU'
+//   },
+//   {
+//     id: 3,
+//     imageUrl:
+//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'
+//   },
+//   {
+//     id: 3,
+//     imageUrl:
+//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
+//   },
+//   {
+//     id: 4,
+//     imageUrl:
+//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
+//   },
+//   {
+//     id: 5,
+//     imageUrl:
+//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
+//   },
+//   {
+//     id: 6,
+//     imageUrl:
+//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
+//   }
+// ];

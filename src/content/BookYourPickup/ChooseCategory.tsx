@@ -9,13 +9,23 @@ function ChooseCategory({ edit, data }) {
   const [selectedItemId, setSelectedItemId] = useState([]);
   const classes = useStyles();
   const theme = useTheme();
+
   const handleChange = (e) => {
-    console.log('event', e);
-    let targetId = Number(e.target.id);
+    console.log('e from handleChange',e);
+    console.log('e from handleChange',e.target);
+    
+    let targetId = e.target.id;
+    if (selectedItemId.find((id) => id === targetId)) {
+      selectedItemId.splice(targetId);
+    } else {
+      selectedItemId.push(targetId);
+    }
+    console.log('selectedItemId from handleChange', selectedItemId);
+    setSelectedItemId(selectedItemId);
+
     const checkedValue = e.target.value;
-    console.log(selectedItems.find((itemId) => itemId === targetId));
     if (selectedItems.find((val) => val === checkedValue)) {
-      console.log('code to remove item');
+      selectedItems.splice(checkedValue);
     } else {
       selectedItems.push(checkedValue);
     }
@@ -25,7 +35,11 @@ function ChooseCategory({ edit, data }) {
 
   return (
     <>
-      <ChooseCategoryComponent onChange={handleChange} data={data} />
+      <ChooseCategoryComponent
+        onChange={handleChange}
+        data={data}
+        selectedItemId={selectedItemId}
+      />
     </>
   );
 }

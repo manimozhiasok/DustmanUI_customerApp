@@ -39,7 +39,7 @@ const useStyles = makeStyles<Theme, ThemeProps>((theme) => {
 type Props = ButtonProps & {
   backgroundColor?: string;
   height?: string | number;
-  buttonText: string;
+  buttonText?: string;
   buttonFontSize?: number;
   onClickButton?: any;
   variant?: string;
@@ -83,17 +83,16 @@ const ButtonComp = (props: Props) => {
     return (
       <Button
         className={classes.container}
-        //component="label"
+        component="label"
         variant={variant}
         onClick={onClickButton}
         endIcon={iconImage}
       >
-        {buttonText}
         <input
           type="file"
-          //accept="application/pdf,image/jpg,image/jpeg"
+          accept="image/jpg,image/jpeg,image/png"
           hidden
-          //multiple
+          multiple
           onChange={onBrowseButtonClick}
         />
       </Button>
