@@ -8,6 +8,7 @@ import {
 import React from 'react';
 import { Aluminium, locationIcon, weightIcon } from 'src/Assets';
 import ButtonComp from '../ButtonComp';
+import OrderButton from '../orderButton';
 import OrderListingComponent from '../OrderListingComponent';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
@@ -27,7 +28,13 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const OrderComponentNew = ({ orderComponent }: { orderComponent: any[] }) => {
+const OrderComponentNew = ({
+  orderComponent,
+  isButton
+}: {
+  orderComponent: any[];
+  isButton?: boolean;
+}) => {
   const classes = useStyles();
   return (
     <>
@@ -50,44 +57,26 @@ const OrderComponentNew = ({ orderComponent }: { orderComponent: any[] }) => {
                   </Typography>
                   <Grid direction="row" style={{ display: 'flex' }}>
                     <Typography style={{ fontSize: 12 }}>
-                      Category :{item.category}
+                      Category:{' '}
+                      <span style={{ color: '#343434', fontWeight: 500 }}>
+                        {item.category}
+                      </span>
                     </Typography>
                     <div style={{ paddingLeft: 55, fontSize: 10 }}>
                       <img src={weightIcon} />
-                      {item.weight}
+                      <span style={{ paddingLeft: 5, marginBottom: 5 }}>
+                        {item.weight}
+                      </span>
                     </div>
                     <div style={{ paddingLeft: 55, fontSize: 10 }}>
                       <img src={locationIcon} />
-                      {item.place}
+                      <span style={{ paddingLeft: 5, marginBottom: 5 }}>
+                        {item.place}
+                      </span>
                     </div>
                   </Grid>
-                  <Grid
-                    item
-                    style={{ display: 'flex', paddingTop: 25 }}
-                    xs={12}
-                  >
-                    <ButtonComp
-                      buttonText={'View Details'}
-                      backgroundColor="#FCFCFC"
-                      buttonFontSize={10}
-                      variant="outlined"
-                      buttonTextColor="#6CB044"
-                      buttonFontWeight={500}
-                      btnBorderRadius={8}
-                      height={'30px'}
-                      btnWidth={'150px'}
-                      style={{ marginRight: 10 }}
-                    />
-                    <ButtonComp
-                      buttonText={'CANCEL'}
-                      buttonFontSize={10}
-                      variant="contained"
-                      buttonTextColor="#FFFFFF"
-                      buttonFontWeight={500}
-                      btnBorderRadius={8}
-                      height={'30px'}
-                      btnWidth={'72px'}
-                    />
+                  <Grid item style={{ display: 'flex', paddingTop: 25 }}>
+                    <OrderButton isField={isButton} />
                   </Grid>
                 </Grid>
               </Grid>

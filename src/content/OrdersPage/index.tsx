@@ -131,7 +131,7 @@ function OrdersPage() {
           >
             <div className={classes.eachOrderContainer}>
               {/* <OrderListingComponent displayContent={ordersList} /> */}
-              <OrderComponentNew orderComponent={ordersList} />
+              <OrderComponentNew orderComponent={ordersList} isButton={true} />
             </div>
           </TabContent>
           <TabContent
@@ -139,14 +139,18 @@ function OrdersPage() {
             index={1}
             className={classes.tabContentContainer}
           >
-            Confirmed Orders
+            <div className={classes.eachOrderContainer}>
+              <OrderComponentNew orderComponent={ordersList} />
+            </div>
           </TabContent>
           <TabContent
             value={tabToDisplay}
             index={2}
             className={classes.tabContentContainer}
           >
-            Completed orders
+            <div className={classes.eachOrderContainer}>
+              <OrderComponentNew orderComponent={ordersList} />
+            </div>
           </TabContent>
         </Grid>
       </Grid>
