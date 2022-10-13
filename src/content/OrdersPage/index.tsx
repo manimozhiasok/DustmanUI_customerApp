@@ -8,6 +8,7 @@ import { Aluminium, Wood } from 'src/Assets/Images';
 import { CompletedOrdersIcon } from 'src/Assets/Images';
 import { ConfirmedOrdersIcon } from 'src/Assets/Images';
 import { PendingOrdersIcon } from 'src/Assets/Images';
+import OrderComponentNew from 'src/components/orderComponetNew';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -129,7 +130,8 @@ function OrdersPage() {
             className={classes.tabContentContainer}
           >
             <div className={classes.eachOrderContainer}>
-              <OrderListingComponent displayContent={ordersList} />
+              {/* <OrderListingComponent displayContent={ordersList} /> */}
+              <OrderComponentNew orderComponent={ordersList} isButton={true} />
             </div>
           </TabContent>
           <TabContent
@@ -137,14 +139,18 @@ function OrdersPage() {
             index={1}
             className={classes.tabContentContainer}
           >
-            Confirmed Orders
+            <div className={classes.eachOrderContainer}>
+              <OrderComponentNew orderComponent={ordersList} />
+            </div>
           </TabContent>
           <TabContent
             value={tabToDisplay}
             index={2}
             className={classes.tabContentContainer}
           >
-            Completed orders
+            <div className={classes.eachOrderContainer}>
+              <OrderComponentNew orderComponent={ordersList} />
+            </div>
           </TabContent>
         </Grid>
       </Grid>
