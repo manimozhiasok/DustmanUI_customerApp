@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   createStyles,
   Grid,
@@ -8,11 +8,6 @@ import {
   useTheme
 } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-type Props = {
-  dataContent: any[];
-  onClick: () => void;
-  isClicked: boolean;
-};
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -40,7 +35,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       background: theme.Colors.whiteGrey,
       borderRadius: '8px',
       width: 152,
-      height: 82
+      height: 82,
+      cursor: 'pointer'
     }
   })
 );
@@ -50,11 +46,11 @@ function SelectVehicleType({
   onClick
 }: {
   dataContent: any[];
-  onClick: () => void;
-  isClicked?: boolean;
+  onClick: (id: any, setActive: any) => void;
 }) {
   const classes = useStyles();
   const theme = useTheme();
+  const [active, setActive] = useState(0);
   const { t } = useTranslation();
 
   return (
@@ -70,7 +66,13 @@ function SelectVehicleType({
             item
             className={classes.gridStyle}
             key={index}
-            onClick={onClick}
+            onClick={() => onClick(item.id, setActive)}
+            style={{
+              background:
+                active === item.id
+                  ? 'linear-gradient(274.42deg, #6CB043 0%, #92E3A9 124.45%)'
+                  : theme.Colors.whiteGrey
+            }}
           >
             <Typography className={classes.heading}>{item.name}</Typography>
             <Grid
@@ -93,7 +95,6 @@ function SelectVehicleType({
             </Grid>
 
             <Typography className={classes.subText}>
-              {' '}
               {item.description}
             </Typography>
           </Grid>

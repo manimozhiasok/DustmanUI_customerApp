@@ -12,6 +12,7 @@ import PendingOrderModal from './PendingOrderModal';
 import { ButtonComp } from 'src/components';
 import ConfirmedOrderModal from './ConfirmedOrderModel';
 import CompletedOrderModal from './CompletedOrderModal';
+import OrderComponentNew from 'src/components/orderComponetNew';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -98,42 +99,32 @@ function OrdersPage() {
       orderId: 123456789,
       category: 'Metals,NewsPaper',
       weight: '25kg',
-      place: 'Ambattur'
+      place: 'Ambattur',
+      status: 'Status'
     },
     {
       displayImage: Wood,
       orderId: 123456789,
       category: 'Metals,NewsPaper',
       weight: '55kg',
-      place: 'Ariyalur'
+      place: 'Ariyalur',
+      status: 'Status'
     },
     {
       displayImage: Wood,
       orderId: 123456789,
       category: 'Metals,NewsPaper',
       weight: '25kg',
-      place: 'Ambattur'
+      place: 'Ambattur',
+      status: 'Status'
     },
     {
       displayImage: Aluminium,
       orderId: 123456789,
       category: 'Metals,NewsPaper',
       weight: '35kg',
-      place: 'Adayar'
-    },
-    {
-      displayImage: Wood,
-      orderId: 123456789,
-      category: 'Metals,NewsPaper',
-      weight: '25kg',
-      place: 'Ambattur'
-    },
-    {
-      displayImage: Wood,
-      orderId: 123456789,
-      category: 'Metals,NewsPaper',
-      weight: '31kg',
-      place: 'Adayar'
+      place: 'Adayar',
+      status: 'Status'
     }
   ];
 
@@ -158,6 +149,7 @@ function OrdersPage() {
               <OrderListingComponent 
               displayContent={ordersList} onClickButton={onClickButton}
                />
+              <OrderComponentNew orderComponent={ordersList} isButton={true} />
             </div>
           </TabContent>
           <TabContent
