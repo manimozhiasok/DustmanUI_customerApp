@@ -4,23 +4,15 @@ import {
   useTheme,
   Theme,
   makeStyles,
-  Typography
 } from '@material-ui/core';
-import React from 'react';
 import ListTextItem from 'src/components/ListTextItem';
-import { Image, Phone, Scales, MapPin, MapTrifold, Date, DateIcon } from 'src/Assets';
+import { Image, Phone, Scales, MapPin, MapTrifold } from 'src/Assets';
 import { DialogContentDetails, Heading } from 'src/components';
 import OrderScheduleComp from '../OrderScheduleComp';
 
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
-    heading: {
-      fontFamily: 'DM Sans',
-      fontWeight: 700,
-      fontSize: 24,
-      color: '#6CB044'
-    },
     leftContentStyle: {
       color: theme.Colors.mediumBlack,
       marginBottom: theme.MetricsSizes.regular_x
@@ -34,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) => {
     },
    divider:{
     margin: theme.spacing(2, 0)
+   },
+   isDivider:{
+    paddingTop: theme.spacing(10)
    }
   };
 });
@@ -121,9 +116,9 @@ const OrderModalComp = (props: Props) => {
       {orderHeading && (
         <Heading
           headingText={orderHeading}
-          headerFontSize={24}
-          headerFontWeight={700}
-          headingColor={'#6CB044'}
+          headerFontSize={theme.MetricsSizes.regular_xxx}
+          headerFontWeight={theme.fontWeight.bold}
+          headingColor={theme.Colors.secondary}
         />
       )}
         {orderSchedule && (
@@ -143,16 +138,16 @@ const OrderModalComp = (props: Props) => {
         value={<img src={image} />}
         img={<img src={img} />}
       />
-      <Grid style={{ paddingTop: 10 }}>
+      <Grid className={classes.isDivider}>
         {isDivider && <Divider variant="middle" />}
       </Grid>
       <Grid container>
       {heading && (
         <Heading
           headingText={heading}
-          headerFontSize={24}
-          headerFontWeight={700}
-          headingColor={'#6CB044'}
+          headerFontSize={theme.MetricsSizes.regular_xxx}
+          headerFontWeight={theme.fontWeight.bold}
+          headingColor={theme.Colors.secondary}
         />
       )}
       {scheduled && (
@@ -161,10 +156,10 @@ const OrderModalComp = (props: Props) => {
       {bottomContent && (
         <DialogContentDetails
           contentDetails={orderVendorContent}
-          leftContentFontSize={16}
-          rightContentFontSize={16}
-          leftContentFontWeight={400}
-          rightContentFontWeight={500} />
+          leftContentFontSize={theme.MetricsSizes.small_xxx}
+          rightContentFontSize={theme.MetricsSizes.small_xxx}
+          leftContentFontWeight={theme.fontWeight.regular}
+          rightContentFontWeight={theme.fontWeight.medium} />
       )}
       </Grid>
     </>

@@ -1,10 +1,4 @@
-import {
-  Grid,
-  Typography,
-  makeStyles,
-  Theme,
-  useTheme
-} from '@material-ui/core';
+import { Grid, Typography, makeStyles, Theme } from '@material-ui/core';
 import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -28,7 +22,6 @@ type Props = {
 const OrderScheduleComp = (props: Props) => {
   const { scheduleDetails } = props;
   const classes = useStyles();
-  const theme = useTheme();
 
   return (
     <Grid container xs={12}>
@@ -54,28 +47,28 @@ const OrderScheduleComp = (props: Props) => {
           },
           index: React.Key
         ) => {
-            return(
-          <>
-            <Grid item key={index}>
-              <Typography variant="h4" className={classes.leftContentStyle}>
-                {item.state}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h4" className={classes.leftContentStyle}>
-                {item.day}
-              </Typography>
-            </Grid>
-            <Grid item className={classes.rightStyle}>
-              {item.dateImage}
-            </Grid>
-            <Grid item>
-              <Typography variant="h4" className={classes.rightContainer}>
-                {item.schedule}
-              </Typography>
-            </Grid>
-          </>
-            );
+          return (
+            <>
+              <Grid item key={index}>
+                <Typography variant="h4" className={classes.leftContentStyle}>
+                  {item.state}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h4" className={classes.leftContentStyle}>
+                  {item.day}
+                </Typography>
+              </Grid>
+              <Grid item className={classes.rightStyle}>
+                {item.dateImage}
+              </Grid>
+              <Grid item>
+                <Typography variant="h4" className={classes.rightContainer}>
+                  {item.schedule}
+                </Typography>
+              </Grid>
+            </>
+          );
         }
       )}
     </Grid>

@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
     margin: theme.spacing(1.75, 0, 1.75, 0),
     background: theme.Colors.whitePure
-    // height: theme.spacing(78)
   },
   tabContainer: {
     border: '0.5px solid',
@@ -38,9 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '0.5px solid',
     borderColor: theme.Colors.greyDark
   },
-  eachOrderContainer: {
-    // paddingLeft: theme.spacing(2)
-  }
+  eachOrderContainer: {}
 }));
 
 function OrdersPage() {
@@ -48,24 +45,28 @@ function OrdersPage() {
   const theme = useTheme();
   const [tabToDisplay, setTabToDisplay] = useState(0);
   const [modalOpen, setModalOpen] = useState<any>({ open: false });
-  const [confirmedModalOpen, setConfirmedModalOpen] = useState<any>({ open: false });
-  const [completedModalOpen, setCompletedModalOpen] = useState<any>({ open: false });
+  const [confirmedModalOpen, setConfirmedModalOpen] = useState<any>({
+    open: false
+  });
+  const [completedModalOpen, setCompletedModalOpen] = useState<any>({
+    open: false
+  });
 
   const onClickButton = () => {
     setModalOpen({
-      open: true,
+      open: true
     });
   };
 
   const onClick = () => {
     setConfirmedModalOpen({
-      open: true,
+      open: true
     });
   };
 
   const handleClick = () => {
     setCompletedModalOpen({
-      open: true,
+      open: true
     });
   };
 
@@ -130,90 +131,94 @@ function OrdersPage() {
 
   return (
     <>
-    <Grid container className={classes.outerContainer}>
-      <Grid container className={classes.contentContainer}>
-        <Grid item className={classes.tabContainer}>
-          <OrdersAndProfileTab
-            displayContent={OrdersTabItems}
-            onTabChange={handleSetSelectedTab}
-            height="100%"
-          />
+      <Grid container className={classes.outerContainer}>
+        <Grid container className={classes.contentContainer}>
+          <Grid item className={classes.tabContainer}>
+            <OrdersAndProfileTab
+              displayContent={OrdersTabItems}
+              onTabChange={handleSetSelectedTab}
+              height="100%"
+            />
+          </Grid>
+          <Grid item xs={true} className={classes.tabContentOuterContainer}>
+            <TabContent
+              value={tabToDisplay}
+              index={0}
+              className={classes.tabContentContainer}
+            >
+              <div className={classes.eachOrderContainer}>
+                <OrderListingComponent
+                  displayContent={ordersList}
+                  onClickButton={onClickButton}
+                />
+                <OrderComponentNew
+                  orderComponent={ordersList}
+                  isButton={true}
+                />
+              </div>
+            </TabContent>
+            <TabContent
+              value={tabToDisplay}
+              index={1}
+              className={classes.tabContentContainer}
+            >
+              Confirmed Orders
+            </TabContent>
+            <TabContent
+              value={tabToDisplay}
+              index={2}
+              className={classes.tabContentContainer}
+            >
+              Completed orders
+            </TabContent>
+          </Grid>
         </Grid>
-        <Grid item xs={true} className={classes.tabContentOuterContainer}>
-          <TabContent
-            value={tabToDisplay}
-            index={0}
-            className={classes.tabContentContainer}
-          >
-            <div className={classes.eachOrderContainer}>
-              <OrderListingComponent 
-              displayContent={ordersList} onClickButton={onClickButton}
-               />
-              <OrderComponentNew orderComponent={ordersList} isButton={true} />
-            </div>
-          </TabContent>
-          <TabContent
-            value={tabToDisplay}
-            index={1}
-            className={classes.tabContentContainer}
-          >
-            Confirmed Orders
-          </TabContent>
-          <TabContent
-            value={tabToDisplay}
-            index={2}
-            className={classes.tabContentContainer}
-          >
-            Completed orders
-          </TabContent>
-        </Grid>
-      </Grid>
-      {modalOpen.open && (
+        {modalOpen.open && (
           <PendingOrderModal
             onClose={() => setModalOpen({ open: false })}
             {...modalOpen}
           />
         )}
-          {confirmedModalOpen.open && (
+        {confirmedModalOpen.open && (
           <ConfirmedOrderModal
             onClose={() => setConfirmedModalOpen({ open: false })}
             {...confirmedModalOpen}
           />
         )}
-          {completedModalOpen.open && (
+        {completedModalOpen.open && (
           <CompletedOrderModal
             onClose={() => setCompletedModalOpen({ open: false })}
             {...completedModalOpen}
           />
         )}
 
-    <ButtonComp
-      buttonText={'Confirmed'}
-      backgroundColor="#FCFCFC"
-      buttonFontSize={10}
-      variant="outlined"
-      buttonTextColor="#6CB044"
-      buttonFontWeight={500}
-      btnBorderRadius={8}
-      height={'30px'}
-      btnWidth={'150px'}
-      style={{ marginRight: 10 }}
-      onClickButton={onClick}
-    />
-      <ButtonComp
-      buttonText={'Completed'}
-      backgroundColor="#FCFCFC"
-      buttonFontSize={10}
-      variant="outlined"
-      buttonTextColor="#6CB044"
-      buttonFontWeight={500}
-      btnBorderRadius={8}
-      height={'30px'}
-      btnWidth={'150px'}
-      style={{ marginRight: 10 }}
-      onClickButton={handleClick}
-    />
-        </Grid>
+        <ButtonComp
+          buttonText={'Confirmed'}
+          backgroundColor="#FCFCFC"
+          buttonFontSize={theme.MetricsSizes.tiny_xxx}
+          variant="outlined"
+          buttonTextColor="#6CB044"
+          buttonFontWeight={theme.fontWeight.medium}
+          btnBorderRadius={theme.MetricsSizes.tiny_xx}
+          height={30}
+          btnWidth={150}
+          style={{ marginRight: 10 }}
+          onClickButton={onClick}
+        />
+        <ButtonComp
+          buttonText={'Completed'}
+          backgroundColor="#FCFCFC"
+          buttonFontSize={theme.MetricsSizes.tiny_xxx}
+          variant="outlined"
+          buttonTextColor="#6CB044"
+          buttonFontWeight={theme.fontWeight.medium}
+          btnBorderRadius={theme.MetricsSizes.tiny_xx}
+          height={30}
+          btnWidth={150}
+          style={{ marginRight: 10 }}
+          onClickButton={handleClick}
+        />
+      </Grid>
     </>
   );
 }

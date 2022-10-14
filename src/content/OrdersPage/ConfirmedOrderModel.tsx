@@ -1,21 +1,8 @@
 import { useEffect } from 'react';
-import { Grid, makeStyles, Theme, useTheme, Divider } from '@material-ui/core';
-import { DialogComp, DialogContentDetails, Heading } from 'src/components';
-import {
-  Image,
-  Phone,
-  Scales,
-  MapPin,
-  MapTrifold,
-  Paper,
-  Iron,
-  DateIcon,
-  Date
-} from 'src/Assets';
-import ModalComp from './OrderModalComp';
-import ListTextItem from 'src/components/ListTextItem';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { DialogComp } from 'src/components';
+import { Paper, Iron, Date } from 'src/Assets';
 import OrderModalComp from './OrderModalComp';
-import DialogOrderDetails from 'src/components/DialogOrderDetails';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -24,14 +11,6 @@ const useStyles = makeStyles((theme: Theme) => {
       height: 555,
       padding: theme.spacing(2, 2, 2, 5),
       borderRadius: theme.MetricsSizes.regular
-    },
-    images: {
-      // height: 148.26,
-      // width: 214.16,
-      paddingRight: theme.spacing(1)
-    },
-    heading: {
-      color: 'green'
     }
   };
 });
@@ -50,36 +29,12 @@ const ConfirmedOrderModal = (props: Props) => {
   }, []);
 
   const renderDialogContent = () => {
-  
-    // const orderDetails = [
-    //   {
-    //     id: 1,
-    //     address: 'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042.',
-    //     phone: "8375476746",
-    //     map: "Map Location",
-    //     quantity: "25kg",
-    //     image:<img src={Paper} height="148.26" width="214.16" className={classes.images}/>,
-    //     image1:<img src={Iron} height="148.26" width="214.16" className={classes.images}/>,
-    //   },
-    // {
-    //   id: 2,
-    //   phone: "8978675643",
-    //   map:"Map Location"
-    // },
-    // { id: 3, quantity: '25 kgs' },
-    // {
-    //   id: 4,
-    //   title: <img src={Image} />,
-    //   image: <img src={Paper} height="148.26" width="214.16" className={classes.images}/>,
-    //   image1: <img src={Iron} height="148.26" width="214.16" className={classes.images}/>
-    // }
-    // ];
-
     return (
       <>
-        {/* <DialogContentDetails contentDetails={rightContent} /> */}
         <OrderModalComp
-          address={'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042.'}
+          address={
+            'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042.'
+          }
           number={9840046988}
           location={'Map Location'}
           quantity={'25 kgs'}
@@ -87,16 +42,16 @@ const ConfirmedOrderModal = (props: Props) => {
           img={Iron}
           isDivider
           state={'Scheduled-'}
-          category={'category'} 
-          loc={'Location'}   
-          heading={'Vendor Details'}   
-          day={'Mon, 01 Jan .'}  
+          category={'category'}
+          loc={'Location'}
+          heading={'Vendor Details'}
+          day={'Mon, 01 Jan .'}
           schedule={'9:00AM - 12:00PM'}
-          vendor = {'Prabhu'}
-          mobile= {'98400 46988'}
+          vendor={'Prabhu'}
+          mobile={'98400 46988'}
           dateImage={Date}
           bottomContent
-           />
+        />
       </>
     );
   };
