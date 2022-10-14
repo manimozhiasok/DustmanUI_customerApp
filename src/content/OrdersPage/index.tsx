@@ -8,7 +8,10 @@ import { Aluminium, Wood } from 'src/Assets/Images';
 import { CompletedOrdersIcon } from 'src/Assets/Images';
 import { ConfirmedOrdersIcon } from 'src/Assets/Images';
 import { PendingOrdersIcon } from 'src/Assets/Images';
-import OrderComponentNew from 'src/components/orderComponetNew';
+import PendingOrderModal from './PendingOrderModal';
+import { ButtonComp } from 'src/components';
+import ConfirmedOrderModal from './ConfirmedOrderModel';
+import CompletedOrderModal from './CompletedOrderModal';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -43,6 +46,27 @@ function OrdersPage() {
   const classes = useStyles();
   const theme = useTheme();
   const [tabToDisplay, setTabToDisplay] = useState(0);
+  const [modalOpen, setModalOpen] = useState<any>({ open: false });
+  const [confirmedModalOpen, setConfirmedModalOpen] = useState<any>({ open: false });
+  const [completedModalOpen, setCompletedModalOpen] = useState<any>({ open: false });
+
+  const onClickButton = () => {
+    setModalOpen({
+      open: true,
+    });
+  };
+
+  const onClick = () => {
+    setConfirmedModalOpen({
+      open: true,
+    });
+  };
+
+  const handleClick = () => {
+    setCompletedModalOpen({
+      open: true,
+    });
+  };
 
   const OrdersTabItems = [
     {
@@ -114,6 +138,7 @@ function OrdersPage() {
   ];
 
   return (
+    <>
     <Grid container className={classes.outerContainer}>
       <Grid container className={classes.contentContainer}>
         <Grid item className={classes.tabContainer}>
@@ -130,8 +155,9 @@ function OrdersPage() {
             className={classes.tabContentContainer}
           >
             <div className={classes.eachOrderContainer}>
-              {/* <OrderListingComponent displayContent={ordersList} /> */}
-              <OrderComponentNew orderComponent={ordersList} isButton={true} />
+              <OrderListingComponent 
+              displayContent={ordersList} onClickButton={onClickButton}
+               />
             </div>
           </TabContent>
           <TabContent
@@ -139,22 +165,64 @@ function OrdersPage() {
             index={1}
             className={classes.tabContentContainer}
           >
-            <div className={classes.eachOrderContainer}>
-              <OrderComponentNew orderComponent={ordersList} />
-            </div>
+            Confirmed Orders
           </TabContent>
           <TabContent
             value={tabToDisplay}
             index={2}
             className={classes.tabContentContainer}
           >
-            <div className={classes.eachOrderContainer}>
-              <OrderComponentNew orderComponent={ordersList} />
-            </div>
+            Completed orders
           </TabContent>
         </Grid>
       </Grid>
-    </Grid>
+      {modalOpen.open && (
+          <PendingOrderModal
+            onClose={() => setModalOpen({ open: false })}
+            {...modalOpen}
+          />
+        )}
+          {confirmedModalOpen.open && (
+          <ConfirmedOrderModal
+            onClose={() => setConfirmedModalOpen({ open: false })}
+            {...confirmedModalOpen}
+          />
+        )}
+          {completedModalOpen.open && (
+          <CompletedOrderModal
+            onClose={() => setCompletedModalOpen({ open: false })}
+            {...completedModalOpen}
+          />
+        )}
+
+    <ButtonComp
+      buttonText={'Confirmed'}
+      backgroundColor="#FCFCFC"
+      buttonFontSize={10}
+      variant="outlined"
+      buttonTextColor="#6CB044"
+      buttonFontWeight={500}
+      btnBorderRadius={8}
+      height={'30px'}
+      btnWidth={'150px'}
+      style={{ marginRight: 10 }}
+      onClickButton={onClick}
+    />
+      <ButtonComp
+      buttonText={'Completed'}
+      backgroundColor="#FCFCFC"
+      buttonFontSize={10}
+      variant="outlined"
+      buttonTextColor="#6CB044"
+      buttonFontWeight={500}
+      btnBorderRadius={8}
+      height={'30px'}
+      btnWidth={'150px'}
+      style={{ marginRight: 10 }}
+      onClickButton={handleClick}
+    />
+        </Grid>
+    </>
   );
 }
 

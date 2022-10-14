@@ -39,6 +39,7 @@ import AvatarCustomer from './AvatarCustomer.svg';
 import locationIcon from './locationIcon.svg';
 import weightIcon from './weightIcon.svg';
 import LoginBtmImg from './LoginBtmImg.svg';
+import Date from './Date.svg'
 
 export {
   DustmanLogoHorizontal,
@@ -81,5 +82,6 @@ export {
   AvatarCustomer,
   locationIcon,
   weightIcon,
-  LoginBtmImg
+  LoginBtmImg,
+  Date
 };

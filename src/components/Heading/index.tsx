@@ -2,31 +2,43 @@ import React from 'react';
 import {
   makeStyles,
   useTheme,
-  Theme,
   Box,
-  Typography
+  Typography,
+  Theme
 } from '@material-ui/core';
 
 type Props = {
-  isSelected: boolean;
+  headerFontWeight?: number;
+  headingColor?: string;
+  headerFontSize?: string | number;
 };
-const useStyles = makeStyles<Theme>((theme: Theme) => {
+const useStyles = makeStyles<Theme, Props>((theme) => {
   return {
     headingContainer: {
       marginBottom: theme.MetricsSizes.tiny_xxx,
       display: 'inline-flex'
     },
     headingStyle: {
-      fontSize: theme.MetricsSizes.regular_x,
-      fontWeight: theme.fontWeight.bold,
-      textAlign: 'left',
-      color: theme.Colors.black
+      fontSize: (props) => props.headerFontSize || theme.MetricsSizes.regular_x,
+      fontWeight: (props) => props.headerFontWeight || theme.fontWeight.bold,
+      color: (props) =>
+        props.headingColor ? props.headingColor : theme.Colors.blueDark
     }
   };
 });
 
-const Heading = ({ headingText }: { headingText: string }) => {
-  const classes = useStyles();
+const Heading = ({
+  headingText,
+  headingColor,
+  headerFontWeight,
+  headerFontSize
+}: {
+  headingText: string | JSX.Element;
+  headingColor?: string;
+  headerFontSize?: string | number;
+  headerFontWeight?: number;
+}) => {
+  const classes = useStyles({ headingColor, headerFontSize, headerFontWeight });
   const theme: Theme = useTheme();
 
   return (
@@ -37,3 +49,4 @@ const Heading = ({ headingText }: { headingText: string }) => {
 };
 
 export default Heading;
+

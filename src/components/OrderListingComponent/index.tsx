@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
   Grid,
   makeStyles,
@@ -6,8 +5,9 @@ import {
   createStyles,
   Typography
 } from '@material-ui/core';
+import { ButtonComp } from 'src/components';
 import { locationIcon, weightIcon } from 'src/Assets';
-import ButtonComp from '../ButtonComp';
+
 
 type Props = {
   bgColor: string;
@@ -39,8 +39,10 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
 const OrderListingComponent = ({
   backgroundColor,
   height,
-  displayContent
+  displayContent,
+  onClickButton,
 }: {
+  onClickButton?: ()=>void;
   backgroundColor?: string;
   height?: string;
   displayContent: {
@@ -55,24 +57,10 @@ const OrderListingComponent = ({
     bgColor: backgroundColor,
     height
   });
-  const [modalOpen, setModalOpen] = useState<any>({ open: false });
-
-  const onClickButton = () => {
-    setModalOpen({
-      open: true,
-    });
-  };
+ 
 
   return (
     <>
-          <ButtonComp
-          btnBorderRadius={20}
-          buttonText={'Details'}
-          buttonFontSize={12}
-          btnWidth={50}
-          height="25px"
-          onClickButton={() => onClickButton()}
-        />
       {displayContent.map((item, index) => {
         return (
           <Grid
@@ -122,6 +110,7 @@ const OrderListingComponent = ({
                         height={'30px'}
                         btnWidth={'150px'}
                         style={{ marginRight: 10 }}
+                        onClickButton={onClickButton}
                       />
                       <ButtonComp
                         buttonText={'CANCEL'}
