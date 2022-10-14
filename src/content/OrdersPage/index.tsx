@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
@@ -13,6 +13,7 @@ import { ButtonComp } from 'src/components';
 import ConfirmedOrderModal from './ConfirmedOrderModel';
 import CompletedOrderModal from './CompletedOrderModal';
 import OrderComponentNew from 'src/components/orderComponetNew';
+import { API_SERVICES } from 'src/Services';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
     margin: theme.spacing(1.75, 0, 1.75, 0),
     background: theme.Colors.whitePure
+    // height: theme.spacing(78)
   },
   tabContainer: {
     border: '0.5px solid',
@@ -37,7 +39,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '0.5px solid',
     borderColor: theme.Colors.greyDark
   },
-  eachOrderContainer: {}
+  eachOrderContainer: {
+    // paddingLeft: theme.spacing(2)
+  }
 }));
 
 function OrdersPage() {
@@ -128,6 +132,16 @@ function OrdersPage() {
       status: 'Status'
     }
   ];
+  const fetchData = async () => {
+    const response: any = await API_SERVICES.orderService.getAll(2);
+    console.log(
+      'response from order service',
+      response.data.orders[0].order_images
+    );
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -147,13 +161,13 @@ function OrdersPage() {
               className={classes.tabContentContainer}
             >
               <div className={classes.eachOrderContainer}>
-                <OrderListingComponent
-                  displayContent={ordersList}
-                  onClickButton={onClickButton}
-                />
+                {/* <OrderListingComponent 
+              displayContent={ordersList} onClickButton={onClickButton}
+               /> */}
                 <OrderComponentNew
                   orderComponent={ordersList}
                   isButton={true}
+                  onClickButton={onClickButton}
                 />
               </div>
             </TabContent>
@@ -162,14 +176,20 @@ function OrdersPage() {
               index={1}
               className={classes.tabContentContainer}
             >
-              Confirmed Orders
+              <OrderComponentNew
+                orderComponent={ordersList}
+                onClickButton={onClickButton}
+              />
             </TabContent>
             <TabContent
               value={tabToDisplay}
               index={2}
               className={classes.tabContentContainer}
             >
-              Completed orders
+              <OrderComponentNew
+                orderComponent={ordersList}
+                onClickButton={onClickButton}
+              />
             </TabContent>
           </Grid>
         </Grid>

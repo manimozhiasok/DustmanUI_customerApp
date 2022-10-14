@@ -2,7 +2,13 @@ import React from 'react';
 import { Box, Grid } from '@material-ui/core';
 import ButtonComp from '../ButtonComp';
 
-const OrderButton = ({ isField }: { isField?: boolean }) => {
+const OrderButton = ({
+  isField,
+  onClickButton
+}: {
+  isField?: boolean;
+  onClickButton?: () => void;
+}) => {
   return (
     <Box
       style={{
@@ -23,6 +29,7 @@ const OrderButton = ({ isField }: { isField?: boolean }) => {
         height={'30px'}
         btnWidth={'150px'}
         style={{ marginRight: 10 }}
+        onClickButton={onClickButton}
       />
       {isField && (
         <ButtonComp

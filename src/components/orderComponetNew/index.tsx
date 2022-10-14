@@ -48,10 +48,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const OrderComponentNew = ({
   orderComponent,
-  isButton
+  isButton,
+  onClickButton
 }: {
   orderComponent: any[];
   isButton?: boolean;
+  onClickButton: () => void;
 }) => {
   const classes = useStyles();
   const { t } = useTranslation();
@@ -89,7 +91,10 @@ const OrderComponentNew = ({
                     </div>
                   </Grid>
                   <Grid item className={classes.buttonAlign}>
-                    <OrderButton isField={isButton} />
+                    <OrderButton
+                      isField={isButton}
+                      onClickButton={onClickButton}
+                    />
                   </Grid>
                 </Grid>
               </Grid>
