@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
+import {
+  Grid,
+  IconButton,
+  makeStyles,
+  Theme,
+  useTheme
+} from '@material-ui/core';
 import Carousel from 'src/components/Carousel';
 import { Content, LeftContent } from './TrashDetailsContent';
 import { AddPhotoAlternate } from '@material-ui/icons';
 import { ButtonComp } from 'src/components';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
@@ -24,10 +32,40 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '80px'
   },
   gridStyle: {
-    marginTop: theme.spacing(2.5),
-    backgroundColor: theme.Colors.lightWhiteGrey,
+    marginTop: theme.spacing(2.8),
+    backgroundColor: theme.Colors.lightBlackGrey,
     padding: theme.spacing(1, 0, 1, 1),
-    borderRadius: theme.spacing(1)
+    borderRadius: theme.spacing(1),
+    height: '290px'
+  },
+  visibleStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: theme.spacing(3)
+  },
+  arrowIcon: {
+    color: '#6BB043',
+    transform: 'matrix(1, 0, 0, 1, 0, 0)'
+  },
+  arrowBack: {
+    width: theme.MetricsSizes.regular_xxx,
+    height: theme.MetricsSizes.regular_xxx,
+    background: theme.Colors.whiteLightGrey,
+    opacity: '0.3',
+    '&:hover': {
+      backgroundColor: theme.Colors.whiteLightGrey
+    }
+  },
+  arrowForward: {
+    width: theme.MetricsSizes.regular_xxx,
+    height: theme.MetricsSizes.regular_xxx,
+    background: theme.Colors.whiteLightGrey,
+    right: theme.spacing(0.4),
+    opacity: '0.3',
+    '&:hover': {
+      backgroundColor: theme.Colors.whiteLightGrey
+    }
   }
 }));
 
@@ -36,6 +74,7 @@ function TrashDetails({ edit }) {
   const theme = useTheme();
   const [text, setText] = useState('Choose your trash pictures');
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [visible, setVisible] = useState(true);
 
   const onUploadFiles = (e) => {
     let selectedFile: any = URL.createObjectURL(e.target.files[0]);
@@ -48,9 +87,8 @@ function TrashDetails({ edit }) {
     } else {
       selectedFiles.push(selectedFile);
     }
-    console.log('selectedFiles length', selectedFiles.length);
     edit.update({ order_images: selectedFiles });
-    console.log('selectedFiles from set', selectedFiles);
+    setVisible(false);
   };
 
   return (
@@ -80,6 +118,28 @@ function TrashDetails({ edit }) {
               );
             })}
           </Carousel>
+          {visible && (
+            <Grid className={classes.visibleStyle}>
+              <IconButton
+                onClick={(e) => console.log(e)}
+                className={classes.arrowBack}
+              >
+                <ArrowBackIcon
+                  fontSize={'small'}
+                  className={classes.arrowIcon}
+                />
+              </IconButton>
+              <IconButton
+                onClick={(e) => console.log(e)}
+                className={classes.arrowForward}
+              >
+                <ArrowForwardIcon
+                  fontSize={'small'}
+                  className={classes.arrowIcon}
+                />
+              </IconButton>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Grid>

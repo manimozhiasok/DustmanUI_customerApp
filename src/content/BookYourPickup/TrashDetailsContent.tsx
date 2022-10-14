@@ -27,12 +27,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(1),
     color: theme.Colors.lightBlack,
     borderColor: theme.Colors.lightWhiteGrey,
-    backgroundColor: theme.Colors.lightWhiteGrey
+    backgroundColor: theme.Colors.lightWhiteGrey,
+    borderRadius: theme.MetricsSizes.tiny_x
   },
   imageStyle: {
     borderRadius: '6px',
     width: '80px',
     height: '80px',
+    opacity: 1.0
   },
   gridStyle: {
     paddingRight: theme.spacing(0.5)
@@ -75,6 +77,7 @@ export const LeftContent = ({ edit }) => {
           value={edit.getValue('order_items').toString()}
           borderColor={theme.Colors.lightWhiteGrey}
           inputHeight={theme.MetricsSizes.large_xxx}
+          inputBorderRadius={theme.MetricsSizes.tiny_x}
         />
       </Grid>
       <Grid item xs={12}>
@@ -93,6 +96,7 @@ export const LeftContent = ({ edit }) => {
               backgroundColor: theme.Colors.lightWhiteGrey
             }
           }}
+          inputBorderRadius={theme.MetricsSizes.tiny_x}
         />
       </Grid>
       <Grid item xs={12}>

@@ -11,9 +11,6 @@ function ChooseCategory({ edit, data }) {
   const theme = useTheme();
 
   const handleChange = (e: { target: { id: any; value: any } }) => {
-    console.log('e from handleChange', e);
-    console.log('e from handleChange', e.target);
-
     let targetId = e.target.id;
     let itemId = selectedItemId.filter((id) => targetId !== id);
     if (itemId.length < selectedItemId.length) {
@@ -27,14 +24,14 @@ function ChooseCategory({ edit, data }) {
     const items = selectedItems.filter(
       (selectedItem) => checkedValue !== selectedItem
     );
-    console.log('items', items);
     if (items.length < selectedItems.length) {
+      // setSelectedItems(items);
       setSelectedItems(items);
     } else {
-      setSelectedItems([...selectedItems, checkedValue]);
+      // setSelectedItems([...selectedItems, checkedValue]);
+      selectedItems.push(checkedValue)
     }
     edit.update({ order_items: selectedItems });
-    console.log(edit.edits);
   };
 
   return (

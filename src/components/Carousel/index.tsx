@@ -11,11 +11,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 1,
     transform: 'translateY(-50%)',
     right: theme.spacing(0.5),
-    width: theme.MetricsSizes.large_xxx,
-    height: theme.MetricsSizes.large_xxx,
+    width: theme.MetricsSizes.regular_xxx,
+    height: theme.MetricsSizes.regular_xxx,
     background: theme.Colors.whiteLightGrey,
     opacity: '0.3',
-    boxShadow: '1.09091px 2.18182px 4.36364px rgba(28, 28, 30, 0.06)'
+    boxShadow: '1.09091px 2.18182px 4.36364px rgba(28, 28, 30, 0.06)',
+    '&:hover': {
+      backgroundColor: theme.Colors.whiteLightGrey
+    }
   },
   arrowBack: {
     top: '50%',
@@ -23,11 +26,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 1,
     left: theme.spacing(0.5),
     transform: 'translateY(-50%)',
-    width: theme.MetricsSizes.large_xxx,
-    height: theme.MetricsSizes.large_xxx,
     background: theme.Colors.whiteLightGrey,
     opacity: '0.3',
-    boxShadow: '1.09091px 2.18182px 4.36364px rgba(28, 28, 30, 0.06)'
+    boxShadow: '1.09091px 2.18182px 4.36364px rgba(28, 28, 30, 0.06)',
+    width: theme.MetricsSizes.regular_xxx,
+    height: theme.MetricsSizes.regular_xxx,
+    '&:hover': {
+      backgroundColor: theme.Colors.whiteLightGrey
+    }
   },
   carouselWrapper: {
     display: 'flex',
@@ -52,7 +58,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Carousel = (props) => {
+type CarouselProp = {
+  children: any;
+  show: any;
+};
+const Carousel = (props: CarouselProp) => {
   const classes = useStyles();
   const { children, show } = props;
 
@@ -67,9 +77,11 @@ const Carousel = (props) => {
   }, [children]);
 
   const handleNextClick = () => {
-    if (currentIndex < length ) {
+    console.log('handleNextClick');
+    if (currentIndex < length) {
+      if(currentIndex < length - show){
       setCurrentIndex((prevState) => prevState + 0.5);
-    }
+    }}
   };
 
   const handlePrevClick = () => {
@@ -83,7 +95,7 @@ const Carousel = (props) => {
     setTouchPosition(touchDown);
   };
 
-  const handleTouchMove = (e) => {  
+  const handleTouchMove = (e) => {
     const touchDown = touchPosition;
 
     if (touchDown === null) {
@@ -121,19 +133,16 @@ const Carousel = (props) => {
             {children}
           </Grid>
         </Grid>
-        {currentIndex > 0 && (
-          <IconButton onClick={handlePrevClick} className={classes.arrowBack}>
-            <ArrowBackIcon style={{color: '#6BB043',transform: 'matrix(1, 0, 0, 1, 0, 0)'}}/>
-          </IconButton>
-        )}
-        {currentIndex < length - show && currentIndex < length - (show-1) && (
-          <IconButton
-            onClick={handleNextClick}
-            className={classes.arrowForward}
-          >
-            <ArrowForwardIcon style={{color: '#6BB043',transform: 'matrix(1, 0, 0, 1, 0, 0)'}}/>
-          </IconButton>
-        )}
+        <IconButton onClick={handlePrevClick} className={classes.arrowBack}>
+          <ArrowBackIcon fontSize={'small'} className={classes.iconStyle} />
+        </IconButton>
+        <IconButton
+          disabled={length < show ? true : false}
+          onClick={handleNextClick}
+          className={classes.arrowForward}
+        >
+          <ArrowForwardIcon fontSize={'small'} className={classes.iconStyle} />
+        </IconButton>
       </Grid>
     </Grid>
   );
