@@ -39,21 +39,20 @@ const useStyles = makeStyles<Theme>((theme: Theme) => createStyles({}));
 //   }
 // ];
 function SelectVehicle() {
-  const classes = useStyles();
-  const theme = useTheme();
   const [dataContent, setDataContent] = useState([]);
-  const handleClick = () => {
-    console.log('clicked item');
-  };
   const fetchData = async () => {
     const response: any =
       await API_SERVICES.customerCreateService.getAllVehicle();
-    console.log('response......', response.data.vehicles);
+    console.log('response......', response.data.vehicles[0].id);
     setDataContent(response.data.vehicles);
   };
   useEffect(() => {
     fetchData();
   }, []);
+  const handleClick = (id, setActive) => {
+    setActive(id);
+    console.log(id);
+  };
 
   return (
     <>

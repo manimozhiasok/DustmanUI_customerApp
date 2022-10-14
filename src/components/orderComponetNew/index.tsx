@@ -6,10 +6,10 @@ import {
   Typography
 } from '@material-ui/core';
 import React from 'react';
-import { Aluminium, locationIcon, weightIcon } from 'src/Assets';
-import ButtonComp from '../ButtonComp';
+import { useTranslation } from 'react-i18next';
+import { locationIcon, weightIcon } from 'src/Assets';
+import ListTextItem from '../ImageTextComponent';
 import OrderButton from '../orderButton';
-import OrderListingComponent from '../OrderListingComponent';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -21,10 +21,28 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       padding: theme.spacing(3.1, 2, 3.8, 2.9)
     },
     contentContainer: {
-      height: '100%',
-      justifyContent: 'space-evenly'
+      height: '100%'
+      //justifyContent: 'space-evenly'
     },
-    imageContainer: { padding: theme.spacing(0, 2, 0, 0) }
+    imageContainer: { padding: theme.spacing(0, 2, 0, 0) },
+    typo: {
+      fontSize: theme.MetricsSizes.tiny_xxx
+    },
+    category: {
+      fontSize: theme.MetricsSizes.small_x
+    },
+    categoryText: {
+      color: theme.Colors.mediumGrey,
+      fontWeight: theme.fontWeight.medium
+    },
+    imageAlign: {
+      paddingLeft: 55,
+      fontSize: theme.MetricsSizes.tiny_xxx
+    },
+    buttonAlign: {
+      display: 'flex',
+      paddingTop: 25
+    }
   })
 );
 
@@ -36,6 +54,7 @@ const OrderComponentNew = ({
   isButton?: boolean;
 }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   return (
     <>
       {orderComponent.map((item, index) => {
@@ -52,37 +71,31 @@ const OrderComponentNew = ({
                   <img src={item.displayImage} alt="image" />
                 </Grid>
                 <Grid item className={classes.contentContainer}>
-                  <Typography style={{ fontSize: 10 }}>
-                    ORDER#:{item.orderId}
+                  <Typography className={classes.typo}>
+                    {t('orders')}:{item.orderId}
                   </Typography>
                   <Grid direction="row" style={{ display: 'flex' }}>
-                    <Typography style={{ fontSize: 12 }}>
-                      Category:{' '}
-                      <span style={{ color: '#343434', fontWeight: 500 }}>
+                    <Typography className={classes.category}>
+                      {t('category')}:{' '}
+                      <span className={classes.categoryText}>
                         {item.category}
                       </span>
                     </Typography>
-                    <div style={{ paddingLeft: 55, fontSize: 10 }}>
-                      <img src={weightIcon} />
-                      <span style={{ paddingLeft: 5, marginBottom: 5 }}>
-                        {item.weight}
-                      </span>
+                    <div className={classes.imageAlign}>
+                      <ListTextItem image={weightIcon} value={item.weight} />
                     </div>
-                    <div style={{ paddingLeft: 55, fontSize: 10 }}>
-                      <img src={locationIcon} />
-                      <span style={{ paddingLeft: 5, marginBottom: 5 }}>
-                        {item.place}
-                      </span>
+                    <div className={classes.imageAlign}>
+                      <ListTextItem image={locationIcon} value={item.place} />
                     </div>
                   </Grid>
-                  <Grid item style={{ display: 'flex', paddingTop: 25 }}>
+                  <Grid item className={classes.buttonAlign}>
                     <OrderButton isField={isButton} />
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item>
-              <Typography style={{ fontSize: 10 }}>Status</Typography>
+              <Typography className={classes.typo}>{item.status}</Typography>
             </Grid>
           </Grid>
         );

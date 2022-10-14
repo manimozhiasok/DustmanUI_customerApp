@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.MetricsSizes.small_x
   },
   mainContainer: {
-    textAlign: 'center',
-    width: 650,
-    height: 303
+    textAlign: 'center'
+    // width: 650,
+    // height: 303
   }
 }));
 
