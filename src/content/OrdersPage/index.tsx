@@ -3,7 +3,6 @@ import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import OrdersAndProfileTab from 'src/components/OrdersAndProfileTab';
-import OrderListingComponent from 'src/components/OrderListingComponent';
 import { Aluminium, Wood } from 'src/Assets/Images';
 import { CompletedOrdersIcon } from 'src/Assets/Images';
 import { ConfirmedOrdersIcon } from 'src/Assets/Images';
@@ -178,7 +177,7 @@ function OrdersPage() {
             >
               <OrderComponentNew
                 orderComponent={ordersList}
-                onClickButton={onClickButton}
+                onClickButton={onClick}
               />
             </TabContent>
             <TabContent
@@ -188,12 +187,13 @@ function OrdersPage() {
             >
               <OrderComponentNew
                 orderComponent={ordersList}
-                onClickButton={onClickButton}
+                onClickButton={handleClick}
               />
             </TabContent>
           </Grid>
         </Grid>
-        {modalOpen.open && (
+      </Grid>
+      {modalOpen.open && (
           <PendingOrderModal
             onClose={() => setModalOpen({ open: false })}
             {...modalOpen}
@@ -212,33 +212,6 @@ function OrdersPage() {
           />
         )}
 
-        <ButtonComp
-          buttonText={'Confirmed'}
-          backgroundColor="#FCFCFC"
-          buttonFontSize={theme.MetricsSizes.tiny_xxx}
-          variant="outlined"
-          buttonTextColor="#6CB044"
-          buttonFontWeight={theme.fontWeight.medium}
-          btnBorderRadius={theme.MetricsSizes.tiny_xx}
-          height={30}
-          btnWidth={150}
-          style={{ marginRight: 10 }}
-          onClickButton={onClick}
-        />
-        <ButtonComp
-          buttonText={'Completed'}
-          backgroundColor="#FCFCFC"
-          buttonFontSize={theme.MetricsSizes.tiny_xxx}
-          variant="outlined"
-          buttonTextColor="#6CB044"
-          buttonFontWeight={theme.fontWeight.medium}
-          btnBorderRadius={theme.MetricsSizes.tiny_xx}
-          height={30}
-          btnWidth={150}
-          style={{ marginRight: 10 }}
-          onClickButton={handleClick}
-        />
-      </Grid>
     </>
   );
 }

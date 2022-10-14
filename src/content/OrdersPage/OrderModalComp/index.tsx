@@ -1,15 +1,8 @@
-import {
-  Divider,
-  Grid,
-  useTheme,
-  Theme,
-  makeStyles,
-} from '@material-ui/core';
+import { Divider, Grid, useTheme, Theme, makeStyles } from '@material-ui/core';
 import ListTextItem from 'src/components/ListTextItem';
 import { Image, Phone, Scales, MapPin, MapTrifold } from 'src/Assets';
 import { DialogContentDetails, Heading } from 'src/components';
 import OrderScheduleComp from '../OrderScheduleComp';
-
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -24,12 +17,15 @@ const useStyles = makeStyles((theme: Theme) => {
     rightStyle: {
       padding: theme.spacing(0.5)
     },
-   divider:{
-    margin: theme.spacing(2, 0)
-   },
-   isDivider:{
-    paddingTop: theme.spacing(10)
-   }
+    divider: {
+      margin: theme.spacing(2, 0)
+    },
+    isDivider: {
+      padding: theme.spacing(1, 0)
+    },
+    details: {
+      paddingLeft: theme.spacing(2)
+    }
   };
 });
 
@@ -56,7 +52,7 @@ type Props = {
   orderHeading?: any;
   orderSchedule?: any;
   orderDay?: any;
-  state?:any;
+  state?: any;
   dateImage?: any;
   orderState?: any;
   orderDateImage?: any;
@@ -103,16 +99,28 @@ const OrderModalComp = (props: Props) => {
     { content: 'Mobile Number', value: mobile }
   ];
 
-  const scheduleDetails =[
-   { state: orderState, day: orderDay, dateImage: <img src={orderDateImage}/>, schedule:pickupSchedule }
-  ]
+  const scheduleDetails = [
+    {
+      state: orderState,
+      day: orderDay,
+      dateImage: <img src={orderDateImage} />,
+      schedule: pickupSchedule
+    }
+  ];
 
-  const scheduled = [{state: state, day:day, dateImage: <img src={dateImage}/>, schedule:schedule}]
+  const scheduled = [
+    {
+      state: state,
+      day: day,
+      dateImage: <img src={dateImage} />,
+      schedule: schedule
+    }
+  ];
   return (
     <>
       <DialogContentDetails contentDetails={rightContent} />
       <ListTextItem image={MapPin} value={address} />
-      {dividerLine && <Divider variant='middle' className={classes.divider}/>}
+      {dividerLine && <Divider variant="middle" className={classes.divider} />}
       {orderHeading && (
         <Heading
           headingText={orderHeading}
@@ -121,9 +129,7 @@ const OrderModalComp = (props: Props) => {
           headingColor={theme.Colors.secondary}
         />
       )}
-        {orderSchedule && (
-          <OrderScheduleComp scheduleDetails={scheduleDetails}/>                 
-      )}
+      {orderSchedule && <OrderScheduleComp scheduleDetails={scheduleDetails} />}
       <Grid container direction="row" spacing={5}>
         <Grid item>
           <ListTextItem image={Phone} value={number} />
@@ -141,26 +147,25 @@ const OrderModalComp = (props: Props) => {
       <Grid className={classes.isDivider}>
         {isDivider && <Divider variant="middle" />}
       </Grid>
-      <Grid container>
-      {heading && (
-        <Heading
-          headingText={heading}
-          headerFontSize={theme.MetricsSizes.regular_xxx}
-          headerFontWeight={theme.fontWeight.bold}
-          headingColor={theme.Colors.secondary}
-        />
-      )}
-      {scheduled && (
-       <OrderScheduleComp scheduleDetails={scheduled}/>      
-      )}
-      {bottomContent && (
-        <DialogContentDetails
-          contentDetails={orderVendorContent}
-          leftContentFontSize={theme.MetricsSizes.small_xxx}
-          rightContentFontSize={theme.MetricsSizes.small_xxx}
-          leftContentFontWeight={theme.fontWeight.regular}
-          rightContentFontWeight={theme.fontWeight.medium} />
-      )}
+      <Grid container className={classes.details}>
+        {heading && (
+          <Heading
+            headingText={heading}
+            headerFontSize={theme.MetricsSizes.regular_xxx}
+            headerFontWeight={theme.fontWeight.bold}
+            headingColor={theme.Colors.secondary}
+          />
+        )}
+        {scheduled && <OrderScheduleComp scheduleDetails={scheduled} />}
+        {bottomContent && (
+          <DialogContentDetails
+            contentDetails={orderVendorContent}
+            leftContentFontSize={theme.MetricsSizes.small_xxx}
+            rightContentFontSize={theme.MetricsSizes.small_xxx}
+            leftContentFontWeight={theme.fontWeight.regular}
+            rightContentFontWeight={theme.fontWeight.medium}
+          />
+        )}
       </Grid>
     </>
   );
