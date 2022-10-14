@@ -8,7 +8,9 @@ import {
   MapPin,
   MapTrifold,
   Paper,
-  Iron
+  Iron,
+  Date,
+  DateIcon
 } from 'src/Assets';
 import ModalComp from './OrderModalComp';
 import ListTextItem from 'src/components/ListTextItem';
@@ -89,8 +91,11 @@ const CompletedOrderModal = (props: Props) => {
           dividerLine
           category={'category'} 
           loc={'Location'}     
+          orderState={'Picked up-'}
+          orderDateImage={Date}
           orderDay={'Mon, 01 Jan .'}  
-          orderSchedule={'9:00AM - 12:00PM'}
+          pickupSchedule={'9:00AM - 12:00PM'}
+          orderSchedule
            />
         {/* <ListTextItem 
         image={MapPin}

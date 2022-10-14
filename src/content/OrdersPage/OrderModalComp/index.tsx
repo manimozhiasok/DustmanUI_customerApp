@@ -10,6 +10,7 @@ import React from 'react';
 import ListTextItem from 'src/components/ListTextItem';
 import { Image, Phone, Scales, MapPin, MapTrifold, Date, DateIcon } from 'src/Assets';
 import { DialogContentDetails, Heading } from 'src/components';
+import OrderScheduleComp from '../OrderScheduleComp';
 
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -60,6 +61,11 @@ type Props = {
   orderHeading?: any;
   orderSchedule?: any;
   orderDay?: any;
+  state?:any;
+  dateImage?: any;
+  orderState?: any;
+  orderDateImage?: any;
+  pickupSchedule?: any;
 };
 
 const OrderModalComp = (props: Props) => {
@@ -82,7 +88,12 @@ const OrderModalComp = (props: Props) => {
     dividerLine,
     orderHeading,
     orderSchedule,
-    orderDay
+    state,
+    orderState,
+    dateImage,
+    orderDay,
+    orderDateImage,
+    pickupSchedule
   } = props;
   const theme = useTheme();
   const classes = useStyles();
@@ -97,6 +108,11 @@ const OrderModalComp = (props: Props) => {
     { content: 'Mobile Number', value: mobile }
   ];
 
+  const scheduleDetails =[
+   { state: orderState, day: orderDay, dateImage: <img src={orderDateImage}/>, schedule:pickupSchedule }
+  ]
+
+  const scheduled = [{state: state, day:day, dateImage: <img src={dateImage}/>, schedule:schedule}]
   return (
     <>
       <DialogContentDetails contentDetails={rightContent} />
@@ -111,26 +127,7 @@ const OrderModalComp = (props: Props) => {
         />
       )}
         {orderSchedule && (
-        <Grid container xs={12}>
-          <Grid item>
-            <Typography variant="h4" className={classes.leftContentStyle}>
-              Picked up-
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="h4" className={classes.leftContentStyle}>
-              {orderDay}
-            </Typography>
-          </Grid>
-          <Grid item className={classes.rightStyle}>
-            <DateIcon/>
-          </Grid>
-          <Grid item>
-            <Typography variant="h4" className={classes.rightContainer}>
-              {orderSchedule}
-            </Typography>
-          </Grid>
-        </Grid>
+          <OrderScheduleComp scheduleDetails={scheduleDetails}/>                 
       )}
       <Grid container direction="row" spacing={5}>
         <Grid item>
@@ -158,27 +155,8 @@ const OrderModalComp = (props: Props) => {
           headingColor={'#6CB044'}
         />
       )}
-      {schedule && (
-        <Grid container xs={12}>
-          <Grid item>
-            <Typography variant="h4" className={classes.leftContentStyle}>
-              Scheduled-
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="h4" className={classes.leftContentStyle}>
-              {day}
-            </Typography>
-          </Grid>
-          <Grid item className={classes.rightStyle}>
-            <img src={Date} />
-          </Grid>
-          <Grid item>
-            <Typography variant="h4" className={classes.rightContainer}>
-              {schedule}
-            </Typography>
-          </Grid>
-        </Grid>
+      {scheduled && (
+       <OrderScheduleComp scheduleDetails={scheduled}/>      
       )}
       {bottomContent && (
         <DialogContentDetails

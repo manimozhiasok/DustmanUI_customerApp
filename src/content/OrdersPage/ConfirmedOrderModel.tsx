@@ -8,7 +8,9 @@ import {
   MapPin,
   MapTrifold,
   Paper,
-  Iron
+  Iron,
+  DateIcon,
+  Date
 } from 'src/Assets';
 import ModalComp from './OrderModalComp';
 import ListTextItem from 'src/components/ListTextItem';
@@ -84,6 +86,7 @@ const ConfirmedOrderModal = (props: Props) => {
           image={Paper}
           img={Iron}
           isDivider
+          state={'Scheduled-'}
           category={'category'} 
           loc={'Location'}   
           heading={'Vendor Details'}   
@@ -91,6 +94,7 @@ const ConfirmedOrderModal = (props: Props) => {
           schedule={'9:00AM - 12:00PM'}
           vendor = {'Prabhu'}
           mobile= {'98400 46988'}
+          dateImage={Date}
           bottomContent
            />
       </>
