@@ -23,13 +23,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '500px',
     overflowY: 'scroll'
   },
-  image: {
-    position: 'absolute'
-  },
-  imageStyle: {
-    position: 'absolute',
-    border: '5px solid red'
-  },
   checkbox: {
     zIndex: 1,
     left: '50px',
@@ -61,20 +54,33 @@ const useStyles = makeStyles((theme: Theme) => ({
 type ChooseProps = {
   onChange?: (e: any) => void;
   data?: any;
-  selectedItemId?: any;
+  selectedItemId?: any[];
+  activeBorderColor?: any;
 };
 
 function ChooseCategoryComponent({
   onChange,
   data,
-  selectedItemId
+  selectedItemId,
+  activeBorderColor
 }: ChooseProps) {
   const classes = useStyles();
   const theme = useTheme();
 
+  const getBorderColor = (isActive: boolean) => {
+    if (isActive) {
+      return activeBorderColor || theme.Colors.secondary;
+    }
+    return theme.Colors.white;
+  };
+
   return (
     <Grid container className={classes.container}>
       {data.map((item, index) => {
+        const findActiveImage: number = selectedItemId.findIndex(
+          (id) => id === item.id
+        );
+        const isActive: boolean = findActiveImage !== -1;
         return (
           <>
             <Grid
@@ -106,12 +112,15 @@ function ChooseCategoryComponent({
                       <img
                         src={item.img}
                         id={item.id}
+                        key={index}
                         alt="Image Not Found"
-                        className={
-                          selectedItemId === item.id
-                            ? classes.imageStyle
-                            : classes.image
-                        }
+                        style={{
+                          position: 'absolute',
+                          borderWidth: '1px',
+                          borderColor: getBorderColor(isActive),
+                          borderStyle: 'solid',
+                          borderRadius: '6px'
+                        }}
                       />
                     </>
                   }

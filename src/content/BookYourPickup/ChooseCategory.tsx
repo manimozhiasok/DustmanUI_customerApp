@@ -10,24 +10,28 @@ function ChooseCategory({ edit, data }) {
   const classes = useStyles();
   const theme = useTheme();
 
-  const handleChange = (e) => {
-    console.log('e from handleChange',e);
-    console.log('e from handleChange',e.target);
-    
+  const handleChange = (e: { target: { id: any; value: any } }) => {
+    console.log('e from handleChange', e);
+    console.log('e from handleChange', e.target);
+
     let targetId = e.target.id;
-    if (selectedItemId.find((id) => id === targetId)) {
-      selectedItemId.splice(targetId);
+    let itemId = selectedItemId.filter((id) => targetId !== id);
+    if (itemId.length < selectedItemId.length) {
+      setSelectedItemId(itemId);
     } else {
-      selectedItemId.push(targetId);
+      setSelectedItemId([...selectedItemId, targetId]);
     }
     console.log('selectedItemId from handleChange', selectedItemId);
-    setSelectedItemId(selectedItemId);
 
     const checkedValue = e.target.value;
-    if (selectedItems.find((val) => val === checkedValue)) {
-      selectedItems.splice(checkedValue);
+    const items = selectedItems.filter(
+      (selectedItem) => checkedValue !== selectedItem
+    );
+    console.log('items', items);
+    if (items.length < selectedItems.length) {
+      setSelectedItems(items);
     } else {
-      selectedItems.push(checkedValue);
+      setSelectedItems([...selectedItems, checkedValue]);
     }
     edit.update({ order_items: selectedItems });
     console.log(edit.edits);
