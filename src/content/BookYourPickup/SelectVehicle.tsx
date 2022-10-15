@@ -38,7 +38,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => createStyles({}));
 //     subText: '* Kindly arrange parking'
 //   }
 // ];
-function SelectVehicle() {
+function SelectVehicle({edit}) {
   const [dataContent, setDataContent] = useState([]);
   const fetchData = async () => {
     const response: any =
@@ -49,9 +49,12 @@ function SelectVehicle() {
   useEffect(() => {
     fetchData();
   }, []);
-  const handleClick = (id, setActive) => {
+  const handleClick = (id, setActive, vehicleName) => {
     setActive(id);
     console.log(id);
+    console.log('vehicleName',vehicleName);
+    edit.update({vehicle_id: id})
+    edit.update({vehicle_name: vehicleName})
   };
 
   return (

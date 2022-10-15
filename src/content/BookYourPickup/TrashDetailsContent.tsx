@@ -28,7 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.Colors.lightBlack,
     borderColor: theme.Colors.lightWhiteGrey,
     backgroundColor: theme.Colors.lightWhiteGrey,
-    borderRadius: theme.MetricsSizes.tiny_x
+    borderRadius: theme.MetricsSizes.tiny_x,
+    '&:hover': {
+      borderColor: theme.Colors.lightWhiteGrey,
+    }
   },
   imageStyle: {
     borderRadius: '6px',
@@ -85,6 +88,7 @@ export const LeftContent = ({ edit }) => {
           inputLabel="Approximate Weight"
           placeholderText="Enter approx. Weight"
           value={edit.getValue('quantity_kg')}
+          onChange={(e) => edit.update({ quantity_kg: e.target.value })}
           labelColor={theme.Colors.deepGrey}
           textColor={theme.Colors.lightBlack}
           backgroundColor={theme.Colors.lightWhiteGrey}
@@ -107,6 +111,7 @@ export const LeftContent = ({ edit }) => {
           minRows={5}
           cols={31}
           value={edit.getValue('description')}
+          onChange={(e) => edit.update({ description: e.target.value })}
           placeholder="Any instructions for our pickup executive"
           className={classes.textAreaStyle}
         />

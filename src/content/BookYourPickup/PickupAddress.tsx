@@ -26,7 +26,8 @@ function PickupAddress({edit}) {
           <TextInputComponent
             placeholderText="House / Flat No."
             textColor={theme.Colors.lightBlack}
-            //value={edit.getValue('order_address').address_line1}
+            value={edit.getValue('order_address').address_line1}
+            onChange={(e) => edit.update({ order_address: e.target.value })}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
@@ -34,14 +35,16 @@ function PickupAddress({edit}) {
           <TextInputComponent
             placeholderText="Apartment / Street Name / Area"
             textColor={theme.Colors.lightBlack}
-            //value={edit.getValue('order_address').address_line2}
+            value={edit.getValue('order_address').address_line2}
+            onChange={(e) => edit.update({ order_address: e.target.value })}
             inputHeight={theme.MetricsSizes.xl_large}
           />
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="State"
-            //value={edit.getValue('order_address').state}
+            value={edit.getValue('order_address').state}
+            onChange={(e) => edit.update({ order_address: e.target.value })}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
@@ -49,7 +52,8 @@ function PickupAddress({edit}) {
         <Grid item xs={6}>
           <TextInputComponent
             placeholderText="City"
-            //value={edit.getValue('order_address').city}
+            value={edit.getValue('order_address').city}
+            onChange={(e) => edit.update({ order_address: e.target.value })}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />
@@ -57,9 +61,12 @@ function PickupAddress({edit}) {
         <Grid item xs={6}>
           <TextInputComponent
             placeholderText="Pincode"
-            //value={edit.getValue('order_address').pincode}
+            value={edit.getValue('pincode')}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
+            onChange={(e) => {edit.update({ order_address: e.target.value }) 
+            console.log(e.target.value)}
+            }
           />
         </Grid>
         <Grid item xs={12}>
@@ -68,12 +75,14 @@ function PickupAddress({edit}) {
             value={edit.getValue('order_address').landmark}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
+            onChange={(e) => edit.update({ order_address: e.target.value })}
           />
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="Mobile Number"
-            //value={edit.getValue('order_address').mobile_number}
+            value={edit.getValue('order_address').mobile_number}
+            onChange={(e) => edit.update({ order_address: e.target.value })}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
           />

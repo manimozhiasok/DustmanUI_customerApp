@@ -30,24 +30,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const initialValues = {
-  quantity_kg: 20,
+  quantity_kg: '',
   order_items: [],
-  description: 'dfghjskdfgfgvcf',
+  description: '',
   order_images: [],
   order_address: {
-    address_line1: 'address_line1',
-    address_line2: 'address_line2',
-    address_line3: 'address_line3',
-    state: 'Tamil Nadu',
-    city: 'Erode',
-    pincode: '6200061',
+    address_line1: '',
+    address_line2: '',
+    address_line3: '',
+    state: '',
+    city: '',
+    pincode: '',
     landmark: '',
-    mobile_number: '9629629952',
+    mobile_number: '45678',
     map_location: 'map_url'
   },
   customer_order_details: {
-    vehicle_id: 1,
-    pickup_time: '2022-09-13 10:59:10.414+05:30',
+    vehicle_id: '',
+    vehicle_name: '',
+    pickup_time: '',
     slot: 'afternoon'
   }
 };
@@ -84,6 +85,12 @@ function BookYourPickup() {
 
   const { t } = useTranslation();
 
+  const handleButtonClick = (e) => {
+    console.log(e);
+    console.log('handleButtonClick for Edit', edit.edits);
+    
+  }
+
   const bookYourPickupAccordionContent = [
     {
       summaryHeading: t('chooseCategory'),
@@ -97,12 +104,12 @@ function BookYourPickup() {
     },
     {
       summaryHeading: t('selectVehicle'),
-      content: <SelectVehicle />,
+      content: <SelectVehicle edit={edit}/>,
       displayIcon: SelectVehicleIcon
     },
     {
       summaryHeading: t('scheduleYourPickup'),
-      content: <ScheduleYourPickup />,
+      content: <ScheduleYourPickup edit={edit}/>,
       displayIcon: ScheduleYourPickupIcon
     },
     {
@@ -112,7 +119,7 @@ function BookYourPickup() {
     },
     {
       summaryHeading: t('orderConfirmation'),
-      content: <OrderConfirmation />,
+      content: <OrderConfirmation edit={edit} handleButtonClick={handleButtonClick}/>,
       displayIcon: OrderConfirmationIcon
     },
     {

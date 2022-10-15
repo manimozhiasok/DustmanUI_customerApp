@@ -91,6 +91,7 @@ function TrashDetails({ edit }) {
     setVisible(false);
   };
 
+  // useEffect(())
   return (
     <Grid container spacing={2} justifyContent="center">
       <Grid item xs={6}>
@@ -108,10 +109,10 @@ function TrashDetails({ edit }) {
             {text}
           </Grid>
           <Carousel show={4}>
-            {edit.edits.order_images.map((img) => {
+            {edit.edits.order_images.map((img,index) => {
               return (
                 <Content
-                  key={img}
+                  key={index}
                   imgUrl={img}
                   handleClickImage={(e) => console.log('hi')}
                 />

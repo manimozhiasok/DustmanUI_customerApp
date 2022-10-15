@@ -6,6 +6,7 @@ import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import Card from '@material-ui/core/Card';
 import Slot from './Slot';
+import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -52,9 +53,11 @@ const useStyles = makeStyles((theme: Theme) => {
   };
 });
 
-const ScheduleYourPickup = () => {
+const ScheduleYourPickup = ({edit}) => {
   const [value, onChange] = useState(new Date());
   const [activeButtonId, setActiveButtonId] = useState<string>('2');
+  const [ getTime, setGetTime] = useState<string>('')
+  const [ getSlot, setGetSlot] = useState([])
   const classes = useStyles();
 
   const timeSlotDetails = [
@@ -63,14 +66,41 @@ const ScheduleYourPickup = () => {
     { id: 3, text: 'Evening', time: '4:00 PM  - 7:00 PM' }
   ];
 
+  const handleChange = (e) => {
+    console.log('e from cal', e);
+    console.log('e from cal', e.target);
+    console.log('new Date()',new Date());
+    onChange(e)
+    const { getMonth, getDate, getYear, getTime } = getDateFormat(
+      e
+    );
+    console.log('value',getDate,getMonth);
+    console.log('value mot',getMonth);
+    console.log('value time',getTime);
+    let date = getDate;
+    let dateMonth = date +' ' + `${getMonth}`
+    setGetTime(dateMonth)
+    console.log('dateMonth',dateMonth);
+    console.log('getSlot',getSlot);
+    
+    edit.update({pickup_time: dateMonth})
+  }
   // const toCalendarType = (weekStartDay: number) =>{
   //         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   //         weekStartDay === 1? 'en-US' : 'ISO 8601'
   // }
 
-  const handleClick = (e: any, id: string) => {
+  const handleClick = (e: any, id: string, time: string) => {
+    console.log('event', e);
+    console.log('event', e.target.name);
     console.log('event', e.target.id);
+    console.log('event texxt', time);
+    console.log(id); 
     setActiveButtonId(id);
+    setGetSlot([...getSlot, time])
+    console.log('setGetTime',getSlot);
+    
+    edit.update({slot: time})
   };
 
   useEffect(() => {
@@ -83,7 +113,7 @@ const ScheduleYourPickup = () => {
         <Grid item xs={5}>
           <Card className={classes.cardStyle}>
             <Calendar
-              onChange={onChange}
+              onChange={handleChange}
               value={value}
               formatShortWeekday={(
                 locale: any,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, useTheme, Grid } from '@material-ui/core';
 import ButtonComp from '../../components/ButtonComp/index';
 import { DateIcon, SunIcon } from 'src/Assets/Images';
@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 const Slot = (props: Prop) => {
+  const [slotText, setSlotText] = useState(); 
+  const [slotTime, setSlotTime] = useState(); 
   const { timeSlotDetails, activeButtonId, handleClick } = props;
 
   const theme = useTheme();
@@ -42,7 +44,7 @@ const Slot = (props: Prop) => {
               | React.ReactPortal;
           },
           index: string
-        ) => {
+        ) => {          
           return (
             <>
               <Grid item xs={4}>
@@ -73,7 +75,7 @@ const Slot = (props: Prop) => {
                       }
                     />
                   }
-                  onClickButton={(e) => handleClick(e, index)}
+                  onClickButton={(e) => handleClick(e, index, slot.time)}
                 />
                 <div className={classes.date}>
                   <Grid container>

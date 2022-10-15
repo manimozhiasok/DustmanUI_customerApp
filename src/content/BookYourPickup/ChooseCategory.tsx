@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import { ChooseCategoryComponent } from 'src/components';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
-
-function ChooseCategory({ edit, data }) {
-  const [selectedItems, setSelectedItems] = useState([]);
+type CategoryProps = {
+  selectedValues?: any[],
+  edit: any,
+  data: any[]
+}
+function ChooseCategory({ edit, data, selectedValues }: CategoryProps) {
+  const [selectedItems, setSelectedItems] = useState(selectedValues || []);
   const [selectedItemId, setSelectedItemId] = useState([]);
   const classes = useStyles();
   const theme = useTheme();
@@ -28,11 +32,17 @@ function ChooseCategory({ edit, data }) {
       // setSelectedItems(items);
       setSelectedItems(items);
     } else {
-      // setSelectedItems([...selectedItems, checkedValue]);
-      selectedItems.push(checkedValue)
+      setSelectedItems([...selectedItems, checkedValue]);
+      //selectedItems.push(checkedValue)
+      console.log('selectedItems',selectedItems);
+      
     }
     edit.update({ order_items: selectedItems });
   };
+
+  useEffect(()=>
+  setSelectedItems(selectedItems)
+  )
 
   return (
     <>

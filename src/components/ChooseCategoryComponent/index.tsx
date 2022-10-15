@@ -104,7 +104,7 @@ function ChooseCategoryComponent({
                       <Checkbox
                         key={index}
                         value={item.description}
-                        name={item.description}
+                        //name={item.description}
                         id={item.id}
                         onChange={onChange}
                         className={classes.checkbox}

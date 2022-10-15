@@ -42,6 +42,7 @@ export const getDateFormat = (date: any) => {
   const getDate = data.getDate();
   const getYear = data.getFullYear();
   const getTime = data.toLocaleTimeString();
+  const getDay = data. getDay();
   return {
     getMonth,
     getDate,

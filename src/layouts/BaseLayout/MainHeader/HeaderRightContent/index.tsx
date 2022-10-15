@@ -43,7 +43,7 @@ function HeaderRightContent() {
     navigateTo('/landing-page/customer-login', { replace: true });
   };
   return (
-    <Grid className={classes.outerContainer}>
+    <Grid container className={classes.outerContainer}>
       <Typography className={classes.headerTextStyle}>
         Home About Us Services Gallery Contact Us
         <ButtonComp

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
-import OrderData from './OrderData';
-import { ButtonComp } from 'src/components';
+// import OrderData from './OrderData';
+import { ButtonComp, DialogContentDetails } from 'src/components';
 
 const useStyles = makeStyles((theme: Theme) => ({
   rootContainer: {
@@ -44,30 +44,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   buttonContainer: {
     padding: theme.spacing(4, 0),
-    textAlign: 'center'
+    textAlign: 'center',
   }
 }));
 
-function OrderConfirmation() {
+function OrderConfirmation({edit, handleButtonClick}) {
   const classes = useStyles();
   const theme = useTheme();
 
+  const rightContent = [
+    { content: 'Slot', value: edit.getValue('slot') },
+    {
+      content: 'User Name',
+      value: edit.getValue('name')
+    },
+    { content: 'Category', value: edit.getValue('order_items').toString() },
+
+    { content: 'Address', value: edit.getValue('order_address{}')},
+    { content: 'Mobile', value: edit.getValue('order_address').mobile_number}
+  ];
+
   return (
     <Grid container direction="row" className={classes.rootContainer}>
-      {OrderData.map((item, index) => {
-        return (
-          <>
-            <Grid container className={classes.mainContainer}>
-              <Grid item xs={2} className={classes.leftContainer}>
-                {item.leftContent}
-              </Grid>
-              <Grid item xs={10} className={classes.rightContainer}>
-                {item.rightContent}
-              </Grid>
-            </Grid>
-          </>
-        );
-      })}
+      <DialogContentDetails contentDetails={rightContent} />
       <Grid container className={classes.outerContainer}>
         <Grid item xs={12} className={classes.title}>
           Yay! Good to see you here
@@ -76,7 +75,7 @@ function OrderConfirmation() {
           You will be notified when your order confirms
         </Grid>
       </Grid>
-      <Grid item xs={12} className={classes.buttonContainer}>
+      <Grid container justifyContent='center' item xs={12} className={classes.buttonContainer}>
         <ButtonComp
           btnBorderRadius={theme.MetricsSizes.large_xx}
           buttonText={'Confirm Order'}
@@ -84,6 +83,7 @@ function OrderConfirmation() {
           btnWidth={342}
           height={theme.MetricsSizes.large_xxx}
           buttonFontWeight={500}
+          onClickButton={handleButtonClick}
         />
       </Grid>
     </Grid>

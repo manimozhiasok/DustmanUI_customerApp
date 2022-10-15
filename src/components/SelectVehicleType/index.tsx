@@ -46,7 +46,7 @@ function SelectVehicleType({
   onClick
 }: {
   dataContent: any[];
-  onClick: (id: any, setActive: any) => void;
+  onClick: (id: any, setActive: any, name: string) => void;
 }) {
   const classes = useStyles();
   const theme = useTheme();
@@ -66,7 +66,7 @@ function SelectVehicleType({
             item
             className={classes.gridStyle}
             key={index}
-            onClick={() => onClick(item.id, setActive)}
+            onClick={() => onClick(item.id, setActive, item.name)}
             style={{
               background:
                 active === item.id
