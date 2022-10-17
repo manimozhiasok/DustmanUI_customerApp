@@ -83,7 +83,7 @@ const ScheduleYourPickup = ({edit}) => {
     console.log('dateMonth',dateMonth);
     console.log('getSlot',getSlot);
     
-    edit.update({pickup_time: dateMonth})
+    edit.update({customer_order_details: {...edit.edits.order_address,pickup_time: dateMonth}})
   }
   // const toCalendarType = (weekStartDay: number) =>{
   //         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -100,7 +100,7 @@ const ScheduleYourPickup = ({edit}) => {
     setGetSlot([...getSlot, time])
     console.log('setGetTime',getSlot);
     
-    edit.update({slot: time})
+    edit.update({customer_order_details: {...edit.edits.order_address,slot: time}})
   };
 
   useEffect(() => {

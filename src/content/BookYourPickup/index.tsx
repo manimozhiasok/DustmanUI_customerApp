@@ -112,8 +112,9 @@ function BookYourPickup() {
       // setSelectedItems(items);
       setSelectedItems(items);
       
-    } else {
-      // setSelectedItems([...selectedItems, checkedValue]);
+    } 
+    else {
+      //setSelectedItems([...selectedItems, checkedValue]);
       //selectedItems.push(checkedValue)
       let temp = selectedItems
       temp.push(checkedValue)

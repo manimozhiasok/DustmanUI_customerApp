@@ -53,14 +53,14 @@ function OrderConfirmation({edit, handleButtonClick}) {
   const theme = useTheme();
 
   const rightContent = [
-    { content: 'Slot', value: edit.getValue('slot') },
+    { content: 'Slot', value: edit.getValue('customer_order_details').slot},
     {
       content: 'User Name',
       value: edit.getValue('name')
     },
     { content: 'Category', value: edit.getValue('order_items').toString() },
 
-    { content: 'Address', value: edit.getValue('order_address{}')},
+    { content: 'Address', value: `${edit.getValue('order_address').address_line1},${edit.getValue('order_address').address_line2},${edit.getValue('order_address').state},${edit.getValue('order_address').city}`},
     { content: 'Mobile', value: edit.getValue('order_address').mobile_number}
   ];
 
