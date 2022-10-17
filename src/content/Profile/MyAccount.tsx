@@ -11,7 +11,7 @@ import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { AvatarCustomer } from 'src/Assets/Images';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import ProfileContent from './profileContent';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
@@ -19,31 +19,31 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contentContainer1: {
     width: '100% ',
-    paddingBottom: theme.spacing(2),
+    paddingBottom: theme.spacing(2)
   },
   contentContainer2: {
     width: '100% ',
     border: '1px solid ',
-    borderColor: theme.Colors.greyDark,
+    borderColor: theme.Colors.greyDark
   }
 }));
 
-function MyAccount({accordionExpanded}:{accordionExpanded?:number}) {
+function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
   const classes = useStyles();
   const theme = useTheme();
 
   const myProfileContent = [
     {
       summaryHeading: '',
-      content: "Profile",
+      content: <ProfileContent />,
       displayIcon: AvatarCustomer
     }
-];
-    const myAccountContent = [
+  ];
+  const myAccountContent = [
     {
       summaryHeading: 'Change Language',
       content: 'Change Language',
-      displayIcon: TrashDetailsIcon,
+      displayIcon: TrashDetailsIcon
     },
     {
       summaryHeading: 'Change User Type',
@@ -69,27 +69,28 @@ function MyAccount({accordionExpanded}:{accordionExpanded?:number}) {
 
   return (
     <Grid container className={classes.outerContainer}>
-        <Grid item className={classes.contentContainer1}>
-        <AccordionComponent 
-            displayContent={myProfileContent} 
-            withBorder
-            isProfile
-            isMyAccount
-            accBorderColor={theme.Colors.greyDark}
-            expandMoreIcon={<ExpandMoreIcon style={{  transform: "rotate(270deg)",}} />}
-            
+      <Grid item className={classes.contentContainer1}>
+        <AccordionComponent
+          displayContent={myProfileContent}
+          withBorder
+          isProfile
+          isMyAccount
+          accBorderColor={theme.Colors.greyDark}
+          expandMoreIcon={
+            <ExpandMoreIcon style={{ transform: 'rotate(270deg)' }} />
+          }
         />
-        </Grid>
-        <Grid item className={classes.contentContainer2}>
-        <AccordionComponent 
-            displayContent={myAccountContent} 
-            //withBorder
-            isProfile
-            //accBorderColor={theme.Colors.greyDark}
-            expandMoreIcon={<ExpandMoreIcon />}
-            accordionExpanded={accordionExpanded}
+      </Grid>
+      <Grid item className={classes.contentContainer2}>
+        <AccordionComponent
+          displayContent={myAccountContent}
+          //withBorder
+          isProfile
+          //accBorderColor={theme.Colors.greyDark}
+          expandMoreIcon={<ExpandMoreIcon />}
+          accordionExpanded={accordionExpanded}
         />
-        </Grid>
+      </Grid>
     </Grid>
   );
 }

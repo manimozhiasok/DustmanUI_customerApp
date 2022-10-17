@@ -38,7 +38,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => createStyles({}));
 //     subText: '* Kindly arrange parking'
 //   }
 // ];
-function SelectVehicle({edit}) {
+function SelectVehicle({ edit }) {
   const [dataContent, setDataContent] = useState([]);
   const fetchData = async () => {
     const response: any =
@@ -52,9 +52,13 @@ function SelectVehicle({edit}) {
   const handleClick = (id, setActive, vehicleName) => {
     setActive(id);
     console.log(id);
-    console.log('vehicleName',vehicleName);
-    edit.update({vehicle_id: id})
-    edit.update({vehicle_name: vehicleName})
+    edit.update({
+      customer_order_details: {
+        vehicle_id: id,
+        ...edit.edits.customer_order_details
+      }
+    });
+    //edit.update({ vehicle_name: vehicleName });
   };
 
   return (

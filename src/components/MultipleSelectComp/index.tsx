@@ -9,22 +9,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select, { SelectProps } from '@material-ui/core/Select';
 import { Typography } from '@material-ui/core';
 
-type StyleProps = {
-    width?: string | number;
-    height?: string | number;
-    borderColor?: string;
-  };
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
     selectStyle: {
-        width: (props) => props.width || '100%',
       height: theme.MetricsSizes.large_xxx,
       color: theme.Colors.inputText,
       fontSize: theme.MetricsSizes.small_xx,
       fontWeight: theme.fontWeight.medium,
+      marginTop: theme.MetricsSizes.tiny,
       '&.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
         borderColor: theme.Colors.lightGrey,
-          borderWidth: '1px'
+        borderWidth: '1px'
       },
       // '&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
       //   borderColor: theme.Colors.lightGrey,
@@ -41,7 +36,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         outline: 'none'
       }
     }
-}));
+  })
+);
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -55,39 +51,49 @@ const MenuProps = {
 };
 
 type Props = SelectProps & {
-  actions?: string[];
+  selectItems?: any[];
   titleText?: string;
   variant?: string;
   multiple?: boolean;
   value?: string[];
   onChange?: (val: any) => void;
-  renderValue?: (value: unknown) => React.ReactNode;
   selectBoxStyle?: React.CSSProperties;
-  selectBoxWidth?: number | string;
+  isPlaceholder?: boolean;
+  placeholderText?: string;
 };
 
 function MultipleSelectComp(props: Props) {
   const {
-    actions,
+    selectItems,
     titleText,
     multiple = false,
     variant = 'outlined',
     value,
     onChange,
-    renderValue,
     selectBoxStyle,
-    selectBoxWidth,
+    isPlaceholder = false,
+    placeholderText,
     ...rest
   } = props;
-  const classes = useStyles({width: selectBoxWidth});
+  const classes = useStyles();
   const theme = useTheme();
-
+  const getMenuItems = () => {
+    if (!selectItems?.length) {
+      return null;
+    }
+    return selectItems.map((item, index) => (
+      <MenuItem key={index} value={item.value}>
+        {item.label}
+      </MenuItem>
+    ));
+  };
   return (
     <div>
       {titleText && (
         <Typography
           style={{
-            color: theme.Colors.primary
+            color: theme.Colors.primary,
+            fontWeight: theme.fontWeight.medium
           }}
         >
           {titleText}
@@ -100,15 +106,16 @@ function MultipleSelectComp(props: Props) {
         value={value}
         onChange={onChange}
         className={classes.selectStyle}
-        renderValue={renderValue}
         MenuProps={MenuProps}
-        style={{...selectBoxStyle }}
+        style={{ ...selectBoxStyle }}
+        {...rest}
       >
-        {actions.map((item, index) => (
-          <MenuItem key={index} value={item}>
-            {item}
+        {getMenuItems()}
+        {isPlaceholder && (
+          <MenuItem value="" disabled>
+            {placeholderText || 'Select'}
           </MenuItem>
-        ))}
+        )}
       </Select>
     </div>
   );

@@ -44,24 +44,36 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   buttonContainer: {
     padding: theme.spacing(4, 0),
-    textAlign: 'center',
+    textAlign: 'center'
   }
 }));
 
-function OrderConfirmation({edit, handleButtonClick}) {
+function OrderConfirmation({ edit, handleButtonClick }) {
   const classes = useStyles();
   const theme = useTheme();
 
   const rightContent = [
-    { content: 'Slot', value: edit.getValue('customer_order_details').slot},
+    {
+      content: 'Slot',
+      value: `${edit.getValue('customer_order_details').pickup_time}, ${
+        edit.getValue('customer_order_details').slot
+      }`
+    },
     {
       content: 'User Name',
       value: edit.getValue('name')
     },
     { content: 'Category', value: edit.getValue('order_items').toString() },
 
-    { content: 'Address', value: `${edit.getValue('order_address').address_line1},${edit.getValue('order_address').address_line2},${edit.getValue('order_address').state},${edit.getValue('order_address').city}`},
-    { content: 'Mobile', value: edit.getValue('order_address').mobile_number}
+    {
+      content: 'Address',
+      value: `${edit.getValue('order_address').address_line1},${
+        edit.getValue('order_address').address_line2
+      },${edit.getValue('order_address').state},${
+        edit.getValue('order_address').city
+      }`
+    },
+    { content: 'Mobile', value: edit.getValue('order_address').mobile_number }
   ];
 
   return (
@@ -75,7 +87,13 @@ function OrderConfirmation({edit, handleButtonClick}) {
           You will be notified when your order confirms
         </Grid>
       </Grid>
-      <Grid container justifyContent='center' item xs={12} className={classes.buttonContainer}>
+      <Grid
+        container
+        justifyContent="center"
+        item
+        xs={12}
+        className={classes.buttonContainer}
+      >
         <ButtonComp
           btnBorderRadius={theme.MetricsSizes.large_xx}
           buttonText={'Confirm Order'}

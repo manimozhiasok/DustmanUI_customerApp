@@ -21,7 +21,7 @@ import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
 import toast from 'react-hot-toast';
-// import data from './CategoryData';
+import data from './CategoryData';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
 
@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {}
 }));
 
-const initialValues = {
-  quantity_kg: '',
-  order_items: [],
+export const initialValues = {
+  quantity_kg: 0,
+  order_items: [1, 2],
   description: '',
   order_images: [],
   order_address: {
@@ -41,15 +41,13 @@ const initialValues = {
     state: '',
     city: '',
     pincode: '',
-    landmark: '',
-    mobile_number: '45678',
+    mobile_number: '',
     map_location: 'map_url'
   },
   customer_order_details: {
-    vehicle_id: '',
-    vehicle_name: '',
+    vehicle_id: 3,
     pickup_time: '',
-    slot: 'afternoon'
+    slot: ''
   }
 };
 
@@ -62,36 +60,37 @@ function BookYourPickup() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const edit = useEdit(initialValues);
+  const { t } = useTranslation();
 
   console.log('edit.edits index', edit.edits);
 
-  // const handleCreateData = async() => {
-  //   try {
-  //     let userData = { ...initialValues, ...edit.edits };
-  //     const createUserRes: any =
-  //       await API_SERVICES.customerService.create({
-  //         data: userData,
-  //         successMessage: 'customer created successfully!'
-  //         //failureMessage: 'customer cannot create'
-  //       });
-  //     console.log(
-  //       'createUserRes..........................................',
-  //       createUserRes
-  //     );
-  //     // if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
-  //     //   updateData();
-  //     //   onClose();
-  //     // }
-  //   } catch (err) {
-  //     toast.error(err?.message);
-  //   }
-  // }
+  const handleCreateData = async () => {
+    try {
+      let userData = { ...initialValues, ...edit.edits };
+      const createUserRes: any =
+        await API_SERVICES.customerCreateService.create({
+          data: userData,
+          successMessage: 'customer created successfully!'
+          //failureMessage: 'customer cannot create'
+        });
+      console.log(
+        'createUserRes..........................................',
+        createUserRes
+      );
+      // if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+      //   updateData();
+      //   onClose();
+      // }
+    } catch (err) {
+      toast.error(err?.message);
+    }
+  };
 
   const fetchData = useCallback(async () => {
     try {
       //setLoading(true);
       const response: any =
-        await API_SERVICES.customerCreateService.getAllTrashCategory(1,1);
+        await API_SERVICES.customerCreateService.getAllTrashCategory(1, 1);
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         if (response?.data) {
           console.log(response.data);
@@ -106,21 +105,11 @@ function BookYourPickup() {
     }
   }, []);
 
-  const { t } = useTranslation();
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-
-  const handleButtonClick = (e) => {
-    console.log(e);
-    console.log('handleButtonClick for Edit', edit.edits);
-    
-  }
-
-  const handleChange = async(e: { target: { id: any; value: any } }) => {
+  const handleChange = async (e: { target: { id: any; value: any } }) => {
     let targetId = e.target.id;
-    console.log('targetId fron handle ', targetId);
-    
     let itemId = selectedItemId.filter((id) => targetId !== id);
     if (itemId.length < selectedItemId.length) {
       setSelectedItemId(itemId);
@@ -135,24 +124,29 @@ function BookYourPickup() {
       (selectedItem) => checkedValue !== selectedItem
     );
     if (items.length < selectedItems.length) {
-      setSelectedItems(items);     
-    } 
-    else {
+      setSelectedItems(items);
+    } else {
       //setSelectedItems([...selectedItems, checkedValue]);
       //selectedItems.push(checkedValue)
-      let temp = selectedItems
-      temp.push(checkedValue)
-      setSelectedItems(temp)
-      console.log('selectedItems',selectedItems);    
+      let temp = selectedItems;
+      temp.push(checkedValue);
+      setSelectedItems(temp);
+      console.log('selectedItems', selectedItems);
     }
     edit.update({ order_items: selectedItems });
   };
 
-
   const bookYourPickupAccordionContent = [
     {
       summaryHeading: t('chooseCategory'),
-      content: <ChooseCategory edit={edit} data={data} handleChange={handleChange} selectedItemId={selectedItemId}/>,
+      content: (
+        <ChooseCategory
+          edit={edit}
+          data={data}
+          handleChange={handleChange}
+          selectedItemId={selectedItemId}
+        />
+      ),
       displayIcon: ChooseCategoryIcon
     },
     {
@@ -162,12 +156,12 @@ function BookYourPickup() {
     },
     {
       summaryHeading: t('selectVehicle'),
-      content: <SelectVehicle edit={edit}/>,
+      content: <SelectVehicle edit={edit} />,
       displayIcon: SelectVehicleIcon
     },
     {
       summaryHeading: t('scheduleYourPickup'),
-      content: <ScheduleYourPickup edit={edit}/>,
+      content: <ScheduleYourPickup edit={edit} />,
       displayIcon: ScheduleYourPickupIcon
     },
     {
@@ -177,7 +171,9 @@ function BookYourPickup() {
     },
     {
       summaryHeading: t('orderConfirmation'),
-      content: <OrderConfirmation edit={edit} handleButtonClick={handleButtonClick} />,
+      content: (
+        <OrderConfirmation edit={edit} handleButtonClick={handleCreateData} />
+      ),
       displayIcon: OrderConfirmationIcon
     },
     {

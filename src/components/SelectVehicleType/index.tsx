@@ -84,7 +84,7 @@ function SelectVehicleType({
 
               <img
                 src={item.image}
-                width={68}
+                width={45}
                 height={45}
                 style={{
                   background: theme.Colors.white,

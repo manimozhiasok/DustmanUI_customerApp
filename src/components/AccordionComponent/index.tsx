@@ -11,7 +11,9 @@ import {
 } from '@material-ui/core';
 import IconTileComponent from '../IconTileComponent';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import TextInputComponent from '../TextInputComponent';
+import ButtonComp from '../ButtonComp';
+import Plus from '../../Assets/Images/Plus.svg';
 type Props = {
   bgColor: string;
   height: string;
@@ -37,21 +39,27 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
       }
     },
     eachAccordianOuterContainer: {
-      position:"relative",
-      border: (props)=> props.withBorder ? '0.5px solid' : 'none',
-      borderColor: (props) => {return props.accBorderColor ? props.accBorderColor : theme.Colors.black}
+      position: 'relative',
+      border: (props) => (props.withBorder ? '0.5px solid' : 'none'),
+      borderColor: (props) => {
+        return props.accBorderColor ? props.accBorderColor : theme.Colors.black;
+      }
     },
     titleContainerStyle: {
       //padding: (props)=>{return props.summaryPadding} //theme.spacing(3, 3, 3, 4)
     },
     accordionSummaryStyle: {
-      padding: (props)=>{return props.summaryPadding} ,
+      padding: (props) => {
+        return props.summaryPadding;
+      },
       '& .MuiAccordionSummary-expandIcon.Mui-expanded': {
         display: 'none'
       }
     },
     accordionStyle: {
-      margin: (props)=>{return props.summaryMargin} ,
+      margin: (props) => {
+        return props.summaryMargin;
+      },
       boxShadow: 'none'
     },
     line: {
@@ -99,12 +107,12 @@ const AccordionComponent = ({
   isProfile?: boolean;
   summaryPadding?: any;
   accBorderColor?: any;
-  expandMoreIcon?:any;
+  expandMoreIcon?: any;
   summaryMargin?: any;
   isMyAccount?: boolean;
-  accordionExpanded?:number;
+  accordionExpanded?: number;
 }) => {
-  const classes = useStyles({ 
+  const classes = useStyles({
     bgColor: backgroundColor,
     height,
     NumOfTabs: displayContent.length,
@@ -124,17 +132,44 @@ const AccordionComponent = ({
             direction="row"
             className={classes.eachAccordianOuterContainer}
           >
-          { !isProfile && 
-            (displayContent.length>index+1) && 
-              <Grid item className={classes.line} />}
+            {!isProfile && displayContent.length > index + 1 && (
+              <Grid item className={classes.line} />
+            )}
             <Grid item className={classes.root}>
-              <Accordion key={index} className={classes.accordionStyle} >
+              <Accordion key={index} className={classes.accordionStyle}>
                 <AccordionSummary
                   className={classes.accordionSummaryStyle}
                   expandIcon={expandMoreIcon ? expandMoreIcon : ''}
                 >
-                  { !isProfile && <IconTileComponent iconToDisplay={item.displayIcon} /> }
-                  { isMyAccount && <img src={item.displayIcon} alt="image" /> }
+                  {!isProfile && (
+                    <IconTileComponent iconToDisplay={item.displayIcon} />
+                  )}
+                  {isMyAccount && <img src={item.displayIcon} alt="image" />}
+                  {isMyAccount && (
+                    <div>
+                      <p
+                        style={{
+                          marginLeft: 20,
+                          color: ' #343434',
+                          fontWeight: '700',
+                          fontSize: '17px'
+                        }}
+                      >
+                        Viji{' '}
+                      </p>
+                      <p
+                        style={{
+                          marginLeft: 20,
+                          fontWeight: 400,
+                          fontSize: ' 11px',
+                          lineHeight: '0px'
+                        }}
+                      >
+                        {' '}
+                        prabu@dustman.com{' '}
+                      </p>
+                    </div>
+                  )}
                   <Typography className={classes.titleStyle}>
                     {item.summaryHeading}
                   </Typography>

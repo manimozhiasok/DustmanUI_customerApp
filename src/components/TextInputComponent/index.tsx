@@ -2,7 +2,8 @@ import {
   TextField,
   Typography,
   useTheme,
-  TextFieldProps
+  TextFieldProps,
+  InputAdornment
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
@@ -26,7 +27,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.MetricsSizes.small_xxx,
       fontWeight: theme.fontWeight.medium,
       backgroundColor: (props) => props.bgColor || theme.Colors.white,
-      "&::placeholder": {
+      '&::placeholder': {
         color: (props) => props.placeHolderColor || null
       },
       color: (props) => props.textColor || theme.Colors.inputText
@@ -59,6 +60,7 @@ type Props = TextFieldProps & {
   inputStyles?: any;
   inputBorderRadius?: number;
   textColor?: string;
+  iconEnd?: any;
 };
 
 const TextInputComponent = (props: Props) => {
@@ -77,6 +79,7 @@ const TextInputComponent = (props: Props) => {
     inputStyles,
     inputBorderRadius,
     textColor,
+    iconEnd,
     ...rest
   } = props;
   const styles = useStyles({
@@ -109,6 +112,11 @@ const TextInputComponent = (props: Props) => {
         variant={variant}
         FormHelperTextProps={{ classes: { root: styles.helperRoot } }}
         error={isError}
+        InputProps={{
+          endAdornment: iconEnd ? (
+            <InputAdornment position="end">{iconEnd}</InputAdornment>
+          ) : null
+        }}
         {...rest}
       />
     </>

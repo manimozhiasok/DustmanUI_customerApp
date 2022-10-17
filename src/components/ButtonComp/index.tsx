@@ -50,6 +50,7 @@ type Props = ButtonProps & {
   onBrowseButtonClick?: any;
   isBrowseButton?: boolean;
   iconImage?: any;
+  startIcon?: any;
 };
 
 const ButtonComp = (props: Props) => {
@@ -67,6 +68,7 @@ const ButtonComp = (props: Props) => {
     iconImage,
     isBrowseButton,
     onBrowseButtonClick,
+    startIcon,
     ...rest
   } = props;
   const classes = useStyles({
@@ -105,6 +107,7 @@ const ButtonComp = (props: Props) => {
       variant={variant}
       onClick={onClickButton}
       endIcon={iconImage}
+      startIcon={startIcon}
       {...rest}
     >
       {buttonText}

@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       outline: 'none !important',
       borderWidth: '1px',
       // borderStyle:'  solid ',
-      borderColor: theme.Colors.lightWhiteGrey,
-    },
+      borderColor: theme.Colors.lightWhiteGrey
+    }
   },
   imageStyle: {
     borderRadius: '6px',
@@ -85,10 +85,17 @@ export const LeftContent = ({ edit }) => {
           labelColor={theme.Colors.deepGrey}
           textColor={theme.Colors.lightBlack}
           backgroundColor={theme.Colors.lightWhiteGrey}
-          value={edit.getValue('order_items').toString()}
+          value={edit.getValue('order_items')}
           borderColor={theme.Colors.lightWhiteGrey}
           inputHeight={theme.MetricsSizes.large_xxx}
           inputBorderRadius={theme.MetricsSizes.tiny_x}
+          onChange={(e) => {
+            console.log(
+              e,
+              '-------------eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-----------------------------'
+            );
+            edit.update({ order_items: e.target.value });
+          }}
         />
       </Grid>
       <Grid item xs={12}>

@@ -94,7 +94,19 @@ abbr[title] {
   color: #a6acc4;
 }
 
-.react-calendar__month-view__days__day--neighboringMonth {
-  color: transparent;
-  pointer-events: none;
+.react-calendar__tile:disabled {
+
+  color: #E0E0E0;
+
+  background-color: transparent;
+
+}
+
+
+.react-calendar__navigation button:disabled {
+
+  color: #E0E0E0;
+
+  background-color:transparent;
+
 }

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Grid, makeStyles, Theme } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import Card from '@material-ui/core/Card';
-import Slot from './Slot';
+import Slot, { TimeSlotDetails } from 'src/components/slotComp';
 import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -53,59 +53,55 @@ const useStyles = makeStyles((theme: Theme) => {
   };
 });
 
-const ScheduleYourPickup = ({edit}) => {
-  const [value, onChange] = useState(new Date());
-  const [activeButtonId, setActiveButtonId] = useState<string>('2');
-  const [ getTime, setGetTime] = useState<string>('')
-  const [ getSlot, setGetSlot] = useState([])
+const ScheduleYourPickup = ({ edit }) => {
+  const [pickupDate, setPickupDate] = useState(new Date());
+  const [selectedSlotVal, setSelectedSlotVal] = useState<any>({});
   const classes = useStyles();
 
-  const timeSlotDetails = [
-    { id: 1, text: 'Morning', time: '9:00 AM  - 12:00 PM' },
-    { id: 2, text: 'Noon', time: '1:00 PM  - 4:00 PM' },
-    { id: 3, text: 'Evening', time: '4:00 PM  - 7:00 PM' }
+  const timeSlotDetails1 = [
+    { id: 1, text: 'Morning', time: '9:00 AM  - 12:00 PM', value: 'morning' },
+    { id: 2, text: 'Noon', time: '1:00 PM  - 4:00 PM', value: 'afternoon' },
+    { id: 3, text: 'Evening', time: '4:00 PM  - 7:00 PM', value: 'evening' }
   ];
 
-  const handleChange = (e) => {
-    console.log('e from cal', e);
-    console.log('e from cal', e.target);
-    console.log('new Date()',new Date());
-    onChange(e)
-    const { getMonth, getDate, getYear, getTime } = getDateFormat(
-      e
-    );
-    console.log('value',getDate,getMonth);
-    console.log('value mot',getMonth);
-    console.log('value time',getTime);
-    let date = getDate;
-    let dateMonth = date +' ' + `${getMonth}`
-    setGetTime(dateMonth)
-    console.log('dateMonth',dateMonth);
-    console.log('getSlot',getSlot);
-    
-    edit.update({customer_order_details: {...edit.edits.order_address,pickup_time: dateMonth}})
-  }
-  // const toCalendarType = (weekStartDay: number) =>{
-  //         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  //         weekStartDay === 1? 'en-US' : 'ISO 8601'
-  // }
-
-  const handleClick = (e: any, id: string, time: string) => {
-    console.log('event', e);
-    console.log('event', e.target.name);
-    console.log('event', e.target.id);
-    console.log('event texxt', time);
-    console.log(id); 
-    setActiveButtonId(id);
-    setGetSlot([...getSlot, time])
-    console.log('setGetTime',getSlot);
-    
-    edit.update({customer_order_details: {...edit.edits.order_address,slot: time}})
+  const handleChangeSlot = (selectedSlot: TimeSlotDetails) => {
+    setSelectedSlotVal(selectedSlot);
+    console.log(selectedSlot);
   };
 
+  const getRandomTime = useCallback(
+    (start?: number, end?: number, slot?: string) => {
+      if (!start || !end) {
+        return;
+      }
+
+      let date = new Date(pickupDate);
+
+      let hour = start + Math.random() * (end - start);
+
+      date.setHours(hour);
+
+      edit.update({
+        customer_order_details: {
+          ...edit.edits.customer_order_details,
+          pickup_time: pickupDate.toJSON(),
+          slot: slot
+        }
+      });
+    },
+
+    [pickupDate]
+  );
+
   useEffect(() => {
-    //api call to get data
-  }, []);
+    if (selectedSlotVal?.id === 1) {
+      getRandomTime(9, 12, selectedSlotVal?.value);
+    } else if (selectedSlotVal?.id === 2) {
+      getRandomTime(13, 16, selectedSlotVal?.value);
+    } else if (selectedSlotVal?.id === 3) {
+      getRandomTime(16, 19, selectedSlotVal?.value);
+    }
+  }, [getRandomTime, selectedSlotVal]);
 
   return (
     <>
@@ -113,16 +109,19 @@ const ScheduleYourPickup = ({edit}) => {
         <Grid item xs={5}>
           <Card className={classes.cardStyle}>
             <Calendar
-              onChange={handleChange}
-              value={value}
+              onChange={setPickupDate}
+              value={pickupDate}
               formatShortWeekday={(
                 locale: any,
+
                 value: { getDay: () => string | number }
               ) => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][value.getDay()]}
               prev2Label={null}
               next2Label={null}
               defaultView="month"
               calendarType="US"
+              minDate={new Date()}
+              showNeighboringMonth={false}
             />
           </Card>
         </Grid>
@@ -133,9 +132,8 @@ const ScheduleYourPickup = ({edit}) => {
             </Grid>
 
             <Slot
-              timeSlotDetails={timeSlotDetails}
-              activeButtonId={activeButtonId}
-              handleClick={handleClick}
+              timeSlotDetails={timeSlotDetails1}
+              handleChangeSlot={handleChangeSlot}
             />
           </Grid>
         </Grid>
