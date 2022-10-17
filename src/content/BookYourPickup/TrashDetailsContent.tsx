@@ -25,13 +25,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.MetricsSizes.small_xxx,
     fontWeight: theme.fontWeight.regular,
     padding: theme.spacing(1),
+    width: '100%',
     color: theme.Colors.lightBlack,
     borderColor: theme.Colors.lightWhiteGrey,
     backgroundColor: theme.Colors.lightWhiteGrey,
     borderRadius: theme.MetricsSizes.tiny_x,
-    '&:hover': {
+    '&:focus': {
+      outline: 'none !important',
+      borderWidth: '1px',
+      // borderStyle:'  solid ',
       borderColor: theme.Colors.lightWhiteGrey,
-    }
+    },
   },
   imageStyle: {
     borderRadius: '6px',
@@ -41,6 +45,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   gridStyle: {
     paddingRight: theme.spacing(0.5)
+  },
+  textarea: {
+    resize: 'both',
+    marginTop: '-50px'
   }
 }));
 
@@ -109,7 +117,6 @@ export const LeftContent = ({ edit }) => {
         </Typography>
         <TextareaAutosize
           minRows={5}
-          cols={31}
           value={edit.getValue('description')}
           onChange={(e) => edit.update({ description: e.target.value })}
           placeholder="Any instructions for our pickup executive"

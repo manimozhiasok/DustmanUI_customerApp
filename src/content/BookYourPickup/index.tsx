@@ -57,6 +57,8 @@ function BookYourPickup() {
   const classes = useStyles();
   const theme = useTheme();
   const [selectedName, setSelectedName] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItemId, setSelectedItemId] = useState([]);
   const edit = useEdit(initialValues);
 
   console.log('edit.edits index', edit.edits);
@@ -91,10 +93,41 @@ function BookYourPickup() {
     
   }
 
+  const handleChange = async(e: { target: { id: any; value: any } }) => {
+    let targetId = e.target.id;
+    let itemId = selectedItemId.filter((id) => targetId !== id);
+    if (itemId.length < selectedItemId.length) {
+      setSelectedItemId(itemId);
+    } else {
+      //setSelectedItemId((selectedItemId) => [...selectedItemId, targetId]);
+      setSelectedItemId([...selectedItemId, targetId]);
+    }
+    console.log('selectedItemId from handleChange', selectedItemId);
+
+    const checkedValue = e.target.value;
+    const items = selectedItems.filter(
+      (selectedItem) => checkedValue !== selectedItem
+    );
+    if (items.length < selectedItems.length) {
+      // setSelectedItems(items);
+      setSelectedItems(items);
+      
+    } else {
+      // setSelectedItems([...selectedItems, checkedValue]);
+      //selectedItems.push(checkedValue)
+      let temp = selectedItems
+      temp.push(checkedValue)
+      setSelectedItems(temp)
+      console.log('selectedItems',selectedItems);    
+    }
+    edit.update({ order_items: selectedItems });
+  };
+
+
   const bookYourPickupAccordionContent = [
     {
       summaryHeading: t('chooseCategory'),
-      content: <ChooseCategory edit={edit} data={data} />,
+      content: <ChooseCategory edit={edit} data={data} handleChange={handleChange} selectedItemId={selectedItemId}/>,
       displayIcon: ChooseCategoryIcon
     },
     {
@@ -119,7 +152,7 @@ function BookYourPickup() {
     },
     {
       summaryHeading: t('orderConfirmation'),
-      content: <OrderConfirmation edit={edit} handleButtonClick={handleButtonClick}/>,
+      content: <OrderConfirmation edit={edit} handleButtonClick={handleButtonClick} />,
       displayIcon: OrderConfirmationIcon
     },
     {
