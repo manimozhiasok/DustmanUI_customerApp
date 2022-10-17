@@ -13,20 +13,23 @@ import {
   FormGroup,
   FormControlLabel
 } from '@material-ui/core';
+import { light } from '@material-ui/core/styles/createPalette';
 
 const useStyles = makeStyles((theme: Theme) => ({
   eachItem: {
-    height: '180px',
+    //height: '180px',
+    //width: '500px',
     padding: theme.spacing(3, 0)
   },
   container: {
-    height: '500px',
+    //height: '500px',
+    //width: '100%',
     overflowY: 'scroll'
   },
   checkbox: {
     zIndex: 1,
     left: '50px',
-    top: '-10px',
+    top: '10px',
     color: '#C4C4C4',
     width: theme.MetricsSizes.regular,
     height: theme.MetricsSizes.regular,
@@ -43,11 +46,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   description: {
-    paddingTop: theme.spacing(12),
+    paddingTop: theme.spacing(1),
     textAlign: 'center'
   },
   checkBoxContainer: {
-    position: 'relative'
+    position: 'relative',
+    width: '100%',
+    paddingRight: theme.spacing(10)
   }
 }));
 
@@ -75,12 +80,17 @@ function ChooseCategoryComponent({
   };
 
   return (
-    <Grid container className={classes.container}>
+    <Grid container spacing={4} className={classes.container}>
       {data.map((item, index) => {
         const findActiveImage: number = selectedItemId.findIndex(
-          (id) => id === item.id
+          (id) => id > item.id
         );
+        
+        console.log('findIndex',findActiveImage);
+        console.log('item.id',item.id);
         const isActive: boolean = findActiveImage !== -1;
+        console.log('isActive',isActive);
+        
         return (
           <>
             <Grid
@@ -92,34 +102,35 @@ function ChooseCategoryComponent({
             >
               <Grid className={classes.checkBoxContainer}>
                 <FormControlLabel
-                  value={item.description}
+                  value={item.name}
                   labelPlacement="bottom"
                   label={
                     <div className={classes.description}>
-                      {item.description}
+                      {item.name}
                     </div>
                   }
                   control={
                     <>
                       <Checkbox
                         key={index}
-                        value={item.description}
-                        //name={item.description}
+                        value={item.name}
                         id={item.id}
                         onChange={onChange}
                         className={classes.checkbox}
                       />
                       <img
-                        src={item.img}
+                        src={item.image_url}
                         id={item.id}
                         key={index}
                         alt="Image Not Found"
                         style={{
-                          position: 'absolute',
+                          // position: 'absolute',
                           borderWidth: '1px',
                           borderColor: getBorderColor(isActive),
                           borderStyle: 'solid',
-                          borderRadius: '6px'
+                          borderRadius: '6px',
+                          width: '100px',
+                          height: '100px',
                         }}
                       />
                     </>

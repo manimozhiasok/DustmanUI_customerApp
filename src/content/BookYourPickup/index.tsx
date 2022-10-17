@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { AccordionComponent } from 'src/components';
@@ -21,7 +21,7 @@ import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
 import toast from 'react-hot-toast';
-import data from './CategoryData';
+// import data from './CategoryData';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
 
@@ -59,6 +59,8 @@ function BookYourPickup() {
   const [selectedName, setSelectedName] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectedItemId, setSelectedItemId] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
   const edit = useEdit(initialValues);
 
   console.log('edit.edits index', edit.edits);
@@ -85,7 +87,29 @@ function BookYourPickup() {
   //   }
   // }
 
+  const fetchData = useCallback(async () => {
+    try {
+      //setLoading(true);
+      const response: any =
+        await API_SERVICES.customerCreateService.getAllTrashCategory(1,1);
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data) {
+          console.log(response.data);
+          console.log(response.data.categories);
+          setData(response.data.categories);
+        }
+      }
+    } catch (err) {
+      toast.error(err?.message);
+    } finally {
+      //setLoading(false);
+    }
+  }, []);
+
   const { t } = useTranslation();
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleButtonClick = (e) => {
     console.log(e);
@@ -95,6 +119,8 @@ function BookYourPickup() {
 
   const handleChange = async(e: { target: { id: any; value: any } }) => {
     let targetId = e.target.id;
+    console.log('targetId fron handle ', targetId);
+    
     let itemId = selectedItemId.filter((id) => targetId !== id);
     if (itemId.length < selectedItemId.length) {
       setSelectedItemId(itemId);
@@ -109,9 +135,7 @@ function BookYourPickup() {
       (selectedItem) => checkedValue !== selectedItem
     );
     if (items.length < selectedItems.length) {
-      // setSelectedItems(items);
-      setSelectedItems(items);
-      
+      setSelectedItems(items);     
     } 
     else {
       //setSelectedItems([...selectedItems, checkedValue]);
