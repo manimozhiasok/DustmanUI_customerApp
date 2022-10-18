@@ -17,4 +17,4 @@ export { default as AccordionComponent } from './AccordionComponent';
 export { default as TabComponent } from './TabComponent';
 export { default as IconTileComponent } from './IconTileComponent';
 export { default as LoginHeaderComp } from './LoginHeaderComp';
-export { default as SlotComp } from './slotComp';
+export { default as SlotButtonComp } from './SlotButtonComp';

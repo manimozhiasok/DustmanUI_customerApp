@@ -5,7 +5,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import Card from '@material-ui/core/Card';
-import SlotComp, { TimeSlotDetails } from 'src/components/slotComp';
+import { SlotButtonComp } from 'src/components';
+import { TimeSlotDetails } from 'src/components/SlotButtonComp';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -121,7 +122,7 @@ const ScheduleYourPickup = ({ edit }) => {
             <Grid item xs={12} className={classes.heading}>
               Slot
             </Grid>
-            <SlotComp
+            <SlotButtonComp
               timeSlotDetails={timeSlotDetails1}
               handleChangeSlot={handleChangeSlot}
             />
