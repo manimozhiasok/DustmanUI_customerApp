@@ -12,13 +12,13 @@ import { FullscreenExit } from '@material-ui/icons';
 const useStyles = makeStyles((theme: Theme) => {
   return {
     outerContainer: {
-      padding: theme.spacing(1, 0)
+      paddingTop: theme.spacing(1)
     },
     mapStyle: {
       marginLeft: theme.spacing(6)
     },
-    imgStyle:{
-     
+    imgContainer: {
+      paddingLeft: theme.spacing(1.6)
     }
   };
 });
@@ -28,7 +28,7 @@ type Props = {
   img?: any;
   value?: any;
   isDivider?: boolean;
-  secImage? : any;
+  secImage?: any;
 };
 
 const ListTextItem = (props: Props) => {
@@ -49,19 +49,23 @@ const ListTextItem = (props: Props) => {
           </Grid>
         )}
         <Grid item xs={9}>
-        {value && <Typography variant='h4'>{value}</Typography>}
-        {img && (
-          <Grid container direction="row" spacing={2}>
-            <Grid item>
-              {img}
+          {value && <Typography variant="h4">{value}</Typography>}
+          {img && (
+            <Grid
+              container
+              className={classes.imgContainer}
+              direction="row"
+              spacing={5}
+            >
+              <Grid item xs={6}>
+                {img}
+              </Grid>
+              <Grid item xs={6}>
+                {secImage}
+              </Grid>
             </Grid>
-            <Grid item className={classes.imgStyle}>
-            {secImage}
-          </Grid>
-          </Grid>
-        )}
+          )}
         </Grid>
-
       </Grid>
     </>
   );

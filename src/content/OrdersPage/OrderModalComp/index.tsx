@@ -6,32 +6,19 @@ import OrderScheduleComp from '../OrderScheduleComp';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
-    leftContentStyle: {
-      color: theme.Colors.mediumBlack,
-      marginBottom: theme.MetricsSizes.regular_x
-    },
-    rightContainer: {
-      color: theme.Colors.mediumGrey,
-      marginBottom: theme.MetricsSizes.regular_x
-    },
-    rightStyle: {
-      padding: theme.spacing(0.5)
-    },
     divider: {
-      margin: theme.spacing(2, 0)
+      padding: theme.spacing(2, 0),
+      margin: `5px 0 0 ${theme.spacing(0)}px`,
     },
     isDivider: {
-      padding: theme.spacing(1, 0 ),
+      padding: theme.spacing(1, 0),
+      margin: `5px 0 0 ${theme.spacing(0.5)}px`,
     },
-    details: {
-      paddingLeft: theme.spacing(2)
+    imgStyle: {
+      borderRadius: 9.41344
     },
-    imgStyle:{
-      borderRadius: 9.41344,
-    },
-    completedStyle:{
-      // border: "1px solid blue",
-      padding: theme.spacing(0, 0, 0, 1),
+    completedStyle: {
+      padding: theme.spacing(0, 0, 0, 1)
     }
   };
 });
@@ -63,7 +50,9 @@ type Props = {
   orderState?: any;
   orderDateImage?: any;
   pickupSchedule?: any;
-  secImage? : any;
+  secImage?: any;
+  orderDot?: any;
+  dot?: any;
 };
 
 const OrderModalComp = (props: Props) => {
@@ -91,7 +80,9 @@ const OrderModalComp = (props: Props) => {
     dateImage,
     orderDay,
     orderDateImage,
-    pickupSchedule
+    pickupSchedule,
+    orderDot,
+    dot,
   } = props;
   const theme = useTheme();
   const classes = useStyles();
@@ -110,6 +101,7 @@ const OrderModalComp = (props: Props) => {
     {
       state: orderState,
       day: orderDay,
+      dot: orderDot,
       dateImage: <img src={orderDateImage} />,
       schedule: pickupSchedule
     }
@@ -119,58 +111,78 @@ const OrderModalComp = (props: Props) => {
     {
       state: state,
       day: day,
+      dot: dot,
       dateImage: <img src={dateImage} />,
       schedule: schedule
     }
   ];
   return (
     <Grid container>
-    <>
-      <DialogContentDetails contentDetails={rightContent} />
-<Grid container>
-      <Grid item xs={7}>
-      <ListTextItem image={MapPin} value={address} />
-      </Grid>
-      <Grid item xs={12}className={classes.isDivider}> {dividerLine && <Divider variant="middle"/>}</Grid>
-     <Grid item xs={12} className={classes.completedStyle}>
-      {orderHeading && (
-        <Heading
-          headingText={orderHeading}
-          headerFontSize={theme.MetricsSizes.regular_xxx}
-          headerFontWeight={theme.fontWeight.bold}
-          headingColor={theme.Colors.secondary}
-        />
-      )}
-      {orderSchedule && <OrderScheduleComp scheduleDetails={scheduleDetails} />}
-      <Grid container direction="row" spacing={5}>
-        <Grid item xs={3}>
-          <ListTextItem image={Phone} value={number} />
+      <>
+        <DialogContentDetails contentDetails={rightContent} />
+        <Grid item xs={10}>
+          <ListTextItem image={MapPin} value={address} />
         </Grid>
-        <Grid item xs={9}>
-          <ListTextItem image={MapTrifold} value={location} />
+        <Grid item xs={12} className={classes.isDivider}>
+          {dividerLine && <Divider />}
         </Grid>
-      </Grid>
-      <ListTextItem image={Scales} value={quantity} />
-      <ListTextItem
-        image={Image}
-        img={<img src={img} height= {148.26} width={ 214.16}  className={classes.imgStyle}/>}
-        secImage={<img src={secImage} height= {148.26} width={ 214.16} className={classes.imgStyle}/>}
-      />
-      </Grid>
-      </Grid>
-      <Grid xs={12} className={classes.isDivider}>
-        {isDivider && <Divider variant="middle"/>}
-      </Grid>
-      <Grid container className={classes.details}>
-        {heading && (
-          <Heading
-            headingText={heading}
-            headerFontSize={theme.MetricsSizes.regular_xxx}
-            headerFontWeight={theme.fontWeight.bold}
-            headingColor={theme.Colors.secondary}
-          />
-        )}
-        {scheduled && <OrderScheduleComp scheduleDetails={scheduled} />}
+        <Grid item xs={12} className={classes.completedStyle}>
+          {orderHeading && (
+            <Heading
+              headingText={orderHeading}
+              headerFontSize={theme.MetricsSizes.regular_xxx}
+              headerFontWeight={theme.fontWeight.bold}
+              headingColor={theme.Colors.secondary}
+            />
+          )}
+          {orderSchedule && (
+            <OrderScheduleComp scheduleDetails={scheduleDetails} />
+          )}
+          <Grid container direction="row" spacing={5}>
+            <Grid item xs={3}>
+              <ListTextItem image={Phone} value={number} />
+            </Grid>
+            <Grid item xs={9}>
+              <ListTextItem image={MapTrifold} value={location} />
+            </Grid>
+          </Grid>
+          <ListTextItem image={Scales} value={quantity} />
+          <Grid item xs={12}>
+            <ListTextItem
+              image={Image}
+              img={
+                <img
+                  src={img}
+                  height={148.26}
+                  width={214.16}
+                  className={classes.imgStyle}
+                />
+              }
+              secImage={
+                <img
+                  src={secImage}
+                  height={148.26}
+                  width={214.16}
+                  className={classes.imgStyle}
+                />
+              }
+            />
+          </Grid>
+        </Grid>
+        <Grid xs={12} className={classes.isDivider}>
+          {isDivider && <Divider/>}
+        </Grid>
+        <Grid item style={{ paddingLeft: 7 }}>
+          {heading && (
+            <Heading
+              headingText={heading}
+              headerFontSize={theme.MetricsSizes.regular_xxx}
+              headerFontWeight={theme.fontWeight.bold}
+              headingColor={theme.Colors.secondary}
+            />
+          )}
+          {scheduled && <OrderScheduleComp scheduleDetails={scheduled} />}
+        </Grid>
         {bottomContent && (
           <DialogContentDetails
             contentDetails={orderVendorContent}
@@ -180,8 +192,7 @@ const OrderModalComp = (props: Props) => {
             rightContentFontWeight={theme.fontWeight.medium}
           />
         )}
-      </Grid>
-    </>
+      </>
     </Grid>
   );
 };

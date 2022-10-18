@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { DialogComp } from 'src/components';
-import { Paper, Iron, Date } from 'src/Assets';
+import { Date } from 'src/Assets';
 import OrderModalComp from './OrderModalComp';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
     dialogPaper: {
-      width: 847,
-      height: 555,
-      padding: theme.spacing(2, 2, 2, 5),
+      width: 683,
+      height: 676,
+      padding: theme.spacing(3, 2, 0, 1),
       borderRadius: theme.MetricsSizes.regular
     }
   };
@@ -38,15 +38,20 @@ const ConfirmedOrderModal = (props: Props) => {
           number={9840046988}
           location={'Map Location'}
           quantity={'25 kgs'}
-          img={  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'}
-          secImage={ 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'}
+          img={
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
+          }
+          secImage={
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'
+          }
           isDivider
           state={'Scheduled-'}
           category={'Aluminum, News Paper... '}
           loc={'Velachery'}
           heading={'Vendor Details'}
-          day={'Mon, 01 Jan .'}
-          schedule={'9:00AM - 12:00PM'}
+          day={'Mon, 01 Jan'}
+          dot={'.'}
+          schedule={'9:00 AM - 12:00 PM'}
           vendor={'Prabhu'}
           mobile={'98400 46988'}
           dateImage={Date}
@@ -65,8 +70,10 @@ const ConfirmedOrderModal = (props: Props) => {
       dialogTitleStyle={{
         fontWeight: theme.fontWeight.bold,
         fontSize: theme.MetricsSizes.regular_xxx,
-        color: theme.Colors.blueDark
+        color: theme.Colors.blueDark,
+        paddingLeft: theme.spacing(0.5)
       }}
+      dialogTitleClasses={{ padding: theme.spacing(2, 0, 1, 3) }}
       renderDialogContent={() => renderDialogContent()}
     />
   );

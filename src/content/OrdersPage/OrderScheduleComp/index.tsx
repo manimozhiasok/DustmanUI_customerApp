@@ -3,16 +3,17 @@ import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
   leftContentStyle: {
-    color: theme.Colors.mediumBlack,
-    marginBottom: theme.MetricsSizes.regular_x
+    color: theme.Colors.mediumBlack
+    // marginBottom: theme.MetricsSizes.regular_x
   },
   rightContainer: {
     color: theme.Colors.mediumGrey,
-    marginBottom: theme.MetricsSizes.regular_x
+    marginBottom: theme.MetricsSizes.tiny
   },
   rightStyle: {
     padding: theme.spacing(0.5)
-  }
+  },
+  dotStyle:{paddingLeft: theme.spacing(0.5)}
 }));
 
 type Props = {
@@ -39,12 +40,14 @@ const OrderScheduleComp = (props: Props) => {
               | React.ReactFragment
               | React.ReactPortal;
             dateImage: string;
+            dot: any;
             schedule:
               | boolean
               | React.ReactChild
               | React.ReactFragment
               | React.ReactPortal;
           },
+          
           index: React.Key
         ) => {
           return (
@@ -58,6 +61,9 @@ const OrderScheduleComp = (props: Props) => {
                 <Typography variant="h4" className={classes.leftContentStyle}>
                   {item.day}
                 </Typography>
+              </Grid>
+              <Grid item  className={classes.dotStyle}>
+                  {item.dot}
               </Grid>
               <Grid item className={classes.rightStyle}>
                 {item.dateImage}
