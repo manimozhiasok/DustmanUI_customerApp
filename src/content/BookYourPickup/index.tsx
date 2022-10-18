@@ -58,23 +58,30 @@ function BookYourPickup() {
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
 
+  const pickAddressFields = [
+    'address_line1',
+    'address_line2',
+    'address_line3',
+    'state',
+    'city',
+    'pincode',
+    'mobile_number'
+  ];
+
   const handleCreateData = async () => {
     try {
+      if (!edit.allFilled(...pickAddressFields)) {
+        return toast.error('Please Fill all the pickup address details');
+      }
       let userData = { ...initialValues, ...edit.edits };
-      // const createUserRes: any =
-      //   await API_SERVICES.customerCreateService.create({
-      //     data: userData,
-      //     successMessage: 'customer created successfully!'
-      //     //failureMessage: 'customer cannot create'
-      //   });
-      // if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
-      //   updateData();
-      //   onClose();
-      // }
-      console.log(
-        userData,
-        '_-------1111111111111111 final data 11111111---------'
-      );
+      const createUserRes: any =
+        await API_SERVICES.customerCreateService.create({
+          data: userData,
+          successMessage: 'Customer created successfully!'
+          //failureMessage: 'customer cannot create'
+        });
+      if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+      }
     } catch (err) {
       toast.error(err?.message);
     }

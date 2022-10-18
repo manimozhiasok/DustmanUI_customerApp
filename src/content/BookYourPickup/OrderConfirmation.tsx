@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textAlign: 'center'
   },
   buttonContainer: {
-    padding: theme.spacing(4, 26),
+    padding: theme.spacing(4, 26)
     // textAlign: 'center'
   }
 }));
@@ -79,10 +79,10 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
 
     {
       content: 'Address',
-      value: `${edit.getValue('order_address').address_line1},${
+      value: `${edit.getValue('order_address').address_line1}, ${
         edit.getValue('order_address').address_line2
-      },${edit.getValue('order_address').state},${
-        edit.getValue('order_address').city
+      }, ${edit.getValue('order_address').city}, ${
+        edit.getValue('order_address').state
       }`
     },
     { content: 'Mobile', value: edit.getValue('order_address').mobile_number }
