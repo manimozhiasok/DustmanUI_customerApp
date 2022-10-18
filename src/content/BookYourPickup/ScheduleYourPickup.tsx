@@ -5,7 +5,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import Card from '@material-ui/core/Card';
-import SlotComp, { TimeSlotDetails } from 'src/components/SlotComp';
+import SlotComp, { TimeSlotDetails } from 'src/components/slotComp';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {

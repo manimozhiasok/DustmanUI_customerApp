@@ -78,7 +78,7 @@ function PickupAddress({ edit }) {
         <Grid item xs={6}>
           <TextInputComponent
             placeholderText="Pincode"
-            value={edit.getValue('pincode')}
+            value={edit.getValue('order_address').pincode}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
             onChange={(e) =>

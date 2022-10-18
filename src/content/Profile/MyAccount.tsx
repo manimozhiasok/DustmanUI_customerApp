@@ -33,7 +33,9 @@ function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
     {
       summaryHeading: '',
       content: <ProfileContent />,
-      displayIcon: AvatarCustomer
+      displayIcon: AvatarCustomer,
+      userName: 'Prabhu',
+      userEmail: 'prabu@dustman.com'
     }
   ];
   const myAccountContent = [

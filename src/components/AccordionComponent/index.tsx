@@ -79,6 +79,18 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
     accordionDetailStyle: {
       padding: (props) =>
         props.accordionDetailPadding ? theme.spacing(0, 6.5, 4.5, 6.5) : 'none'
+    },
+    subText: {
+      marginLeft: 20,
+      color: ' #343434',
+      fontWeight: 700,
+      fontSize: '17px'
+    },
+    userDetails: {
+      marginLeft: 20,
+      fontWeight: 400,
+      fontSize: ' 11px',
+      lineHeight: '0px'
     }
   })
 );
@@ -104,6 +116,8 @@ const AccordionComponent = ({
     summaryHeading: string;
     content: any;
     displayIcon: any;
+    userName?: string;
+    userEmail?: string;
   }[];
   onTabChange?: any;
   withBorder?: boolean;
@@ -158,27 +172,8 @@ const AccordionComponent = ({
                   {isMyAccount && <img src={item.displayIcon} alt="image" />}
                   {isMyAccount && (
                     <div>
-                      <p
-                        style={{
-                          marginLeft: 20,
-                          color: ' #343434',
-                          fontWeight: '700',
-                          fontSize: '17px'
-                        }}
-                      >
-                        Viji{' '}
-                      </p>
-                      <p
-                        style={{
-                          marginLeft: 20,
-                          fontWeight: 400,
-                          fontSize: ' 11px',
-                          lineHeight: '0px'
-                        }}
-                      >
-                        {' '}
-                        prabu@dustman.com{' '}
-                      </p>
+                      <p className={classes.subText}>{item.userName}</p>
+                      <p className={classes.userDetails}>{item.userEmail}</p>
                     </div>
                   )}
                   <Typography className={classes.titleStyle}>

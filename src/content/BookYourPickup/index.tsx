@@ -58,21 +58,21 @@ function BookYourPickup() {
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
 
-  const pickAddressFields = [
-    'address_line1',
-    'address_line2',
-    'address_line3',
-    'state',
-    'city',
-    'pincode',
-    'mobile_number'
-  ];
+  // const pickAddressFields = [
+  //   'address_line1',
+  //   'address_line2',
+  //   'address_line3',
+  //   'state',
+  //   'city',
+  //   'pincode',
+  //   'mobile_number'
+  // ];
 
   const handleCreateData = async () => {
     try {
-      if (!edit.allFilled(...pickAddressFields)) {
-        return toast.error('Please Fill all the pickup address details');
-      }
+      // if (!edit.allFilled(...pickAddressFields)) {
+      //   return toast.error('Please Fill all the pickup address details');
+      // }
       let userData = { ...initialValues, ...edit.edits };
       const createUserRes: any =
         await API_SERVICES.customerCreateService.create({
@@ -81,6 +81,7 @@ function BookYourPickup() {
           //failureMessage: 'customer cannot create'
         });
       if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+        edit.reset();
       }
     } catch (err) {
       toast.error(err?.message);
