@@ -19,6 +19,9 @@ type Props = {
   summaryPadding?: any;
   accBorderColor?: any;
   summaryMargin?: any;
+  expandIcon?: boolean;
+  accordionPadding?: boolean;
+  accordionDetailPadding?: boolean;
 };
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
@@ -29,13 +32,14 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
         transition: 'none'
       },
       '& .MuiAccordionSummary-root.Mui-expanded': {
-        padding: theme.spacing(3.25, 6.5, 1, 6.5)
+        padding: (props) =>
+          props.accordionPadding ? theme.spacing(3.25, 6.5, 1, 6.5) : 'none'
       },
       '& .MuiAccordion-root.Mui-expanded:last-child': {
         margin: theme.spacing(2.5, 0)
       }
     },
-    eachAccordianOuterContainer: {
+    eachAccordionOuterContainer: {
       position: 'relative',
       border: (props) => (props.withBorder ? '0.5px solid' : 'none'),
       borderColor: (props) => {
@@ -50,7 +54,7 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
         return props.summaryPadding;
       },
       '& .MuiAccordionSummary-expandIcon.Mui-expanded': {
-        display: 'none'
+        display: (props) => (props.expandIcon ? 'flex' : 'none')
       }
     },
     accordionStyle: {
@@ -73,7 +77,8 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
       color: theme.Colors.primary
     },
     accordionDetailStyle: {
-      padding: theme.spacing(0, 6.5, 4.5, 6.5)
+      padding: (props) =>
+        props.accordionDetailPadding ? theme.spacing(0, 6.5, 4.5, 6.5) : 'none'
     }
   })
 );
@@ -82,15 +87,16 @@ const AccordionComponent = ({
   backgroundColor,
   height,
   displayContent,
-  onTabChange,
   withBorder,
   isProfile,
   summaryPadding,
   accBorderColor,
   expandMoreIcon,
   summaryMargin,
+  accordionDetailPadding,
   isMyAccount,
-  accordionExpanded
+  expandIcon,
+  accordionPadding
 }: {
   backgroundColor?: string;
   height?: string;
@@ -102,11 +108,16 @@ const AccordionComponent = ({
   onTabChange?: any;
   withBorder?: boolean;
   isProfile?: boolean;
+  accordionDetailPadding?: boolean;
+
   summaryPadding?: any;
   accBorderColor?: any;
   expandMoreIcon?: any;
   summaryMargin?: any;
   isMyAccount?: boolean;
+  expandIcon?: boolean;
+  accordionPadding?: boolean;
+
   accordionExpanded?: number;
 }) => {
   const classes = useStyles({
@@ -116,7 +127,10 @@ const AccordionComponent = ({
     withBorder,
     summaryPadding,
     accBorderColor,
-    summaryMargin
+    summaryMargin,
+    expandIcon,
+    accordionPadding,
+    accordionDetailPadding
   });
 
   return (
@@ -127,7 +141,7 @@ const AccordionComponent = ({
             key={index}
             container
             direction="row"
-            className={classes.eachAccordianOuterContainer}
+            className={classes.eachAccordionOuterContainer}
           >
             {!isProfile && displayContent.length > index + 1 && (
               <Grid item className={classes.line} />

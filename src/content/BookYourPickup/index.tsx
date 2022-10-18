@@ -164,6 +164,9 @@ function BookYourPickup() {
   return (
     <Grid className={classes.outerContainer}>
       <AccordionComponent
+        expandIcon={false}
+        accordionPadding={true}
+        accordionDetailPadding={true}
         displayContent={bookYourPickupAccordionContent}
         summaryPadding={theme.spacing(4.25, 6.5)}
         summaryMargin={theme.spacing(2.5, 0)}
