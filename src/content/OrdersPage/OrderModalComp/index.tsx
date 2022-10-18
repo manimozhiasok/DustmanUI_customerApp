@@ -7,7 +7,7 @@ import OrderScheduleComp from '../OrderScheduleComp';
 const useStyles = makeStyles((theme: Theme) => {
   return {
     divider: {
-      padding: theme.spacing(2, 0),
+      // padding: theme.spacing(2, 0),
       margin: `5px 0 0 ${theme.spacing(0)}px`,
     },
     isDivider: {
@@ -30,29 +30,29 @@ type Props = {
   location: string;
   quantity: string;
   heading?: string;
-  img?: any;
-  orderDetails?: any;
+  img?: string;
+  orderDetails?: string;
   category?: string;
   loc?: string;
   headingText?: string;
-  schedule?: any;
-  time?: any;
-  day?: any;
-  bottomContent?: any;
+  schedule?: string;
+  time?: string;
+  day?: string;
+  bottomContent?: boolean;
   vendor?: string;
   mobile?: string | number;
-  dividerLine?: any;
-  orderHeading?: any;
-  orderSchedule?: any;
-  orderDay?: any;
-  state?: any;
-  dateImage?: any;
-  orderState?: any;
-  orderDateImage?: any;
-  pickupSchedule?: any;
-  secImage?: any;
-  orderDot?: any;
-  dot?: any;
+  dividerLine?: boolean;
+  orderHeading?: string;
+  orderSchedule?: boolean;
+  orderDay?: string;
+  state?: string;
+  dateImage?: string;
+  orderState?: string;
+  orderDateImage?: string;
+  pickupSchedule?: string;
+  secImage?: string;
+  orderDot?: string;
+  dot?: string;
 };
 
 const OrderModalComp = (props: Props) => {
@@ -139,10 +139,10 @@ const OrderModalComp = (props: Props) => {
             <OrderScheduleComp scheduleDetails={scheduleDetails} />
           )}
           <Grid container direction="row" spacing={5}>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <ListTextItem image={Phone} value={number} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={6}>
               <ListTextItem image={MapTrifold} value={location} />
             </Grid>
           </Grid>

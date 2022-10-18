@@ -7,7 +7,6 @@ import {
   Typography,
   Divider
 } from '@material-ui/core';
-import { FullscreenExit } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -48,14 +47,14 @@ const ListTextItem = (props: Props) => {
             <img src={image} />
           </Grid>
         )}
-        <Grid item xs={9}>
+        <Grid item xs={9} style={{paddingLeft:20}}>
           {value && <Typography variant="h4">{value}</Typography>}
           {img && (
             <Grid
               container
               className={classes.imgContainer}
               direction="row"
-              spacing={5}
+              spacing={8}
             >
               <Grid item xs={6}>
                 {img}

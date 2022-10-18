@@ -56,7 +56,7 @@ export const DialogTitleComp = ({
         titleStyle={dialogTitleStyle}
       />
       <Box>
-        <CloseIcon onClick={onClose} fontSize="medium" />
+        <CloseIcon onClick={onClose} fontSize="medium" color="disabled"/>
       </Box>
     </Box>
   );

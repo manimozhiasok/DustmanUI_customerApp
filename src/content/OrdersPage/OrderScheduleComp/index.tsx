@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  scheduleDetails: any;
+  scheduleDetails: any[];
 };
 
 const OrderScheduleComp = (props: Props) => {

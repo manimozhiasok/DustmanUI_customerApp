@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme: Theme) => {
     dialogPaper: {
       width: 683,
       height: 676,
-      padding: theme.spacing(3, 2, 0, 1),
+      padding: theme.spacing(2, 2, 1, 1),
       borderRadius: theme.MetricsSizes.regular
     }
   };
@@ -71,7 +71,7 @@ const CompletedOrderModal = (props: Props) => {
         color: theme.Colors.blueDark,
         paddingLeft: theme.spacing(0.5)
       }}
-      dialogTitleClasses={{ padding: theme.spacing(2, 0, 1, 3) }}
+      dialogTitleClasses={{ padding: theme.spacing(2, 0, 0, 3) }}
       renderDialogContent={() => renderDialogContent()}
     />
   );

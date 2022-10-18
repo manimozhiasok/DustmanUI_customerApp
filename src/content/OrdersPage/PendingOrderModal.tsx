@@ -8,12 +8,12 @@ const useStyles = makeStyles((theme: Theme) => {
     dialogPaper: {
       width: 683,
       height: 643,
-      padding: theme.spacing(3, 2, 0, 1),
+      padding: theme.spacing(2, 2, 1, 1),
       borderRadius: theme.MetricsSizes.regular
       // border:"2px solid red"
     },
     btnStyle: {
-      padding: theme.spacing(3, 2, 0, 0),
+      // padding: theme.spacing(3, 0),
     }
   };
 });
@@ -60,8 +60,7 @@ const PendingModal = (props: Props) => {
             btnBorderRadius={209.338}
             height={48}
             btnWidth={142}
-            style={{ marginRight: 10 }}
-            // onClickButton={onClick}
+            onClickButton={onClose}
           />
         </Grid>
       </>
@@ -81,7 +80,7 @@ const PendingModal = (props: Props) => {
         paddingLeft: theme.spacing(0.5)
         // border: "1px solid green"
       }}
-      dialogTitleClasses={{ padding: theme.spacing(2, 0, 1, 3) }}
+      dialogTitleClasses={{ padding: theme.spacing(2, 0, 0, 3) }}
       renderDialogContent={() => renderDialogContent()}
     />
   );
