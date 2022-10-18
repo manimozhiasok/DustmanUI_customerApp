@@ -44,32 +44,33 @@ const useStyles = makeStyles((theme: Theme) => ({
   carouselContainer: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column',
-    // overflowX: 'scroll'
-  },
-  carouselContentWrapper: {
-    // width: '100%',
-    // height: '100%'
-    // overflowX: 'scroll'
+    flexDirection: 'column'
   },
   iconStyle: {
     color: theme.Colors.primaryGreen,
     transform: 'matrix(1, 0, 0, 1, 0, 0)'
+  },
+  imageStyle: {
+    borderRadius: '6px',
+    width: '80px',
+    height: '80px',
+    opacity: 1.0
+  },
+  gridStyle: {
+    paddingRight: theme.spacing(0.5)
   }
 }));
 
 type CarouselProp = {
   children: any;
-  show: any;
+  show?: any;
 };
-const Carousel = (props: CarouselProp) => {
+export const Carousel = (props: CarouselProp) => {
   const classes = useStyles();
   const { children, show } = props;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(children.length);
-
-  const [touchPosition, setTouchPosition] = useState(null);
 
   // Set the length to match current children from props
   useEffect(() => {
@@ -79,9 +80,10 @@ const Carousel = (props: CarouselProp) => {
   const handleNextClick = () => {
     console.log('handleNextClick');
     if (currentIndex < length) {
-      if(currentIndex < length - show){
-      setCurrentIndex((prevState) => prevState + 0.5);
-    }}
+      if (currentIndex < 2) {
+        setCurrentIndex((prevState) => prevState + 0.5);
+      }
+    }
   };
 
   const handlePrevClick = () => {
@@ -90,48 +92,16 @@ const Carousel = (props: CarouselProp) => {
     }
   };
 
-  const handleTouchStart = (e) => {
-    const touchDown = e.touches[0].clientX;
-    setTouchPosition(touchDown);
-  };
-
-  const handleTouchMove = (e) => {
-    const touchDown = touchPosition;
-
-    if (touchDown === null) {
-      return;
-    }
-
-    const currentTouch = e.touches[0].clientX;
-    const diff = touchDown - currentTouch;
-
-    if (diff > 5) {
-      handleNextClick();
-    }
-
-    if (diff < -5) {
-      handlePrevClick();
-    }
-
-    setTouchPosition(null);
-  };
-
   return (
     <Grid className={classes.carouselContainer}>
       <Grid className={classes.carouselWrapper}>
         <Grid
-          className={classes.carouselContentWrapper}
-          // onTouchStart={handleTouchStart}
-          // onTouchMove={handleTouchMove}
+          className={`carousel-content show-${show}`}
+          style={{
+            transform: `translateX(-${currentIndex * (100 / show)}%)`
+          }}
         >
-          <Grid
-            className={`carousel-content show-${show}`}
-            style={{
-              transform: `translateX(-${currentIndex * (100 / show)}%)`
-            }}
-          >
-            {children}
-          </Grid>
+          {children}
         </Grid>
         <IconButton onClick={handlePrevClick} className={classes.arrowBack}>
           <ArrowBackIcon fontSize={'small'} className={classes.iconStyle} />
@@ -148,4 +118,38 @@ const Carousel = (props: CarouselProp) => {
   );
 };
 
-export default Carousel;
+type Prop = {
+  imgUrl: any;
+  key: number;
+};
+
+export const Content = ({ imgUrl, key }: Prop) => {
+  const classes = useStyles();
+  return (
+    <>
+      <Grid className={classes.gridStyle}>
+        <img
+          src={imgUrl}
+          alt="image not found"
+          key={key}
+          className={classes.imageStyle}
+        />
+      </Grid>
+    </>
+  );
+};
+
+const CarouselContent = ({ data }: any) => {
+  const classes = useStyles();
+  return (
+    <>
+      <Carousel show={4}>
+        {data.map((item, index) => {
+          return <Content imgUrl={item.image_url} key={index} />;
+        })}
+      </Carousel>
+    </>
+  );
+};
+
+export default CarouselContent;

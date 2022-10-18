@@ -33,44 +33,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     '&:focus': {
       outline: 'none !important',
       borderWidth: '1px',
-      // borderStyle:'  solid ',
       borderColor: theme.Colors.lightWhiteGrey
     }
-  },
-  imageStyle: {
-    borderRadius: '6px',
-    width: '80px',
-    height: '80px',
-    opacity: 1.0
-  },
-  gridStyle: {
-    paddingRight: theme.spacing(0.5)
   },
   textarea: {
     resize: 'both',
     marginTop: '-50px'
   }
 }));
-
-type Prop = {
-  imgUrl: any;
-  key: number;
-};
-export const Content = ({ imgUrl, key }: Prop) => {
-  const classes = useStyles();
-  return (
-    <>
-      <Grid className={classes.gridStyle}>
-        <img
-          src={imgUrl}
-          alt="image not found"
-          key={key}
-          className={classes.imageStyle}
-        />
-      </Grid>
-    </>
-  );
-};
 
 export const LeftContent = ({ edit, trashData }) => {
   const theme = useTheme();
