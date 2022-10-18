@@ -43,8 +43,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     textAlign: 'center'
   },
   buttonContainer: {
-    padding: theme.spacing(4, 0),
-    textAlign: 'center'
+    padding: theme.spacing(4, 26),
+    // textAlign: 'center'
   }
 }));
 
@@ -100,7 +100,7 @@ function OrderConfirmation({ edit, handleButtonClick }) {
           buttonFontSize={theme.MetricsSizes.small_xxx}
           btnWidth={342}
           height={theme.MetricsSizes.large_xxx}
-          buttonFontWeight={500}
+          buttonFontWeight={theme.fontWeight.medium}
           onClickButton={handleButtonClick}
         />
       </Grid>

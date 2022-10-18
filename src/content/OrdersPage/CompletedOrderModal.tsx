@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) => {
   return {
     dialogPaper: {
       width: 847,
-      height: 555,
+      height: 600,
       padding: theme.spacing(2, 2, 2, 5),
       borderRadius: theme.MetricsSizes.regular
     }
@@ -39,8 +39,8 @@ const CompletedOrderModal = (props: Props) => {
           orderHeading={'Order Completed'}
           location={'Map Location'}
           quantity={'25 kgs'}
-          image={Paper}
-          img={Iron}
+          img={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'}
+          secImage={ 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'}
           dividerLine
           category={'category'}
           loc={'Location'}

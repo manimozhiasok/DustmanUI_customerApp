@@ -7,14 +7,18 @@ import {
   Typography,
   Divider
 } from '@material-ui/core';
+import { FullscreenExit } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
     outerContainer: {
-      // padding: theme.spacing(1.5, 0, 0, 0)
+      padding: theme.spacing(1, 0)
     },
     mapStyle: {
       marginLeft: theme.spacing(6)
+    },
+    imgStyle:{
+     
     }
   };
 });
@@ -24,10 +28,11 @@ type Props = {
   img?: any;
   value?: any;
   isDivider?: boolean;
+  secImage? : any;
 };
 
 const ListTextItem = (props: Props) => {
-  const { image, img, value, isDivider } = props;
+  const { image, img, value, isDivider, secImage } = props;
   const theme = useTheme();
   const classes = useStyles();
 
@@ -37,18 +42,26 @@ const ListTextItem = (props: Props) => {
 
   return (
     <>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} className={classes.outerContainer}>
         {image && (
           <Grid item>
             <img src={image} />
           </Grid>
         )}
-        <Grid item>{value && <Typography variant='h4'>{value}</Typography>}</Grid>
+        <Grid item xs={9}>
+        {value && <Typography variant='h4'>{value}</Typography>}
         {img && (
-          <Grid item>
-             {img}
+          <Grid container direction="row" spacing={2}>
+            <Grid item>
+              {img}
+            </Grid>
+            <Grid item className={classes.imgStyle}>
+            {secImage}
+          </Grid>
           </Grid>
         )}
+        </Grid>
+
       </Grid>
     </>
   );

@@ -21,10 +21,17 @@ const useStyles = makeStyles((theme: Theme) => {
       margin: theme.spacing(2, 0)
     },
     isDivider: {
-      padding: theme.spacing(1, 0)
+      padding: theme.spacing(1, 0 ),
     },
     details: {
       paddingLeft: theme.spacing(2)
+    },
+    imgStyle:{
+      borderRadius: 9.41344,
+    },
+    completedStyle:{
+      // border: "1px solid blue",
+      padding: theme.spacing(0, 0, 0, 1),
     }
   };
 });
@@ -36,7 +43,6 @@ type Props = {
   location: string;
   quantity: string;
   heading?: string;
-  image: any;
   img?: any;
   orderDetails?: any;
   category?: string;
@@ -57,6 +63,7 @@ type Props = {
   orderState?: any;
   orderDateImage?: any;
   pickupSchedule?: any;
+  secImage? : any;
 };
 
 const OrderModalComp = (props: Props) => {
@@ -67,8 +74,8 @@ const OrderModalComp = (props: Props) => {
     number,
     location,
     quantity,
-    image,
     img,
+    secImage,
     category,
     loc,
     schedule,
@@ -117,10 +124,15 @@ const OrderModalComp = (props: Props) => {
     }
   ];
   return (
+    <Grid container>
     <>
       <DialogContentDetails contentDetails={rightContent} />
+<Grid container>
+      <Grid item xs={7}>
       <ListTextItem image={MapPin} value={address} />
-      {dividerLine && <Divider variant="middle" className={classes.divider} />}
+      </Grid>
+      <Grid item xs={12}className={classes.isDivider}> {dividerLine && <Divider variant="middle"/>}</Grid>
+     <Grid item xs={12} className={classes.completedStyle}>
       {orderHeading && (
         <Heading
           headingText={orderHeading}
@@ -131,21 +143,23 @@ const OrderModalComp = (props: Props) => {
       )}
       {orderSchedule && <OrderScheduleComp scheduleDetails={scheduleDetails} />}
       <Grid container direction="row" spacing={5}>
-        <Grid item>
+        <Grid item xs={3}>
           <ListTextItem image={Phone} value={number} />
         </Grid>
-        <Grid item>
+        <Grid item xs={9}>
           <ListTextItem image={MapTrifold} value={location} />
         </Grid>
       </Grid>
       <ListTextItem image={Scales} value={quantity} />
       <ListTextItem
         image={Image}
-        value={<img src={image} />}
-        img={<img src={img} />}
+        img={<img src={img} height= {148.26} width={ 214.16}  className={classes.imgStyle}/>}
+        secImage={<img src={secImage} height= {148.26} width={ 214.16} className={classes.imgStyle}/>}
       />
-      <Grid className={classes.isDivider}>
-        {isDivider && <Divider variant="middle" />}
+      </Grid>
+      </Grid>
+      <Grid xs={12} className={classes.isDivider}>
+        {isDivider && <Divider variant="middle"/>}
       </Grid>
       <Grid container className={classes.details}>
         {heading && (
@@ -168,6 +182,7 @@ const OrderModalComp = (props: Props) => {
         )}
       </Grid>
     </>
+    </Grid>
   );
 };
 

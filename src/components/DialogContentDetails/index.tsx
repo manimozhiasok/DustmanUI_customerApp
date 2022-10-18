@@ -19,7 +19,7 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => {
       Color: theme.Colors.mediumGrey,
       fontSize: (props) => props.rightContentFontSize,
       fontWeight: (props) => props.rightContentFontWeight,
-      marginBottom: theme.MetricsSizes.regular_x
+      marginBottom:  (props) => props.rightContentMarginBottom,
     },
     rightStyle: {
       marginLeft: theme.spacing(1)
@@ -32,6 +32,7 @@ type Props = {
   rightContentFontSize?: any;
   leftContentFontWeight?: any;
   rightContentFontWeight?: any;
+  rightContentMarginBottom?: any;
 };
 
 const DialogContentDetails = ({
@@ -39,31 +40,32 @@ const DialogContentDetails = ({
   leftContentFontSize,
   rightContentFontSize,
   leftContentFontWeight,
-  rightContentFontWeight
+  rightContentFontWeight,
+  rightContentMarginBottom,
 }: {
   contentDetails: any[];
   leftContentFontSize?: any;
   rightContentFontSize?: any;
   leftContentFontWeight?: any;
   rightContentFontWeight?: any;
+  rightContentMarginBottom?: any;
 }) => {
   const classes = useStyles({
     leftContentFontSize,
     rightContentFontSize,
     leftContentFontWeight,
-    rightContentFontWeight
+    rightContentFontWeight,
+    rightContentMarginBottom
   });
   const theme: Theme = useTheme();
   return (
     <>
       {contentDetails.map((item: any, index: number) => {
         return (
-          <Grid container xs={12} key={index}>
-            <Grid item>
+          <Grid container key={index}>
               <Typography variant="h4" className={classes.leftContentStyle}>
                 {item.content}:
               </Typography>
-            </Grid>
             <Grid item className={classes.rightStyle}>
               {item.isLink ? (
                 <LinkComp title={item.value} />

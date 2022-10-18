@@ -15,13 +15,14 @@ import CloseIcon from '@material-ui/icons/Close';
 const useStyles = makeStyles((theme: Theme) => {
   return {
     root: {
-      padding: theme.spacing(1)
+      padding: theme.spacing(1),
+      // border: "2px solid blue"
     },
     titleStyle: {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-between'
-    }
+      justifyContent: 'space-between',
+      },
   };
 });
 
@@ -36,13 +37,15 @@ type DialogProp = {
   onClose: () => void;
   dialogClasses?: any;
   dialogTitleStyle?: React.CSSProperties;
+  rootStyle?: React.CSSProperties;
+  dialogTitleClasses?: any;
 };
 
 export const DialogTitleComp = ({
   avatarImg,
   dialogTitle,
   onClose,
-  dialogTitleStyle
+  dialogTitleStyle,
 }) => {
   const classes = useStyles();
   return (
@@ -68,7 +71,8 @@ const DialogComp = ({
   renderAction,
   avatarImg,
   dialogClasses,
-  dialogTitleStyle
+  dialogTitleClasses,
+  dialogTitleStyle,
 }: DialogProp) => {
   const classes = useStyles();
 
@@ -81,7 +85,7 @@ const DialogComp = ({
         maxWidth={maxWidth || 'lg'}
         classes={{ ...dialogClasses }}
       >
-        <DialogTitle>
+        <DialogTitle style={{...dialogTitleClasses}}>
           <DialogTitleComp
             avatarImg={avatarImg}
             dialogTitle={dialogTitle}

@@ -1,16 +1,20 @@
 import { useEffect } from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import { ButtonComp, DialogComp } from 'src/components';
-import { Paper, Iron } from 'src/Assets';
 import OrderModalComp from './OrderModalComp';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
     dialogPaper: {
       width: 847,
-      height: 555,
+      height: 600,
       padding: theme.spacing(2, 2, 2, 5),
-      borderRadius: theme.MetricsSizes.regular
+      borderRadius: theme.MetricsSizes.regular,
+      // border:"2px solid red"
+    },
+    btnStyle:{
+      padding: theme.spacing(2, 25, 0, 0),
+      marginBottom: theme.spacing(3)
     }
   };
 });
@@ -32,20 +36,17 @@ const PendingModal = (props: Props) => {
     return (
       <>
         <OrderModalComp
-          address={
-            'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042.'
-          }
+          address={'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042.'}
           number={9840046988}
           location={'Map Location'}
           quantity={'25 kgs'}
-          image={Paper}
-          img={Iron}
-          category={'Category'}
-          loc={'Location'}
-        />
-        <Grid container justifyContent="center">
+          img={  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'}
+          secImage={ 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'}
+          category={'Aluminum, News Paper... '}
+          loc={'Velachery'}/>
+        <Grid container justifyContent="center" className={classes.btnStyle}>
           <ButtonComp
-            buttonText={'Cancel'}
+            buttonText={'CANCEL'}
             backgroundColor="#6BB043"
             buttonFontSize={theme.MetricsSizes.regular}
             buttonTextColor="#FFFFFF"
@@ -70,8 +71,10 @@ const PendingModal = (props: Props) => {
       dialogTitleStyle={{
         fontWeight: theme.fontWeight.bold,
         fontSize: theme.MetricsSizes.regular_xxx,
-        color: theme.Colors.blueDark
+        color: theme.Colors.blueDark,
+        // border: "1px solid green"
       }}
+      dialogTitleClasses={{padding:theme.spacing(2, 0, 1, 3)}}
       renderDialogContent={() => renderDialogContent()}
     />
   );
