@@ -40,6 +40,8 @@ import locationIcon from './locationIcon.svg';
 import weightIcon from './weightIcon.svg';
 import LoginBtmImg from './LoginBtmImg.svg';
 import Date from './Date.svg'
+import YetToConfirm from './yetToConfirm.svg';
+import Confirm from './confirm.svg';
 
 export {
   DustmanLogoHorizontal,
@@ -83,5 +85,7 @@ export {
   locationIcon,
   weightIcon,
   LoginBtmImg,
-  Date
+  Date,
+  YetToConfirm,
+  Confirm
 };

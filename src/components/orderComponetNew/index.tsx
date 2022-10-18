@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { locationIcon, weightIcon } from 'src/Assets';
+import { Confirm, locationIcon, weightIcon, YetToConfirm } from 'src/Assets';
 import ListTextItem from '../ImageTextComponent';
 import OrderButton from '../orderButton';
 
@@ -26,10 +26,17 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     imageContainer: { padding: theme.spacing(0, 2, 0, 0) },
     typo: {
-      fontSize: theme.MetricsSizes.tiny_xxx
+      fontSize: theme.MetricsSizes.tiny_xxx,    
+    },
+    status: {
+      fontSize: theme.MetricsSizes.tiny_xxx,
+      display: 'flex',
+      alignItems: 'center',
+      gap: theme.spacing(2)
     },
     category: {
-      fontSize: theme.MetricsSizes.small_x
+      fontSize: theme.MetricsSizes.small_x,
+      paddingTop: theme.spacing(0.4)
     },
     categoryText: {
       color: theme.Colors.mediumGrey,
@@ -100,7 +107,16 @@ const OrderComponentNew = ({
               </Grid>
             </Grid>
             <Grid item>
-              <Typography className={classes.typo}>{item.status}</Typography>
+              <Typography className={classes.status}>
+                <label className={classes.status}>{item.status}</label>
+                {
+                  <img
+                    src={
+                      item.status === 'Yet to Confirm' ? YetToConfirm : Confirm
+                    }
+                  />
+                }
+              </Typography>
             </Grid>
           </Grid>
         );

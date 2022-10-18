@@ -104,7 +104,7 @@ function OrdersPage() {
       category: 'Metals,NewsPaper',
       weight: '25kg',
       place: 'Ambattur',
-      status: 'Status'
+      status: 'Yet to Confirm'
     },
     {
       displayImage: Wood,
@@ -112,7 +112,7 @@ function OrdersPage() {
       category: 'Metals,NewsPaper',
       weight: '55kg',
       place: 'Ariyalur',
-      status: 'Status'
+      status: 'Scheduled on Sat, Sep 24, 2022, 02:15 PM'
     },
     {
       displayImage: Wood,
@@ -120,7 +120,7 @@ function OrdersPage() {
       category: 'Metals,NewsPaper',
       weight: '25kg',
       place: 'Ambattur',
-      status: 'Status'
+      status: 'Delivered on Sat, Sep 24, 2022, 02:15 PM'
     },
     {
       displayImage: Aluminium,
@@ -128,7 +128,7 @@ function OrdersPage() {
       category: 'Metals,NewsPaper',
       weight: '35kg',
       place: 'Adayar',
-      status: 'Status'
+      status: 'Delivered on Sat, Sep 24, 2022, 02:15 PM'
     }
   ];
   const fetchData = async () => {

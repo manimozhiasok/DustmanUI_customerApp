@@ -19,7 +19,7 @@ const OrderButton = ({
       }}
     >
       <ButtonComp
-        buttonText={'View Details'}
+        buttonText={'VIEW DETAILS'}
         backgroundColor="#FCFCFC"
         buttonFontSize={10}
         variant="outlined"
