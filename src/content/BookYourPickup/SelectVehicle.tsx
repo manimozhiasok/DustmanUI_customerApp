@@ -54,8 +54,8 @@ function SelectVehicle({ edit }) {
     console.log(id);
     edit.update({
       customer_order_details: {
-        vehicle_id: id,
-        ...edit.edits.customer_order_details
+        ...edit.edits.customer_order_details,
+        vehicle_id: id
       }
     });
     //edit.update({ vehicle_name: vehicleName });

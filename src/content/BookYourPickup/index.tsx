@@ -45,7 +45,7 @@ export const initialValues = {
     map_location: 'map_url'
   },
   customer_order_details: {
-    vehicle_id: 3,
+    vehicle_id: 0,
     pickup_time: '',
     slot: ''
   }
@@ -71,16 +71,11 @@ function BookYourPickup() {
         await API_SERVICES.customerCreateService.create({
           data: userData,
           successMessage: 'customer created successfully!'
-          //failureMessage: 'customer cannot create'
         });
       console.log(
         'createUserRes..........................................',
         createUserRes
       );
-      // if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
-      //   updateData();
-      //   onClose();
-      // }
     } catch (err) {
       toast.error(err?.message);
     }
