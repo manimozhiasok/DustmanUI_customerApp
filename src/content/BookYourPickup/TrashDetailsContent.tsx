@@ -55,9 +55,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 type Prop = {
   imgUrl: any;
   key: number;
-  handleClickImage: (e: any) => void;
 };
-export const Content = ({ imgUrl, key, handleClickImage }: Prop) => {
+export const Content = ({ imgUrl, key }: Prop) => {
   const classes = useStyles();
   return (
     <>
@@ -67,16 +66,28 @@ export const Content = ({ imgUrl, key, handleClickImage }: Prop) => {
           alt="image not found"
           key={key}
           className={classes.imageStyle}
-          onClick={handleClickImage}
         />
       </Grid>
     </>
   );
 };
 
-export const LeftContent = ({ edit }) => {
+export const LeftContent = ({ edit, trashData }) => {
   const theme = useTheme();
   const classes = useStyles();
+
+  const getTrashValue = () => {
+    const data =
+      edit.getValue('order_items').length &&
+      edit.getValue('order_items').map((element) => {
+        return (
+          trashData.length &&
+          trashData.filter((list) => list.id === element)[0].name
+        );
+      });
+    return data.length ? data.toString() : '';
+  };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -85,17 +96,11 @@ export const LeftContent = ({ edit }) => {
           labelColor={theme.Colors.deepGrey}
           textColor={theme.Colors.lightBlack}
           backgroundColor={theme.Colors.lightWhiteGrey}
-          value={edit.getValue('order_items')}
+          // value={edit.getValue('order_items')}
+          value={getTrashValue()}
           borderColor={theme.Colors.lightWhiteGrey}
           inputHeight={theme.MetricsSizes.large_xxx}
           inputBorderRadius={theme.MetricsSizes.tiny_x}
-          onChange={(e) => {
-            console.log(
-              e,
-              '-------------eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-----------------------------'
-            );
-            edit.update({ order_items: e.target.value });
-          }}
         />
       </Grid>
       <Grid item xs={12}>
@@ -133,36 +138,3 @@ export const LeftContent = ({ edit }) => {
     </Grid>
   );
 };
-
-// export const imagesForSlide = [
-//   {
-//     id: 2,
-//     imageUrl:
-//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr4bECuQKN8KRcAYPQwE03Vt5CZBWqPCTr9g&usqp=CAU'
-//   },
-//   {
-//     id: 3,
-//     imageUrl:
-//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'
-//   },
-//   {
-//     id: 3,
-//     imageUrl:
-//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
-//   },
-//   {
-//     id: 4,
-//     imageUrl:
-//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
-//   },
-//   {
-//     id: 5,
-//     imageUrl:
-//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
-//   },
-//   {
-//     id: 6,
-//     imageUrl:
-//       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
-//   }
-// ];

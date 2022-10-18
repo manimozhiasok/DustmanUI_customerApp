@@ -46,12 +46,17 @@ function SelectVehicleType({
   onClick
 }: {
   dataContent: any[];
-  onClick: (id: any, setActive: any, name: string) => void;
+  onClick: (id: number) => void;
 }) {
   const classes = useStyles();
   const theme = useTheme();
   const [active, setActive] = useState(0);
   const { t } = useTranslation();
+
+  const onClickItem = (selectId: number) => {
+    setActive(selectId);
+    onClick(selectId);
+  };
 
   return (
     <Grid container direction="row" spacing={2}>
@@ -66,7 +71,7 @@ function SelectVehicleType({
             item
             className={classes.gridStyle}
             key={index}
-            onClick={() => onClick(item.id, setActive, item.name)}
+            onClick={() => onClickItem(item.id)}
             style={{
               background:
                 active === item.id
@@ -76,9 +81,11 @@ function SelectVehicleType({
           >
             <Typography className={classes.heading}>{item.name}</Typography>
             <Grid
-              style={{ display: 'flex' }}
-              justifyContent="space-between"
-              direction="row"
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                flexDirection: 'row'
+              }}
             >
               <Typography className={classes.subText}>{item.name}</Typography>
 

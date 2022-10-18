@@ -95,18 +95,12 @@ abbr[title] {
 }
 
 .react-calendar__tile:disabled {
-
   color: #E0E0E0;
-
   background-color: transparent;
-
 }
 
-
 .react-calendar__navigation button:disabled {
-
   color: #E0E0E0;
-
   background-color:transparent;
 
 }

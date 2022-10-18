@@ -48,9 +48,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function OrderConfirmation({ edit, handleButtonClick }) {
+function OrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
+
+  const getTrashValue = () => {
+    const data =
+      edit.getValue('order_items').length &&
+      edit.getValue('order_items').map((element) => {
+        return (
+          trashData.length &&
+          trashData.filter((list) => list.id === element)[0].name
+        );
+      });
+    return data.length ? data.toString() : '';
+  };
 
   const rightContent = [
     {
@@ -63,7 +75,7 @@ function OrderConfirmation({ edit, handleButtonClick }) {
       content: 'User Name',
       value: edit.getValue('name')
     },
-    { content: 'Category', value: edit.getValue('order_items').toString() },
+    { content: 'Category', value: getTrashValue() },
 
     {
       content: 'Address',

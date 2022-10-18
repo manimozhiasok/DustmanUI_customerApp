@@ -30,8 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '520px'
   },
   loginDrawerStyle: {
-    padding: theme.spacing(3.8),
-    flex: 1
+    padding: theme.spacing(3.8)
   }
 }));
 

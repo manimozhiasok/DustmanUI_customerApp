@@ -92,7 +92,7 @@ const ButtonComp = (props: Props) => {
       >
         <input
           type="file"
-          accept="image/jpg,image/jpeg,image/png"
+          accept="image/jpg,image/jpeg"
           hidden
           multiple
           onChange={onBrowseButtonClick}

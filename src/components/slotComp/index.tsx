@@ -9,6 +9,7 @@ export type TimeSlotDetails = {
   id: React.ReactText;
   value: string;
 };
+
 type Prop = {
   timeSlotDetails: TimeSlotDetails[];
   handleChangeSlot: (slot: TimeSlotDetails) => void;
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => {
   };
 });
 
-const Slot = (props: Prop) => {
+const SlotComp = (props: Prop) => {
   const { timeSlotDetails, handleChangeSlot } = props;
   const theme = useTheme();
   const classes = useStyles();
@@ -95,4 +96,4 @@ const Slot = (props: Prop) => {
   );
 };
 
-export default Slot;
+export default SlotComp;

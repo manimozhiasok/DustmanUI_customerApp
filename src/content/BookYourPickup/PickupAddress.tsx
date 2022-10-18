@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  Grid,
-  makeStyles,
-  TextareaAutosize,
-  Theme,
-  useTheme
-} from '@material-ui/core';
-import { ListItemCell, TextInputComponent } from 'src/components';
+import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
+import { TextInputComponent } from 'src/components';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
@@ -16,18 +10,12 @@ function PickupAddress({ edit }) {
 
   return (
     <>
-      <Grid
-        container
-        spacing={2}
-        // justifyContent="center"
-        style={{ paddingBottom: theme.spacing(8.8) }}
-      >
+      <Grid container spacing={2} style={{ paddingBottom: theme.spacing(8.8) }}>
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="House / Flat No."
             textColor={theme.Colors.lightBlack}
             value={edit.getValue('order_address').address_line1}
-            //onChange={(e) => edit.update({ order_address: e.target.value })}
             onChange={(e) =>
               edit.update({
                 order_address: {
@@ -44,7 +32,6 @@ function PickupAddress({ edit }) {
             placeholderText="Apartment / Street Name / Area"
             textColor={theme.Colors.lightBlack}
             value={edit.getValue('order_address').address_line2}
-            // onChange={(e) => edit.update({ order_address: e.target.value })}
             onChange={(e) =>
               edit.update({
                 order_address: {
@@ -60,7 +47,6 @@ function PickupAddress({ edit }) {
           <TextInputComponent
             placeholderText="State"
             value={edit.getValue('order_address').state}
-            // onChange={(e) => edit.update({ order_address: e.target.value })}
             onChange={(e) =>
               edit.update({
                 order_address: {
@@ -77,7 +63,6 @@ function PickupAddress({ edit }) {
           <TextInputComponent
             placeholderText="City"
             value={edit.getValue('order_address').city}
-            // onChange={(e) => edit.update({ order_address: e.target.value })}
             onChange={(e) =>
               edit.update({
                 order_address: {
@@ -96,7 +81,6 @@ function PickupAddress({ edit }) {
             value={edit.getValue('pincode')}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
-            // onChange={(e) => {edit.update({ order_address: e.target.value})}
             onChange={(e) =>
               edit.update({
                 order_address: {
@@ -113,7 +97,6 @@ function PickupAddress({ edit }) {
             value={edit.getValue('order_address').address_line3}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
-            // onChange={(e) => edit.update({ order_address: e.target.value })}
             onChange={(e) =>
               edit.update({
                 order_address: {
@@ -128,7 +111,6 @@ function PickupAddress({ edit }) {
           <TextInputComponent
             placeholderText="Mobile Number"
             value={edit.getValue('mobile_number')}
-            // onChange={(e) => edit.update({ mobile_number: e.target.value })}
             onChange={(e) =>
               edit.update({
                 order_address: {

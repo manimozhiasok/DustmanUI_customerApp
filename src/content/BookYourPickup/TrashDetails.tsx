@@ -12,6 +12,8 @@ import { AddPhotoAlternate } from '@material-ui/icons';
 import { ButtonComp } from 'src/components';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { API_SERVICES } from 'src/Services';
+import { HTTP_STATUSES } from 'src/Config/constant';
 
 const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
@@ -69,33 +71,44 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function TrashDetails({ edit }) {
+type Props = {
+  trashData?: any;
+  edit?: any;
+};
+
+function TrashDetails({ edit, trashData }: Props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [text, setText] = useState('Choose your trash pictures');
-  const [selectedFiles, setSelectedFiles] = useState([]);
   const [visible, setVisible] = useState(true);
 
-  const onUploadFiles = (e) => {
-    let selectedFile: any = URL.createObjectURL(e.target.files[0]);
-    console.log('selectedFile from upload list', e.target.files);
-    console.log('selectedFile from upload list next', e.target.files[0].name);
-    console.log('selectedFile from upload list next id', e.target.files.length);
-    if (selectedFiles.find((val) => val === selectedFile)) {
-      console.log('Duplicate value');
-      selectedFiles.splice(selectedFile);
-    } else {
-      selectedFiles.push(selectedFile);
+  const onUploadFiles = async (event: any) => {
+    let formData = new FormData();
+    let selectedImages = event.target.files;
+    for (let key in selectedImages) {
+      formData.append('file', selectedImages[key]);
     }
-    edit.update({ order_images: selectedFiles });
-    setVisible(false);
+    const uploadImageRes: any =
+      await API_SERVICES.imageUploadService.uploadImage(formData);
+    if (uploadImageRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (uploadImageRes?.data?.images.length) {
+        let imageData = [];
+        uploadImageRes?.data?.images.map((item) => {
+          imageData.push({ image_url: item.Location });
+        });
+        if (imageData?.length) {
+          edit.update({
+            order_images: [...edit.edits.order_images, ...imageData]
+          });
+        }
+      }
+    }
   };
 
   // useEffect(())
   return (
     <Grid container spacing={2} justifyContent="center">
       <Grid item xs={6}>
-        <LeftContent edit={edit} />
+        <LeftContent edit={edit} trashData={trashData} />
       </Grid>
       <Grid item xs={6}>
         <Grid className={classes.gridStyle}>
@@ -106,17 +119,11 @@ function TrashDetails({ edit }) {
               onBrowseButtonClick={onUploadFiles}
               isBrowseButton
             />
-            {text}
+            {'Choose your trash pictures'}
           </Grid>
           <Carousel show={4}>
-            {edit.edits.order_images.map((img,index) => {
-              return (
-                <Content
-                  key={index}
-                  imgUrl={img}
-                  handleClickImage={(e) => console.log('hi')}
-                />
-              );
+            {edit.getValue('order_images').map((item, index) => {
+              return <Content key={index} imgUrl={item?.image_url} />;
             })}
           </Carousel>
           {visible && (

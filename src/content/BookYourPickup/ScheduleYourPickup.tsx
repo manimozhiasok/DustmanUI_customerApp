@@ -5,15 +5,14 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 import Card from '@material-ui/core/Card';
-import Slot, { TimeSlotDetails } from 'src/components/slotComp';
-import { getDateFormat } from 'src/Utils';
+import { SlotComp } from 'src/components';
+import { TimeSlotDetails } from 'src/components/SlotComp';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
     dialogPaper: {
       width: 847,
       height: 900,
-      // padding: theme.spacing(2, 2, 2, 5),
       borderRadius: theme.MetricsSizes.regular
     },
     buttonStyle: {
@@ -22,8 +21,7 @@ const useStyles = makeStyles((theme: Theme) => {
       gap: theme.MetricsSizes.tiny_xxx
     },
     cardStyle: {
-      boxShadow: '0px 8.93293px 26.7988px rgba(5, 16, 55, 0.1)',
-      padding: theme.spacing(0, 0, 0, 0)
+      boxShadow: '0px 8.93293px 26.7988px rgba(5, 16, 55, 0.1)'
     },
     heading: {
       fontFamily: 'DM Sans',
@@ -35,7 +33,6 @@ const useStyles = makeStyles((theme: Theme) => {
     listItemStyle: {
       display: 'flex',
       alignItems: 'center'
-      // padding: theme.spacing(2, 0)
     },
     containerStyle: {
       color: theme.Colors.blueDark,
@@ -48,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => {
       fontWeight: theme.fontWeight.medium
     },
     calendarContainerStyle: {
-      // padding: theme.spacing(2, 0, 10, 7)
+      padding: theme.spacing(2, 0, 3, 0)
     }
   };
 });
@@ -74,13 +71,9 @@ const ScheduleYourPickup = ({ edit }) => {
       if (!start || !end) {
         return;
       }
-
       let date = new Date(pickupDate);
-
       let hour = start + Math.random() * (end - start);
-
       date.setHours(hour);
-
       edit.update({
         customer_order_details: {
           ...edit.edits.customer_order_details,
@@ -89,7 +82,6 @@ const ScheduleYourPickup = ({ edit }) => {
         }
       });
     },
-
     [pickupDate]
   );
 
@@ -106,7 +98,7 @@ const ScheduleYourPickup = ({ edit }) => {
   return (
     <>
       <Grid container spacing={3} className={classes.calendarContainerStyle}>
-        <Grid item xs={5}>
+        <Grid item xs={6}>
           <Card className={classes.cardStyle}>
             <Calendar
               onChange={setPickupDate}
@@ -130,8 +122,7 @@ const ScheduleYourPickup = ({ edit }) => {
             <Grid item xs={12} className={classes.heading}>
               Slot
             </Grid>
-
-            <Slot
+            <SlotComp
               timeSlotDetails={timeSlotDetails1}
               handleChangeSlot={handleChangeSlot}
             />
