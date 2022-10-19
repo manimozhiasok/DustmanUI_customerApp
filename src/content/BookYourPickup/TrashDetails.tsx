@@ -99,17 +99,13 @@ function TrashDetails({ edit, trashData }: Props) {
         });
         if (imageData?.length) {
           edit.update({
-            order_images: [...edit.edits.order_images, ...imageData]
+            order_images: [...uploadedImages, ...imageData]
           });
         }
       }
     }
     setVisible(false);
   };
-
-  useEffect(() => {
-    setVisible(true);
-  }, [uploadedImages]);
 
   return (
     <Grid container spacing={2} justifyContent="center">

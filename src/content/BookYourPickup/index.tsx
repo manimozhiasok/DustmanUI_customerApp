@@ -40,12 +40,11 @@ export const initialValues = {
     state: '',
     city: '',
     pincode: '',
-    mobile_number: '',
-    map_location: 'map_url'
+    mobile_number: ''
   },
   customer_order_details: {
     vehicle_id: 0,
-    pickup_time: new Date(),
+    pickup_time: '',
     slot: ''
   }
 };
@@ -93,7 +92,7 @@ function BookYourPickup() {
       const response: any =
         await API_SERVICES.customerCreateService.getAllTrashCategory(1, 1);
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-        if (response?.data) {
+        if (response?.data?.categories) {
           setTrashData(response.data.categories);
         }
       }

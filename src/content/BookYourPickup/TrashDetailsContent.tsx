@@ -78,7 +78,9 @@ export const LeftContent = ({ edit, trashData }) => {
           inputLabel="Approximate Weight"
           placeholderText="Enter approx. Weight"
           value={edit.getValue('quantity_kg')}
-          onChange={(e) => edit.update({ quantity_kg: e.target.value })}
+          onChange={(e) =>
+            edit.update({ quantity_kg: parseInt(e.target.value) })
+          }
           labelColor={theme.Colors.deepGrey}
           textColor={theme.Colors.lightBlack}
           backgroundColor={theme.Colors.lightWhiteGrey}

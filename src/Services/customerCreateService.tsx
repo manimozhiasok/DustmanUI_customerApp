@@ -3,17 +3,10 @@ import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
 type CustomerDetailsProp = {
   data: {
-    quantity_kg: number;
-    order_items: [];
+    quantity_kg: number | string;
+    order_items: number[];
     description: string;
-    order_images: [
-      {
-        image_url: string;
-      },
-      {
-        image_url: string;
-      }
-    ];
+    order_images: any[];
     order_address: {
       address_line1: string;
       address_line2: string;
@@ -22,7 +15,6 @@ type CustomerDetailsProp = {
       city: string;
       pincode: string;
       mobile_number: string;
-      map_location: string;
     };
     customer_order_details: {
       vehicle_id: number;
@@ -67,6 +59,5 @@ export const customerCreateService = {
       method: 'get'
     });
     return apiRequest(options);
-  },
-
+  }
 };

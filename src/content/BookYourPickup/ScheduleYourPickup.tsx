@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 const ScheduleYourPickup = ({ edit }) => {
-  const [pickupDate, setPickupDate] = useState(new Date());
+  const [pickupDate, setPickupDate] = useState<any>(new Date());
   const [selectedSlotVal, setSelectedSlotVal] = useState<any>({});
   const classes = useStyles();
 
@@ -69,18 +69,19 @@ const ScheduleYourPickup = ({ edit }) => {
       if (!start || !end) {
         return;
       }
-      let date = new Date(pickupDate);
+      let initialDate = pickupDate.toISOString();
+      let data = new Date(initialDate);
       let hour = start + Math.random() * (end - start);
-      date.setHours(hour);
+      data.setHours(hour);
       edit.update({
         customer_order_details: {
           ...edit.edits.customer_order_details,
-          pickup_time: pickupDate.toJSON(),
+          pickup_time: data.toISOString(),
           slot: slot
         }
       });
     },
-    [pickupDate]
+    [selectedSlotVal, pickupDate]
   );
 
   useEffect(() => {
@@ -91,7 +92,7 @@ const ScheduleYourPickup = ({ edit }) => {
     } else if (selectedSlotVal?.id === 3) {
       getRandomTime(16, 19, selectedSlotVal?.value);
     }
-  }, [getRandomTime, selectedSlotVal]);
+  }, [getRandomTime]);
 
   return (
     <>
