@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Grid, makeStyles, Theme } from '@material-ui/core';
+import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme: Theme) => {
       boxShadow: '0px 8.93293px 26.7988px rgba(5, 16, 55, 0.1)'
     },
     heading: {
-      fontFamily: 'DM Sans',
       fontSize: theme.MetricsSizes.small_xxx,
       color: theme.Colors.primary,
       padding: theme.spacing(1, 0),
@@ -63,7 +62,6 @@ const ScheduleYourPickup = ({ edit }) => {
 
   const handleChangeSlot = (selectedSlot: TimeSlotDetails) => {
     setSelectedSlotVal(selectedSlot);
-    console.log(selectedSlot);
   };
 
   const getRandomTime = useCallback(
@@ -119,12 +117,13 @@ const ScheduleYourPickup = ({ edit }) => {
         </Grid>
         <Grid item xs={6}>
           <Grid container direction="column">
-            <Grid item xs={12} className={classes.heading}>
-              Slot
+            <Grid item xs={12}>
+              <Typography className={classes.heading}>Slot</Typography>
             </Grid>
             <SlotButtonComp
               timeSlotDetails={timeSlotDetails1}
               handleChangeSlot={handleChangeSlot}
+              activeButtonVal={edit.getValue('customer_order_details').slot}
             />
           </Grid>
         </Grid>

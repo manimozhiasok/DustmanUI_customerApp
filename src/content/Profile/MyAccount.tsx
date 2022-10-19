@@ -75,13 +75,12 @@ function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
           displayContent={myProfileContent}
           withBorder
           isProfile
-          accordionPadding={false}
           isMyAccount
           accordionDetailPadding={false}
+          accordionPadding={false}
+          expandIcon={true}
           accBorderColor={theme.Colors.greyDark}
-          expandMoreIcon={
-            <ExpandMoreIcon style={{ transform: 'rotate(270deg)' }} />
-          }
+          expandMoreIcon={<ExpandMoreIcon />}
         />
       </Grid>
       <Grid item className={classes.contentContainer2}>
@@ -89,8 +88,8 @@ function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
           displayContent={myAccountContent}
           accordionDetailPadding={false}
           expandIcon={true}
-          isProfile
           accordionPadding={false}
+          isProfile
           expandMoreIcon={<ExpandMoreIcon />}
           accordionExpanded={accordionExpanded}
         />

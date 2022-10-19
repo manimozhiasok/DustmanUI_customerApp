@@ -1,25 +1,25 @@
 import React from 'react';
-import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
-// import OrderData from './OrderData';
+import {
+  Grid,
+  makeStyles,
+  Theme,
+  Typography,
+  useTheme
+} from '@material-ui/core';
 import { ButtonComp, DialogContentDetails } from 'src/components';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  rootContainer: {
-    // padding:theme.spacing(0, 0, 0, 0)
-  },
+  rootContainer: {},
   mainContainer: {
     padding: theme.spacing(1, 0)
-    // border:'1px solid green'
   },
   leftContainer: {
-    // border:'1px solid green',
     fontFamily: 'DM Sans',
     fontWeight: theme.fontWeight.regular,
     fontSize: theme.MetricsSizes.small_x,
     color: theme.Colors.mediumBlack
   },
   rightContainer: {
-    // border:'1px solid green'
     fontFamily: 'DM Sans',
     fontWeight: theme.fontWeight.regular,
     fontSize: theme.MetricsSizes.small_x,
@@ -28,12 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     fontFamily: 'Source Serif Pro',
     fontWeight: theme.fontWeight.bold,
-    fontSize: theme.MetricsSizes.regular,
     color: theme.Colors.darkBlue
   },
   subtitle: {
     paddingTop: theme.spacing(1),
-    fontFamily: 'DM Sans',
     fontWeight: theme.fontWeight.regular,
     fontSize: theme.MetricsSizes.tiny_xxx,
     color: theme.Colors.mediumBlack
@@ -44,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   buttonContainer: {
     padding: theme.spacing(4, 26)
-    // textAlign: 'center'
   }
 }));
 
@@ -92,11 +89,15 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
     <Grid container direction="row" className={classes.rootContainer}>
       <DialogContentDetails contentDetails={rightContent} />
       <Grid container className={classes.outerContainer}>
-        <Grid item xs={12} className={classes.title}>
-          Yay! Good to see you here
+        <Grid item xs={12}>
+          <Typography variant="h5" className={classes.title}>
+            Yay! Good to see you here
+          </Typography>
         </Grid>
-        <Grid item xs={12} className={classes.subtitle}>
-          You will be notified when your order confirms
+        <Grid item xs={12}>
+          <Typography className={classes.subtitle}>
+            You will be notified when your order confirms
+          </Typography>
         </Grid>
       </Grid>
       <Grid

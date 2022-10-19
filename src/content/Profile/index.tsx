@@ -27,14 +27,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   tabContentOuterContainer: {
     height: theme.spacing(65.5),
-    overflowY: 'scroll'                                               
+    overflowY: 'scroll'
   },
   tabContentContainer: {
     marginRight: theme.spacing(2),
     border: '0.5px solid',
     borderColor: theme.Colors.greyDark
-  },
-
+  }
 }));
 
 function Profile() {
@@ -87,22 +86,19 @@ function Profile() {
             index={1}
             className={classes.tabContentContainer}
           >
-            <MyAccount accordionExpanded = {0} />
+            <MyAccount accordionExpanded={0} />
           </TabContent>
           <TabContent
             value={tabToDisplay}
             index={2}
             className={classes.tabContentContainer}
           >
-           <MyAccount accordionExpanded = {1} />
+            <MyAccount accordionExpanded={1} />
           </TabContent>
         </Grid>
       </Grid>
     </Grid>
-
-
-
-      );
+  );
 }
 
 export default Profile;

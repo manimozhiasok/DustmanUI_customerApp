@@ -81,6 +81,7 @@ function TrashDetails({ edit, trashData }: Props) {
   const classes = useStyles();
   const theme = useTheme();
   const [visible, setVisible] = useState(true);
+  const uploadedImages = edit.getValue('order_images');
 
   const onUploadFiles = async (event: any) => {
     let formData = new FormData();
@@ -103,10 +104,13 @@ function TrashDetails({ edit, trashData }: Props) {
         }
       }
     }
-    setVisible(false)
+    setVisible(false);
   };
 
-  // useEffect(())
+  useEffect(() => {
+    setVisible(true);
+  }, [uploadedImages]);
+
   return (
     <Grid container spacing={2} justifyContent="center">
       <Grid item xs={6}>
@@ -123,7 +127,7 @@ function TrashDetails({ edit, trashData }: Props) {
             />
             {'Choose your trash pictures'}
           </Grid>
-          <CarouselContent data={edit.getValue('order_images')} isVisible />
+          <CarouselContent data={uploadedImages} isVisible />
           {visible && (
             <Grid className={classes.visibleStyle}>
               <IconButton

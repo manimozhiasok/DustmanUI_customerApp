@@ -16,7 +16,8 @@ const reportSuccess = (result, url, toastMessage) => {
     statusCode: result?.status,
     response: result
   };
-  let successMessage = toastMessage?.message ?? result?.data?.message;
+  let successMessage = toastMessage?.message;
+  // ?? result?.data?.message
   if (successMessage) {
     toast.success(successMessage);
   }

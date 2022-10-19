@@ -67,9 +67,7 @@ function ChooseCategoryComponent({
 }: Props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [selectedItemId, setSelectedItemId] = useState<string[]>(
-    InitialItemVal || []
-  );
+  const [selectedItemId, setSelectedItemId] = useState<string[]>([]);
   const getBorderColor = (isActive: boolean) => {
     if (isActive) {
       return activeBorderColor || theme.Colors.secondary;
@@ -111,9 +109,9 @@ function ChooseCategoryComponent({
   return (
     <Grid container spacing={4} className={classes.container}>
       {data.map((item, index) => {
-        const findActiveImage: number = selectedItemId.findIndex(
-          (selId) => selId === item.id
-        );
+        const findActiveImage: number = selectedItemId.length
+          ? selectedItemId.findIndex((selId) => selId === item.id)
+          : -1;
         const isActive: boolean = findActiveImage !== -1;
         return (
           <Grid
@@ -133,6 +131,7 @@ function ChooseCategoryComponent({
                     <Checkbox
                       onChange={() => handleOnClick(item.id)}
                       className={classes.checkbox}
+                      checked={isActive}
                     />
                     <img
                       src={item.image_url}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   createStyles,
   Grid,
@@ -43,20 +43,26 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 function SelectVehicleType({
   dataContent,
-  onClick
+  onClick,
+  selectedVal
 }: {
   dataContent: any[];
   onClick: (id: number) => void;
+  selectedVal?: number;
 }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [active, setActive] = useState(0);
+  const [activeCard, setActiveCard] = useState(0);
   const { t } = useTranslation();
 
   const onClickItem = (selectId: number) => {
-    setActive(selectId);
+    setActiveCard(selectId);
     onClick(selectId);
   };
+
+  useEffect(() => {
+    setActiveCard(selectedVal);
+  }, [selectedVal]);
 
   return (
     <Grid container direction="row" spacing={2}>
@@ -74,7 +80,7 @@ function SelectVehicleType({
             onClick={() => onClickItem(item.id)}
             style={{
               background:
-                active === item.id
+                activeCard === item.id
                   ? 'linear-gradient(274.42deg, #6CB043 0%, #92E3A9 124.45%)'
                   : theme.Colors.whiteGrey
             }}

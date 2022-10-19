@@ -110,7 +110,7 @@ function PickupAddress({ edit }) {
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="Mobile Number"
-            value={edit.getValue('mobile_number')}
+            value={edit.getValue('order_address').mobile_number}
             onChange={(e) =>
               edit.update({
                 order_address: {

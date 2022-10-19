@@ -44,8 +44,8 @@ export const initialValues = {
     map_location: 'map_url'
   },
   customer_order_details: {
-    vehicle_id: '',
-    pickup_time: '',
+    vehicle_id: 0,
+    pickup_time: new Date(),
     slot: ''
   }
 };
@@ -68,17 +68,17 @@ function BookYourPickup() {
   //   'mobile_number'
   // ];
 
-  const handleCreateData = async () => {
+  const handleCreateCustomerOrder = async () => {
     try {
       // if (!edit.allFilled(...pickAddressFields)) {
       //   return toast.error('Please Fill all the pickup address details');
       // }
-      let userData = { ...initialValues, ...edit.edits };
+      let orderData = { ...initialValues, ...edit.edits };
       const createUserRes: any =
         await API_SERVICES.customerCreateService.create({
-          data: userData,
-          successMessage: 'Customer created successfully!'
-          //failureMessage: 'customer cannot create'
+          data: orderData,
+          successMessage: 'Customer order created successfully!',
+          failureMessage: 'Failed to create Customer order '
         });
       if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
         edit.reset();
@@ -149,7 +149,7 @@ function BookYourPickup() {
       content: (
         <OrderConfirmation
           edit={edit}
-          handleButtonClick={handleCreateData}
+          handleButtonClick={handleCreateCustomerOrder}
           trashData={trashData}
         />
       ),

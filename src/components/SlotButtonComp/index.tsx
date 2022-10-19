@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme, Grid } from '@material-ui/core';
 import ButtonComp from '../ButtonComp/index';
 import { DateIcon, SunIcon } from 'src/Assets/Images';
@@ -13,6 +13,7 @@ export type TimeSlotDetails = {
 type Prop = {
   timeSlotDetails: TimeSlotDetails[];
   handleChangeSlot: (slot: TimeSlotDetails) => void;
+  activeButtonVal: string;
 };
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -30,15 +31,19 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 const SlotButtonComp = (props: Prop) => {
-  const { timeSlotDetails, handleChangeSlot } = props;
+  const { timeSlotDetails, handleChangeSlot, activeButtonVal } = props;
+  const [activeButton, setActiveButton] = useState<any>(0);
   const theme = useTheme();
   const classes = useStyles();
-  const [activeButtonId, setActiveButtonId] = useState<any>(null);
 
   const handleClickSlot = (selectedSlot: TimeSlotDetails) => {
-    setActiveButtonId(selectedSlot?.id);
     handleChangeSlot(selectedSlot);
+    setActiveButton(selectedSlot?.value);
   };
+
+  useEffect(() => {
+    setActiveButton(activeButtonVal);
+  }, [activeButtonVal]);
 
   return (
     <Grid container direction="row">
@@ -52,12 +57,12 @@ const SlotButtonComp = (props: Prop) => {
               buttonFontWeight={theme.fontWeight.regular}
               height={theme.MetricsSizes.large_x}
               backgroundColor={
-                activeButtonId === slot.id
+                activeButton === slot.value
                   ? theme.Colors.secondary
                   : theme.Colors.lightWhiteGrey
               }
               buttonTextColor={
-                activeButtonId === slot.id
+                activeButton === slot.value
                   ? theme.Colors.white
                   : theme.Colors.black
               }
@@ -65,7 +70,7 @@ const SlotButtonComp = (props: Prop) => {
                 <SunIcon
                   fontSize="small"
                   stroke={
-                    activeButtonId === slot.id
+                    activeButton === slot.value
                       ? theme.Colors.white
                       : theme.Colors.black
                   }
