@@ -3,12 +3,15 @@ import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
   leftContentStyle: {
-    color: theme.Colors.mediumBlack
-    // marginBottom: theme.MetricsSizes.regular_x
+    color: theme.Colors.mediumBlack,
+    fontSize: theme.MetricsSizes.small_xxx,
+    fontWeight: theme.fontWeight.regular
   },
   rightContainer: {
     color: theme.Colors.mediumGrey,
-    marginBottom: theme.MetricsSizes.tiny
+    marginBottom: theme.MetricsSizes.tiny,
+    fontSize: theme.MetricsSizes.small_xxx,
+    fontWeight: theme.fontWeight.regular
   },
   rightStyle: {
     padding: theme.spacing(0.5)

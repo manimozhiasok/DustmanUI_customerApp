@@ -7,7 +7,6 @@ import OrderScheduleComp from '../OrderScheduleComp';
 const useStyles = makeStyles((theme: Theme) => {
   return {
     divider: {
-      // padding: theme.spacing(2, 0),
       margin: `5px 0 0 ${theme.spacing(0)}px`,
     },
     isDivider: {
@@ -119,7 +118,10 @@ const OrderModalComp = (props: Props) => {
   return (
     <Grid container>
       <>
-        <DialogContentDetails contentDetails={rightContent} />
+        <DialogContentDetails contentDetails={rightContent}  
+           leftContentFontSize={theme.MetricsSizes.regular}
+            rightContentFontSize={theme.MetricsSizes.regular}
+            rightContentFontWeight={theme.fontWeight.regular}/>
         <Grid item xs={10}>
           <ListTextItem image={MapPin} value={address} />
         </Grid>

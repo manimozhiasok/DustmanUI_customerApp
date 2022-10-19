@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
     margin: theme.spacing(1.75, 0, 1.75, 0),
     background: theme.Colors.whitePure
-    // height: theme.spacing(78)
   },
   tabContainer: {
     border: '0.5px solid',
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderColor: theme.Colors.greyDark
   },
   eachOrderContainer: {
-    // paddingLeft: theme.spacing(2)
   }
 }));
 

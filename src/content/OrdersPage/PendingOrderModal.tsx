@@ -8,12 +8,11 @@ const useStyles = makeStyles((theme: Theme) => {
     dialogPaper: {
       width: 683,
       height: 643,
-      padding: theme.spacing(2, 2, 1, 1),
+      padding: theme.spacing(2, 2, 0, 1),
       borderRadius: theme.MetricsSizes.regular
-      // border:"2px solid red"
     },
     btnStyle: {
-      // padding: theme.spacing(3, 0),
+      padding: theme.spacing(4, 0, 0, 0),
     }
   };
 });
@@ -78,7 +77,6 @@ const PendingModal = (props: Props) => {
         fontSize: theme.MetricsSizes.regular_xxx,
         color: theme.Colors.blueDark,
         paddingLeft: theme.spacing(0.5)
-        // border: "1px solid green"
       }}
       dialogTitleClasses={{ padding: theme.spacing(2, 0, 0, 3) }}
       renderDialogContent={() => renderDialogContent()}
