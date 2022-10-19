@@ -8,7 +8,7 @@ import {
 
 
 type Props = {
-
+  background?: any;
 };
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
@@ -17,7 +17,7 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
     outerContainer: {
         height: theme.spacing(7.25),
         width: theme.spacing(7.25),
-        background: theme.Colors.primary,
+        background: (props) => {return props.background ? props.background : theme.Colors.primary},
         position:'absolute',
         left: -theme.spacing(6.25),
         top: theme.spacing(2),
@@ -29,12 +29,16 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
 );
 
 const IconTileComponent = ({
-    iconToDisplay
+    iconToDisplay,
+    background
   }: {
     iconToDisplay?: any,
+    background?: any;
   }) => {
 
-  const classes = useStyles();
+  const classes = useStyles({
+    background,
+  });
 
 
   return (

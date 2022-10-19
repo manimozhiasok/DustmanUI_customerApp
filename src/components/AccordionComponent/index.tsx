@@ -7,7 +7,8 @@ import {
   createStyles,
   Accordion,
   AccordionSummary,
-  AccordionDetails
+  AccordionDetails,
+  Divider
 } from '@material-ui/core';
 import IconTileComponent from '../IconTileComponent';
 
@@ -22,6 +23,7 @@ type Props = {
   expandIcon?: boolean;
   accordionPadding?: boolean;
   accordionDetailPadding?: boolean;
+  background?: any;
 };
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
@@ -91,7 +93,11 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
       fontWeight: 400,
       fontSize: ' 11px',
       lineHeight: '0px'
-    }
+    },
+    isDivider: {
+      padding: theme.spacing(1, 0),
+      margin: `5px 0 0 ${theme.spacing(0.5)}px`,
+    },
   })
 );
 
@@ -101,6 +107,7 @@ const AccordionComponent = ({
   displayContent,
   withBorder,
   isProfile,
+  isDivider,
   summaryPadding,
   accBorderColor,
   expandMoreIcon,
@@ -108,7 +115,8 @@ const AccordionComponent = ({
   accordionDetailPadding,
   isMyAccount,
   expandIcon,
-  accordionPadding
+  accordionPadding,
+  background
 }: {
   backgroundColor?: string;
   height?: string;
@@ -118,12 +126,14 @@ const AccordionComponent = ({
     displayIcon: any;
     userName?: string;
     userEmail?: string;
+    background?: any;
   }[];
+  background?: any;
   onTabChange?: any;
   withBorder?: boolean;
   isProfile?: boolean;
   accordionDetailPadding?: boolean;
-
+  isDivider?: boolean
   summaryPadding?: any;
   accBorderColor?: any;
   expandMoreIcon?: any;
@@ -144,7 +154,8 @@ const AccordionComponent = ({
     summaryMargin,
     expandIcon,
     accordionPadding,
-    accordionDetailPadding
+    accordionDetailPadding,
+    background
   });
 
   return (
@@ -157,6 +168,7 @@ const AccordionComponent = ({
             direction="row"
             className={classes.eachAccordionOuterContainer}
           >
+           
             {!isProfile && displayContent.length > index + 1 && (
               <Grid item className={classes.line} />
             )}
@@ -167,9 +179,9 @@ const AccordionComponent = ({
                   expandIcon={expandMoreIcon ? expandMoreIcon : ''}
                 >
                   {!isProfile && (
-                    <IconTileComponent iconToDisplay={item.displayIcon} />
+                    <IconTileComponent background={item.background} iconToDisplay={item.displayIcon} />
                   )}
-                  {isMyAccount && <img src={item.displayIcon} alt="image" />}
+                  {isMyAccount && <img src={item.displayIcon} alt={"image"} />}
                   {isMyAccount && (
                     <div>
                       <p className={classes.subText}>{item.userName}</p>
@@ -184,6 +196,9 @@ const AccordionComponent = ({
                   <Grid>{item.content}</Grid>
                 </AccordionDetails>
               </Accordion>
+              {/* <Grid className={classes.isDivider}>
+              <Divider/>
+              </Grid> */}
             </Grid>
           </Grid>
         );

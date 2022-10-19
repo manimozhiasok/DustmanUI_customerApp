@@ -43,6 +43,11 @@ import LoginBtmImg from './LoginBtmImg.svg';
 import Date from './Date.svg';
 import YetToConfirm from './yetToConfirm.svg';
 import Confirm from './confirm.svg';
+import Help  from './Help.svg';
+import Outline from './Outline.svg';
+import SignOut  from './SignOut.svg';
+import Translate  from './Translate.svg';
+import UserSwitch from './UserSwitch.svg';
 
 export {
   DustmanLogoHorizontal,
@@ -89,5 +94,10 @@ export {
   Date,
   YetToConfirm,
   Confirm,
-  PlaceMaker
+  PlaceMaker,
+  Help,
+  Outline, 
+  SignOut,
+  Translate, 
+  UserSwitch
 };

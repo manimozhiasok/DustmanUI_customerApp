@@ -11,6 +11,7 @@ import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { AvatarCustomer } from 'src/Assets/Images';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ProfileContent from './profileContent';
+import { Help, Outline, SignOut, Translate, UserSwitch } from 'src/Assets';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {},
@@ -42,29 +43,34 @@ function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
     {
       summaryHeading: 'Change Language',
       content: 'Change Language',
-      displayIcon: TrashDetailsIcon
+      displayIcon: Translate,
+      background: 'none'
     },
     {
       summaryHeading: 'Change User Type',
       content: 'Change User Type',
-      displayIcon: SelectVehicleIcon
+      displayIcon: UserSwitch,
+      background: 'none'
     }
   ];
   const AccountContent = [
     {
       summaryHeading: 'Help & Support',
       content: 'Help & Support',
-      displayIcon: ScheduleYourPickupIcon
+      displayIcon: Help,
+      background: 'none'
     },
     {
       summaryHeading: 'About',
       content: 'About',
-      displayIcon: PickupAddressIcon
+      displayIcon: Outline,
+      background: 'none'
     },
     {
       summaryHeading: 'Log Out',
       content: 'Log Out',
-      displayIcon: OrderConfirmationIcon
+      displayIcon: SignOut,
+      background: 'none'
     }
   ];
 
@@ -75,12 +81,13 @@ function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
           displayContent={myProfileContent}
           withBorder
           isProfile
+          accordionPadding={false}
           isMyAccount
           accordionDetailPadding={false}
-          accordionPadding={false}
-          expandIcon={true}
           accBorderColor={theme.Colors.greyDark}
-          expandMoreIcon={<ExpandMoreIcon />}
+          expandMoreIcon={
+            <ExpandMoreIcon style={{ transform: 'rotate(270deg)' }} />
+          }
         />
       </Grid>
       <Grid item className={classes.contentContainer2}>
@@ -88,17 +95,19 @@ function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
           displayContent={myAccountContent}
           accordionDetailPadding={false}
           expandIcon={true}
+          isMyAccount
           accordionPadding={false}
-          isProfile
           expandMoreIcon={<ExpandMoreIcon />}
           accordionExpanded={accordionExpanded}
+          isDivider
         />
         <AccordionComponent
           displayContent={AccountContent}
           accordionPadding={false}
           accordionDetailPadding={false}
-          isProfile
+          isMyAccount
           accordionExpanded={accordionExpanded}
+          isDivider 
         />
       </Grid>
     </Grid>
