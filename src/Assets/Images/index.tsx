@@ -1,5 +1,6 @@
 import { ReactComponent as SunIcon } from './Sun.svg';
 import { ReactComponent as DateIcon } from './Date.svg';
+import { ReactComponent as PlaceMaker } from './PlaceMarker.svg';
 import DustmanLogoHorizontal from './DustmanLogoHorizontal.svg';
 import LandingPageArc from './LandingPageArc.svg';
 import PatternDotted from './PatternDotted.svg';
@@ -32,14 +33,14 @@ import checkImage from './checkImage.svg';
 import Image from './Image.svg';
 import Location from './Location.svg';
 import MapPin from './MapPin.svg';
-import MapTrifold from './MapTrifold.svg'
+import MapTrifold from './MapTrifold.svg';
 import Phone from './Phone.svg';
 import Scales from './Scales.svg';
 import AvatarCustomer from './AvatarCustomer.svg';
 import locationIcon from './locationIcon.svg';
 import weightIcon from './weightIcon.svg';
 import LoginBtmImg from './LoginBtmImg.svg';
-import Date from './Date.svg'
+import Date from './Date.svg';
 import YetToConfirm from './yetToConfirm.svg';
 import Confirm from './confirm.svg';
 
@@ -87,5 +88,6 @@ export {
   LoginBtmImg,
   Date,
   YetToConfirm,
-  Confirm
+  Confirm,
+  PlaceMaker
 };
