@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => {
   };
 });
 
-const SlotComp = (props: Prop) => {
+const SlotButtonComp = (props: Prop) => {
   const { timeSlotDetails, handleChangeSlot } = props;
   const theme = useTheme();
   const classes = useStyles();
@@ -96,4 +96,4 @@ const SlotComp = (props: Prop) => {
   );
 };
 
-export default SlotComp;
+export default SlotButtonComp;

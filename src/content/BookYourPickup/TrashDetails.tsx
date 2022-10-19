@@ -7,13 +7,14 @@ import {
   useTheme
 } from '@material-ui/core';
 import Carousel from 'src/components/Carousel';
-import { Content, LeftContent } from './TrashDetailsContent';
+import { LeftContent } from './TrashDetailsContent';
 import { AddPhotoAlternate } from '@material-ui/icons';
 import { ButtonComp } from 'src/components';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
+import CarouselContent from 'src/components/Carousel';
 
 const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
@@ -102,6 +103,7 @@ function TrashDetails({ edit, trashData }: Props) {
         }
       }
     }
+    setVisible(false)
   };
 
   // useEffect(())
@@ -121,11 +123,7 @@ function TrashDetails({ edit, trashData }: Props) {
             />
             {'Choose your trash pictures'}
           </Grid>
-          <Carousel show={4}>
-            {edit.getValue('order_images').map((item, index) => {
-              return <Content key={index} imgUrl={item?.image_url} />;
-            })}
-          </Carousel>
+          <CarouselContent data={edit.getValue('order_images')} isVisible />
           {visible && (
             <Grid className={classes.visibleStyle}>
               <IconButton
