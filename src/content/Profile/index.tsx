@@ -9,6 +9,7 @@ import {
   ConfirmedOrdersIcon
 } from 'src/Assets/Images';
 import MyAccount from './MyAccount';
+import ProfileAddressModel from './profileAddressModel';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -40,6 +41,9 @@ function Profile() {
   const classes = useStyles();
   const theme = useTheme();
   const [tabToDisplay, setTabToDisplay] = useState(0);
+  const [openModal, setOpenModal] = useState<any>({
+    open: false
+  });
   const OrdersTabItems = [
     {
       tabIcon: PendingOrdersIcon,
@@ -79,7 +83,10 @@ function Profile() {
             index={0}
             className={classes.tabContentContainer}
           >
-            <MyAccount />
+            <MyAccount
+              handleAddNewItem={() => setOpenModal(true)}
+              handleEditListItem={() => setOpenModal(true)}
+            />
           </TabContent>
           <TabContent
             value={tabToDisplay}
@@ -97,6 +104,12 @@ function Profile() {
           </TabContent>
         </Grid>
       </Grid>
+      {openModal && (
+        <ProfileAddressModel
+          onClose={() => setOpenModal(false)}
+          open={openModal}
+        />
+      )}
     </Grid>
   );
 }

@@ -26,14 +26,27 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
+function MyAccount({
+  accordionExpanded,
+  handleAddNewItem,
+  handleEditListItem
+}: {
+  accordionExpanded?: number;
+  handleEditListItem?: () => void;
+  handleAddNewItem?: () => void;
+}) {
   const classes = useStyles();
   const theme = useTheme();
 
   const myProfileContent = [
     {
       summaryHeading: '',
-      content: <ProfileContent />,
+      content: (
+        <ProfileContent
+          handleAddNewItem={handleEditListItem}
+          handleEditListItem={handleAddNewItem}
+        />
+      ),
       displayIcon: AvatarCustomer,
       userName: 'Prabhu',
       userEmail: 'prabu@dustman.com'
@@ -73,7 +86,6 @@ function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
       background: 'none'
     }
   ];
-
   return (
     <Grid container className={classes.outerContainer}>
       <Grid item className={classes.contentContainer1}>
@@ -107,7 +119,7 @@ function MyAccount({ accordionExpanded }: { accordionExpanded?: number }) {
           accordionDetailPadding={false}
           isMyAccount
           accordionExpanded={accordionExpanded}
-          isDivider 
+          isDivider
         />
       </Grid>
     </Grid>
