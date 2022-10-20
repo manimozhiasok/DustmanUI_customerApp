@@ -80,7 +80,8 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
     },
     accordionDetailStyle: {
       padding: (props) =>
-        props.accordionDetailPadding ? theme.spacing(0, 6.5, 4.5, 6.5) : 'none'
+        props.accordionDetailPadding ? theme.spacing(0, 6.5, 4.5, 6.5) : 'none',
+      display: 'block'
     },
     subText: {
       marginLeft: 20,
@@ -96,8 +97,8 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
     },
     isDivider: {
       padding: theme.spacing(1, 0),
-      margin: `5px 0 0 ${theme.spacing(0.5)}px`,
-    },
+      margin: `5px 0 0 ${theme.spacing(0.5)}px`
+    }
   })
 );
 
@@ -133,7 +134,7 @@ const AccordionComponent = ({
   withBorder?: boolean;
   isProfile?: boolean;
   accordionDetailPadding?: boolean;
-  isDivider?: boolean
+  isDivider?: boolean;
   summaryPadding?: any;
   accBorderColor?: any;
   expandMoreIcon?: any;
@@ -168,7 +169,6 @@ const AccordionComponent = ({
             direction="row"
             className={classes.eachAccordionOuterContainer}
           >
-           
             {!isProfile && displayContent.length > index + 1 && (
               <Grid item className={classes.line} />
             )}
@@ -179,9 +179,12 @@ const AccordionComponent = ({
                   expandIcon={expandMoreIcon ? expandMoreIcon : ''}
                 >
                   {!isProfile && (
-                    <IconTileComponent background={item.background} iconToDisplay={item.displayIcon} />
+                    <IconTileComponent
+                      background={item.background}
+                      iconToDisplay={item.displayIcon}
+                    />
                   )}
-                  {isMyAccount && <img src={item.displayIcon} alt={"image"} />}
+                  {isMyAccount && <img src={item.displayIcon} alt={'image'} />}
                   {isMyAccount && (
                     <div>
                       <p className={classes.subText}>{item.userName}</p>

@@ -37,8 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '0.5px solid',
     borderColor: theme.Colors.greyDark
   },
-  eachOrderContainer: {
-  }
+  eachOrderContainer: {}
 }));
 
 function OrdersPage() {

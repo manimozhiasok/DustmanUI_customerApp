@@ -17,10 +17,10 @@ import { light } from '@material-ui/core/styles/createPalette';
 
 const useStyles = makeStyles((theme: Theme) => ({
   eachItem: {
-    padding: theme.spacing(3, 0)
-  },
-  container: {
-    overflowY: 'scroll'
+    '&.MuiGrid-item': {
+      padding: theme.spacing(1, 0, 1, 0),
+      marginBottom: theme.spacing(2)
+    }
   },
   checkbox: {
     zIndex: 1,
@@ -44,11 +44,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     paddingTop: theme.spacing(1),
     textAlign: 'center'
-  },
-  checkBoxContainer: {
-    position: 'relative',
-    width: '100%',
-    paddingRight: theme.spacing(10)
   }
 }));
 
@@ -107,7 +102,7 @@ function ChooseCategoryComponent({
   }, [InitialItemVal]);
 
   return (
-    <Grid container spacing={4} className={classes.container}>
+    <Grid container spacing={4}>
       {data.map((item, index) => {
         const findActiveImage: number = selectedItemId.length
           ? selectedItemId.findIndex((selId) => selId === item.id)
@@ -121,35 +116,33 @@ function ChooseCategoryComponent({
             justifyContent="center"
             className={classes.eachItem}
           >
-            <Grid className={classes.checkBoxContainer}>
-              <FormControlLabel
-                value={item.name}
-                labelPlacement="bottom"
-                label={<div className={classes.description}>{item.name}</div>}
-                control={
-                  <>
-                    <Checkbox
-                      onChange={() => handleOnClick(item.id)}
-                      className={classes.checkbox}
-                      checked={isActive}
-                    />
-                    <img
-                      src={item.image_url}
-                      alt="Image Not Found"
-                      style={{
-                        borderWidth: '1px',
-                        borderColor: getBorderColor(isActive),
-                        borderStyle: 'solid',
-                        borderRadius: '6px',
-                        width: '100px',
-                        height: '100px',
-                        padding: 2
-                      }}
-                    />
-                  </>
-                }
-              />
-            </Grid>
+            <FormControlLabel
+              value={item.name}
+              labelPlacement="bottom"
+              label={<div className={classes.description}>{item.name}</div>}
+              control={
+                <>
+                  <Checkbox
+                    onChange={() => handleOnClick(item.id)}
+                    className={classes.checkbox}
+                    checked={isActive}
+                  />
+                  <img
+                    src={item.image_url}
+                    alt="Image Not Found"
+                    style={{
+                      borderWidth: '1px',
+                      borderColor: getBorderColor(isActive),
+                      borderStyle: 'solid',
+                      borderRadius: '6px',
+                      width: '100px',
+                      height: '100px',
+                      padding: 2
+                    }}
+                  />
+                </>
+              }
+            />
           </Grid>
         );
       })}
