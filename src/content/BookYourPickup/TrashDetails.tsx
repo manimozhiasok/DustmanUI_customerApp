@@ -40,35 +40,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: theme.spacing(1),
     height: '290px'
   },
-  visibleStyle: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: theme.spacing(3)
-  },
-  arrowIcon: {
-    color: '#6BB043',
-    transform: 'matrix(1, 0, 0, 1, 0, 0)'
-  },
-  arrowBack: {
-    width: theme.MetricsSizes.regular_xxx,
-    height: theme.MetricsSizes.regular_xxx,
-    background: theme.Colors.whiteLightGrey,
-    opacity: '0.3',
-    '&:hover': {
-      backgroundColor: theme.Colors.whiteLightGrey
-    }
-  },
-  arrowForward: {
-    width: theme.MetricsSizes.regular_xxx,
-    height: theme.MetricsSizes.regular_xxx,
-    background: theme.Colors.whiteLightGrey,
-    right: theme.spacing(0.4),
-    opacity: '0.3',
-    '&:hover': {
-      backgroundColor: theme.Colors.whiteLightGrey
-    }
-  }
 }));
 
 type Props = {
@@ -79,7 +50,6 @@ type Props = {
 function TrashDetails({ edit, trashData }: Props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [visible, setVisible] = useState(false);
   const uploadedImages = edit.getValue('order_images');
   const length = uploadedImages.length;
 
@@ -104,7 +74,6 @@ function TrashDetails({ edit, trashData }: Props) {
         }
       }
     }
-    setVisible(false);
   };
 
   return (
@@ -124,28 +93,6 @@ function TrashDetails({ edit, trashData }: Props) {
             {'Choose your trash pictures'}
           </Grid>
           <CarouselContent data={uploadedImages} show={4} isVisible length={length}/>
-          {visible && (
-            <Grid className={classes.visibleStyle}>
-              <IconButton
-                onClick={(e) => console.log(e)}
-                className={classes.arrowBack}
-              >
-                <ArrowBackIcon
-                  fontSize={'small'}
-                  className={classes.arrowIcon}
-                />
-              </IconButton>
-              <IconButton
-                onClick={(e) => console.log(e)}
-                className={classes.arrowForward}
-              >
-                <ArrowForwardIcon
-                  fontSize={'small'}
-                  className={classes.arrowIcon}
-                />
-              </IconButton>
-            </Grid>
-          )}
         </Grid>
       </Grid>
     </Grid>
