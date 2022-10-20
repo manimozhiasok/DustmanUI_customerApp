@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import { ButtonComp, DialogComp } from 'src/components';
 import OrderModalComp from './OrderModalComp';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -25,6 +26,7 @@ const PendingModal = (props: Props) => {
   const { onClose } = props;
   const theme = useTheme();
   const classes = useStyles();
+  const { t } = useTranslation();
 
   useEffect(() => {
     //api call to get data
@@ -34,24 +36,22 @@ const PendingModal = (props: Props) => {
     return (
       <>
         <OrderModalComp
-          address={
-            'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042.'
-          }
-          number={9840046988}
-          location={'Map Location'}
-          quantity={'25 kgs'}
+          address={t('ORDER.address')}
+          number={t('ORDER.number')}
+          location={t('ORDER.mapLocation')}
+          quantity={t('ORDER.quantity')}
           img={
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
           }
           secImage={
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'
           }
-          category={'Aluminum, News Paper... '}
-          loc={'Velachery'}
+          category={t('ORDER.category')}
+          loc={t('ORDER.location')}
         />
         <Grid container justifyContent="center" className={classes.btnStyle}>
           <ButtonComp
-            buttonText={'CANCEL'}
+            buttonText={t('ORDER.cancelButton')}
             backgroundColor="#6BB043"
             buttonFontSize={theme.MetricsSizes.regular}
             buttonTextColor="#FFFFFF"

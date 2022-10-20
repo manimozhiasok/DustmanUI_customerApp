@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { TextInputComponent } from 'src/components';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textStyle: {
@@ -48,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const LeftContent = ({ edit, trashData }) => {
   const theme = useTheme();
   const classes = useStyles();
+  const { t } = useTranslation();
 
   const getTrashValue = () => {
     const data =
@@ -65,7 +67,7 @@ export const LeftContent = ({ edit, trashData }) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <TextInputComponent
-          inputLabel="Category"
+          inputLabel={t("category")}
           labelColor={theme.Colors.deepGrey}
           textColor={theme.Colors.darkGrey}
           backgroundColor={theme.Colors.lightWhiteGrey}       
@@ -80,8 +82,8 @@ export const LeftContent = ({ edit, trashData }) => {
       </Grid>
       <Grid item xs={12}>
         <TextInputComponent
-          inputLabel="Approximate Weight"
-          placeholderText="Enter approx. Weight"
+          inputLabel={t('PICKUP.weight')}
+          placeholderText={t('PICKUP.approxWeight')}
           value={edit.getValue('quantity_kg')}
           onChange={(e) =>
             edit.update({ quantity_kg: parseInt(e.target.value) })
@@ -102,13 +104,13 @@ export const LeftContent = ({ edit, trashData }) => {
       </Grid>
       <Grid item xs={12}>
         <Typography className={classes.textStyle}>
-          Description <label className={classes.optionStyle}>(Optional)</label>
+        {t('PICKUP.description')} <label className={classes.optionStyle}>(Optional)</label>
         </Typography>
         <TextareaAutosize
           minRows={5}
           value={edit.getValue('description')}
           onChange={(e) => edit.update({ description: e.target.value })}
-          placeholder="Any instructions for our pickup executive"
+          placeholder={t("PICKUP.anyInstructionsForOurPickupExecutive")}
           className={classes.textAreaStyle}
         />
       </Grid>

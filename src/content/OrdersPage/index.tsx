@@ -13,6 +13,7 @@ import ConfirmedOrderModal from './ConfirmedOrderModel';
 import CompletedOrderModal from './CompletedOrderModal';
 import OrderComponentNew from 'src/components/orderComponetNew';
 import { API_SERVICES } from 'src/Services';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -51,6 +52,7 @@ function OrdersPage() {
   const [completedModalOpen, setCompletedModalOpen] = useState<any>({
     open: false
   });
+  const { t } = useTranslation();
 
   const onClickButton = () => {
     setModalOpen({
@@ -73,15 +75,15 @@ function OrdersPage() {
   const OrdersTabItems = [
     {
       tabIcon: PendingOrdersIcon,
-      tabItem: 'Pending'
+      tabItem:   t('ORDER.pending')
     },
     {
       tabIcon: ConfirmedOrdersIcon,
-      tabItem: 'Confirmed'
+      tabItem:  t('ORDER.pending')
     },
     {
       tabIcon: CompletedOrdersIcon,
-      tabItem: 'Completed'
+      tabItem:  t('ORDER.pending')
     }
   ];
 

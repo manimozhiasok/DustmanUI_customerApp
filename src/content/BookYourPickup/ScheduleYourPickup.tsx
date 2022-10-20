@@ -7,6 +7,7 @@ import './Calendar.css';
 import Card from '@material-ui/core/Card';
 import { SlotButtonComp } from 'src/components';
 import { TimeSlotDetails } from 'src/components/SlotButtonComp';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -29,11 +30,12 @@ const ScheduleYourPickup = ({ edit }) => {
   const [pickupDate, setPickupDate] = useState<any>(new Date());
   const [selectedSlotVal, setSelectedSlotVal] = useState<any>({});
   const classes = useStyles();
+  const { t } = useTranslation();
 
   const timeSlotDetails1 = [
-    { id: 1, text: 'Morning', time: '9:00 AM  - 12:00 PM', value: 'morning' },
-    { id: 2, text: 'Noon', time: '1:00 PM  - 4:00 PM', value: 'afternoon' },
-    { id: 3, text: 'Evening', time: '4:00 PM  - 7:00 PM', value: 'evening' }
+    { id: 1, text: t('PICKUP.morning'), time: '9:00 AM  - 12:00 PM', value: 'morning' },
+    { id: 2, text: t('PICKUP.noon'), time: '1:00 PM  - 4:00 PM', value: 'afternoon' },
+    { id: 3, text: t('PICKUP.evening'), time: '4:00 PM  - 7:00 PM', value: 'evening' }
   ];
 
   const handleChangeSlot = (selectedSlot: TimeSlotDetails) => {

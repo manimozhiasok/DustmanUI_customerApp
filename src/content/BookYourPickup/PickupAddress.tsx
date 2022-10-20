@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import { TextInputComponent } from 'src/components';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -11,13 +12,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 function PickupAddress({ edit }) {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <>
       <Grid container spacing={2} className={classes.mainContainer}>
         <Grid item xs={12}>
           <TextInputComponent
-            placeholderText="House / Flat No."
+            placeholderText= {t('PICKUP.houseNo')}
             textColor={theme.Colors.lightBlack}
             value={edit.getValue('order_address').address_line1}
             onChange={(e) =>
@@ -33,7 +35,7 @@ function PickupAddress({ edit }) {
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
-            placeholderText="Apartment / Street Name / Area"
+            placeholderText={t('PICKUP.area')}
             textColor={theme.Colors.lightBlack}
             value={edit.getValue('order_address').address_line2}
             onChange={(e) =>
@@ -49,7 +51,7 @@ function PickupAddress({ edit }) {
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
-            placeholderText="State"
+            placeholderText={t('PICKUP.state')}
             value={edit.getValue('order_address').state}
             onChange={(e) =>
               edit.update({
@@ -65,7 +67,7 @@ function PickupAddress({ edit }) {
         </Grid>
         <Grid item xs={6}>
           <TextInputComponent
-            placeholderText="City"
+            placeholderText={t('PICKUP.city')}
             value={edit.getValue('order_address').city}
             onChange={(e) =>
               edit.update({
@@ -81,7 +83,7 @@ function PickupAddress({ edit }) {
         </Grid>
         <Grid item xs={6}>
           <TextInputComponent
-            placeholderText="Pincode"
+            placeholderText={t('PICKUP.pincode')}
             value={edit.getValue('order_address').pincode}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
@@ -97,7 +99,7 @@ function PickupAddress({ edit }) {
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
-            placeholderText="Landmark"
+            placeholderText={t('PICKUP.landmark')}
             value={edit.getValue('order_address').address_line3}
             textColor={theme.Colors.lightBlack}
             inputHeight={theme.MetricsSizes.xl_large}
@@ -113,7 +115,7 @@ function PickupAddress({ edit }) {
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
-            placeholderText="Mobile Number"
+            placeholderText={t('PICKUP.mobileNo')}
             value={edit.getValue('order_address').mobile_number}
             onChange={(e) =>
               edit.update({

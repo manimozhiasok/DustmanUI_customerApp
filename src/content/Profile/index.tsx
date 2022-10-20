@@ -10,6 +10,7 @@ import {
 } from 'src/Assets/Images';
 import MyAccount from './MyAccount';
 import ProfileAddressModel from './profileAddressModel';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -41,21 +42,22 @@ function Profile() {
   const classes = useStyles();
   const theme = useTheme();
   const [tabToDisplay, setTabToDisplay] = useState(0);
+  const { t } = useTranslation();
   const [openModal, setOpenModal] = useState<any>({
     open: false
   });
   const OrdersTabItems = [
     {
       tabIcon: PendingOrdersIcon,
-      tabItem: 'My Account'
+      tabItem: t('PROFILE.account')
     },
     {
       tabIcon: ConfirmedOrdersIcon,
-      tabItem: 'Change Language'
+      tabItem: t('PROFILE.language')
     },
     {
       tabIcon: CompletedOrdersIcon,
-      tabItem: 'Change User Type'
+      tabItem: t('PROFILE.userType')
     }
   ];
 

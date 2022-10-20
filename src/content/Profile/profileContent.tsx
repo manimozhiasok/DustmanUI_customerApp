@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ButtonComp, TextInputComponent } from 'src/components';
 import Plus from '../../Assets/Images/Plus.svg';
 import ProfileAddressModel from './profileAddressModel';
+import { useTranslation } from 'react-i18next';
 
 const ProfileContent = ({
   handleAddNewItem,
@@ -15,7 +16,8 @@ const ProfileContent = ({
   //   open: false
   // });
   const [isEditable, setIsEditable] = useState<any>(true);
-  const theme = useTheme();
+  const theme = useTheme(); 
+  const { t } = useTranslation();
   //const handleAddNewItem = () => {
   //   console.log(setOpenModal, 'console1...........');
   //   setOpenModal({
@@ -44,7 +46,7 @@ const ProfileContent = ({
         >
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'FIRST NAME'}
+              inputLabel={t('PROFILE.firstName')}
               labelColor={theme.Colors.primary}
               variant="standard"
               disabled={isEditable}
@@ -53,7 +55,7 @@ const ProfileContent = ({
 
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'LAST NAME'}
+              inputLabel={t('PROFILE.lastName')}
               labelColor={theme.Colors.primary}
               variant="standard"
               disabled={isEditable}
@@ -61,7 +63,7 @@ const ProfileContent = ({
           </Grid>
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'EMAIL ADDRESS'}
+              inputLabel={t('PROFILE.emailAddress')}
               labelColor={theme.Colors.primary}
               variant="standard"
               disabled={isEditable}
@@ -69,7 +71,7 @@ const ProfileContent = ({
           </Grid>
           <Grid item xs={12} container justifyContent="center">
             <ButtonComp
-              buttonText={'EDIT'}
+              buttonText={t('PROFILE.edit')}
               backgroundColor="white"
               buttonFontSize={14}
               variant="outlined"
@@ -83,7 +85,7 @@ const ProfileContent = ({
 
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'PHONE NUMBER'}
+              inputLabel={t('PROFILE.phoneNumber')}
               labelColor={theme.Colors.primary}
               variant="standard"
               iconEnd={
@@ -96,7 +98,7 @@ const ProfileContent = ({
 
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'ADDRESS'}
+              inputLabel={t('PROFILE.profileAddress')}
               labelColor={theme.Colors.primary}
               variant="standard"
               iconEnd={
@@ -112,7 +114,7 @@ const ProfileContent = ({
 
           <Grid xs={12} container justifyContent="center">
             <ButtonComp
-              buttonText={'ADD NEW ADDRESS'}
+              buttonText={t('PROFILE.profileButton')}
               backgroundColor="white"
               buttonFontSize={14}
               variant="outlined"

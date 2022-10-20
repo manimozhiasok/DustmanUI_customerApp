@@ -3,6 +3,7 @@ import ListTextItem from 'src/components/ListTextItem';
 import { Image, Phone, Scales, MapPin, MapTrifold } from 'src/Assets';
 import { DialogContentDetails, Heading } from 'src/components';
 import OrderScheduleComp from '../OrderScheduleComp';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -85,15 +86,16 @@ const OrderModalComp = (props: Props) => {
   } = props;
   const theme = useTheme();
   const classes = useStyles();
+  const { t } = useTranslation();
 
   const rightContent = [
-    { content: 'Category', value: category },
-    { content: 'Location', value: loc }
+    { content: t('category'), value: category },
+    { content: t('location'), value: loc }
   ];
 
   const orderVendorContent = [
-    { content: 'Vendor Name', value: vendor },
-    { content: 'Mobile Number', value: mobile }
+    { content: t('ORDER.vendorName'), value: vendor },
+    { content: t('ORDER.mobileNumber'), value: mobile }
   ];
 
   const scheduleDetails = [

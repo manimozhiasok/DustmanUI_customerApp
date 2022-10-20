@@ -3,6 +3,7 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { DialogComp } from 'src/components';
 import { Date } from 'src/Assets';
 import OrderModalComp from './OrderModalComp';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -23,6 +24,7 @@ const ConfirmedOrderModal = (props: Props) => {
   const { onClose } = props;
   const theme = useTheme();
   const classes = useStyles();
+  const { t } = useTranslation();
 
   useEffect(() => {
     //api call to get data
@@ -32,12 +34,10 @@ const ConfirmedOrderModal = (props: Props) => {
     return (
       <>
         <OrderModalComp
-          address={
-            'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042.'
-          }
-          number={9840046988}
-          location={'Map Location'}
-          quantity={'25 kgs'}
+          address={t('ORDER.address')}
+          number={t('ORDER.number')}
+          location={t('ORDER.mapLocation')}
+          quantity={t('ORDER.quantity')}
           img={
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
           }
@@ -45,15 +45,15 @@ const ConfirmedOrderModal = (props: Props) => {
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'
           }
           isDivider
-          state={'Scheduled-'}
-          category={'Aluminum, News Paper... '}
-          loc={'Velachery'}
+          state={t('ORDER.scheduledState')}
+          category={t('ORDER.category')}
+          loc={t('ORDER.location')}
           heading={'Vendor Details'}
-          day={'Mon, 01 Jan'}
+          day={t('ORDER.day')}
           dot={'.'}
-          schedule={'9:00 AM - 12:00 PM'}
-          vendor={'Prabhu'}
-          mobile={'98400 46988'}
+          schedule={t('ORDER.time')}
+          vendor={t('ORDER.vendorDetail')}
+          mobile={t('ORDER.vendorMobileNo')}
           dateImage={Date}
           bottomContent
         />

@@ -12,6 +12,7 @@ import { AvatarCustomer } from 'src/Assets/Images';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ProfileContent from './profileContent';
 import { Help, Outline, SignOut, Translate, UserSwitch } from 'src/Assets';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {},
@@ -37,6 +38,7 @@ function MyAccount({
 }) {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const myProfileContent = [
     {
@@ -48,19 +50,19 @@ function MyAccount({
         />
       ),
       displayIcon: AvatarCustomer,
-      userName: 'Prabhu',
-      userEmail: 'prabu@dustman.com'
+      userName: t('PROFILE.userName'),
+      userEmail: t('PROFILE.eMail')
     }
   ];
   const myAccountContent = [
     {
-      summaryHeading: 'Change Language',
+      summaryHeading: t('PROFILE.language'),
       content: 'Change Language',
       displayIcon: Translate,
       background: 'none'
     },
     {
-      summaryHeading: 'Change User Type',
+      summaryHeading: t('PROFILE.userType'),
       content: 'Change User Type',
       displayIcon: UserSwitch,
       background: 'none'
@@ -68,19 +70,19 @@ function MyAccount({
   ];
   const AccountContent = [
     {
-      summaryHeading: 'Help & Support',
+      summaryHeading: t('PROFILE.help'),
       content: 'Help & Support',
       displayIcon: Help,
       background: 'none'
     },
     {
-      summaryHeading: 'About',
+      summaryHeading: t('PROFILE.about'),
       content: 'About',
       displayIcon: Outline,
       background: 'none'
     },
     {
-      summaryHeading: 'Log Out',
+      summaryHeading: t('PROFILE.logout'),
       content: 'Log Out',
       displayIcon: SignOut,
       background: 'none'

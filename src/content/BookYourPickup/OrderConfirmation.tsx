@@ -6,6 +6,7 @@ import {
   useTheme
 } from '@material-ui/core';
 import { ButtonComp, DialogContentDetails } from 'src/components';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 function OrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const getTrashValue = () => {
     const data =
@@ -46,26 +48,26 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
 
   const rightContent = [
     {
-      content: 'Slot',
+      content: t('PICKUP.slot'),
       value: `${edit.getValue('customer_order_details').pickup_time}, ${
         edit.getValue('customer_order_details').slot
       }`
     },
     {
-      content: 'User Name',
+      content: t('PICKUP.userName'),
       value: edit.getValue('name')
     },
-    { content: 'Category', value: getTrashValue() },
+    { content: t('category'), value: getTrashValue() },
 
     {
-      content: 'Address',
+      content: t('address'),
       value: `${edit.getValue('order_address').address_line1}, ${
         edit.getValue('order_address').address_line2
       }, ${edit.getValue('order_address').city}, ${
         edit.getValue('order_address').state
       }`
     },
-    { content: 'Mobile', value: edit.getValue('order_address').mobile_number }
+    { content: t('PICKUP.mobile'), value: edit.getValue('order_address').mobile_number }
   ];
 
   return (
@@ -74,12 +76,12 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
       <Grid container className={classes.outerContainer}>
         <Grid item xs={12}>
           <Typography variant="h5" className={classes.title}>
-            Yay! Good to see you here
+            {t('PICKUP.goodToSee')}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.subtitle}>
-            You will be notified when your order confirms
+          {t('PICKUP.notified')}
           </Typography>
         </Grid>
       </Grid>
@@ -92,7 +94,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
       >
         <ButtonComp
           btnBorderRadius={theme.MetricsSizes.large_xx}
-          buttonText={'Confirm Order'}
+          buttonText={t('PICKUP.confirm')}
           buttonFontSize={theme.MetricsSizes.small_xxx}
           btnWidth={342}
           height={theme.MetricsSizes.large_xxx}

@@ -1,5 +1,6 @@
 import { Grid, Typography, makeStyles, Theme } from '@material-ui/core';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   leftContentStyle: {
@@ -26,6 +27,7 @@ type Props = {
 const OrderScheduleComp = (props: Props) => {
   const { scheduleDetails } = props;
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <Grid container xs={12}>

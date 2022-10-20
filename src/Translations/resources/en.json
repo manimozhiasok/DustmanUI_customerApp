@@ -52,5 +52,74 @@
     "createAccount": "Create Account",
     "phNumber": "Phone Number",
     "oneTimePassword": "One Time Password"
+  },
+
+  "PICKUP":{
+    "slot": "Slot",
+    "userName":"User Name",
+    "mobile": "Mobile",
+    "confirm": "Confirm Order",
+    "houseNo":"House / Flat No.",
+    "area":"Apartment / Street Name / Area ",
+    "state": "State",
+    "city": "City",
+    "pincode": "Pincode",
+    "landmark": "Landmark",
+    "mobileNo": "Mobile Number",
+    "morning": "Morning",
+    "noon": "Noon",
+    "evening": "Evening",
+    "weight": "Approximate Weight",
+    "description": "Description",
+    "approxWeight": "Enter approx. Weight ",
+    "anyInstructionsForOurPickupExecutive": "Any instructions for our pickup executive",
+    "goodToSee": "Yay! Good to see you here",
+    "notified": "You will be notified when your order confirms",
+    "trashPicture": "Choose your trash pictures"
+  },
+
+  "Landing":{
+    "knowMore": "Know More"
+  },
+
+  "ORDER":{
+  "vendorName": "Vendor Name",
+  "mobileNumber": "Mobile Number",
+  "address": "New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042. ",
+  "heading": "Order Completed",
+  "mapLocation": "Map Location",
+  "quantity": "25 kgs",
+  "category": "Aluminum, News Paper... ",
+  "location": "Velachery",
+  "state": "Picked up -",
+  "day": "Mon, 01 Jan",
+  "time": "9:00 AM - 12:00 PM",
+  "completedDialogTitle": "Order 567885",
+  "number": "9876598765",
+  "vendorMobileNo": "9564737654" ,
+  "vendorDetail": "Prabhu",
+  "scheduledState": "Scheduled -",
+  "cancelButton": "CANCEL",
+  "pending": "Pending",
+  "confirmed": "Confirmed",
+  "completed": "Completed"
+  },
+ 
+  "PROFILE":{
+    "account": "My Account",
+    "language": "Change Language",
+    "userType": "Change User Type",
+    "userName": "Prabu",
+    "eMail": "prabu@dustman.com",
+    "help": "Help & Support",
+    "about": "About",
+    "logout": "Log Out",
+    "firstName": "FIRST NAME",
+    "lastName": "LAST NAME",
+    "edit": "EDIT",
+    "phoneNumber": "PHONE NUMBER",
+    "emailAddress": "EMAIL ADDRESS",
+    "profileAddress": "ADDRESS",
+    "profileButton": "ADD NEW ADDRESS"
   }
 }

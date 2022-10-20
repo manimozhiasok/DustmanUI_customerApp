@@ -11,6 +11,7 @@ import { LandingPageArc } from 'src/Assets/Images';
 import { ButtonComp } from 'src/components';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { PatternDotted } from 'src/Assets/Images';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 function LandingPageLeftContent() {
   const theme = useTheme();
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -62,7 +64,7 @@ function LandingPageLeftContent() {
       />
       <Grid className={classes.outerContainer}>
         <Typography className={classes.captionStyle}>
-          solution for the every pollution
+          solution for the every pollution  
         </Typography>
         <Typography className={classes.titleStyle}>
           <Fragment>
@@ -76,7 +78,7 @@ function LandingPageLeftContent() {
         </Typography>
         <Box className={classes.buttonContainer}>
           <ButtonComp
-            buttonText="Know More"
+            buttonText={t('Landing.knowMore')}
             height={theme.spacing(6)}
             btnWidth={theme.spacing(21)}
             backgroundColor={theme.Colors.primary}
