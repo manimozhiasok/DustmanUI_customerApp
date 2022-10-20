@@ -6,7 +6,6 @@ import {
   Theme,
   useTheme
 } from '@material-ui/core';
-import Carousel from 'src/components/Carousel';
 import { LeftContent } from './TrashDetailsContent';
 import { AddPhotoAlternate } from '@material-ui/icons';
 import { ButtonComp } from 'src/components';
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     gap: theme.spacing(2),
     alignItems: 'center',
     width: '100%',
-    height: '185px',
+    height: '195px',
     fontSize: theme.MetricsSizes.small_xx,
     color: theme.Colors.darkGrey,
     fontWeight: theme.fontWeight.regular
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   gridStyle: {
     marginTop: theme.spacing(2.8),
     backgroundColor: theme.Colors.lightBlackGrey,
-    padding: theme.spacing(1, 0, 1, 1),
+    padding: theme.spacing(1, 0, 0, 1),
     borderRadius: theme.spacing(1),
     height: '290px'
   },
@@ -80,8 +79,9 @@ type Props = {
 function TrashDetails({ edit, trashData }: Props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const uploadedImages = edit.getValue('order_images');
+  const length = uploadedImages.length;
 
   const onUploadFiles = async (event: any) => {
     let formData = new FormData();
@@ -123,7 +123,7 @@ function TrashDetails({ edit, trashData }: Props) {
             />
             {'Choose your trash pictures'}
           </Grid>
-          <CarouselContent data={uploadedImages} isVisible />
+          <CarouselContent data={uploadedImages} show={4} isVisible length={length}/>
           {visible && (
             <Grid className={classes.visibleStyle}>
               <IconButton
