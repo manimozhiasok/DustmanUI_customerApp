@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Grid,
   makeStyles,
@@ -9,22 +8,6 @@ import {
 import { ButtonComp, DialogContentDetails } from 'src/components';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  rootContainer: {},
-  mainContainer: {
-    padding: theme.spacing(1, 0)
-  },
-  leftContainer: {
-    fontFamily: 'DM Sans',
-    fontWeight: theme.fontWeight.regular,
-    fontSize: theme.MetricsSizes.small_x,
-    color: theme.Colors.mediumBlack
-  },
-  rightContainer: {
-    fontFamily: 'DM Sans',
-    fontWeight: theme.fontWeight.regular,
-    fontSize: theme.MetricsSizes.small_x,
-    color: theme.Colors.mediumGrey
-  },
   title: {
     fontFamily: 'Source Serif Pro',
     fontWeight: theme.fontWeight.bold,
@@ -86,7 +69,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
   ];
 
   return (
-    <Grid container direction="row" className={classes.rootContainer}>
+    <Grid container direction="row">
       <DialogContentDetails contentDetails={rightContent} />
       <Grid container className={classes.outerContainer}>
         <Grid item xs={12}>

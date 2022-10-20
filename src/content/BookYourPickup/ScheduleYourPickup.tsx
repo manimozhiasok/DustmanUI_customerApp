@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
@@ -10,16 +10,6 @@ import { TimeSlotDetails } from 'src/components/SlotButtonComp';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
-    dialogPaper: {
-      width: 847,
-      height: 900,
-      borderRadius: theme.MetricsSizes.regular
-    },
-    buttonStyle: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: theme.MetricsSizes.tiny_xxx
-    },
     cardStyle: {
       boxShadow: '0px 8.93293px 26.7988px rgba(5, 16, 55, 0.1)'
     },
@@ -28,20 +18,6 @@ const useStyles = makeStyles((theme: Theme) => {
       color: theme.Colors.primary,
       padding: theme.spacing(1, 0),
       fontWeight: theme.fontWeight.bold
-    },
-    listItemStyle: {
-      display: 'flex',
-      alignItems: 'center'
-    },
-    containerStyle: {
-      color: theme.Colors.blueDark,
-      fontSize: theme.MetricsSizes.small_xxx,
-      fontWeight: theme.fontWeight.regular,
-      marginTop: theme.MetricsSizes.tiny_x
-    },
-    typoStyle: {
-      color: theme.Colors.primary,
-      fontWeight: theme.fontWeight.medium
     },
     calendarContainerStyle: {
       padding: theme.spacing(2, 0, 3, 0)
@@ -95,41 +71,39 @@ const ScheduleYourPickup = ({ edit }) => {
   }, [getRandomTime]);
 
   return (
-    <>
-      <Grid container spacing={3} className={classes.calendarContainerStyle}>
-        <Grid item xs={6}>
-          <Card className={classes.cardStyle}>
-            <Calendar
-              onChange={setPickupDate}
-              value={pickupDate}
-              formatShortWeekday={(
-                locale: any,
+    <Grid container spacing={3} className={classes.calendarContainerStyle}>
+      <Grid item xs={6}>
+        <Card className={classes.cardStyle}>
+          <Calendar
+            onChange={setPickupDate}
+            value={pickupDate}
+            formatShortWeekday={(
+              locale: any,
 
-                value: { getDay: () => string | number }
-              ) => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][value.getDay()]}
-              prev2Label={null}
-              next2Label={null}
-              defaultView="month"
-              calendarType="US"
-              minDate={new Date()}
-              showNeighboringMonth={false}
-            />
-          </Card>
-        </Grid>
-        <Grid item xs={6}>
-          <Grid container direction="column">
-            <Grid item xs={12}>
-              <Typography className={classes.heading}>Slot</Typography>
-            </Grid>
-            <SlotButtonComp
-              timeSlotDetails={timeSlotDetails1}
-              handleChangeSlot={handleChangeSlot}
-              activeButtonVal={edit.getValue('customer_order_details').slot}
-            />
+              value: { getDay: () => string | number }
+            ) => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][value.getDay()]}
+            prev2Label={null}
+            next2Label={null}
+            defaultView="month"
+            calendarType="US"
+            minDate={new Date()}
+            showNeighboringMonth={false}
+          />
+        </Card>
+      </Grid>
+      <Grid item xs={6}>
+        <Grid container direction="column">
+          <Grid item xs={12}>
+            <Typography className={classes.heading}>Slot</Typography>
           </Grid>
+          <SlotButtonComp
+            timeSlotDetails={timeSlotDetails1}
+            handleChangeSlot={handleChangeSlot}
+            activeButtonVal={edit.getValue('customer_order_details').slot}
+          />
         </Grid>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

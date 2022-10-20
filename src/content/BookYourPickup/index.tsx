@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import { AccordionComponent } from 'src/components';
+import { AccordionComponent, Loader } from 'src/components';
 import { Grid } from '@material-ui/core';
 import { ChooseCategoryIcon } from 'src/Assets/Images';
 import { TrashDetailsIcon } from 'src/Assets/Images';
@@ -24,9 +24,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
 import ChooseCategoryComponent from './ChooseCategoryComponent';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  outerContainer: {}
-}));
+const useStyles = makeStyles((theme: Theme) => ({}));
 
 export const initialValues = {
   quantity_kg: '',
@@ -160,20 +158,22 @@ function BookYourPickup() {
       displayIcon: OrderSuccessIcon
     }
   ];
-
-  return (
-    <Grid className={classes.outerContainer}>
-      <AccordionComponent
-        expandIcon={false}
-        accordionPadding={true}
-        accordionDetailPadding={true}
-        displayContent={bookYourPickupAccordionContent}
-        summaryPadding={theme.spacing(4.25, 6.5)}
-        summaryMargin={theme.spacing(2.5, 0)}
-        expandMoreIcon={<ExpandMoreIcon />}
-      />
-    </Grid>
-  );
+  if (loading) {
+    return <Loader />;
+  } else {
+    return (
+      <Grid>
+        <AccordionComponent
+          expandIcon={false}
+          accordionPadding={true}
+          accordionDetailPadding={true}
+          displayContent={bookYourPickupAccordionContent}
+          summaryPadding={theme.spacing(4.25, 6.5)}
+          summaryMargin={theme.spacing(2.5, 0)}
+          expandMoreIcon={<ExpandMoreIcon />}
+        />
+      </Grid>
+    );
+  }
 }
-
 export default BookYourPickup;

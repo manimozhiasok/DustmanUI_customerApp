@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
-  Box,
   Grid,
   makeStyles,
-  Tab,
-  Tabs,
   Theme,
   useTheme,
   Checkbox,
-  FormControl,
-  FormLabel,
-  FormGroup,
-  FormControlLabel
+  FormControlLabel,
+  Typography
 } from '@material-ui/core';
-import { light } from '@material-ui/core/styles/createPalette';
 
 const useStyles = makeStyles((theme: Theme) => ({
   eachItem: {
@@ -25,14 +19,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   checkbox: {
     zIndex: 1,
     left: '50px',
-    top: '10px',
-    color: '#C4C4C4',
+    top: theme.MetricsSizes.tiny_xxx,
+    color: theme.Colors.greyScaleMedium,
     width: theme.MetricsSizes.regular,
     height: theme.MetricsSizes.regular,
     '&:not($checked).MuiCheckbox-colorSecondary': {
-      backgroundColor: '#C4C4C4',
-      padding: '0px',
-      borderRadius: '0px'
+      backgroundColor: theme.Colors.greyScaleMedium,
+      padding: 0,
+      borderRadius: 0
     },
     '&.MuiCheckbox-colorSecondary.Mui-checked': {
       backgroundColor: theme.Colors.white
@@ -43,7 +37,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     paddingTop: theme.spacing(1),
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: theme.fontWeight.regular
   }
 }));
 
@@ -63,6 +58,7 @@ function ChooseCategoryComponent({
   const classes = useStyles();
   const theme = useTheme();
   const [selectedItemId, setSelectedItemId] = useState<string[]>([]);
+
   const getBorderColor = (isActive: boolean) => {
     if (isActive) {
       return activeBorderColor || theme.Colors.secondary;
@@ -119,7 +115,11 @@ function ChooseCategoryComponent({
             <FormControlLabel
               value={item.name}
               labelPlacement="bottom"
-              label={<div className={classes.description}>{item.name}</div>}
+              label={
+                <Typography className={classes.description}>
+                  {item.name}
+                </Typography>
+              }
               control={
                 <>
                   <Checkbox
@@ -134,10 +134,10 @@ function ChooseCategoryComponent({
                       borderWidth: '1px',
                       borderColor: getBorderColor(isActive),
                       borderStyle: 'solid',
-                      borderRadius: '6px',
+                      borderRadius: theme.MetricsSizes.tiny_x,
                       width: '100px',
                       height: '100px',
-                      padding: 2
+                      padding: theme.spacing(2)
                     }}
                   />
                 </>

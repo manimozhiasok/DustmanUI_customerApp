@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Grid,
   makeStyles,
@@ -21,11 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.MetricsSizes.small_x
   },
   mainContainer: {
-    textAlign: 'center',
-    display: 'flex',
-    justifyContent: 'center',
-    width: 650,
-    height: 303
+    textAlign: 'center'
   }
 }));
 
@@ -35,7 +30,7 @@ function OrderSuccess() {
   const { t } = useTranslation();
 
   return (
-    <Grid container className={classes.mainContainer} justifyContent="center">
+    <Grid container className={classes.mainContainer}>
       <Grid item xs={12}>
         <img src={checkImage} width={'93.85px'} height={'93.85px'} />
       </Grid>

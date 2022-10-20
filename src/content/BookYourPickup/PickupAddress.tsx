@@ -2,7 +2,11 @@ import React from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import { TextInputComponent } from 'src/components';
 
-const useStyles = makeStyles((theme: Theme) => ({}));
+const useStyles = makeStyles((theme: Theme) => ({
+  mainContainer: {
+    paddingBottom: theme.spacing(5)
+  }
+}));
 
 function PickupAddress({ edit }) {
   const classes = useStyles();
@@ -10,7 +14,7 @@ function PickupAddress({ edit }) {
 
   return (
     <>
-      <Grid container spacing={2} style={{ paddingBottom: theme.spacing(8.8) }}>
+      <Grid container spacing={2} className={classes.mainContainer}>
         <Grid item xs={12}>
           <TextInputComponent
             placeholderText="House / Flat No."
