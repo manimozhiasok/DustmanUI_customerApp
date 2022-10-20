@@ -11,8 +11,10 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles((theme: Theme) => ({
   text: {
     color: theme.Colors.black,
+    fontFamily: 'Source Serif Pro',
     fontWeight: theme.fontWeight.bold,
-    fontSize: theme.MetricsSizes.regular
+    fontSize: theme.MetricsSizes.regular,
+    paddingBottom: theme.spacing(3)
   },
   subText: {
     color: theme.Colors.lightBlueGrey,
@@ -21,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   mainContainer: {
     textAlign: 'center'
+  },
+  successText: {
+    paddingTop: theme.spacing(3)
   }
 }));
 
@@ -34,7 +39,7 @@ function OrderSuccess() {
       <Grid item xs={12}>
         <img src={checkImage} width={'93.85px'} height={'93.85px'} />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} className={classes.successText}>
         <Typography className={classes.text}>{t('orderPlaced')}</Typography>
       </Grid>
       <Grid item xs={12}>

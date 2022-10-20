@@ -137,7 +137,7 @@ function ChooseCategoryComponent({
                       borderRadius: theme.MetricsSizes.tiny_x,
                       width: '100px',
                       height: '100px',
-                      padding: theme.spacing(2)
+                      padding: 2
                     }}
                   />
                 </>

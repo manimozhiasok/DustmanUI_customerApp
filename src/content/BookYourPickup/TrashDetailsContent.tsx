@@ -13,13 +13,11 @@ import { TextInputComponent } from 'src/components';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textStyle: {
-    color: theme.Colors.deepGrey,
-    fontWeight: 400,
-    fontSize: '16px'
+    color: theme.Colors.deepGrey
   },
   optionStyle: {
-    color: '#11294C',
-    fontSize: '12px'
+    color: theme.Colors.primary,
+    fontSize: theme.MetricsSizes.small_x
   },
   textAreaStyle: {
     fontSize: theme.MetricsSizes.small_xxx,
@@ -96,8 +94,8 @@ export const LeftContent = ({ edit, trashData }) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Typography className={classes.textStyle}>
-          Description <label className={classes.optionStyle}>(Optional)</label>
+        <Typography variant="h4" className={classes.textStyle}>
+          Description <span className={classes.optionStyle}>(Optional)</span>
         </Typography>
         <TextareaAutosize
           minRows={5}

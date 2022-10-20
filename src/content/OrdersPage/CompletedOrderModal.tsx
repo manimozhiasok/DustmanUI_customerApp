@@ -30,32 +30,30 @@ const CompletedOrderModal = (props: Props) => {
 
   const renderDialogContent = () => {
     return (
-      <>
-        <OrderModalComp
-          address={
-            'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042.'
-          }
-          number={9840046988}
-          orderHeading={'Order Completed'}
-          location={'Map Location'}
-          quantity={'25 kgs'}
-          img={
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
-          }
-          secImage={
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'
-          }
-          dividerLine
-          category={'Aluminum, News Paper... '}
-          loc={'Velachery'}
-          orderState={'Picked up-'}
-          orderDateImage={Date}
-          orderDay={'Mon, 01 Jan'}
-          orderDot={'.'}
-          pickupSchedule={'9:00 AM - 12:00 PM'}
-          orderSchedule
-        />
-      </>
+      <OrderModalComp
+        address={
+          'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042.'
+        }
+        number={9840046988}
+        orderHeading={'Order Completed'}
+        location={'Map Location'}
+        quantity={'25 kgs'}
+        img={
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqQttpKeNfOLaBMaxVrdFHij2HMXNDBorcg&usqp=CAU'
+        }
+        secImage={
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_cn3Z1iNyocdOSpJ3_tCWyFQ6LZARnznMQ&usqp=CAU'
+        }
+        dividerLine
+        category={'Aluminum, News Paper... '}
+        loc={'Velachery'}
+        orderState={'Picked up-'}
+        orderDateImage={Date}
+        orderDay={'Mon, 01 Jan'}
+        orderDot={'.'}
+        pickupSchedule={'9:00 AM - 12:00 PM'}
+        orderSchedule
+      />
     );
   };
 
