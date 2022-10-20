@@ -70,49 +70,52 @@ function Profile() {
     return value === index && <>{children}</>;
   }
   return (
-    <Grid container className={classes.outerContainer}>
-      <Grid container className={classes.contentContainer}>
-        <Grid item className={classes.tabContainer}>
-          <OrdersAndProfileTab
-            displayContent={OrdersTabItems}
-            onTabChange={handleSetSelectedTab}
-            height="100%"
-          />
-        </Grid>
-        <Grid item xs={true} className={classes.tabContentOuterContainer}>
-          <TabContent
-            value={tabToDisplay}
-            index={0}
-            className={classes.tabContentContainer}
-          >
-            <MyAccount
-              handleAddNewItem={() => setOpenModal(true)}
-              handleEditListItem={() => setOpenModal(true)}
+    <>
+      <Grid container className={classes.outerContainer}>
+        <Grid container className={classes.contentContainer}>
+          <Grid item className={classes.tabContainer}>
+            <OrdersAndProfileTab
+              displayContent={OrdersTabItems}
+              onTabChange={handleSetSelectedTab}
+              height="100%"
             />
-          </TabContent>
-          <TabContent
-            value={tabToDisplay}
-            index={1}
-            className={classes.tabContentContainer}
-          >
-            <MyAccount accordionExpanded={0} />
-          </TabContent>
-          <TabContent
-            value={tabToDisplay}
-            index={2}
-            className={classes.tabContentContainer}
-          >
-            <MyAccount accordionExpanded={1} />
-          </TabContent>
+          </Grid>
+          <Grid item xs={true} className={classes.tabContentOuterContainer}>
+            <TabContent
+              value={tabToDisplay}
+              index={0}
+              className={classes.tabContentContainer}
+            >
+              <MyAccount
+                handleAddNewItem={() => setOpenModal(true)}
+                handleEditListItem={() => setOpenModal(true)}
+              />
+            </TabContent>
+            <TabContent
+              value={tabToDisplay}
+              index={1}
+              className={classes.tabContentContainer}
+            >
+              <MyAccount accordionExpanded={0} />
+            </TabContent>
+            <TabContent
+              value={tabToDisplay}
+              index={2}
+              className={classes.tabContentContainer}
+            >
+              <MyAccount accordionExpanded={1} />
+            </TabContent>
+          </Grid>
         </Grid>
       </Grid>
       {openModal && (
         <ProfileAddressModel
           onClose={() => setOpenModal(false)}
           open={openModal}
+          {...openModal}
         />
       )}
-    </Grid>
+    </>
   );
 }
 
