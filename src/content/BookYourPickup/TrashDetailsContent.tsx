@@ -39,7 +39,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   textarea: {
     resize: 'both',
     marginTop: '-50px'
-  }
+  },
+  // fontStyle:{
+  //   fontSize: theme.MetricsSizes.small_xx
+  // }
 }));
 
 export const LeftContent = ({ edit, trashData }) => {
@@ -64,13 +67,15 @@ export const LeftContent = ({ edit, trashData }) => {
         <TextInputComponent
           inputLabel="Category"
           labelColor={theme.Colors.deepGrey}
-          textColor={theme.Colors.lightBlack}
-          backgroundColor={theme.Colors.lightWhiteGrey}
+          textColor={theme.Colors.darkGrey}
+          backgroundColor={theme.Colors.lightWhiteGrey}       
           // value={edit.getValue('order_items')}
           value={getTrashValue()}
           borderColor={theme.Colors.lightWhiteGrey}
           inputHeight={theme.MetricsSizes.large_xxx}
           inputBorderRadius={theme.MetricsSizes.tiny_x}
+          // inputStyles={classes.fontStyle}
+          fontSize={theme.MetricsSizes.small_xx}
         />
       </Grid>
       <Grid item xs={12}>

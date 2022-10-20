@@ -193,19 +193,16 @@ function OrdersPage() {
       {modalOpen.open && (
         <PendingOrderModal
           onClose={() => setModalOpen({ open: false })}
-          {...modalOpen}
         />
       )}
       {confirmedModalOpen.open && (
         <ConfirmedOrderModal
           onClose={() => setConfirmedModalOpen({ open: false })}
-          {...confirmedModalOpen}
         />
       )}
       {completedModalOpen.open && (
         <CompletedOrderModal
           onClose={() => setCompletedModalOpen({ open: false })}
-          {...completedModalOpen}
         />
       )}
     </>

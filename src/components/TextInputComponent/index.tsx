@@ -6,6 +6,7 @@ import {
   InputAdornment
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import { fontSize } from '@mui/system';
 
 type StyleProps = {
   width?: string | number;
@@ -15,6 +16,8 @@ type StyleProps = {
   placeHolderColor?: string;
   borderRadius?: number;
   textColor?: string;
+  fontWeight?: number;
+  fontSize?: any;
 };
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -24,8 +27,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     '& .MuiOutlinedInput-input': {
       height: (props) => props.height || 46,
       padding: theme.spacing(0, 1.8),
-      fontSize: theme.MetricsSizes.small_xxx,
-      fontWeight: theme.fontWeight.medium,
+      fontSize: (props) => props.fontSize || theme.MetricsSizes.small_xxx,
+      fontWeight: (props) => props.fontWeight || theme.fontWeight.medium,
       backgroundColor: (props) => props.bgColor || theme.Colors.white,
       '&::placeholder': {
         color: (props) => props.placeHolderColor || null
@@ -61,6 +64,8 @@ type Props = TextFieldProps & {
   inputBorderRadius?: number;
   textColor?: string;
   iconEnd?: any;
+  fontWeight?: number;
+  fontSize?: any;
 };
 
 const TextInputComponent = (props: Props) => {
@@ -80,6 +85,8 @@ const TextInputComponent = (props: Props) => {
     inputBorderRadius,
     textColor,
     iconEnd,
+    fontWeight,
+    fontSize,
     ...rest
   } = props;
   const styles = useStyles({
@@ -89,7 +96,9 @@ const TextInputComponent = (props: Props) => {
     placeHolderColor: placeHolderColor,
     borderColor: (isError && theme.Colors.redPrimary) || borderColor,
     borderRadius: inputBorderRadius,
-    textColor
+    textColor,
+    fontWeight: fontWeight,
+    fontSize: fontSize
   });
   return (
     <>
@@ -99,7 +108,8 @@ const TextInputComponent = (props: Props) => {
             color:
               (isError && theme.Colors.redPrimary) ||
               labelColor ||
-              theme.Colors.primary
+              theme.Colors.primary,
+              fontSize: theme.MetricsSizes.small_xxx
           }}
         >
           {inputLabel}
@@ -108,7 +118,7 @@ const TextInputComponent = (props: Props) => {
       <TextField
         placeholder={placeholderText}
         className={`${styles.subText} ${inputStyles}`}
-        size="medium"
+        // size="medium"
         variant={variant}
         FormHelperTextProps={{ classes: { root: styles.helperRoot } }}
         error={isError}

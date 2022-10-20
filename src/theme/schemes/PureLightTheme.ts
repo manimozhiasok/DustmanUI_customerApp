@@ -57,7 +57,8 @@ const defaultColors = {
     900: '#FF3B30'
   },
   RED: {
-    900: '#E10600'
+    900: '#E10600',
+    800: '#1D1617'
   }
 };
 const Colors = {
@@ -90,6 +91,7 @@ const Colors = {
   navBlue: defaultColors.BLUE.dark,
   inputText: defaultColors.GREY[300],
   redPrimary: defaultColors.RED[900],
+  rusticRed: defaultColors.RED[800],
   lightGrey: defaultColors.GREY[200],
   mediumGrey: defaultColors.GREY['a700'],
   mediumBlack: defaultColors.BLACK[700],

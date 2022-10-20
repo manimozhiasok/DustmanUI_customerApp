@@ -18,7 +18,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     heading: {
       fontSize: theme.MetricsSizes.small_x,
-      fontWeight: theme.fontWeight.medium
+      fontWeight: theme.fontWeight.medium,
+      color: theme.Colors.rusticRed
     },
     topHeading: {
       fontWeight: theme.fontWeight.bold,
