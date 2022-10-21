@@ -2,6 +2,7 @@ import React from 'react';
 import { Dialog, Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import { DialogComp, TextInputComponent } from 'src/components';
 import DualActionButton from 'src/components/DualActionButton';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -22,6 +23,7 @@ function ProfileAddressModel({
 }) {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const renderDialogContent = () => {
     return (
@@ -33,51 +35,51 @@ function ProfileAddressModel({
         >
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'Address Line1'}
+              inputLabel={t('PICKUP.houseNo')}
               labelColor={theme.Colors.primary}
-              placeholderText="address_line1"
+              //placeholderText="address_line1"
             />
           </Grid>
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'Address Line2'}
+              inputLabel={t('PICKUP.area')}
               labelColor={theme.Colors.primary}
-              placeholderText="address_line2"
+              //placeholderText="address_line2"
             />
           </Grid>
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'Address Line3'}
-              placeholderText="address_line3"
+              inputLabel={t('PICKUP.landmark')}
+              //placeholderText="address_line3"
               labelColor={theme.Colors.primary}
             />
           </Grid>
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'State'}
-              placeholderText="state"
+              inputLabel={t('PICKUP.state')}
+              //placeholderText="state"
               labelColor={theme.Colors.primary}
             />
           </Grid>
           <Grid item xs={6}>
             <TextInputComponent
-              inputLabel={'City'}
-              placeholderText="city"
+              inputLabel={t('PICKUP.city')}
+              //placeholderText="city"
               labelColor={theme.Colors.primary}
             />
           </Grid>
           <Grid item xs={6}>
             <TextInputComponent
-              inputLabel={'Pincode'}
-              placeholderText="pincode"
+              inputLabel={t('PICKUP.pincode')}
+              //placeholderText="pincode"
               labelColor={theme.Colors.primary}
             />
           </Grid>
 
           <Grid item xs={12}>
             <TextInputComponent
-              inputLabel={'Mobile Number'}
-              placeholderText="mobile_number"
+              inputLabel={t('PICKUP.mobileNo')}
+              //placeholderText="mobile_number"
               labelColor={theme.Colors.primary}
             />
           </Grid>
