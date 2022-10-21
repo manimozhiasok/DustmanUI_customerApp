@@ -79,11 +79,11 @@ function OrdersPage() {
     },
     {
       tabIcon: ConfirmedOrdersIcon,
-      tabItem:  t('ORDER.pending')
+      tabItem:  t('ORDER.confirmed')
     },
     {
       tabIcon: CompletedOrdersIcon,
-      tabItem:  t('ORDER.pending')
+      tabItem:  t('ORDER.completed')
     }
   ];
 
