@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 function HeaderRightContent() {
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   const classes = useStyles();
   const navigateTo = useNavigate();
   const { toggleLoginDrawer, isLoginDrawerOpen } =

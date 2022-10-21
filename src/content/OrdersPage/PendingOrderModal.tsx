@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => {
       borderRadius: theme.MetricsSizes.regular
     },
     btnStyle: {
-      padding: theme.spacing(4, 0, 0, 0),
+      padding: theme.spacing(4, 0, 0, 0)
     }
   };
 });

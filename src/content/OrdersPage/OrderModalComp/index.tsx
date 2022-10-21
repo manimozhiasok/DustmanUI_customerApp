@@ -8,11 +8,11 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles((theme: Theme) => {
   return {
     divider: {
-      margin: `5px 0 0 ${theme.spacing(0)}px`,
+      margin: `5px 0 0 ${theme.spacing(0)}px`
     },
     isDivider: {
       padding: theme.spacing(1, 0),
-      margin: `5px 0 0 ${theme.spacing(0.5)}px`,
+      margin: `5px 0 0 ${theme.spacing(0.5)}px`
     },
     imgStyle: {
       borderRadius: 9.41344
@@ -82,7 +82,7 @@ const OrderModalComp = (props: Props) => {
     orderDateImage,
     pickupSchedule,
     orderDot,
-    dot,
+    dot
   } = props;
   const theme = useTheme();
   const classes = useStyles();
@@ -119,84 +119,84 @@ const OrderModalComp = (props: Props) => {
   ];
   return (
     <Grid container>
-      <>
-        <DialogContentDetails contentDetails={rightContent}  
-           leftContentFontSize={theme.MetricsSizes.regular}
-            rightContentFontSize={theme.MetricsSizes.regular}
-            rightContentFontWeight={theme.fontWeight.regular}/>
-        <Grid item xs={10}>
-          <ListTextItem image={MapPin} value={address} />
-        </Grid>
-        <Grid item xs={12} className={classes.isDivider}>
-          {dividerLine && <Divider />}
-        </Grid>
-        <Grid item xs={12} className={classes.completedStyle}>
-          {orderHeading && (
-            <Heading
-              headingText={orderHeading}
-              headerFontSize={theme.MetricsSizes.regular_xxx}
-              headerFontWeight={theme.fontWeight.bold}
-              headingColor={theme.Colors.secondary}
-            />
-          )}
-          {orderSchedule && (
-            <OrderScheduleComp scheduleDetails={scheduleDetails} />
-          )}
-          <Grid container direction="row" spacing={5}>
-            <Grid item xs={4}>
-              <ListTextItem image={Phone} value={number} />
-            </Grid>
-            <Grid item xs={6}>
-              <ListTextItem image={MapTrifold} value={location} />
-            </Grid>
-          </Grid>
-          <ListTextItem image={Scales} value={quantity} />
-          <Grid item xs={12}>
-            <ListTextItem
-              image={Image}
-              img={
-                <img
-                  src={img}
-                  height={148.26}
-                  width={214.16}
-                  className={classes.imgStyle}
-                />
-              }
-              secImage={
-                <img
-                  src={secImage}
-                  height={148.26}
-                  width={214.16}
-                  className={classes.imgStyle}
-                />
-              }
-            />
-          </Grid>
-        </Grid>
-        <Grid xs={12} className={classes.isDivider}>
-          {isDivider && <Divider/>}
-        </Grid>
-        <Grid item style={{ paddingLeft: 7 }}>
-          {heading && (
-            <Heading
-              headingText={heading}
-              headerFontSize={theme.MetricsSizes.regular_xxx}
-              headerFontWeight={theme.fontWeight.bold}
-              headingColor={theme.Colors.secondary}
-            />
-          )}
-          {scheduled && <OrderScheduleComp scheduleDetails={scheduled} />}
-        </Grid>
-        {bottomContent && (
-          <DialogContentDetails
-            contentDetails={orderVendorContent}
-            leftContentFontSize={theme.MetricsSizes.small_xxx}
-            rightContentFontSize={theme.MetricsSizes.small_xxx}
-            leftContentFontWeight={theme.fontWeight.regular}
-            rightContentFontWeight={theme.fontWeight.medium}
+      <DialogContentDetails
+        contentDetails={rightContent}
+        leftContentFontSize={theme.MetricsSizes.regular}
+        rightContentFontSize={theme.MetricsSizes.regular}
+        rightContentFontWeight={theme.fontWeight.regular}
+      />
+      <Grid item xs={10}>
+        <ListTextItem image={MapPin} value={address} />
+      </Grid>
+      <Grid item xs={12} className={classes.isDivider}>
+        {dividerLine && <Divider />}
+      </Grid>
+      <Grid item xs={12} className={classes.completedStyle}>
+        {orderHeading && (
+          <Heading
+            headingText={orderHeading}
+            headerFontSize={theme.MetricsSizes.regular_xxx}
+            headerFontWeight={theme.fontWeight.bold}
+            headingColor={theme.Colors.secondary}
           />
         )}
-      </>
+        {orderSchedule && (
+          <OrderScheduleComp scheduleDetails={scheduleDetails} />
+        )}
+        <Grid container direction="row" spacing={5}>
+          <Grid item xs={4}>
+            <ListTextItem image={Phone} value={number} />
+          </Grid>
+          <Grid item xs={6}>
+            <ListTextItem image={MapTrifold} value={location} />
+          </Grid>
+        </Grid>
+        <ListTextItem image={Scales} value={quantity} />
+        <Grid item xs={12}>
+          <ListTextItem
+            image={Image}
+            img={
+              <img
+                src={img}
+                height={148.26}
+                width={214.16}
+                className={classes.imgStyle}
+              />
+            }
+            secImage={
+              <img
+                src={secImage}
+                height={148.26}
+                width={214.16}
+                className={classes.imgStyle}
+              />
+            }
+          />
+        </Grid>
+      </Grid>
+      <Grid xs={12} className={classes.isDivider}>
+        {isDivider && <Divider />}
+      </Grid>
+      <Grid item style={{ paddingLeft: 7 }}>
+        {heading && (
+          <Heading
+            headingText={heading}
+            headerFontSize={theme.MetricsSizes.regular_xxx}
+            headerFontWeight={theme.fontWeight.bold}
+            headingColor={theme.Colors.secondary}
+          />
+        )}
+        {scheduled && <OrderScheduleComp scheduleDetails={scheduled} />}
+      </Grid>
+      {bottomContent && (
+        <DialogContentDetails
+          contentDetails={orderVendorContent}
+          leftContentFontSize={theme.MetricsSizes.small_xxx}
+          rightContentFontSize={theme.MetricsSizes.small_xxx}
+          leftContentFontWeight={theme.fontWeight.regular}
+          rightContentFontWeight={theme.fontWeight.medium}
+        />
+      )}
     </Grid>
   );
 };

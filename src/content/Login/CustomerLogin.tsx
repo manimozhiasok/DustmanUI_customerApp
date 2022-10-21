@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, useTheme, Grid } from '@material-ui/core';
+import { useTheme, Grid } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -10,36 +10,28 @@ import {
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { TermsAndConditionComp } from './TermsAndConditionComp';
+import { isPhoneNumber } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    marginTop: theme.spacing(5)
-  },
-  headingStyle: {
-    color: theme.Colors.primary,
-    fontSize: theme.MetricsSizes.large_x,
-    fontWeight: theme.fontWeight.bold
-  },
-  subStyle: {
-    fontSize: theme.MetricsSizes.regular,
-    color: theme.Colors.secondary,
-    marginLeft: theme.MetricsSizes.tiny_xx
-  },
-  boldText: {
-    color: theme.Colors.primary,
-    fontWeight: theme.fontWeight.bold
+    marginTop: theme.spacing(4)
   }
 }));
 
 const CustomerLogin = () => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   const navigateTo = useNavigate();
   const [inputVal, setInputVal] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const handleCustomerLoginButtonClick = () => {
-    navigateTo('/landing-page/verify-otp');
+    if (inputVal === '' || !isPhoneNumber(inputVal)) {
+      setIsError(true);
+      return;
+    }
+    navigateTo('/landing-page/verify-otp', { replace: true, state: inputVal });
   };
 
   const handleTextFieldValueChange = (event) => {
@@ -49,9 +41,8 @@ const CustomerLogin = () => {
   return (
     <Grid>
       <LoginHeaderComp
-        title={t('LOGIN.login')}
-        linkText={t('LOGIN.createAccount')}
-        pathName={''}
+        title={t('LOGIN.loginSignUp')}
+        subText={t('LOGIN.enterPhoneNumber')}
       />
       <Grid className={classes.container}>
         <TextInputComponent
@@ -61,9 +52,14 @@ const CustomerLogin = () => {
           onChange={handleTextFieldValueChange}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
+          helperText={
+            ((isError && inputVal === '') ||
+              (isError && inputVal !== '' && !isPhoneNumber(inputVal))) &&
+            'Please enter your 10 digit mobile number for verification'
+          }
         />
         <ButtonComp
-          buttonText={t('LOGIN.login')}
+          buttonText={t('LOGIN.next')}
           backgroundColor={theme.Colors.secondary}
           btnBorderRadius={theme.MetricsSizes.tiny}
           onClickButton={handleCustomerLoginButtonClick}

@@ -8,7 +8,6 @@ import { CompletedOrdersIcon } from 'src/Assets/Images';
 import { ConfirmedOrdersIcon } from 'src/Assets/Images';
 import { PendingOrdersIcon } from 'src/Assets/Images';
 import PendingOrderModal from './PendingOrderModal';
-import { ButtonComp } from 'src/components';
 import ConfirmedOrderModal from './ConfirmedOrderModel';
 import CompletedOrderModal from './CompletedOrderModal';
 import OrderComponentNew from 'src/components/orderComponetNew';
@@ -37,8 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(2),
     border: '0.5px solid',
     borderColor: theme.Colors.greyDark
-  },
-  eachOrderContainer: {}
+  }
 }));
 
 function OrdersPage() {
@@ -158,16 +156,11 @@ function OrdersPage() {
               index={0}
               className={classes.tabContentContainer}
             >
-              <div className={classes.eachOrderContainer}>
-                {/* <OrderListingComponent 
-              displayContent={ordersList} onClickButton={onClickButton}
-               /> */}
-                <OrderComponentNew
-                  orderComponent={ordersList}
-                  isButton={true}
-                  onClickButton={onClickButton}
-                />
-              </div>
+              <OrderComponentNew
+                orderComponent={ordersList}
+                isButton={true}
+                onClickButton={onClickButton}
+              />
             </TabContent>
             <TabContent
               value={tabToDisplay}

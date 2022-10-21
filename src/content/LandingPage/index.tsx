@@ -10,7 +10,7 @@ import {
 import LandingPageRightContent from './LandingPageRightContent';
 import LandingPageLeftContent from './LandingPageLeftContent';
 import { LoginDrawerContext } from 'src/contexts/LoginDrawerContext';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation, useMatch, useNavigate } from 'react-router';
 import CloseIcon from '@material-ui/icons/Close';
 import { LoginBtmImg } from 'src/Assets';
 import { createBrowserHistory } from 'history';
@@ -30,7 +30,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '520px'
   },
   loginDrawerStyle: {
-    padding: theme.spacing(3.8)
+    padding: theme.spacing(3.8),
+    display: 'block'
+  },
+  imageStyle: {
+    display: 'flex',
+    paddingLeft: theme.spacing(7)
   }
 }));
 
@@ -39,22 +44,21 @@ function LandingPage() {
   const theme = useTheme();
   const { isLoginDrawerOpen, closeLoginDrawer } =
     useContext(LoginDrawerContext);
+  const navigateTo = useNavigate();
 
-  const history = createBrowserHistory();
+  const location = useLocation();
+  const match = useMatch('/landing-page');
 
   const handleCloseIconClick = () => {
     closeLoginDrawer();
-    history.replace('/landing-page');
+    navigateTo('/landing-page', { replace: true });
   };
 
   useEffect(() => {
-    const listener = history.listen(({ action }) => {
-      if (action === 'POP') {
-        history.go(1);
-      }
-    });
-    return listener;
-  }, []);
+    if (match !== null) {
+      closeLoginDrawer();
+    }
+  }, [match]);
 
   return (
     <Box>
@@ -74,17 +78,12 @@ function LandingPage() {
             <CloseIcon onClick={handleCloseIconClick} />
             <Box
               sx={{
-                padding: theme.spacing(4, 10, 4, 3.8)
+                padding: theme.spacing(4, 10, 6, 3.8)
               }}
             >
               <Outlet />
             </Box>
-            <Grid
-              style={{
-                display: 'flex',
-                paddingLeft: theme.spacing(7)
-              }}
-            >
+            <Grid className={classes.imageStyle}>
               <img src={LoginBtmImg} alt="LoginBtmImg" />
             </Grid>
           </Grid>

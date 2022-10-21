@@ -3,7 +3,8 @@ import {
   Typography,
   useTheme,
   TextFieldProps,
-  InputAdornment
+  InputAdornment,
+  Grid
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { fontSize } from '@mui/system';
@@ -16,19 +17,21 @@ type StyleProps = {
   placeHolderColor?: string;
   borderRadius?: number;
   textColor?: string;
-  fontWeight?: number;
-  fontSize?: any;
+  inputTextWeight?: number;
+  inputTextSize?: any;
 };
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   subText: {
     width: (props) => props.width || '100%',
-    marginTop: theme.MetricsSizes.tiny,
     '& .MuiOutlinedInput-input': {
+      '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+        '-webkit-appearance': 'none'
+      },
       height: (props) => props.height || 46,
       padding: theme.spacing(0, 1.8),
-      fontSize: (props) => props.fontSize || theme.MetricsSizes.small_xxx,
-      fontWeight: (props) => props.fontWeight || theme.fontWeight.medium,
+      fontSize: (props) => props.inputTextSize || theme.MetricsSizes.small_xxx,
+      fontWeight: (props) => props.inputTextWeight || theme.fontWeight.medium,
       backgroundColor: (props) => props.bgColor || theme.Colors.white,
       '&::placeholder': {
         color: (props) => props.placeHolderColor || null
@@ -45,8 +48,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   helperRoot: {
     textTransform: 'none',
-    fontSize: theme.MetricsSizes.small_xx
-  }
+    fontSize: theme.MetricsSizes.small_x,
+    fontWeight: theme.fontWeight.medium
+  },
+  containerStyle: { display: 'flex', flexDirection: 'column' }
 }));
 
 type Props = TextFieldProps & {
@@ -64,8 +69,9 @@ type Props = TextFieldProps & {
   inputBorderRadius?: number;
   textColor?: string;
   iconEnd?: any;
-  fontWeight?: number;
-  fontSize?: any;
+  inputTextWeight?: number;
+  inputTextSize?: any;
+  inputLabelFont?: number;
 };
 
 const TextInputComponent = (props: Props) => {
@@ -85,8 +91,9 @@ const TextInputComponent = (props: Props) => {
     inputBorderRadius,
     textColor,
     iconEnd,
-    fontWeight,
-    fontSize,
+    inputTextWeight,
+    inputTextSize,
+    inputLabelFont,
     ...rest
   } = props;
   const styles = useStyles({
@@ -97,11 +104,11 @@ const TextInputComponent = (props: Props) => {
     borderColor: (isError && theme.Colors.redPrimary) || borderColor,
     borderRadius: inputBorderRadius,
     textColor,
-    fontWeight: fontWeight,
-    fontSize: fontSize
+    inputTextWeight,
+    inputTextSize
   });
   return (
-    <>
+    <Grid className={styles.containerStyle}>
       {inputLabel && (
         <Typography
           style={{
@@ -109,7 +116,8 @@ const TextInputComponent = (props: Props) => {
               (isError && theme.Colors.redPrimary) ||
               labelColor ||
               theme.Colors.primary,
-              fontSize: theme.MetricsSizes.small_xxx
+            fontSize: inputLabelFont || theme.MetricsSizes.small_xxx,
+            marginBottom: theme.MetricsSizes.tiny
           }}
         >
           {inputLabel}
@@ -129,7 +137,7 @@ const TextInputComponent = (props: Props) => {
         }}
         {...rest}
       />
-    </>
+    </Grid>
   );
 };
 

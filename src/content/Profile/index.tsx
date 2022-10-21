@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Theme, useTheme } from '@material-ui/core';
 import OrdersAndProfileTab from 'src/components/OrdersAndProfileTab';
 import {
   CompletedOrdersIcon,

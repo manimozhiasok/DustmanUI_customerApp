@@ -4,20 +4,16 @@ import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   leftContentStyle: {
-    color: theme.Colors.mediumBlack,
-    fontSize: theme.MetricsSizes.small_xxx,
-    fontWeight: theme.fontWeight.regular
+    color: theme.Colors.mediumBlack
   },
   rightContainer: {
     color: theme.Colors.mediumGrey,
-    marginBottom: theme.MetricsSizes.tiny,
-    fontSize: theme.MetricsSizes.small_xxx,
-    fontWeight: theme.fontWeight.regular
+    marginBottom: theme.MetricsSizes.tiny
   },
   rightStyle: {
     padding: theme.spacing(0.5)
   },
-  dotStyle:{paddingLeft: theme.spacing(0.5)}
+  dotStyle: { paddingLeft: theme.spacing(0.5) }
 }));
 
 type Props = {
@@ -52,7 +48,7 @@ const OrderScheduleComp = (props: Props) => {
               | React.ReactFragment
               | React.ReactPortal;
           },
-          
+
           index: React.Key
         ) => {
           return (
@@ -67,8 +63,8 @@ const OrderScheduleComp = (props: Props) => {
                   {item.day}
                 </Typography>
               </Grid>
-              <Grid item  className={classes.dotStyle}>
-                  {item.dot}
+              <Grid item className={classes.dotStyle}>
+                {item.dot}
               </Grid>
               <Grid item className={classes.rightStyle}>
                 {item.dateImage}

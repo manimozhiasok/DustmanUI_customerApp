@@ -5,31 +5,28 @@ import HeaderLeftContent from './HeaderLeftContent';
 import HeaderRightContent from './HeaderRightContent';
 
 const useStyles = makeStyles((theme: Theme) => ({
-    headerContainer: {
-        height: theme.spacing(11.5),   
-        position: "sticky",
-        zIndex: 2,
-        top: 0,
-        background: theme.Colors.whitePure,
-    },
-    leftContainer:{
-      width: '43%',    
-    },
-    rightContainer:{
-      width: '57%',
-    }
-
+  headerContainer: {
+    height: theme.spacing(11.5),
+    position: 'sticky',
+    zIndex: 2,
+    top: 0,
+    background: theme.Colors.whitePure
+  },
+  leftContainer: {
+    width: '43%'
+  },
+  rightContainer: {
+    width: '57%'
+  }
 }));
 
 const MainHeader = () => {
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   const classes = useStyles();
 
-
-
   return (
-    <Grid container direction='row' className={classes.headerContainer}>
-        <Grid item className={classes.leftContainer}>
+    <Grid container direction="row" className={classes.headerContainer}>
+      <Grid item className={classes.leftContainer}>
         <HeaderLeftContent />
       </Grid>
       <Grid item className={classes.rightContainer}>

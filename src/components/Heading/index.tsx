@@ -39,7 +39,7 @@ const Heading = ({
   headerFontWeight?: number;
 }) => {
   const classes = useStyles({ headingColor, headerFontSize, headerFontWeight });
-  const theme: Theme = useTheme();
+  const theme = useTheme();
 
   return (
     <Box className={classes.headingContainer}>
@@ -49,4 +49,3 @@ const Heading = ({
 };
 
 export default Heading;
-

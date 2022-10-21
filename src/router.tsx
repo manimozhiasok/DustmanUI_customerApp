@@ -8,6 +8,8 @@ import HomePage from './content/HomePage';
 import HomePageLayout from './layouts/HomePageLayout';
 import CustomerLogin from './content/Login/CustomerLogin';
 import VerifyOtp from './content/Login/VerifyOtp';
+import CreateAccountSignUp from './content/Login/CreateAccountSignUp';
+import ChooseUserType from './content/Login/ChooseUserType';
 
 const routes: RouteObject[] = [
   {
@@ -29,6 +31,14 @@ const routes: RouteObject[] = [
           {
             path: 'verify-otp',
             element: <VerifyOtp />
+          },
+          {
+            path: 'create-account',
+            element: <CreateAccountSignUp />
+          },
+          {
+            path: 'choose-user-type',
+            element: <ChooseUserType />
           }
         ]
       }

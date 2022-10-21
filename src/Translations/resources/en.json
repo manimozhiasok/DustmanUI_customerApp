@@ -32,7 +32,7 @@
   "poweredBy": "Powered by ",
   "unitiveTechnologies": "Unitive Technologies",
   "orderSuccess": "Order Success",
-  "orderPlaced": "Order Successfully Placed",
+  "orderPlaced": "Order Successfully Placed.",
   "orderConfirm": "Your order was Successfull !",
   "orderDescription": "Just wait until Dustman arrive at your home.",
   "vehicleChoose": " What vehicle you think will be right fit to pick your trash",
@@ -42,25 +42,36 @@
   "scheduleYourPickup": "Schedule Your Pickup",
   "pickupAddress": "Pickup Address",
   "orderConfirmation": "Order Confirmation",
-   "orders":"ORDER#",
-   
+  "orders": "ORDER#",
+
   "LOGIN": {
     "loginAndAccept": "By clicking on Login, I accept the ",
     "termsAndCondition": "Terms & Conditions ",
     "privacyAndPolicy": " Privacy Policy",
-    "login": "Login",
+    "loginSignUp": "Login/SignUp",
+    "signUp": "SignUp",
     "createAccount": "Create Account",
     "phNumber": "Phone Number",
-    "oneTimePassword": "One Time Password"
+    "oneTimePassword": "One Time Password",
+    "next": "Next",
+    "verifyOtp": "Verify OTP",
+    "enterPhoneNumber": "Enter your phone number for verification",
+    "enterPhoneVerify": "Enter the OTP sent to the below Phone number",
+    "firstName": "First Name",
+    "userProfile": "Create User Profile",
+    "lastName": "Last Name",
+    "email": "Email",
+    "continue": "Continue",
+    "chooseUserType": "Choose User Type"
   },
 
-  "PICKUP":{
+  "PICKUP": {
     "slot": "Slot",
-    "userName":"User Name",
+    "userName": "User Name",
     "mobile": "Mobile",
     "confirm": "Confirm Order",
-    "houseNo":"House / Flat No.",
-    "area":"Apartment / Street Name / Area ",
+    "houseNo": "House / Flat No.",
+    "area": "Apartment / Street Name / Area ",
     "state": "State",
     "city": "City",
     "pincode": "Pincode",
@@ -78,34 +89,21 @@
     "trashPicture": "Choose your trash pictures"
   },
 
-  "Landing":{
+  "Landing": {
     "knowMore": "Know More"
   },
 
-  "ORDER":{
-  "vendorName": "Vendor Name",
-  "mobileNumber": "Mobile Number",
-  "address": "New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042. ",
-  "heading": "Order Completed",
-  "mapLocation": "Map Location",
-  "quantity": "25 kgs",
-  "category": "Aluminum, News Paper... ",
-  "location": "Velachery",
-  "state": "Picked up -",
-  "day": "Mon, 01 Jan",
-  "time": "9:00 AM - 12:00 PM",
-  "completedDialogTitle": "Order 567885",
-  "number": "9876598765",
-  "vendorMobileNo": "9564737654" ,
-  "vendorDetail": "Prabhu",
-  "scheduledState": "Scheduled -",
-  "cancelButton": "CANCEL",
-  "pending": "Pending",
-  "confirmed": "Confirmed",
-  "completed": "Completed"
+  "ORDER": {
+    "vendorName": "Vendor Name",
+    "mobileNumber": "Mobile Number",
+    "scheduledState": "Scheduled -",
+    "cancelButton": "CANCEL",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "completed": "Completed"
   },
- 
-  "PROFILE":{
+
+  "PROFILE": {
     "account": "My Account",
     "language": "Change Language",
     "userType": "Change User Type",

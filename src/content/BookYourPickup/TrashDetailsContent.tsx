@@ -14,13 +14,11 @@ import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textStyle: {
-    color: theme.Colors.deepGrey,
-    fontWeight: 400,
-    fontSize: '16px'
+    color: theme.Colors.deepGrey
   },
   optionStyle: {
-    color: '#11294C',
-    fontSize: '12px'
+    color: theme.Colors.primary,
+    fontSize: theme.MetricsSizes.small_x
   },
   textAreaStyle: {
     fontSize: theme.MetricsSizes.small_xxx,
@@ -40,10 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   textarea: {
     resize: 'both',
     marginTop: '-50px'
-  },
-  // fontStyle:{
-  //   fontSize: theme.MetricsSizes.small_xx
-  // }
+  }
 }));
 
 export const LeftContent = ({ edit, trashData }) => {
@@ -67,17 +62,16 @@ export const LeftContent = ({ edit, trashData }) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <TextInputComponent
-          inputLabel={t("category")}
+          inputLabel={t('category')}
           labelColor={theme.Colors.deepGrey}
           textColor={theme.Colors.darkGrey}
-          backgroundColor={theme.Colors.lightWhiteGrey}       
+          backgroundColor={theme.Colors.lightWhiteGrey}
           // value={edit.getValue('order_items')}
           value={getTrashValue()}
           borderColor={theme.Colors.lightWhiteGrey}
           inputHeight={theme.MetricsSizes.large_xxx}
           inputBorderRadius={theme.MetricsSizes.tiny_x}
-          // inputStyles={classes.fontStyle}
-          fontSize={theme.MetricsSizes.small_xx}
+          inputTextSize={theme.MetricsSizes.small_xx}
         />
       </Grid>
       <Grid item xs={12}>
@@ -103,14 +97,15 @@ export const LeftContent = ({ edit, trashData }) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Typography className={classes.textStyle}>
-        {t('PICKUP.description')} <label className={classes.optionStyle}>(Optional)</label>
+        <Typography variant="h4" className={classes.textStyle}>
+          {t('PICKUP.description')}
+          <label className={classes.optionStyle}>(Optional)</label>
         </Typography>
         <TextareaAutosize
           minRows={5}
           value={edit.getValue('description')}
           onChange={(e) => edit.update({ description: e.target.value })}
-          placeholder={t("PICKUP.anyInstructionsForOurPickupExecutive")}
+          placeholder={t('PICKUP.anyInstructionsForOurPickupExecutive')}
           className={classes.textAreaStyle}
         />
       </Grid>

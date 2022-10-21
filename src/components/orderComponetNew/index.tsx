@@ -5,7 +5,6 @@ import {
   Theme,
   Typography
 } from '@material-ui/core';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Confirm, locationIcon, weightIcon, YetToConfirm } from 'src/Assets';
 import ListTextItem from '../ImageTextComponent';
@@ -22,11 +21,10 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     contentContainer: {
       height: '100%'
-      //justifyContent: 'space-evenly'
     },
     imageContainer: { padding: theme.spacing(0, 2, 0, 0) },
-    typo: {
-      fontSize: theme.MetricsSizes.tiny_xxx,    
+    type: {
+      fontSize: theme.MetricsSizes.tiny_xxx
     },
     status: {
       fontSize: theme.MetricsSizes.tiny_xxx,
@@ -43,12 +41,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       fontWeight: theme.fontWeight.medium
     },
     imageAlign: {
-      paddingLeft: 55,
+      paddingLeft: theme.spacing(7),
       fontSize: theme.MetricsSizes.tiny_xxx
     },
     buttonAlign: {
       display: 'flex',
-      paddingTop: 25
+      paddingTop: theme.spacing(3.5)
     }
   })
 );
@@ -74,35 +72,33 @@ const OrderComponentNew = ({
             direction="row"
             key={index}
           >
-            <Grid item xs={true}>
-              <Grid container direction="row">
-                <Grid item className={classes.imageContainer}>
-                  <img src={item.displayImage} alt="image" />
-                </Grid>
-                <Grid item className={classes.contentContainer}>
-                  <Typography className={classes.typo}>
-                    {t('orders')}:{item.orderId}
+            <Grid container item xs={true} direction="row">
+              <Grid item className={classes.imageContainer}>
+                <img src={item.displayImage} alt="image" />
+              </Grid>
+              <Grid item className={classes.contentContainer}>
+                <Typography className={classes.type}>
+                  {t('orders')}:{item.orderId}
+                </Typography>
+                <Grid container direction="row">
+                  <Typography className={classes.category}>
+                    {t('category')}:{' '}
+                    <span className={classes.categoryText}>
+                      {item.category}
+                    </span>
                   </Typography>
-                  <Grid direction="row" style={{ display: 'flex' }}>
-                    <Typography className={classes.category}>
-                      {t('category')}:{' '}
-                      <span className={classes.categoryText}>
-                        {item.category}
-                      </span>
-                    </Typography>
-                    <div className={classes.imageAlign}>
-                      <ListTextItem image={weightIcon} value={item.weight} />
-                    </div>
-                    <div className={classes.imageAlign}>
-                      <ListTextItem image={locationIcon} value={item.place} />
-                    </div>
+                  <Grid className={classes.imageAlign}>
+                    <ListTextItem image={weightIcon} value={item.weight} />
                   </Grid>
-                  <Grid item className={classes.buttonAlign}>
-                    <OrderButton
-                      isField={isButton}
-                      onClickButton={onClickButton}
-                    />
+                  <Grid className={classes.imageAlign}>
+                    <ListTextItem image={locationIcon} value={item.place} />
                   </Grid>
+                </Grid>
+                <Grid item className={classes.buttonAlign}>
+                  <OrderButton
+                    isField={isButton}
+                    onClickButton={onClickButton}
+                  />
                 </Grid>
               </Grid>
             </Grid>

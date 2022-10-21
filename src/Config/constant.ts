@@ -17,19 +17,9 @@ export const TOAST_TYPES = {
   INFO: 'info',
   LINK: 'link'
 };
-export const VENDOR_MANAGEMENT_STATUS = {
-  1: 'View',
-  2: 'Accepted',
-  3: 'Rejected'
-};
+
 export const CUSTOMER_STATUS = {
-  1: 'Publish',
-  2: 'Accepted',
-  3: 'Completed',
-  4: 'Cancelled'
-};
-export const VENDOR_STATUS = {
-  1: 'Accept',
+  0: 'Publish',
   2: 'Accepted',
   3: 'Completed',
   4: 'Cancelled'
@@ -41,26 +31,32 @@ export const HANDLE_SUBMIT = {
 };
 
 export const CONFIRM_MODAL = {
-  delete: 'delete'
+  delete: 'delete',
+  publish: 'publish',
+  cancel: 'cancel',
+  accept: 'accept',
+  reject: 'reject',
+  moveToDustman: 'moveToDustman'
 };
 
-export const ORDERS_COUNT = {
-  cancelledOrderCount: 0,
-  confirmedOrderCount: 0,
-  newOrderCount: 0,
-  sheduledOrderCount: 0
+export const USER_TYPE_ID = {
+  home: 1,
+  commercial: 2,
+  industry: 3,
+  vendorPickup: 4,
+  vendorDrop: 5
 };
 
-export const VENDOR_REGIS_COUNT = {
-  approvedCount: 0,
-  newRequestCount: 0,
-  rejectedCount: 0
+export const GET_USER_CATEGORY = {
+  1: 'Home User',
+  2: 'Commercial User',
+  3: 'Industry User',
+  4: 'Vendor Pickup',
+  5: 'vendor Drop'
 };
 
-export const FILTER_CHIPS = ['Today', 'This Week', 'This Month'];
-
-export const GET_FILTER_VALUES = {
-  ['Today']: 1,
-  ['This Week']: 2,
-  ['This Month']: 3
+export const TRASH_CATEGORY_ID = {
+  customerTrash: 1,
+  vendorDropTrash: 2,
+  vendorPickupTrash: 3
 };

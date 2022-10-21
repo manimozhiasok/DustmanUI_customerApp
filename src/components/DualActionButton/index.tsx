@@ -11,7 +11,7 @@ type Props = {
 };
 
 const DualActionButton = (props: Props) => {
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   const { onLeftButtonClick, onRightButtonClick, disabledRightBtn, styles } =
     props;
   const classes = useStyles({});

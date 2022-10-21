@@ -1,9 +1,8 @@
-import { Box, CircularProgress } from '@material-ui/core';
+import { Box, CircularProgress, useTheme } from '@material-ui/core';
 import { Theme } from '@material-ui/core';
-import { useTheme } from '@material-ui/styles';
 
 function SuspenseLoader() {
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   return (
     <Box
       sx={{
