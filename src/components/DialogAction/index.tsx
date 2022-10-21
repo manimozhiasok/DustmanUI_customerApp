@@ -1,5 +1,5 @@
-import { Theme, useTheme } from '@material-ui/core';
 import React from 'react';
+import { useTheme } from '@material-ui/core';
 import { ButtonComp } from 'src/components';
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   onRightButtonClick?: () => void;
 };
 const DialogAction = (props: Props) => {
-  const theme: Theme = useTheme();
+  const theme = useTheme();
 
   const { onLeftButtonClick, onRightButtonClick } = props;
   return (

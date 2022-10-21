@@ -7,55 +7,55 @@ import {
   LoginHeaderComp,
   TextInputComponent
 } from 'src/components';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    marginTop: theme.spacing(5.8)
-  },
-  inputStyle: {
-    marginTop: 0
+    marginTop: theme.spacing(4)
   }
 }));
 
 const VerifyOtp = () => {
+  const { state } = useLocation();
+  console.log(state, '----11111111111');
+
   const classes = useStyles();
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   const navigateTo = useNavigate();
   const { t } = useTranslation();
 
   const handleCustomerLoginButtonClick = () => {
-    navigateTo('/homepage', { replace: true });
+    navigateTo('/landing-page/create-account', { replace: true });
   };
 
   return (
     <Grid>
       <LoginHeaderComp
-        title={t('LOGIN.login')}
-        linkText={t('LOGIN.createAccount')}
-        pathName={''}
+        title={t('LOGIN.loginSignUp')}
+        subText={t('LOGIN.enterPhoneVerify')}
       />
       <Grid className={classes.container}>
         <TextInputComponent
           inputHeight={66}
           placeholderText={t('LOGIN.phNumber')}
-          //   value={inputVal}
+          value={state}
           //   onChange={handleTextFieldValueChange}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
+          disabled
         />
         <TextInputComponent
           inputHeight={66}
           placeholderText={t('LOGIN.oneTimePassword')}
-          inputStyles={classes.inputStyle}
           //   value={inputVal}
           //   onChange={handleTextFieldValueChange}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
+          type={'number'}
         />
         <ButtonComp
-          buttonText={t('LOGIN.login')}
+          buttonText={t('LOGIN.verifyOtp')}
           backgroundColor={theme.Colors.secondary}
           btnBorderRadius={theme.MetricsSizes.tiny}
           onClickButton={handleCustomerLoginButtonClick}

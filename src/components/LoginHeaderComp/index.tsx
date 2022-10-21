@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Typography, useTheme } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {},
@@ -13,43 +13,40 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   subStyle: {
     fontSize: theme.MetricsSizes.regular,
-    color: theme.Colors.secondary,
-    marginLeft: theme.MetricsSizes.tiny_xx,
-    textDecoration: 'none'
+    color: theme.Colors.secondary
   },
-  subHeadingStyle: { display: 'flex', alignItems: 'center' },
   bar: {
     height: theme.MetricsSizes.tiny_x,
     width: 81,
     backgroundColor: theme.Colors.primary,
-    marginTop: theme.MetricsSizes.small_x
+    marginTop: theme.MetricsSizes.small_x,
+    marginBottom: theme.MetricsSizes.small_x
   }
 }));
 
 type Props = {
   title: string;
-  linkText: string;
-  pathName: string;
+  subText?: string;
 };
 const LoginHeaderComp = (props: Props) => {
-  const { title, linkText, pathName } = props;
+  const { title, subText } = props;
   const classes = useStyles();
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   return (
     <>
       <Typography className={classes.headingStyle}>{title}</Typography>
-      <Grid className={classes.subHeadingStyle}>
-        <Typography variant="h5">or</Typography>
+      <Grid className={classes.bar}></Grid>
+      <Grid>
+        {/* <Typography variant="h5">or</Typography> */}
         <Typography
           variant="h5"
           className={classes.subStyle}
-          component={Link}
-          to={pathName}
+          // component={Link}
+          // to={pathName}
         >
-          {linkText}
+          {subText}
         </Typography>
       </Grid>
-      <Grid className={classes.bar}></Grid>
     </>
   );
 };

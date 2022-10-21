@@ -8,31 +8,27 @@ interface BaseLayoutProps {
   children?: ReactNode;
 }
 
-
 const useStyles = makeStyles((theme: Theme) => ({
   mainContainer: {
-      //height: '100vh',  
-
+    //height: '100vh',
   },
   headerContainer: {
     height: theme.spacing(11.5),
     position: 'sticky',
-    top: 0,
+    top: 0
   },
   landingPageContentContainer: {
     backgroundImage: 'linear-gradient(150deg, #FFFFFF 8.53%, #70B245 200%)',
-    zIndex: -1,
-  },
+    zIndex: -1
+  }
 }));
 
 const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
-
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   const classes = useStyles();
 
   return (
-
-        <Box
+    <Box
       sx={{
         flex: 1,
         height: '100vh',
@@ -41,10 +37,8 @@ const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
       }}
     >
       <MainHeader />
-      {children || <Outlet />}    
-
+      {children || <Outlet />}
     </Box>
-
   );
 };
 

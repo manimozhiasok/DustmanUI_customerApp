@@ -1,15 +1,5 @@
 import { useContext } from 'react';
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Tab,
-  Tabs
-} from '@material-ui/core';
-import { NavLink as RouterLink } from 'react-router-dom';
-import { SidebarContext } from 'src/contexts/SidebarContext';
+import { Box, Tab, Tabs } from '@material-ui/core';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 
 type StyleProps = {
@@ -73,28 +63,20 @@ type Props = {
   logOutTextColor?: string;
 };
 const NavListItem = ({ routes, containerStyles, logOutTextColor }: Props) => {
-
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   const styles = useStyles({ logOutTextColor: logOutTextColor });
 
   return (
     <Box sx={containerStyles}>
-
-    <Tabs
-      value={1}
-      //onChange={}
-      textColor="primary"
-    >
-          {routes.map((item, index) => {
-            return (
-              <Tab
-                key={index}
-                value={index}              
-                label={item.name}
-              />
-            );
-          })}
-        </Tabs>
+      <Tabs
+        value={1}
+        //onChange={}
+        textColor="primary"
+      >
+        {routes.map((item, index) => {
+          return <Tab key={index} value={index} label={item.name} />;
+        })}
+      </Tabs>
     </Box>
   );
 };

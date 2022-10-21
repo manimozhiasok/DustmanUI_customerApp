@@ -42,15 +42,26 @@
   "scheduleYourPickup": "Schedule Your Pickup",
   "pickupAddress": "Pickup Address",
   "orderConfirmation": "Order Confirmation",
-   "orders":"ORDER#",
-   
+  "orders": "ORDER#",
+
   "LOGIN": {
     "loginAndAccept": "By clicking on Login, I accept the ",
     "termsAndCondition": "Terms & Conditions ",
     "privacyAndPolicy": " Privacy Policy",
-    "login": "Login",
+    "loginSignUp": "Login/SignUp",
+    "signUp": "SignUp",
     "createAccount": "Create Account",
     "phNumber": "Phone Number",
-    "oneTimePassword": "One Time Password"
+    "oneTimePassword": "One Time Password",
+    "next": "Next",
+    "verifyOtp": "Verify OTP",
+    "enterPhoneNumber": "Enter your phone number for verification",
+    "enterPhoneVerify": "Enter the OTP sent to the below Phone number",
+    "firstName": "First Name",
+    "userProfile": "Create User Profile",
+    "lastName": "Last Name",
+    "email": "Email",
+    "continue": "Continue",
+    "chooseUserType": "Choose User Type"
   }
 }

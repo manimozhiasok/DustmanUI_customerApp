@@ -3,7 +3,8 @@ import {
   Typography,
   useTheme,
   TextFieldProps,
-  InputAdornment
+  InputAdornment,
+  Grid
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
@@ -20,8 +21,10 @@ type StyleProps = {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   subText: {
     width: (props) => props.width || '100%',
-    marginTop: theme.MetricsSizes.tiny,
     '& .MuiOutlinedInput-input': {
+      '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+        '-webkit-appearance': 'none'
+      },
       height: (props) => props.height || 46,
       padding: theme.spacing(0, 1.8),
       fontSize: theme.MetricsSizes.small_xxx,
@@ -42,8 +45,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   helperRoot: {
     textTransform: 'none',
-    fontSize: theme.MetricsSizes.small_xx
-  }
+    fontSize: theme.MetricsSizes.small_x,
+    fontWeight: theme.fontWeight.medium
+  },
+  containerStyle: { display: 'flex', flexDirection: 'column' }
 }));
 
 type Props = TextFieldProps & {
@@ -92,14 +97,15 @@ const TextInputComponent = (props: Props) => {
     textColor
   });
   return (
-    <>
+    <Grid className={styles.containerStyle}>
       {inputLabel && (
         <Typography
           style={{
             color:
               (isError && theme.Colors.redPrimary) ||
               labelColor ||
-              theme.Colors.primary
+              theme.Colors.primary,
+            marginBottom: theme.MetricsSizes.tiny
           }}
         >
           {inputLabel}
@@ -119,7 +125,7 @@ const TextInputComponent = (props: Props) => {
         }}
         {...rest}
       />
-    </>
+    </Grid>
   );
 };
 

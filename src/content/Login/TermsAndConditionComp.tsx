@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const TermsAndConditionComp = () => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const theme: Theme = useTheme();
+  const theme = useTheme();
   return (
     <Typography variant="subtitle2">
       {t('LOGIN.loginAndAccept')}

@@ -42,7 +42,7 @@ export const getDateFormat = (date: any) => {
   const getDate = data.getDate();
   const getYear = data.getFullYear();
   const getTime = data.toLocaleTimeString();
-  const getDay = data. getDay();
+  const getDay = data.getDay();
   return {
     getMonth,
     getDate,
@@ -78,4 +78,15 @@ export const filterOrders = (tableData: any[], val: number) => {
     tableData.length &&
     tableData.filter((item) => item.status_id === val).length
   );
+};
+
+export const isValidEmail = (email) => {
+  const emailExp =
+    /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+  return email?.match(emailExp);
+};
+
+export const isPhoneNumber = (number) => {
+  const numberExp = /^([0-9()-]{10})$/;
+  return number?.match(numberExp);
 };
