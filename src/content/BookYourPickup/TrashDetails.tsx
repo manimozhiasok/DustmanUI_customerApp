@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   Grid,
-  IconButton,
   makeStyles,
   Theme,
   useTheme
@@ -9,11 +8,10 @@ import {
 import { LeftContent } from './TrashDetailsContent';
 import { AddPhotoAlternate } from '@material-ui/icons';
 import { ButtonComp } from 'src/components';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
 import CarouselContent from 'src/components/Carousel';
+import { useTranslation } from 'react-i18next'
 
 const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
@@ -30,15 +28,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   iconStyle: {
     color: '#828282',
-    width: '80px',
-    height: '80px'
+    width: theme.MetricsSizes.large_xx * 2,
+    height: theme.MetricsSizes.large_xx * 2
   },
   gridStyle: {
     marginTop: theme.spacing(2.8),
     backgroundColor: theme.Colors.lightBlackGrey,
-    padding: theme.spacing(1, 0, 0, 1),
+    padding: theme.spacing(1, 0, 1, 0),
     borderRadius: theme.spacing(1),
-    height: '290px'
   },
 }));
 
@@ -50,7 +47,8 @@ type Props = {
 function TrashDetails({ edit, trashData }: Props) {
   const classes = useStyles();
   const theme = useTheme();
-  const uploadedImages = edit.getValue('order_images');
+  const { t } = useTranslation();
+  const uploadedImages = edit.getValue('order_images');  
   const length = uploadedImages.length;
 
   const onUploadFiles = async (event: any) => {
@@ -88,11 +86,13 @@ function TrashDetails({ edit, trashData }: Props) {
               iconImage={<AddPhotoAlternate className={classes.iconStyle} />}
               backgroundColor={'transparent'}
               onBrowseButtonClick={onUploadFiles}
+              btnWidth={theme.MetricsSizes.large_xxx}
+              height={theme.MetricsSizes.xl_large}
               isBrowseButton
             />
-            {'Choose your trash pictures'}
+            {t('PICKUP.trashPicture')}
           </Grid>
-          <CarouselContent data={uploadedImages} show={4} isVisible length={length}/>
+          <CarouselContent data={uploadedImages} show={4} length={length}/>
         </Grid>
       </Grid>
     </Grid>

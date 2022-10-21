@@ -1,4 +1,5 @@
 import {
+  Box,
   Grid,
   IconButton,
   makeStyles,
@@ -12,11 +13,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrowForward: {
-    top: '78.5%',
-    position: 'absolute',
-    zIndex: 1,
-    transform: 'translateY(-50%)',
-    right: theme.spacing(7.3),
+    right: 0,
     width: theme.MetricsSizes.regular_xxx,
     height: theme.MetricsSizes.regular_xxx,
     background: theme.Colors.whiteLightGrey,
@@ -27,43 +24,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   arrowBack: {
-    top: '78.5%',
-    position: 'absolute',
-    zIndex: 1,
-    left: theme.spacing(49.5),
-    transform: 'translateY(-50%)',
     background: theme.Colors.whiteLightGrey,
     opacity: '0.3',
     boxShadow: '1.09091px 2.18182px 4.36364px rgba(28, 28, 30, 0.06)',
     width: theme.MetricsSizes.regular_xxx,
     height: theme.MetricsSizes.regular_xxx,
-    '&:hover': {
-      backgroundColor: theme.Colors.whiteLightGrey
-    }
-  },
-  arrowBackContent: {
-    top: '78.5%',
-    position: 'absolute',
-    left: 395,
-    background: theme.Colors.whiteLightGrey,
-    opacity: '0.3',
-    boxShadow: '1.09091px 2.18182px 4.36364px rgba(28, 28, 30, 0.06)',
-    width: theme.MetricsSizes.regular_xxx,
-    height: theme.MetricsSizes.regular_xxx,
-    '&:hover': {
-      backgroundColor: theme.Colors.whiteLightGrey
-    }
-  },
-  arrowForwardContant: {
-    top: '81.3%',
-    position: 'absolute',
-    right: '56px',
-    transform: 'translateY(-50%)',
-    width: theme.MetricsSizes.regular_xxx,
-    height: theme.MetricsSizes.regular_xxx,
-    background: theme.Colors.whiteLightGrey,
-    opacity: '0.3',
-    boxShadow: '1.09091px 2.18182px 4.36364px rgba(28, 28, 30, 0.06)',
     '&:hover': {
       backgroundColor: theme.Colors.whiteLightGrey
     }
@@ -74,23 +39,33 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     overflow: 'hidden'
   },
-  carouselContainer: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
   iconStyle: {
-    color: theme.Colors.primaryGreen,
-    transform: 'matrix(1, 0, 0, 1, 0, 0)'
+    color: theme.Colors.primaryGreen
   },
   imageStyle: {
-    borderRadius: '6px',
-    width: '80px',
-    height: '80px',
+    borderRadius: theme.MetricsSizes.tiny_x,
+    width: theme.MetricsSizes.large_xx * 2,
+    height: theme.MetricsSizes.large_xx * 2,
     opacity: 1.0
   },
   gridStyle: {
-    paddingRight: theme.spacing(0.5)
+    paddingLeft: theme.spacing(0.5),
+    paddingTop: theme.spacing(0.9)
+  },
+  carouselStyle: {
+    width: '100%',
+    height: theme.MetricsSizes.large_xx * 2.1,
+    position: 'relative'
+  },
+  iconGrid: {
+    width: '100%',
+    display: 'flex',
+    zIndex: 1,
+    padding: theme.spacing(0, 1),
+    height: '90px',
+    position: 'absolute',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 }));
 
@@ -98,46 +73,23 @@ type CarouselProp = {
   children: any;
   show?: any;
   currentIndex?: any;
+  length?: any;
 };
 export const Carousel = (props: CarouselProp) => {
   const { children, show, currentIndex } = props;
   const classes = useStyles();
-  
+
   return (
-    <Grid className={classes.carouselContainer}>
-      <Grid className={classes.carouselWrapper}>
-        <Grid
-          className={`carousel-content show-${show}`}
-          style={{
-            transform: `translateX(-${currentIndex * (100 / show)}%)`
-          }}
-        >
-          {children}
-        </Grid>
+    <Grid className={classes.carouselWrapper}>
+      <Grid
+        style={{
+          transform: `translateX(-${currentIndex * (80 / show)}%)`,
+          display: 'flex'
+        }}
+      >
+        {children}
       </Grid>
     </Grid>
-  );
-};
-
-type Prop = {
-  imgUrl: any;
-  key: number;
-};
-
-export const Content = ({ imgUrl, key }: Prop) => {
-  const classes = useStyles();
-  const theme = useTheme();
-  return (
-    <>
-      <Grid className={classes.gridStyle}>
-        <img
-          src={imgUrl}
-          alt="image not found"
-          key={key}
-          className={classes.imageStyle}
-        />
-      </Grid>
-    </>
   );
 };
 
@@ -147,11 +99,8 @@ const CarouselContent = ({ data, show, length }: any) => {
 
   const handleNextClick = () => {
     if (currentIndex < length) {
-      if (currentIndex < length-show) {
+      if (currentIndex < length - show) {
         setCurrentIndex((prevState) => prevState + 0.5);
-      }
-      if (length === show) {
-        setCurrentIndex(0.5);
       }
     }
   };
@@ -163,24 +112,28 @@ const CarouselContent = ({ data, show, length }: any) => {
   };
 
   return (
-    <Grid>
-      <Carousel show={show} currentIndex={currentIndex}>
-        {data.map((item, index) => {
-          return <Content imgUrl={item.image_url} key={index} />;
+    <Grid className={classes.carouselStyle}>
+      <Grid className={classes.iconGrid}>
+        <IconButton onClick={handlePrevClick} className={classes.arrowBack}>
+          <ArrowBackIcon fontSize={'small'} className={classes.iconStyle} />
+        </IconButton>
+        <IconButton onClick={handleNextClick} className={classes.arrowForward}>
+          <ArrowForwardIcon fontSize={'small'} className={classes.iconStyle} />
+        </IconButton>
+      </Grid>
+      <Carousel show={show} currentIndex={currentIndex} length={length}>
+        {data.map((item: { image_url: string }, index: React.Key) => {
+          return (
+            <Grid key={index} className={classes.gridStyle}>
+              <img
+                src={item.image_url}
+                alt="image not found"
+                className={classes.imageStyle}
+              />
+            </Grid>
+          );
         })}
       </Carousel>
-      <IconButton
-        onClick={handlePrevClick}
-        className={classes.arrowBack}
-      >
-        <ArrowBackIcon fontSize={'small'} className={classes.iconStyle} />
-      </IconButton>
-      <IconButton
-        onClick={handleNextClick}
-        className={classes.arrowForward}
-      >
-        <ArrowForwardIcon fontSize={'small'} className={classes.iconStyle} />
-      </IconButton>
     </Grid>
   );
 };
