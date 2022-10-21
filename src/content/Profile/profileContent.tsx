@@ -1,10 +1,27 @@
-import { Grid, Typography, useTheme } from '@material-ui/core';
+import {
+  Grid,
+  makeStyles,
+  Theme,
+  Typography,
+  useTheme
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import { ButtonComp, TextInputComponent } from 'src/components';
 import Plus from '../../Assets/Images/Plus.svg';
 import ProfileAddressModel from './profileAddressModel';
 import { useTranslation } from 'react-i18next';
 import OTPInput, { ResendOTP } from 'otp-input-react';
+const useStyles = makeStyles((theme: Theme) => ({
+  buttonStyle: {
+    color: theme.Colors.secondary,
+    border: 'none',
+    fontWeight: theme.fontWeight.bold,
+    fontSize: theme.MetricsSizes.small_xx,
+    '&.MuiButton-label': {
+      fontFamily: 'DM sans'
+    }
+  }
+}));
 
 const ProfileContent = ({
   handleAddNewItem,
@@ -15,12 +32,24 @@ const ProfileContent = ({
 }) => {
   const [isEditable, setIsEditable] = useState<any>(true);
   const [isText, setIsText] = useState(false);
-  const [OTP, setOTP] = useState('');
   const theme = useTheme();
   const { t } = useTranslation();
+  const classes = useStyles();
 
   const handleEdit = () => {
     setIsEditable(true);
+  };
+  const OtpInputCard = ({ ...rest }) => {
+    const [OTP, setOTP] = useState('');
+    return (
+      <div
+      // style={{
+      //   padding: 12
+      // }}
+      >
+        <OTPInput value={OTP} onChange={setOTP} {...rest} />
+      </div>
+    );
   };
 
   return (
@@ -55,17 +84,22 @@ const ProfileContent = ({
             disabled={isEditable}
           />
         </Grid>
-        <Grid item xs={12} container justifyContent="center">
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', flexDirection: 'row-reverse' }}
+        >
           <ButtonComp
             buttonText={isEditable ? t('PROFILE.edit') : 'SAVE'}
             backgroundColor={theme.Colors.white}
-            buttonFontSize={14}
+            buttonFontSize={theme.MetricsSizes.small_xx}
             variant="outlined"
             buttonTextColor={theme.Colors.secondary}
-            buttonFontWeight={700}
-            btnWidth={'100px'}
-            height="30px"
+            buttonFontWeight={theme.fontWeight.bold}
+            btnWidth={'80px'}
+            height={'30px'}
             onClickButton={() => setIsEditable(false)}
+            style={{ border: 'none' }}
           />
         </Grid>
 
@@ -77,7 +111,7 @@ const ProfileContent = ({
             disabled={!isText}
             iconEnd={
               <button
-                style={{ color: '#6CB044', border: 'none' }}
+                className={classes.buttonStyle}
                 onClick={() => setIsText(true)}
               >
                 {!isText ? t('PROFILE.edit') : 'SAVE'}
@@ -85,41 +119,44 @@ const ProfileContent = ({
             }
           ></TextInputComponent>
           {isText && (
-            <Grid style={{ margin: 20, padding: 10 }} spacing={2} xs={12}>
-              <Grid item>
-                <OTPInput
-                  value={OTP}
-                  onChange={setOTP}
-                  autoFocus
+            <Grid style={{ marginTop: 10 }} spacing={2} xs={12}>
+              <Grid item xs={12}>
+                <OtpInputCard
+                  inputClassName="bottom__border"
+                  // autoFocus
                   OTPLength={6}
-                  otpType="number"
-                  disabled={true}
-                  //secure
-                />
-                <ResendOTP
-                  onResendClick={() => console.log('Resend clicked')}
+                  otpType="any"
+                  disabled={false}
+                  inputStyles={{
+                    border: 0,
+                    borderBottom: '1px solid #cbcbcb'
+                  }}
                 />
               </Grid>
-              <Grid item>
-                <Typography variant="h6">Having Trouble? Resend OTP</Typography>
+              <Grid item xs={12}>
+                <Typography variant="body1" style={{ marginTop: 10 }}>
+                  Having Trouble?{' '}
+                  <span
+                    style={{ color: theme.Colors.secondary }}
+                    onClick={() => console.log('Resend clicked')}
+                  >
+                    Resend OTP
+                  </span>
+                </Typography>
               </Grid>
-              <Grid
-                item
-                container
-                style={{ display: 'flex', margin: 20, padding: 10 }}
-              >
+              <Grid item container style={{ display: 'flex', marginTop: 15 }}>
                 <Grid item xs={3}>
                   <ButtonComp
                     buttonText={'Verify'}
                     //onClickButton={() => setIsText(false)}
                     btnBorderRadius={4}
-                    btnWidth={167}
-                    height={48}
-                    buttonFontSize={16}
+                    btnWidth={'167px'}
+                    height={'48px'}
+                    buttonFontSize={theme.MetricsSizes.small_xxx}
                   />
                 </Grid>
 
-                <Grid item style={{ marginLeft: 20 }} xs={3}>
+                <Grid item xs={3}>
                   <ButtonComp
                     buttonText={'Cancel'}
                     buttonTextColor={theme.Colors.secondary}
@@ -127,9 +164,9 @@ const ProfileContent = ({
                     variant="outlined"
                     onClickButton={() => setIsText(false)}
                     btnBorderRadius={4}
-                    btnWidth={167}
-                    height={48}
-                    buttonFontSize={16}
+                    btnWidth={'167px'}
+                    height={'48px'}
+                    buttonFontSize={theme.MetricsSizes.small_xxx}
                   />
                 </Grid>
               </Grid>
@@ -144,7 +181,7 @@ const ProfileContent = ({
             variant="standard"
             iconEnd={
               <button
-                style={{ color: '#6CB044', border: 'none' }}
+                className={classes.buttonStyle}
                 onClick={handleEditListItem}
               >
                 {t('PROFILE.edit')}
@@ -157,10 +194,10 @@ const ProfileContent = ({
           <ButtonComp
             buttonText={t('PROFILE.profileButton')}
             backgroundColor="white"
-            buttonFontSize={14}
+            buttonFontSize={theme.MetricsSizes.small_xx}
             variant="outlined"
-            buttonTextColor="#6CB044"
-            buttonFontWeight={700}
+            buttonTextColor={theme.Colors.secondary}
+            buttonFontWeight={theme.fontWeight.bold}
             btnWidth={'250px'}
             style={{
               marginTop: 30,
