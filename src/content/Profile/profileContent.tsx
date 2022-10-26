@@ -17,9 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: 'none',
     fontWeight: theme.fontWeight.bold,
     fontSize: theme.MetricsSizes.small_xx,
-    '&.MuiButton-label': {
-      fontFamily: 'DM sans'
-    }
+    fontFamily: 'DM Sans'
   }
 }));
 

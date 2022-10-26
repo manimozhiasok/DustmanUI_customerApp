@@ -44,6 +44,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
       borderColor: (props) => props.borderColor || theme.Colors.lightGrey,
       borderWidth: '1px'
+    },
+    ' & .MuiInput-underline.Mui-disabled:before ': {
+      borderBottomStyle: 'solid'
     }
   },
   helperRoot: {
