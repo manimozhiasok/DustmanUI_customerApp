@@ -1,14 +1,14 @@
 import {
+  Button,
   Grid,
   makeStyles,
   Theme,
   Typography,
   useTheme
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ButtonComp, TextInputComponent } from 'src/components';
 import Plus from '../../Assets/Images/Plus.svg';
-import ProfileAddressModel from './profileAddressModel';
 import { useTranslation } from 'react-i18next';
 import OTPInput, { ResendOTP } from 'otp-input-react';
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,13 +40,9 @@ const ProfileContent = ({
   const OtpInputCard = ({ ...rest }) => {
     const [OTP, setOTP] = useState('');
     return (
-      <div
-      // style={{
-      //   padding: 12
-      // }}
-      >
+      <Grid>
         <OTPInput value={OTP} onChange={setOTP} {...rest} />
-      </div>
+      </Grid>
     );
   };
 
@@ -108,12 +104,12 @@ const ProfileContent = ({
             variant="standard"
             disabled={!isText}
             iconEnd={
-              <button
+              <Button
                 className={classes.buttonStyle}
                 onClick={() => setIsText(true)}
               >
                 {!isText ? t('PROFILE.edit') : 'SAVE'}
-              </button>
+              </Button>
             }
           ></TextInputComponent>
           {isText && (
@@ -178,12 +174,12 @@ const ProfileContent = ({
             labelColor={theme.Colors.primary}
             variant="standard"
             iconEnd={
-              <button
+              <Button
                 className={classes.buttonStyle}
                 onClick={handleEditListItem}
               >
                 {t('PROFILE.edit')}
-              </button>
+              </Button>
             }
           />
         </Grid>

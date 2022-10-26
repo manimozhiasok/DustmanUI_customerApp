@@ -172,10 +172,10 @@ function BookYourPickup() {
       <Grid>
         <AccordionComponent
           expandIcon={false}
-          accordionPadding={true}
-          accordionDetailPadding={true}
+          accordionDetailPadding={theme.spacing(0, 6.5, 4.5, 6.5)}
+          accordionPadding={theme.spacing(2.25, 6.5, 1, 6.5)}
           displayContent={bookYourPickupAccordionContent}
-          summaryPadding={theme.spacing(4.25, 6.5)}
+          summaryPadding={theme.spacing(3.5, 6.5)}
           summaryMargin={theme.spacing(2.5, 0)}
           expandMoreIcon={<ExpandMoreIcon />}
         />

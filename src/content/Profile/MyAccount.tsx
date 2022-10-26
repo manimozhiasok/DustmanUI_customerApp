@@ -3,11 +3,6 @@ import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { AccordionComponent } from 'src/components';
 import { Grid } from '@material-ui/core';
-import { TrashDetailsIcon } from 'src/Assets/Images';
-import { SelectVehicleIcon } from 'src/Assets/Images';
-import { ScheduleYourPickupIcon } from 'src/Assets/Images';
-import { PickupAddressIcon } from 'src/Assets/Images';
-import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { AvatarCustomer } from 'src/Assets/Images';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ProfileContent from './profileContent';
@@ -49,7 +44,7 @@ function MyAccount({
           handleEditListItem={handleAddNewItem}
         />
       ),
-      displayIcon: AvatarCustomer,
+      profileIcon: AvatarCustomer,
       userName: t('PROFILE.userName'),
       userEmail: t('PROFILE.eMail')
     }
@@ -58,13 +53,13 @@ function MyAccount({
     {
       summaryHeading: t('PROFILE.language'),
       content: 'Change Language',
-      displayIcon: Translate,
+      profileIcon: Translate,
       background: 'none'
     },
     {
       summaryHeading: t('PROFILE.userType'),
       content: 'Change User Type',
-      displayIcon: UserSwitch,
+      profileIcon: UserSwitch,
       background: 'none'
     }
   ];
@@ -72,19 +67,19 @@ function MyAccount({
     {
       summaryHeading: t('PROFILE.help'),
       content: 'Help & Support',
-      displayIcon: Help,
+      profileIcon: Help,
       background: 'none'
     },
     {
       summaryHeading: t('PROFILE.about'),
       content: 'About',
-      displayIcon: Outline,
+      profileIcon: Outline,
       background: 'none'
     },
     {
       summaryHeading: t('PROFILE.logout'),
       content: 'Log Out',
-      displayIcon: SignOut,
+      profileIcon: SignOut,
       background: 'none'
     }
   ];
@@ -95,33 +90,29 @@ function MyAccount({
           displayContent={myProfileContent}
           withBorder
           isProfile
-          accordionPadding={false}
           isMyAccount
-          accordionDetailPadding={false}
+          summaryPadding={theme.spacing(0, 2)}
+          accordionDetailPadding={theme.spacing(0, 2)}
           accBorderColor={theme.Colors.greyDark}
-          expandMoreIcon={
-            <ExpandMoreIcon style={{ transform: 'rotate(270deg)' }} />
-          }
+          expandMoreIcon={<ExpandMoreIcon />}
+          expandIcon={true}
         />
       </Grid>
       <Grid item className={classes.contentContainer2}>
         <AccordionComponent
           displayContent={myAccountContent}
-          accordionDetailPadding={false}
+          summaryPadding={theme.spacing(0, 2)}
+          accordionDetailPadding={theme.spacing(0, 7)}
           expandIcon={true}
           isMyAccount
-          accordionPadding={false}
           expandMoreIcon={<ExpandMoreIcon />}
-          accordionExpanded={accordionExpanded}
-          isDivider
         />
         <AccordionComponent
           displayContent={AccountContent}
-          accordionPadding={false}
-          accordionDetailPadding={false}
           isMyAccount
           accordionExpanded={accordionExpanded}
-          isDivider
+          summaryPadding={theme.spacing(0, 2)}
+          accordionDetailPadding={theme.spacing(0, 7)}
         />
       </Grid>
     </Grid>

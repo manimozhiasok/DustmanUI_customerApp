@@ -7,10 +7,10 @@ import {
   createStyles,
   Accordion,
   AccordionSummary,
-  AccordionDetails,
-  Divider
+  AccordionDetails
 } from '@material-ui/core';
 import IconTileComponent from '../IconTileComponent';
+import AccordionIcon from './AccordionIcon';
 
 type Props = {
   bgColor: string;
@@ -21,8 +21,8 @@ type Props = {
   accBorderColor?: any;
   summaryMargin?: any;
   expandIcon?: boolean;
-  accordionPadding?: boolean;
-  accordionDetailPadding?: boolean;
+  accordionDetailPadding?: any;
+  accordionPadding?: any;
   background?: any;
 };
 
@@ -34,8 +34,7 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
         transition: 'none'
       },
       '& .MuiAccordionSummary-root.Mui-expanded': {
-        padding: (props) =>
-          props.accordionPadding ? theme.spacing(3.25, 6.5, 1, 6.5) : 'none'
+        padding: (props) => props.accordionPadding || 'none'
       },
       '& .MuiAccordion-root.Mui-expanded:last-child': {
         margin: theme.spacing(2.5, 0)
@@ -44,25 +43,20 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
     eachAccordionOuterContainer: {
       position: 'relative',
       border: (props) => (props.withBorder ? '0.5px solid' : 'none'),
-      borderColor: (props) => {
-        return props.accBorderColor ? props.accBorderColor : theme.Colors.black;
-      }
-    },
-    titleContainerStyle: {
-      //padding: (props)=>{return props.summaryPadding} //theme.spacing(3, 3, 3, 4)
+      borderColor: (props) => props.accBorderColor || theme.Colors.secondary
     },
     accordionSummaryStyle: {
-      padding: (props) => {
-        return props.summaryPadding;
-      },
+      padding: (props) => props.summaryPadding || 0,
       '& .MuiAccordionSummary-expandIcon.Mui-expanded': {
         display: (props) => (props.expandIcon ? 'flex' : 'none')
       }
     },
+    accordionDetailStyle: {
+      padding: (props) => props.accordionDetailPadding || 0,
+      display: 'block'
+    },
     accordionStyle: {
-      margin: (props) => {
-        return props.summaryMargin;
-      },
+      margin: (props) => props.summaryMargin || 0,
       boxShadow: 'none'
     },
     line: {
@@ -77,27 +71,6 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
       fontSize: theme.MetricsSizes.small_xxx,
       fontWeight: theme.fontWeight.bold,
       color: theme.Colors.primary
-    },
-    accordionDetailStyle: {
-      padding: (props) =>
-        props.accordionDetailPadding ? theme.spacing(0, 6.5, 4.5, 6.5) : 'none',
-      display: 'block'
-    },
-    subText: {
-      marginLeft: 20,
-      color: ' #343434',
-      fontWeight: 700,
-      fontSize: '17px'
-    },
-    userDetails: {
-      marginLeft: 20,
-      fontWeight: 400,
-      fontSize: ' 11px',
-      lineHeight: '0px'
-    },
-    isDivider: {
-      padding: theme.spacing(1, 0),
-      margin: `5px 0 0 ${theme.spacing(0.5)}px`
     }
   })
 );
@@ -108,7 +81,6 @@ const AccordionComponent = ({
   displayContent,
   withBorder,
   isProfile,
-  isDivider,
   summaryPadding,
   accBorderColor,
   expandMoreIcon,
@@ -124,7 +96,8 @@ const AccordionComponent = ({
   displayContent?: {
     summaryHeading: string;
     content: any;
-    displayIcon: any;
+    displayIcon?: any;
+    profileIcon?: any;
     userName?: string;
     userEmail?: string;
     background?: any;
@@ -133,16 +106,14 @@ const AccordionComponent = ({
   onTabChange?: any;
   withBorder?: boolean;
   isProfile?: boolean;
-  accordionDetailPadding?: boolean;
-  isDivider?: boolean;
+  accordionDetailPadding?: any;
   summaryPadding?: any;
   accBorderColor?: any;
   expandMoreIcon?: any;
   summaryMargin?: any;
   isMyAccount?: boolean;
   expandIcon?: boolean;
-  accordionPadding?: boolean;
-
+  accordionPadding?: any;
   accordionExpanded?: number;
 }) => {
   const classes = useStyles({
@@ -166,7 +137,6 @@ const AccordionComponent = ({
           <Grid
             key={index}
             container
-            direction="row"
             className={classes.eachAccordionOuterContainer}
           >
             {!isProfile && displayContent.length > index + 1 && (
@@ -184,12 +154,12 @@ const AccordionComponent = ({
                       iconToDisplay={item.displayIcon}
                     />
                   )}
-                  {isMyAccount && <img src={item.displayIcon} alt={'image'} />}
                   {isMyAccount && (
-                    <div>
-                      <p className={classes.subText}>{item.userName}</p>
-                      <p className={classes.userDetails}>{item.userEmail}</p>
-                    </div>
+                    <AccordionIcon
+                      profileIcon={item.profileIcon}
+                      userName={item.userName}
+                      userEmail={item.userEmail}
+                    />
                   )}
                   <Typography className={classes.titleStyle}>
                     {item.summaryHeading}
@@ -199,9 +169,6 @@ const AccordionComponent = ({
                   <Grid>{item.content}</Grid>
                 </AccordionDetails>
               </Accordion>
-              {/* <Grid className={classes.isDivider}>
-              <Divider/>
-              </Grid> */}
             </Grid>
           </Grid>
         );
