@@ -21,12 +21,14 @@ function App() {
           success: {
             style: {
               background: 'green'
-            }
+            },
+            duration: 2000
           },
           error: {
             style: {
               background: 'red'
-            }
+            },
+            duration: 2000
           }
         }}
       />

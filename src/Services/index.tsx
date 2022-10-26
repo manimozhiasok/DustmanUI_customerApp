@@ -1,15 +1,15 @@
-import { authService } from './authService';
-import { customerCreateService } from './customerCreateService';
+import { customerOrderService } from './customerOrderService';
 import { orderService } from './orderService';
-import { userService } from './userService';
 import { imageUploadService } from './imageUploadService';
 import { generalService } from './generalService';
+import { customerRegisterService } from './customerRegisterService';
+import { customerProfileService } from './customerProfileService';
 
 export const API_SERVICES = {
-  authService,
-  userService,
-  customerCreateService,
+  customerOrderService,
   orderService,
   imageUploadService,
-  generalService
+  generalService,
+  customerProfileService,
+  customerRegisterService
 };

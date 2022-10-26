@@ -90,3 +90,8 @@ export const isPhoneNumber = (number) => {
   const numberExp = /^([0-9()-]{10})$/;
   return number?.match(numberExp);
 };
+
+export const isOneTimePassWord = (number) => {
+  const numberExp = /^([0-9]{6})$/;
+  return number?.match(numberExp);
+};

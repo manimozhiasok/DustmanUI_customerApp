@@ -31,9 +31,9 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       color: theme.Colors.lightBlack
     },
     gridStyle: {
-      margin: 5,
+      margin: theme.spacing(0.9),
       background: theme.Colors.whiteGrey,
-      borderRadius: '8px',
+      borderRadius: 5,
       width: 152,
       height: 82,
       cursor: 'pointer'
@@ -55,11 +55,6 @@ function SelectVehicleType({
   const [activeCard, setActiveCard] = useState(0);
   const { t } = useTranslation();
 
-  const onClickItem = (selectId: number) => {
-    setActiveCard(selectId);
-    onClick(selectId);
-  };
-
   useEffect(() => {
     setActiveCard(selectedVal);
   }, [selectedVal]);
@@ -77,12 +72,16 @@ function SelectVehicleType({
             item
             className={classes.gridStyle}
             key={index}
-            onClick={() => onClickItem(item.id)}
+            onClick={() => onClick(item.id)}
             style={{
               background:
                 activeCard === item.id
-                  ? 'linear-gradient(274.42deg, #6CB043 0%, #92E3A9 124.45%)'
-                  : theme.Colors.whiteGrey
+                  ? 'linear-gradient(rgba(108, 176, 67, 0.2),rgba(146, 227, 169, 0.2))'
+                  : theme.Colors.whiteGrey,
+              border:
+                activeCard === item.id
+                  ? `1px solid rgba(107, 176, 67, 0.2)`
+                  : 'none'
             }}
           >
             <Typography className={classes.heading}>{item.name}</Typography>

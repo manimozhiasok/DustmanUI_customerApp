@@ -18,11 +18,12 @@ import OrderConfirmation from './OrderConfirmation';
 import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
-import { HTTP_STATUSES } from 'src/Config/constant';
+import { HTTP_STATUSES, TRASH_CATEGORY_ID } from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
 import ChooseCategoryComponent from './ChooseCategoryComponent';
+import useUserInfo from 'src/hooks/useUserInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
@@ -54,6 +55,7 @@ function BookYourPickup() {
   const [trashData, setTrashData] = useState([]);
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
+  const { userDetails } = useUserInfo();
 
   // const pickAddressFields = [
   //   'address_line1',
@@ -71,12 +73,14 @@ function BookYourPickup() {
       //   return toast.error('Please Fill all the pickup address details');
       // }
       let orderData = { ...initialValues, ...edit.edits };
-      const createUserRes: any =
-        await API_SERVICES.customerCreateService.create({
+      const createUserRes: any = await API_SERVICES.customerOrderService.create(
+        userDetails?.customer_id,
+        {
           data: orderData,
           successMessage: 'Customer order created successfully!',
           failureMessage: 'Failed to create Customer order '
-        });
+        }
+      );
       if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
         edit.reset();
       }
@@ -88,7 +92,10 @@ function BookYourPickup() {
   const fetchData = useCallback(async () => {
     try {
       const response: any =
-        await API_SERVICES.customerCreateService.getAllTrashCategory(1, 1);
+        await API_SERVICES.customerOrderService.getAllTrashCategory(
+          TRASH_CATEGORY_ID.customerTrash,
+          userDetails?.user_type_id
+        );
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         if (response?.data?.categories) {
           setTrashData(response.data.categories);

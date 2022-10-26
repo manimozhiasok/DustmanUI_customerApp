@@ -27,14 +27,13 @@ type CustomerDetailsProp = {
   failureMessage?: string;
 };
 
-export const customerCreateService = {
-  create: async ({
-    data,
-    successMessage,
-    failureMessage
-  }: CustomerDetailsProp) => {
+export const customerOrderService = {
+  create: async (
+    customerId: number,
+    { data, successMessage, failureMessage }: CustomerDetailsProp
+  ) => {
     const options = await apiOptions({
-      url: `${Config.BASE_URL}/api/createCustomerOrder/orderer/1`,
+      url: `${Config.BASE_URL}/api/createCustomerOrder/orderer/${customerId}`,
       method: 'post',
       data: data
     });

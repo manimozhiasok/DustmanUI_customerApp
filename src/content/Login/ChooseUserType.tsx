@@ -2,13 +2,16 @@ import { useTheme, Grid, Typography, Box } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { ButtonComp, LoginHeaderComp } from 'src/components';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { TermsAndConditionComp } from './TermsAndConditionComp';
 import SelectUserComp from './SelectUserComp';
 import { useEffect, useState } from 'react';
 import { API_SERVICES } from 'src/Services';
-import { HTTP_STATUSES } from 'src/Config/constant';
+import { HTTP_STATUSES, USER_TYPE_ID } from 'src/Config/constant';
+import { useEdit } from 'src/hooks/useEdit';
+import toast from 'react-hot-toast';
+import useUserInfo from 'src/hooks/useUserInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -19,11 +22,29 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ChooseUserType = () => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const { state }: any = useLocation();
   const theme = useTheme();
   const navigateTo = useNavigate();
   const [userTypes, setUserTypes] = useState([]);
-  const handleContinueClick = () => {
-    navigateTo('/homepage/customer-info', { replace: true });
+  const edit = useEdit(state?.formEdits);
+  const { updateUserInfo } = useUserInfo();
+
+  const handleContinueClick = async () => {
+    if (!edit.allFilled('user_type_id')) {
+      return toast.error('Please select any one of the user type!');
+    }
+    let data = { ...state?.formEdits, ...edit.edits };
+    const response: any = await API_SERVICES.customerProfileService.create(
+      state?.customerId,
+      { data, successMessage: 'Customer profile created successfully!' }
+    );
+    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (response?.data?.customerProfile?.customer_id) {
+        await updateUserInfo(response?.data?.customerProfile?.customer_id);
+        navigateTo('/homepage', { replace: true });
+      }
+    }
+    //  navigateTo('/homepage/customer-info', { replace: true });
   };
 
   const fetchData = async () => {
@@ -33,6 +54,12 @@ const ChooseUserType = () => {
         setUserTypes(response.data.user.slice(0, 3));
       }
     }
+  };
+
+  const onClickRadioButton = (val: number) => {
+    edit.update({
+      user_type_id: val
+    });
   };
 
   useEffect(() => {
@@ -47,8 +74,8 @@ const ChooseUserType = () => {
       />
       <SelectUserComp
         userTypeItems={userTypes}
-        selectedVal={undefined}
-        onClickRadioButton={undefined}
+        selectedVal={edit.getValue('user_type_id')}
+        onClickRadioButton={onClickRadioButton}
       />
       <ButtonComp
         buttonText={t('LOGIN.continue')}
