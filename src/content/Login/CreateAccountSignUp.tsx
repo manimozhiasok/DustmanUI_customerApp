@@ -6,11 +6,12 @@ import {
   LoginHeaderComp,
   TextInputComponent
 } from 'src/components';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { TermsAndConditionComp } from './TermsAndConditionComp';
 import { useEdit } from 'src/hooks/useEdit';
 import { isValidEmail } from 'src/Utils';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -23,6 +24,9 @@ const CreateAccountSignUp = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const navigateTo = useNavigate();
+  const [isError, setIsError] = useState(false);
+  const { state }: any = useLocation();
+
   const initialValues = {
     user_type_id: 0,
     first_name: '',
@@ -31,9 +35,22 @@ const CreateAccountSignUp = () => {
     image_url: ''
   };
   const edit = useEdit(initialValues);
+  const RequiredFields = ['first_name', 'last_name', 'email'];
 
   const handleContinueClick = () => {
-    navigateTo('/landing-page/choose-user-type');
+    if (
+      !edit.allFilled(...RequiredFields) ||
+      !isValidEmail(edit.getValue('email'))
+    ) {
+      setIsError(true);
+      return;
+    }
+    navigateTo('/landing-page/choose-user-type', {
+      state: {
+        formEdits: { ...initialValues, ...edit.edits },
+        customerId: state?.customerId
+      }
+    });
   };
 
   return (
@@ -50,6 +67,11 @@ const CreateAccountSignUp = () => {
           onChange={(e) => edit.update({ first_name: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
+          helperText={
+            isError &&
+            !edit.allFilled('first_name') &&
+            'Please Enter your first name'
+          }
         />
         <TextInputComponent
           inputHeight={66}
@@ -58,11 +80,11 @@ const CreateAccountSignUp = () => {
           onChange={(e) => edit.update({ last_name: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          // helperText={
-          //   edit.allFilled('last_name') &&
-          //   !isValidEmail(edit.getValue('last_name')) &&
-          //   "Please Enter your last name min of 'one' character of length"
-          // }
+          helperText={
+            isError &&
+            !edit.allFilled('last_name') &&
+            'Please Enter your last name'
+          }
         />
         <TextInputComponent
           inputHeight={66}
@@ -72,9 +94,9 @@ const CreateAccountSignUp = () => {
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
           helperText={
-            edit.allFilled('email') &&
-            !isValidEmail(edit.getValue('email')) &&
-            'Enter a valid email address'
+            ((isError && !edit.allFilled('email')) ||
+              (isError && !isValidEmail(edit.getValue('email')))) &&
+            'Please Enter your valid email address'
           }
         />
         <ButtonComp

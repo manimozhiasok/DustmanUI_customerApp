@@ -1,7 +1,7 @@
+import React, { useEffect, useState } from 'react';
 import { useTheme, Grid, Typography, Box } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -41,16 +41,15 @@ type Prop = {
   onClickRadioButton: (val: number) => void;
 };
 
-const SelectUserComp = ({ userTypeItems, selectedVal, onClickRadioButton }) => {
+const SelectUserComp = ({
+  userTypeItems,
+  selectedVal,
+  onClickRadioButton
+}: Prop) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const theme = useTheme();
   const [activeCard, setActiveCard] = useState(0);
-
-  const onClickItem = (selectId: number) => {
-    setActiveCard(selectId);
-    onClickRadioButton(selectId);
-  };
 
   useEffect(() => {
     setActiveCard(selectedVal);
@@ -71,13 +70,15 @@ const SelectUserComp = ({ userTypeItems, selectedVal, onClickRadioButton }) => {
             </Grid>
             <Grid
               className={classes.radioContainer}
-              onClick={() => onClickItem(item.id)}
+              onClick={() => onClickRadioButton(item.id)}
             >
               <Box
                 sx={{ height: 12, width: 12 }}
                 style={{
                   backgroundColor:
-                    activeCard === item.id ? theme.Colors.primary : 'none'
+                    activeCard === item.id
+                      ? theme.Colors.primary
+                      : theme.Colors.white
                 }}
               ></Box>
             </Grid>
@@ -88,4 +89,4 @@ const SelectUserComp = ({ userTypeItems, selectedVal, onClickRadioButton }) => {
   );
 };
 
-export default SelectUserComp;
+export default React.memo(SelectUserComp);

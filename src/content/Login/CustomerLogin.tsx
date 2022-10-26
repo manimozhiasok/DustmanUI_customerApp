@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { TermsAndConditionComp } from './TermsAndConditionComp';
 import { isPhoneNumber } from 'src/Utils';
+import { API_SERVICES } from 'src/Services';
+import { HTTP_STATUSES } from 'src/Config/constant';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -26,12 +28,26 @@ const CustomerLogin = () => {
   const [inputVal, setInputVal] = useState('');
   const [isError, setIsError] = useState(false);
 
-  const handleCustomerLoginButtonClick = () => {
+  const handleCustomerLoginButtonClick = async () => {
     if (inputVal === '' || !isPhoneNumber(inputVal)) {
       setIsError(true);
       return;
     }
-    navigateTo('/landing-page/verify-otp', { replace: true, state: inputVal });
+    let data = {
+      phoneNumber: inputVal
+    };
+    const response: any =
+      await API_SERVICES.customerRegisterService.generateOtp({
+        data
+      });
+    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (response?.data?.message) {
+        navigateTo('/landing-page/verify-otp', {
+          replace: true,
+          state: { mobileNumber: response?.data?.message }
+        });
+      }
+    }
   };
 
   const handleTextFieldValueChange = (event) => {
