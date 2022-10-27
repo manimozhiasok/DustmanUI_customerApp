@@ -24,6 +24,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
 import ChooseCategoryComponent from './ChooseCategoryComponent';
 import useUserInfo from 'src/hooks/useUserInfo';
+import PickupAddressModal from './PickupAddressModal';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
