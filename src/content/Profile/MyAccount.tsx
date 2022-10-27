@@ -8,6 +8,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ProfileContent from './profileContent';
 import { Help, Outline, SignOut, Translate, UserSwitch } from 'src/Assets';
 import { useTranslation } from 'react-i18next';
+import ChangeLanguage from './ChangeLanguage';
+import ChangeUsertype from './ChangeUsertype';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {},
@@ -52,13 +54,13 @@ function MyAccount({
   const myAccountContent = [
     {
       summaryHeading: t('PROFILE.language'),
-      content: 'Change Language',
+      content: <ChangeLanguage/>,
       profileIcon: Translate,
       background: 'none'
     },
     {
       summaryHeading: t('PROFILE.userType'),
-      content: 'Change User Type',
+      content: <ChangeUsertype/>,
       profileIcon: UserSwitch,
       background: 'none'
     }
