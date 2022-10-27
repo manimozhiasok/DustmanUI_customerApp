@@ -118,6 +118,7 @@
     "phoneNumber": "PHONE NUMBER",
     "emailAddress": "EMAIL ADDRESS",
     "profileAddress": "ADDRESS",
-    "profileButton": "ADD NEW ADDRESS"
+    "profileButton": "ADD NEW ADDRESS",
+    "verify":"VERIFY"
   }
 }

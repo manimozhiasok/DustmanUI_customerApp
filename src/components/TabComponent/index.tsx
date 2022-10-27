@@ -24,6 +24,11 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
       color: theme.Colors.primary,
       fontSize: theme.MetricsSizes.regular,
       fontWeight: theme.fontWeight.bold
+    },
+    textStyle: {
+      fontSize: theme.MetricsSizes.small_xxx,
+      color: theme.Colors.blueMediumDark,
+      fontWeight: theme.fontWeight.bold
     }
   })
 );

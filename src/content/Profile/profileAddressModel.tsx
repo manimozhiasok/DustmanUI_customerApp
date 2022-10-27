@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dialog, Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
+import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import { DialogComp, TextInputComponent } from 'src/components';
 import DualActionButton from 'src/components/DualActionButton';
 import { useTranslation } from 'react-i18next';
@@ -37,41 +37,35 @@ function ProfileAddressModel({
             <TextInputComponent
               inputLabel={t('PICKUP.houseNo')}
               labelColor={theme.Colors.primary}
-              //placeholderText="address_line1"
             />
           </Grid>
           <Grid item xs={12}>
             <TextInputComponent
               inputLabel={t('PICKUP.area')}
               labelColor={theme.Colors.primary}
-              //placeholderText="address_line2"
             />
           </Grid>
           <Grid item xs={12}>
             <TextInputComponent
               inputLabel={t('PICKUP.landmark')}
-              //placeholderText="address_line3"
               labelColor={theme.Colors.primary}
             />
           </Grid>
           <Grid item xs={12}>
             <TextInputComponent
               inputLabel={t('PICKUP.state')}
-              //placeholderText="state"
               labelColor={theme.Colors.primary}
             />
           </Grid>
           <Grid item xs={6}>
             <TextInputComponent
               inputLabel={t('PICKUP.city')}
-              //placeholderText="city"
               labelColor={theme.Colors.primary}
             />
           </Grid>
           <Grid item xs={6}>
             <TextInputComponent
               inputLabel={t('PICKUP.pincode')}
-              //placeholderText="pincode"
               labelColor={theme.Colors.primary}
             />
           </Grid>
@@ -79,7 +73,6 @@ function ProfileAddressModel({
           <Grid item xs={12}>
             <TextInputComponent
               inputLabel={t('PICKUP.mobileNo')}
-              //placeholderText="mobile_number"
               labelColor={theme.Colors.primary}
             />
           </Grid>
@@ -99,15 +92,14 @@ function ProfileAddressModel({
 
   return (
     <DialogComp
+      dialogTitle={t('PROFILE.profileButton')}
       maxWidth="md"
-      dialogTitle={'Add New Address'}
       open={open}
       onClose={onClose}
       dialogTitleStyle={{
-        //cannot apply makestyles
-        fontWeight: 700,
+        fontWeight: theme.fontWeight.bold,
         fontSize: theme.MetricsSizes.regular_xxx,
-        color: '#333333'
+        color: theme.Colors.primary
       }}
       dialogTitleClasses={{ padding: theme.spacing(2, 0, 0, 3) }}
       dialogClasses={{ paper: classes.dialogPaper }}

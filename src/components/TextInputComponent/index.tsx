@@ -119,7 +119,7 @@ const TextInputComponent = (props: Props) => {
               (isError && theme.Colors.redPrimary) ||
               labelColor ||
               theme.Colors.primary,
-            fontSize: inputLabelFont || theme.MetricsSizes.small_x,
+            fontSize: inputLabelFont || theme.MetricsSizes.small_xxx,
             marginBottom: theme.MetricsSizes.tiny
           }}
         >

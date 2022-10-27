@@ -55,7 +55,9 @@ const ProfileContent = ({
       >
         <Grid item xs={12}>
           <TextInputComponent
+            borderColor={theme.Colors.secondary}
             inputLabel={t('PROFILE.firstName')}
+            inputLabelFont={12}
             labelColor={theme.Colors.primary}
             variant="standard"
             disabled={isEditable}
@@ -65,6 +67,7 @@ const ProfileContent = ({
         <Grid item xs={12}>
           <TextInputComponent
             inputLabel={t('PROFILE.lastName')}
+            inputLabelFont={12}
             labelColor={theme.Colors.primary}
             variant="standard"
             disabled={isEditable}
@@ -73,6 +76,7 @@ const ProfileContent = ({
         <Grid item xs={12}>
           <TextInputComponent
             inputLabel={t('PROFILE.emailAddress')}
+            inputLabelFont={12}
             labelColor={theme.Colors.primary}
             variant="standard"
             disabled={isEditable}
@@ -92,7 +96,7 @@ const ProfileContent = ({
             buttonFontWeight={theme.fontWeight.bold}
             btnWidth={'80px'}
             height={'30px'}
-            onClickButton={() => setIsEditable(false)}
+            onClickButton={() => setIsEditable(!isEditable)}
             style={{ border: 'none' }}
           />
         </Grid>
@@ -100,13 +104,14 @@ const ProfileContent = ({
         <Grid item xs={12}>
           <TextInputComponent
             inputLabel={t('PROFILE.phoneNumber')}
+            inputLabelFont={12}
             labelColor={theme.Colors.primary}
             variant="standard"
             disabled={!isText}
             iconEnd={
               <Button
                 className={classes.buttonStyle}
-                onClick={() => setIsText(true)}
+                onClick={() => setIsText(!isText)}
               >
                 {!isText ? t('PROFILE.edit') : 'SAVE'}
               </Button>
@@ -123,7 +128,7 @@ const ProfileContent = ({
                   disabled={false}
                   inputStyles={{
                     border: 0,
-                    borderBottom: '1px solid #cbcbcb'
+                    borderBottom: '1px solid #6BB043'
                   }}
                 />
               </Grid>
@@ -141,7 +146,7 @@ const ProfileContent = ({
               <Grid item container style={{ display: 'flex', marginTop: 15 }}>
                 <Grid item xs={3}>
                   <ButtonComp
-                    buttonText={'Verify'}
+                    buttonText={t('PROFILE.verify')}
                     //onClickButton={() => setIsText(false)}
                     btnBorderRadius={4}
                     btnWidth={'167px'}
@@ -152,7 +157,7 @@ const ProfileContent = ({
 
                 <Grid item xs={3}>
                   <ButtonComp
-                    buttonText={'Cancel'}
+                    buttonText={t('ORDER.cancelButton')}
                     buttonTextColor={theme.Colors.secondary}
                     backgroundColor={theme.Colors.white}
                     variant="outlined"
@@ -171,6 +176,7 @@ const ProfileContent = ({
         <Grid item xs={12}>
           <TextInputComponent
             inputLabel={t('PROFILE.profileAddress')}
+            inputLabelFont={12}
             labelColor={theme.Colors.primary}
             variant="standard"
             iconEnd={
@@ -187,7 +193,7 @@ const ProfileContent = ({
         <Grid xs={12} container justifyContent="center">
           <ButtonComp
             buttonText={t('PROFILE.profileButton')}
-            backgroundColor="white"
+            backgroundColor={theme.Colors.whiteLightGrey}
             buttonFontSize={theme.MetricsSizes.small_xx}
             variant="outlined"
             buttonTextColor={theme.Colors.secondary}

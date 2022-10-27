@@ -33,7 +33,7 @@ const useStyles = makeStyles<Theme, ThemeProps>((theme) => {
         backgroundColor: (props) => props.bgColor || theme.Colors.secondary
       },
       '&.MuiButton-root': {
-        fontFamily: 'DN Sans'
+        fontFamily: 'DM Sans'
       }
     }
   };
