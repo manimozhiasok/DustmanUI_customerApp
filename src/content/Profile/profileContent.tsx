@@ -11,6 +11,8 @@ import { ButtonComp, TextInputComponent } from 'src/components';
 import Plus from '../../Assets/Images/Plus.svg';
 import { useTranslation } from 'react-i18next';
 import OTPInput, { ResendOTP } from 'otp-input-react';
+import { API_SERVICES } from 'src/Services';
+import { HTTP_STATUSES } from 'src/Config/constant';
 const useStyles = makeStyles((theme: Theme) => ({
   buttonStyle: {
     color: theme.Colors.secondary,
@@ -18,6 +20,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: theme.fontWeight.bold,
     fontSize: theme.MetricsSizes.small_xx,
     fontFamily: 'DM Sans'
+  },
+  buttonContainer: {
+    //paddingLeft: theme.spacing(2),
+    alignSelf: 'flex-end'
   }
 }));
 
@@ -45,6 +51,28 @@ const ProfileContent = ({
       </Grid>
     );
   };
+  const onUploadFiles = async (event: any) => {
+    let formData = new FormData();
+    let selectedImages = event.target.files;
+    for (let key in selectedImages) {
+      formData.append('file', selectedImages[key]);
+    }
+    // const uploadImageRes: any =
+    //   await API_SERVICES.imageUploadService.uploadImage(formData);
+    // if (uploadImageRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+    //   if (uploadImageRes?.data?.images.length) {
+    //     let imageData = [];
+    //     uploadImageRes?.data?.images.map((item) => {
+    //       imageData.push({ image_url: item.Location });
+    //     });
+    //     if (imageData?.length) {
+    //       // edit.update({
+    //       //   order_images: [...uploadedImages, ...imageData]
+    //       // });
+    //     }
+    //   }
+    // }
+  };
 
   return (
     <Grid container justifyContent="center">
@@ -53,6 +81,28 @@ const ProfileContent = ({
         spacing={2}
         style={{ padding: theme.spacing(0, 0, 0, 0) }}
       >
+        <Grid
+          item
+          xs={12}
+          style={{
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            paddingRight: 0
+          }}
+        >
+          <ButtonComp
+            buttonText={isEditable ? t('PROFILE.edit') : 'SAVE'}
+            backgroundColor={theme.Colors.white}
+            buttonFontSize={theme.MetricsSizes.small_xx}
+            variant="outlined"
+            buttonTextColor={theme.Colors.secondary}
+            buttonFontWeight={theme.fontWeight.bold}
+            btnWidth={'80px'}
+            height={'30px'}
+            onClickButton={() => setIsEditable(!isEditable)}
+            style={{ border: 'none' }}
+          />
+        </Grid>
         <Grid item xs={12}>
           <TextInputComponent
             borderColor={theme.Colors.secondary}
@@ -80,24 +130,6 @@ const ProfileContent = ({
             labelColor={theme.Colors.primary}
             variant="standard"
             disabled={isEditable}
-          />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          style={{ display: 'flex', flexDirection: 'row-reverse' }}
-        >
-          <ButtonComp
-            buttonText={isEditable ? t('PROFILE.edit') : 'SAVE'}
-            backgroundColor={theme.Colors.white}
-            buttonFontSize={theme.MetricsSizes.small_xx}
-            variant="outlined"
-            buttonTextColor={theme.Colors.secondary}
-            buttonFontWeight={theme.fontWeight.bold}
-            btnWidth={'80px'}
-            height={'30px'}
-            onClickButton={() => setIsEditable(!isEditable)}
-            style={{ border: 'none' }}
           />
         </Grid>
 
@@ -189,6 +221,29 @@ const ProfileContent = ({
               </Button>
             }
           />
+        </Grid>
+        <Grid container item xs={12}>
+          <Grid item xs={9}>
+            <TextInputComponent
+              disabled
+              inputLabelFont={12}
+              inputLabel={'CLICK HERE TO UPLOAD IMAGE'}
+              labelColor={theme.Colors.primary}
+              variant="standard"
+            />
+          </Grid>
+          <Grid item xs={3} className={classes.buttonContainer}>
+            <ButtonComp
+              buttonText={'UPLOAD'}
+              //backgroundColor={theme.Colors.white}
+              buttonFontSize={theme.MetricsSizes.small_xx}
+              variant="outlined"
+              buttonTextColor={theme.Colors.white}
+              buttonFontWeight={theme.fontWeight.bold}
+              onClickButton={onUploadFiles}
+              isBrowseButton
+            />
+          </Grid>
         </Grid>
 
         <Grid xs={12} container justifyContent="center">
