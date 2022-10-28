@@ -9,7 +9,7 @@ import {
 } from 'src/components';
 import { useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { isOneTimePassWord } from 'src/Utils';
+import { isOneTimePassWord, setCustomerId } from 'src/Utils';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
 import useUserInfo from 'src/hooks/useUserInfo';
@@ -45,12 +45,13 @@ const VerifyOtp = () => {
     });
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.customer) {
-        navigateTo('/landing-page/create-account', {
+        navigateTo('/create-account', {
           replace: true,
           state: { customerId: response.data.customer.id }
         });
       } else if (response?.data?.customerProfile?.customer_id) {
-        await updateUserInfo(response?.data?.customerProfile?.customer_id);
+        updateUserInfo(response?.data?.customerProfile?.customer_id);
+        setCustomerId(response.data.customerProfile.customer_id);
         navigateTo('/homepage', { replace: true });
       }
     }

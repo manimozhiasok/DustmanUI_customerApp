@@ -128,9 +128,11 @@ const OrderModalComp = (props: Props) => {
       <Grid item xs={10}>
         <ListTextItem image={MapPin} value={address} />
       </Grid>
-      <Grid item xs={12} className={classes.isDivider}>
-        {dividerLine && <Divider />}
-      </Grid>
+      {dividerLine && (
+        <Grid item xs={12} className={classes.isDivider}>
+          <Divider />
+        </Grid>
+      )}
       <Grid item xs={12} className={classes.completedStyle}>
         {orderHeading && (
           <Heading

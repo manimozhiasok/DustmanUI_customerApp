@@ -47,11 +47,11 @@ function LandingPage() {
   const navigateTo = useNavigate();
 
   const location = useLocation();
-  const match = useMatch('/landing-page');
+  const match = useMatch('/');
 
   const handleCloseIconClick = () => {
     closeLoginDrawer();
-    navigateTo('/landing-page', { replace: true });
+    navigateTo('/', { replace: true });
   };
 
   useEffect(() => {

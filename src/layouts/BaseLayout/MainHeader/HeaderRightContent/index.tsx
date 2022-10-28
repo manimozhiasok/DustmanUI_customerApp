@@ -1,17 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import {
   Box,
   Grid,
   useTheme,
   Theme,
   makeStyles,
-  Menu,
-  MenuItem,
-  ListItemText,
-  Button,
   Typography
 } from '@material-ui/core';
-import { Helmet } from 'react-helmet-async';
 import ButtonComp from './../../../../components/ButtonComp/index';
 import { LoginDrawerContext } from './../../../../contexts/LoginDrawerContext';
 import { useNavigate } from 'react-router';
@@ -40,7 +35,7 @@ function HeaderRightContent() {
 
   const handleCustomerButtonClick = () => {
     toggleLoginDrawer();
-    navigateTo('/landing-page/customer-login', { replace: true });
+    navigateTo('/login', { replace: true });
   };
   return (
     <Grid container className={classes.outerContainer}>

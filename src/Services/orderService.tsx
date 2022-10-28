@@ -40,6 +40,14 @@ type OrderServiceProp = {
 };
 
 export const orderService = {
+  getCustomerOrderByStatus: async (customerId: number, statusId: number) => {
+    const options = await apiOptions({
+      url: `${Config.BASE_URL}/api/getMyOrdersByStatus/customer/${customerId}/status/${statusId}`,
+      method: 'get'
+    });
+    return apiRequest(options);
+  },
+
   create: async ({
     data,
     successMessage,
@@ -60,6 +68,7 @@ export const orderService = {
     };
     return apiRequest(options, toastMessageConfig);
   },
+
   getAll: async (id: number) => {
     const options = await apiOptions({
       url: `${Config.BASE_URL}/api/getMyOrders/customer/${id}`,
@@ -67,6 +76,7 @@ export const orderService = {
     });
     return OrderData.OrderServiceGet;
   },
+
   getById: async (id: number) => {
     const options = await apiOptions({
       url: `${Config.BASE_URL}/api/getDetailsById/${id}`,
@@ -74,6 +84,7 @@ export const orderService = {
     });
     return apiRequest(options);
   },
+
   update: async (
     id: number,
     { data, successMessage, failureMessage }: OrderServiceProp
@@ -93,6 +104,7 @@ export const orderService = {
     };
     return apiRequest(options, toastMessageConfig);
   },
+
   replace: async (
     id: number,
     { data, successMessage, failureMessage }: OrderServiceProp
@@ -112,6 +124,7 @@ export const orderService = {
     };
     return apiRequest(options, toastMessageConfig);
   },
+
   delete: async (
     id: number,
     {

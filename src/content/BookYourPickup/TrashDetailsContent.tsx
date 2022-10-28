@@ -69,7 +69,7 @@ export const LeftContent = ({ edit, trashData }) => {
           backgroundColor={theme.Colors.lightWhiteGrey}
           // value={edit.getValue('order_items')}
           value={getTrashValue()}
-          borderColor={theme.Colors.lightWhiteGrey}
+          borderColor={'transparent'}
           inputHeight={theme.MetricsSizes.large_xxx}
           inputBorderRadius={theme.MetricsSizes.tiny_x}
           inputTextSize={theme.MetricsSizes.small_xx}
@@ -86,7 +86,7 @@ export const LeftContent = ({ edit, trashData }) => {
           labelColor={theme.Colors.deepGrey}
           textColor={theme.Colors.lightBlack}
           backgroundColor={theme.Colors.lightWhiteGrey}
-          borderColor={theme.Colors.lightWhiteGrey}
+          borderColor={'transparent'}
           inputHeight={theme.MetricsSizes.large_xxx}
           InputProps={{
             endAdornment: <InputAdornment position="start">kg.</InputAdornment>,
@@ -102,12 +102,22 @@ export const LeftContent = ({ edit, trashData }) => {
           {t('PICKUP.description')}
           <label className={classes.optionStyle}>(Optional)</label>
         </Typography>
-        <TextareaAutosize
+        {/* <TextareaAutosize
           minRows={5}
           value={edit.getValue('description')}
           onChange={(e) => edit.update({ description: e.target.value })}
           placeholder={t('PICKUP.anyInstructionsForOurPickupExecutive')}
           className={classes.textAreaStyle}
+        /> */}
+        <TextInputComponent
+          value={edit.getValue('description')}
+          onChange={(e) => edit.update({ description: e.target.value })}
+          placeholder={t('PICKUP.anyInstructionsForOurPickupExecutive')}
+          backgroundColor={theme.Colors.lightWhiteGrey}
+          inputHeight={123}
+          multiline
+          //rows={6}
+          borderColor={'transparent'}
         />
       </Grid>
     </Grid>

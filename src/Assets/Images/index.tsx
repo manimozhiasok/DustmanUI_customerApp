@@ -1,6 +1,9 @@
 import { ReactComponent as SunIcon } from './Sun.svg';
 import { ReactComponent as DateIcon } from './Date.svg';
 import { ReactComponent as PlaceMaker } from './PlaceMarker.svg';
+import PendingOrdersIcon from './PendingOrdersIcon.svg';
+import ConfirmedOrdersIcon from './ConfirmedOrdersIcon.svg';
+import CompletedOrdersIcon from './CompletedOrdersIcon.svg';
 import DustmanLogoHorizontal from './DustmanLogoHorizontal.svg';
 import LandingPageArc from './LandingPageArc.svg';
 import PatternDotted from './PatternDotted.svg';
@@ -13,8 +16,6 @@ import ScheduleYourPickupIcon from './ScheduleYourPickupIcon.svg';
 import PickupAddressIcon from './PickupAddressIcon.svg';
 import OrderConfirmationIcon from './OrderConfirmationIcon.svg';
 import OrderSuccessIcon from './OrderSuccessIcon.svg';
-import Aluminium from './Aluminium.svg';
-import Wood from './Wood.svg';
 import All from './All.svg';
 import Carton from './Carton.svg';
 import Cart from './Cart.svg';
@@ -24,9 +25,6 @@ import General from './General.svg';
 import Iron from './Iron.svg';
 import Paper from './Paper.svg';
 import Plastic from './Plastic.svg';
-import PendingOrdersIcon from './PendingOrdersIcon.svg';
-import ConfirmedOrdersIcon from './ConfirmedOrdersIcon.svg';
-import CompletedOrdersIcon from './CompletedOrdersIcon.svg';
 import bike from './bike.svg';
 import vehicleImage from './vehicleImage.svg';
 import checkImage from './checkImage.svg';
@@ -43,10 +41,10 @@ import LoginBtmImg from './LoginBtmImg.svg';
 import Date from './Date.svg';
 import YetToConfirm from './yetToConfirm.svg';
 import Confirm from './confirm.svg';
-import Help  from './Help.svg';
+import Help from './Help.svg';
 import Outline from './Outline.svg';
-import SignOut  from './SignOut.svg';
-import Translate  from './Translate.svg';
+import SignOut from './SignOut.svg';
+import Translate from './Translate.svg';
 import UserSwitch from './UserSwitch.svg';
 
 export {
@@ -62,8 +60,6 @@ export {
   PickupAddressIcon,
   OrderConfirmationIcon,
   OrderSuccessIcon,
-  Aluminium,
-  Wood,
   All,
   Carton,
   Cart,
@@ -96,8 +92,8 @@ export {
   Confirm,
   PlaceMaker,
   Help,
-  Outline, 
+  Outline,
   SignOut,
-  Translate, 
+  Translate,
   UserSwitch
 };

@@ -45,7 +45,7 @@ const CreateAccountSignUp = () => {
       setIsError(true);
       return;
     }
-    navigateTo('/landing-page/choose-user-type', {
+    navigateTo('/choose-user-type', {
       state: {
         formEdits: { ...initialValues, ...edit.edits },
         customerId: state?.customerId

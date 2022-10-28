@@ -48,7 +48,7 @@ function HomePage() {
 
   return (
     <Grid className={classes.superOuterContainer}>
-      <Grid container direction="row">
+      <Grid container>
         <Grid
           item
           xs={tabToDisplay === 0 ? 8 : 12}

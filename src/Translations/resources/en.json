@@ -42,7 +42,7 @@
   "scheduleYourPickup": "Schedule Your Pickup",
   "pickupAddress": "Pickup Address",
   "orderConfirmation": "Order Confirmation",
-  "orders": "ORDER#",
+  "orders": "ORDER #",
 
   "LOGIN": {
     "loginAndAccept": "By clicking on Login, I accept the ",
@@ -119,6 +119,6 @@
     "emailAddress": "EMAIL ADDRESS",
     "profileAddress": "ADDRESS",
     "profileButton": "ADD NEW ADDRESS",
-    "verify":"VERIFY"
+    "verify": "VERIFY"
   }
 }

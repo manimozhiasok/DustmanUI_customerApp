@@ -31,8 +31,12 @@ export const getToken = () => {
   return JSON.parse(localStorage.getItem('token'));
 };
 
-export const getUserId = () => {
-  return JSON.parse(localStorage.getItem('userId'));
+export const getCustomerId = () => {
+  return JSON.parse(localStorage.getItem('customerId'));
+};
+
+export const setCustomerId = (id: number) => {
+  return localStorage.setItem('customerId', JSON.stringify(id));
 };
 
 export const getDateFormat = (date: any) => {
@@ -43,11 +47,13 @@ export const getDateFormat = (date: any) => {
   const getYear = data.getFullYear();
   const getTime = data.toLocaleTimeString();
   const getDay = data.getDay();
+  const getDateString = data.toDateString();
   return {
     getMonth,
     getDate,
     getYear,
-    getTime
+    getTime,
+    getDateString
   };
 };
 

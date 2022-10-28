@@ -52,8 +52,6 @@ export const UserInfoProvider = ({ children }: Props) => {
     INITIAL_STATE.userAddressDetails
   );
 
-  console.log(userDetails, "ttererer'de");
-
   const updateUserDetails = async (id: number) => {
     const response: any =
       await API_SERVICES.customerProfileService.getProfileByCustomerId(id);
@@ -75,7 +73,7 @@ export const UserInfoProvider = ({ children }: Props) => {
       updateUserInfo: updateUserDetails,
       userAddressDetails: userAddresses
     };
-  }, [userDetails]);
+  }, [userDetails, updateUserDetails]);
 
   return (
     <UserInfoContext.Provider value={contextValue}>

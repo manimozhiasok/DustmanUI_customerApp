@@ -18,3 +18,5 @@ export { default as TabComponent } from './TabComponent';
 export { default as IconTileComponent } from './IconTileComponent';
 export { default as LoginHeaderComp } from './LoginHeaderComp';
 export { default as SlotButtonComp } from './SlotButtonComp';
+export { default as UHTabComponent } from './UHTabComponent';
+export { default as ImageTextComponent } from './ImageTextComponent';

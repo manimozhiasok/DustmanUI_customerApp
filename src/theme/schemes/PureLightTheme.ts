@@ -248,6 +248,28 @@ export const PureLightTheme = (options?: ThemeOptions) =>
           fontWeight: 700,
           textTransform: 'uppercase'
         }
+      },
+      overrides: {
+        MuiCssBaseline: {
+          '@global': {
+            body: {
+              scrollbarColor: '#D9D9D9',
+              '&::-webkit-scrollbar, & *::-webkit-scrollbar': {
+                backgroundColor: 'transparent',
+                width: 5,
+                borderRadius: 30
+              },
+              '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
+                border: '1px solid #D9D9D9',
+                backgroundColor: '#D9D9D9'
+              },
+              '&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover':
+                {
+                  backgroundColor: 'grey'
+                }
+            }
+          }
+        }
       }
     }
   );

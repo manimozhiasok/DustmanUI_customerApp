@@ -42,7 +42,7 @@ const CustomerLogin = () => {
       });
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.message) {
-        navigateTo('/landing-page/verify-otp', {
+        navigateTo('/verify-otp', {
           replace: true,
           state: { mobileNumber: response?.data?.message }
         });

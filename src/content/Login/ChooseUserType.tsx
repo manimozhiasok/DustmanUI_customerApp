@@ -40,7 +40,7 @@ const ChooseUserType = () => {
     );
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.customerProfile?.customer_id) {
-        await updateUserInfo(response?.data?.customerProfile?.customer_id);
+        updateUserInfo(response?.data?.customerProfile?.customer_id);
         navigateTo('/homepage', { replace: true });
       }
     }

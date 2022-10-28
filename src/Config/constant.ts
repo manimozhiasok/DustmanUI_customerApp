@@ -19,10 +19,17 @@ export const TOAST_TYPES = {
 };
 
 export const CUSTOMER_STATUS = {
-  0: 'Publish',
+  0: 'Pending',
   2: 'Accepted',
   3: 'Completed',
   4: 'Cancelled'
+};
+
+export const CUSTOMER_ORDER_STATUS = {
+  Pending: 0,
+  Confirmed: 2,
+  Completed: 3,
+  Cancelled: 4
 };
 
 export const HANDLE_SUBMIT = {
@@ -59,4 +66,9 @@ export const TRASH_CATEGORY_ID = {
   customerTrash: 1,
   vendorDropTrash: 2,
   vendorPickupTrash: 3
+};
+
+export const ORIENTATION = {
+  VERTICAL: 'vertical',
+  HORIZONTAL: 'horizontal'
 };

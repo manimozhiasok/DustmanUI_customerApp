@@ -20,39 +20,32 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 type Props = {
-  image?: any;
-  img?: any;
+  icon?: any;
   value?: any;
-  isDivider?: boolean;
 };
 
-const ListTextItem = (props: Props) => {
-  const { image, img, value, isDivider } = props;
+const ImageTextComponent = (props: Props) => {
+  const { icon, value } = props;
   const theme = useTheme();
   const classes = useStyles();
 
-  useEffect(() => {
-    //api call to get data
-  }, []);
-
   return (
-    <>
-      <Grid container spacing={1} alignItems="center" justifyContent="center">
-        {image && (
-          <Grid item>
-            <img src={image} />
-          </Grid>
+    <Grid style={{ display: 'flex', alignItems: 'center' }}>
+      <Grid>{icon && <img src={icon} />}</Grid>
+      <Grid>
+        {value && (
+          <Typography
+            style={{
+              fontSize: theme.MetricsSizes.tiny_xxx,
+              marginLeft: theme.spacing(1)
+            }}
+          >
+            {value}
+          </Typography>
         )}
-        <Grid item>
-          {value && <Typography style={{ fontSize: 10 }}>{value}</Typography>}
-        </Grid>
-        {/* {img && <Grid item>{img}</Grid>}
-        <Grid item xs={12}>
-          {isDivider && <Divider variant="middle" />}
-        </Grid> */}
       </Grid>
-    </>
+    </Grid>
   );
 };
 
-export default ListTextItem;
+export default ImageTextComponent;

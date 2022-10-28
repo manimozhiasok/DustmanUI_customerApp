@@ -107,7 +107,7 @@ function BookYourPickup() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [userDetails]);
 
   const handleTrashCatItems = (itemIds: any[]) => {
     edit.update({ order_items: itemIds });
@@ -115,7 +115,7 @@ function BookYourPickup() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const bookYourPickupAccordionContent = [
     {

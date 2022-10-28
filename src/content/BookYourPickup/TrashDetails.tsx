@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Grid,
-  makeStyles,
-  Theme,
-  useTheme
-} from '@material-ui/core';
+import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import { LeftContent } from './TrashDetailsContent';
 import { AddPhotoAlternate } from '@material-ui/icons';
 import { ButtonComp } from 'src/components';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
 import CarouselContent from 'src/components/Carousel';
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
@@ -32,11 +27,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.MetricsSizes.large_xx * 2
   },
   gridStyle: {
-    marginTop: theme.spacing(2.8),
+    marginTop: theme.spacing(3.5),
     backgroundColor: theme.Colors.lightBlackGrey,
     padding: theme.spacing(1, 0, 1, 0),
-    borderRadius: theme.spacing(1),
-  },
+    borderRadius: theme.spacing(1)
+  }
 }));
 
 type Props = {
@@ -48,7 +43,7 @@ function TrashDetails({ edit, trashData }: Props) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const uploadedImages = edit.getValue('order_images');  
+  const uploadedImages = edit.getValue('order_images');
   const length = uploadedImages.length;
 
   const onUploadFiles = async (event: any) => {
@@ -92,7 +87,7 @@ function TrashDetails({ edit, trashData }: Props) {
             />
             {t('PICKUP.trashPicture')}
           </Grid>
-          <CarouselContent data={uploadedImages} show={4} length={length}/>
+          <CarouselContent data={uploadedImages} show={4} length={length} />
         </Grid>
       </Grid>
     </Grid>

@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-import OrdersAndProfileTab from 'src/components/OrdersAndProfileTab';
-import { Aluminium, Wood } from 'src/Assets/Images';
-import { CompletedOrdersIcon } from 'src/Assets/Images';
-import { ConfirmedOrdersIcon } from 'src/Assets/Images';
-import { PendingOrdersIcon } from 'src/Assets/Images';
 import PendingOrderModal from './PendingOrderModal';
 import ConfirmedOrderModal from './ConfirmedOrderModel';
 import CompletedOrderModal from './CompletedOrderModal';
-import OrderComponentNew from 'src/components/orderComponetNew';
 import { API_SERVICES } from 'src/Services';
 import { useTranslation } from 'react-i18next';
+import useUserInfo from 'src/hooks/useUserInfo';
+import {
+  CUSTOMER_ORDER_STATUS,
+  HTTP_STATUSES,
+  ORIENTATION
+} from 'src/Config/constant';
+import { UHTabComponent } from 'src/components';
+import {
+  CompletedOrdersIcon,
+  ConfirmedOrdersIcon,
+  PendingOrdersIcon
+} from 'src/Assets';
+import OrderPreviewComp from './OrderPreviewComp';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -26,171 +33,131 @@ const useStyles = makeStyles((theme: Theme) => ({
   tabContainer: {
     border: '0.5px solid',
     borderColor: theme.Colors.greyDark,
-    marginRight: theme.spacing(2)
+    paddingTop: theme.spacing(4)
   },
-  tabContentOuterContainer: {
-    height: theme.spacing(65.5),
+  tabContentStyle: {
+    height: 513,
     overflowY: 'scroll'
   },
   tabContentContainer: {
-    marginRight: theme.spacing(2),
-    border: '0.5px solid',
-    borderColor: theme.Colors.greyDark
+    margin: theme.spacing(0, 2)
+  },
+  selectedTab: {
+    color: theme.Colors.whitePure,
+    background: theme.Colors.secondary,
+    fontWeight: theme.fontWeight.medium
   }
 }));
 
 function OrdersPage() {
   const classes = useStyles();
   const theme = useTheme();
-  const [tabToDisplay, setTabToDisplay] = useState(0);
+  const { userDetails } = useUserInfo();
+  const [selectedTab, setSelectedTab] = useState<number>(
+    CUSTOMER_ORDER_STATUS.Pending
+  );
+  const [orderDetails, setOrderDetails] = useState([]);
   const [modalOpen, setModalOpen] = useState<any>({ open: false });
-  const [confirmedModalOpen, setConfirmedModalOpen] = useState<any>({
-    open: false
-  });
-  const [completedModalOpen, setCompletedModalOpen] = useState<any>({
-    open: false
-  });
+  // const [confirmedModalOpen, setConfirmedModalOpen] = useState<any>({
+  //   open: false
+  // });
+  // const [completedModalOpen, setCompletedModalOpen] = useState<any>({
+  //   open: false
+  // });
   const { t } = useTranslation();
 
-  const onClickButton = () => {
+  const onClickViewDetails = () => {
     setModalOpen({
       open: true
     });
   };
 
-  const onClick = () => {
-    setConfirmedModalOpen({
-      open: true
-    });
-  };
+  // const onClick = () => {
+  //   setConfirmedModalOpen({
+  //     open: true
+  //   });
+  // };
 
-  const handleClick = () => {
-    setCompletedModalOpen({
-      open: true
-    });
-  };
+  // const handleClick = () => {
+  //   setCompletedModalOpen({
+  //     open: true
+  //   });
+  // };
 
   const OrdersTabItems = [
     {
       tabIcon: PendingOrdersIcon,
-      tabItem:   t('ORDER.pending')
+      label: t('ORDER.pending'),
+      value: CUSTOMER_ORDER_STATUS.Pending
     },
     {
       tabIcon: ConfirmedOrdersIcon,
-      tabItem:  t('ORDER.confirmed')
+      label: t('ORDER.confirmed'),
+      value: CUSTOMER_ORDER_STATUS.Confirmed
     },
     {
       tabIcon: CompletedOrdersIcon,
-      tabItem:  t('ORDER.completed')
+      label: t('ORDER.confirmed'),
+      value: CUSTOMER_ORDER_STATUS.Completed
     }
   ];
 
-  const handleSetSelectedTab = (value) => {
-    setTabToDisplay(value);
-  };
-
-  function TabContent(props) {
-    const { children, value, index } = props;
-    return value === index && <Grid>{children}</Grid>;
-  }
-
-  const ordersList = [
-    {
-      displayImage: Aluminium,
-      orderId: 123456789,
-      category: 'Metals,NewsPaper',
-      weight: '25kg',
-      place: 'Ambattur',
-      status: 'Yet to Confirm'
-    },
-    {
-      displayImage: Wood,
-      orderId: 123456789,
-      category: 'Metals,NewsPaper',
-      weight: '55kg',
-      place: 'Ariyalur',
-      status: 'Scheduled on Sat, Sep 24, 2022, 02:15 PM'
-    },
-    {
-      displayImage: Wood,
-      orderId: 123456789,
-      category: 'Metals,NewsPaper',
-      weight: '25kg',
-      place: 'Ambattur',
-      status: 'Delivered on Sat, Sep 24, 2022, 02:15 PM'
-    },
-    {
-      displayImage: Aluminium,
-      orderId: 123456789,
-      category: 'Metals,NewsPaper',
-      weight: '35kg',
-      place: 'Adayar',
-      status: 'Delivered on Sat, Sep 24, 2022, 02:15 PM'
+  const fetchData = useCallback(async () => {
+    const response: any =
+      await API_SERVICES.orderService.getCustomerOrderByStatus(
+        userDetails?.customer_id,
+        selectedTab
+      );
+    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (response?.data?.orders) {
+        setOrderDetails(response.data.orders);
+      }
     }
-  ];
-  const fetchData = async () => {
-    const response: any = await API_SERVICES.orderService.getAll(2);
-    console.log(
-      'response from order service',
-      response.data.orders[0].order_images
+  }, [selectedTab]);
+
+  const renderTabContent = () => {
+    return (
+      <Grid className={classes.tabContentContainer}>
+        <OrderPreviewComp
+          orderItems={orderDetails}
+          isCancelButton={true}
+          onClickViewDetails={onClickViewDetails}
+          //  onClickCancelButton={onClickCancelButton}
+        />
+      </Grid>
     );
   };
+
+  const onTabChange = (tabValue: any) => {
+    setSelectedTab(tabValue);
+  };
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <>
-      <Grid container className={classes.outerContainer}>
-        <Grid container className={classes.contentContainer}>
-          <Grid item className={classes.tabContainer}>
-            <OrdersAndProfileTab
-              displayContent={OrdersTabItems}
-              onTabChange={handleSetSelectedTab}
-              height="100%"
-            />
-          </Grid>
-          <Grid item xs={true} className={classes.tabContentOuterContainer}>
-            <TabContent
-              value={tabToDisplay}
-              index={0}
-              className={classes.tabContentContainer}
-            >
-              <OrderComponentNew
-                orderComponent={ordersList}
-                isButton={true}
-                onClickButton={onClickButton}
-              />
-            </TabContent>
-            <TabContent
-              value={tabToDisplay}
-              index={1}
-              className={classes.tabContentContainer}
-            >
-              <OrderComponentNew
-                orderComponent={ordersList}
-                onClickButton={onClick}
-              />
-            </TabContent>
-            <TabContent
-              value={tabToDisplay}
-              index={2}
-              className={classes.tabContentContainer}
-            >
-              <OrderComponentNew
-                orderComponent={ordersList}
-                onClickButton={handleClick}
-              />
-            </TabContent>
-          </Grid>
+      <Grid className={classes.outerContainer}>
+        <Grid className={classes.contentContainer}>
+          <UHTabComponent
+            currentTabVal={undefined}
+            tabContent={OrdersTabItems}
+            orientation={ORIENTATION.VERTICAL}
+            tabClasses={{ selected: classes.selectedTab }}
+            tabIndicatorColor={theme.Colors.primary}
+            isDivider={false}
+            tabContainerClassName={classes.tabContainer}
+            renderTabContent={renderTabContent}
+            tabContentClassName={classes.tabContentStyle}
+            onTabChange={onTabChange}
+          />
         </Grid>
       </Grid>
       {modalOpen.open && (
-        <PendingOrderModal
-          onClose={() => setModalOpen({ open: false })}
-        />
+        <PendingOrderModal onClose={() => setModalOpen({ open: false })} />
       )}
-      {confirmedModalOpen.open && (
+      {/* {confirmedModalOpen.open && (
         <ConfirmedOrderModal
           onClose={() => setConfirmedModalOpen({ open: false })}
         />
@@ -199,7 +166,7 @@ function OrdersPage() {
         <CompletedOrderModal
           onClose={() => setCompletedModalOpen({ open: false })}
         />
-      )}
+      )} */}
     </>
   );
 }

@@ -7,14 +7,12 @@ import {
   Grid
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { fontSize } from '@mui/system';
 
 type StyleProps = {
   width?: string | number;
   height?: string | number;
   borderColor?: string;
   bgColor?: string;
-  placeHolderColor?: string;
   borderRadius?: number;
   textColor?: string;
   inputTextWeight?: number;
@@ -24,33 +22,26 @@ type StyleProps = {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   subText: {
     width: (props) => props.width || '100%',
+    '& .MuiOutlinedInput-multiline': {
+      alignItems: 'initial',
+      padding: theme.spacing(1.25, 1.8)
+    },
     '& .MuiOutlinedInput-input': {
       '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
         '-webkit-appearance': 'none'
-      },
-      height: (props) => props.height || 46,
-      padding: theme.spacing(0, 1.8),
-      fontSize: (props) => props.inputTextSize || theme.MetricsSizes.small_x,
-      fontFamily: 'DM Sans',
-      fontWeight: (props) => props.inputTextWeight || theme.fontWeight.medium,
-      backgroundColor: (props) => props.bgColor || theme.Colors.white,
-      '&::placeholder': {
-        color: (props) => props.placeHolderColor || null
-      },
-      color: (props) => props.textColor || theme.Colors.inputText
+      }
     },
     '& .MuiOutlinedInput-root': {
-      borderRadius: (props) => props.borderRadius ?? theme.MetricsSizes.tiny
+      borderRadius: (props) => props.borderRadius ?? theme.MetricsSizes.tiny,
+      height: (props) => props.height || 46,
+      fontSize: (props) => props.inputTextSize || theme.MetricsSizes.small_xxx,
+      fontWeight: (props) => props.inputTextWeight || theme.fontWeight.medium,
+      backgroundColor: (props) => props.bgColor || theme.Colors.white,
+      color: (props) => props.textColor || theme.Colors.inputText
     },
     '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
       borderColor: (props) => props.borderColor || theme.Colors.lightGrey,
       borderWidth: '1px'
-    },
-    ' & .MuiInput-underline.Mui-disabled:before ': {
-      borderBottomStyle: 'solid'
-    },
-    ' & .MuiInput-underline:after': {
-      borderBottom: '0.5px solid #6CB044'
     }
   },
   helperRoot: {
@@ -71,7 +62,6 @@ type Props = TextFieldProps & {
   borderColor?: string;
   isError?: boolean;
   backgroundColor?: string;
-  placeHolderColor?: string;
   inputStyles?: any;
   inputBorderRadius?: number;
   textColor?: string;
@@ -93,7 +83,6 @@ const TextInputComponent = (props: Props) => {
     borderColor,
     isError = false,
     backgroundColor,
-    placeHolderColor,
     inputStyles,
     inputBorderRadius,
     textColor,
@@ -107,7 +96,6 @@ const TextInputComponent = (props: Props) => {
     width: inputWidth,
     height: inputHeight,
     bgColor: backgroundColor,
-    placeHolderColor: placeHolderColor,
     borderColor: (isError && theme.Colors.redPrimary) || borderColor,
     borderRadius: inputBorderRadius,
     textColor,
@@ -123,7 +111,7 @@ const TextInputComponent = (props: Props) => {
               (isError && theme.Colors.redPrimary) ||
               labelColor ||
               theme.Colors.primary,
-            fontSize: inputLabelFont || theme.MetricsSizes.small_xx,
+            fontSize: inputLabelFont || theme.MetricsSizes.small_xxx,
             marginBottom: theme.MetricsSizes.tiny
           }}
         >
