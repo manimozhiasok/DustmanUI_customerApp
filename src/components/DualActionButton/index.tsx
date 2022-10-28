@@ -26,7 +26,7 @@ const DualActionButton = (props: Props) => {
       }}
     >
       <ButtonComp
-        style={{ marginRight: 20 }}
+        style={{ marginRight: theme.MetricsSizes.regular_x }}
         backgroundColor={theme.Colors.grey}
         height="40px"
         buttonText="Cancel"

@@ -4,7 +4,7 @@ import {
   Theme,
   useTheme,
   Grid,
-  Typography,
+  Typography
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme: Theme) => {
     imgContainer: {
       paddingLeft: theme.spacing(1.6)
     },
-    valueStyle:{
-      paddingLeft:20,
+    valueStyle: {
+      paddingLeft: theme.MetricsSizes.regular_x,
       fontSize: theme.MetricsSizes.regular
     }
   };
@@ -34,7 +34,6 @@ type Props = {
 
 const ListTextItem = (props: Props) => {
   const { image, img, value, secImage } = props;
-  const theme = useTheme();
   const classes = useStyles();
 
   useEffect(() => {
@@ -50,7 +49,11 @@ const ListTextItem = (props: Props) => {
           </Grid>
         )}
         <Grid item xs={9}>
-          {value && <Typography variant="h4" className={classes.valueStyle}>{value}</Typography>}
+          {value && (
+            <Typography variant="h4" className={classes.valueStyle}>
+              {value}
+            </Typography>
+          )}
           {img && (
             <Grid
               container
@@ -73,5 +76,3 @@ const ListTextItem = (props: Props) => {
 };
 
 export default ListTextItem;
-
-

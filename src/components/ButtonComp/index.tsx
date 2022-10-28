@@ -93,7 +93,7 @@ const ButtonComp = (props: Props) => {
         onClick={onClickButton}
         endIcon={iconImage}
       >
-        UPLOAD
+        {buttonText}
         <input
           type="file"
           accept="image/jpg,image/jpeg"

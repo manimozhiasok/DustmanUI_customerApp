@@ -21,16 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
         borderColor: theme.Colors.lightGrey,
         borderWidth: '1px'
       },
-      // '&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      //   borderColor: theme.Colors.lightGrey,
-      //   borderWidth: '1px'
-      // },
-      // '& fieldset': {
-      //   borderColor: theme.Colors.lightGrey
-      // },
-      // '&:hover .MuiOutlinedInput-notchedOutline': {
-      //   borderColor: theme.Colors.lightGrey
-      // },
       '& .MuiSelect-select:focus': {
         background: 'transparent',
         outline: 'none'

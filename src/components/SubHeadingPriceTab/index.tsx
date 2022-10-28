@@ -13,27 +13,25 @@ type Props = {
 const useStyles = makeStyles<Theme>((theme: Theme) => {
   return {
     headingContainer: {
-        display: 'inline-flex',
+      display: 'inline-flex'
     },
     headingStyle: {
-        color: (props: Props) => props.headingColor,
-        fontSize: theme.MetricsSizes.regular_xx,
-        fontWeight: theme.fontWeight.medium,
-        textAlign: 'left'
+      color: (props: Props) => props.headingColor,
+      fontSize: theme.MetricsSizes.regular_xx,
+      fontWeight: theme.fontWeight.medium,
+      textAlign: 'left'
     }
   };
 });
 
-export const SubHeadingPriceTab = (
-  {
-     headingText,
-     headingColor 
-  }: 
-  { 
-      headingText: string,
-      headingColor: string 
-  }) => {
-  const classes = useStyles( {headingColor});
+export const SubHeadingPriceTab = ({
+  headingText,
+  headingColor
+}: {
+  headingText: string;
+  headingColor: string;
+}) => {
+  const classes = useStyles({ headingColor });
   const theme: Theme = useTheme();
 
   return (

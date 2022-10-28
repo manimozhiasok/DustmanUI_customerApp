@@ -1,12 +1,5 @@
-import {
-  Box,
-  Grid,
-  IconButton,
-  makeStyles,
-  Theme,
-  useTheme
-} from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import { Grid, IconButton, makeStyles, Theme } from '@material-ui/core';
+import React, { useState } from 'react';
 import './carousel.css';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';

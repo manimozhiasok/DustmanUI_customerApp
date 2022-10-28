@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'none'
   },
   buttonContainer: {
-    //paddingLeft: theme.spacing(2),
+    // paddingBottom: theme.spacing(2),
     alignSelf: 'flex-end'
   }
 }));
@@ -88,7 +88,7 @@ const ProfileContent = ({
           style={{
             display: 'flex',
             flexDirection: 'row-reverse',
-            padding: theme.spacing(2, 0, 0, 0)
+            paddingTop: theme.spacing(2)
           }}
         >
           <ButtonComp
@@ -132,7 +132,20 @@ const ProfileContent = ({
             disabled={isEditable}
           />
         </Grid>
-
+        <Grid container item xs={12}>
+          <Grid item xs={3} className={classes.buttonContainer}>
+            <ButtonComp
+              buttonText={'CLICK HERE TO UPLOAD IMAGE'}
+              backgroundColor={theme.Colors.secondary}
+              buttonFontSize={theme.MetricsSizes.small_xx}
+              variant="outlined"
+              buttonTextColor={theme.Colors.white}
+              buttonFontWeight={theme.fontWeight.bold}
+              onClickButton={onUploadFiles}
+              isBrowseButton
+            />
+          </Grid>
+        </Grid>
         <Grid item xs={12}>
           <TextInputComponent
             inputLabel={t('PROFILE.phoneNumber')}
@@ -150,7 +163,11 @@ const ProfileContent = ({
             }
           ></TextInputComponent>
           {isText && (
-            <Grid style={{ marginTop: 10 }} spacing={2} xs={12}>
+            <Grid
+              style={{ marginTop: theme.MetricsSizes.tiny_xxx }}
+              spacing={2}
+              xs={12}
+            >
               <Grid item xs={12}>
                 <OtpInputCard
                   inputClassName="bottom__border"
@@ -167,7 +184,10 @@ const ProfileContent = ({
               <Grid item xs={12}>
                 <Typography
                   variant="body1"
-                  style={{ color: theme.Colors.whiteGreyLight, marginTop: 10 }}
+                  style={{
+                    color: theme.Colors.whiteGreyLight,
+                    marginTop: theme.MetricsSizes.tiny_xxx
+                  }}
                 >
                   {t('PROFILE.havingTrouble')}
                   <Button
@@ -178,7 +198,14 @@ const ProfileContent = ({
                   </Button>
                 </Typography>
               </Grid>
-              <Grid item container style={{ display: 'flex', marginTop: 15 }}>
+              <Grid
+                item
+                container
+                style={{
+                  display: 'flex',
+                  marginTop: theme.MetricsSizes.small_xxx
+                }}
+              >
                 <Grid item xs={3}>
                   <ButtonComp
                     buttonText={t('PROFILE.verify')}
@@ -225,28 +252,6 @@ const ProfileContent = ({
             }
           />
         </Grid>
-        <Grid container item xs={12}>
-          <Grid item xs={9}>
-            <TextInputComponent
-              inputLabelFont={12}
-              inputLabel={'CLICK HERE TO UPLOAD IMAGE'}
-              labelColor={theme.Colors.whiteGreyLight}
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={3} className={classes.buttonContainer}>
-            <ButtonComp
-              buttonText={'UPLOAD'}
-              //backgroundColor={theme.Colors.white}
-              buttonFontSize={theme.MetricsSizes.small_xx}
-              variant="outlined"
-              buttonTextColor={theme.Colors.white}
-              buttonFontWeight={theme.fontWeight.bold}
-              onClickButton={onUploadFiles}
-              isBrowseButton
-            />
-          </Grid>
-        </Grid>
 
         <Grid xs={12} container justifyContent="center">
           <ButtonComp
@@ -258,7 +263,7 @@ const ProfileContent = ({
             buttonFontWeight={theme.fontWeight.bold}
             btnWidth={'250px'}
             style={{
-              marginTop: 30,
+              marginTop: theme.MetricsSizes.medium_xx,
               justifyContent: 'center'
             }}
             startIcon={<img src={Plus} />}

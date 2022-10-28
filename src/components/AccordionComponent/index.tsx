@@ -7,7 +7,8 @@ import {
   createStyles,
   Accordion,
   AccordionSummary,
-  AccordionDetails
+  AccordionDetails,
+  Divider
 } from '@material-ui/core';
 import IconTileComponent from '../IconTileComponent';
 import AccordionIcon from './AccordionIcon';
@@ -24,6 +25,7 @@ type Props = {
   accordionDetailPadding?: any;
   accordionPadding?: any;
   background?: any;
+  isDivider?: boolean;
 };
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
@@ -71,6 +73,10 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
       fontSize: theme.MetricsSizes.small_xxx,
       fontWeight: theme.fontWeight.bold,
       color: theme.Colors.primary
+    },
+    isDivider: {
+      padding: theme.spacing(2, 0),
+      margin: `5px 0 0 ${theme.spacing(0.5)}px`
     }
   })
 );
@@ -89,6 +95,7 @@ const AccordionComponent = ({
   isMyAccount,
   expandIcon,
   accordionPadding,
+  isDivider,
   background
 }: {
   backgroundColor?: string;
@@ -102,6 +109,7 @@ const AccordionComponent = ({
     userEmail?: string;
     background?: any;
   }[];
+  isDivider?: boolean;
   background?: any;
   onTabChange?: any;
   withBorder?: boolean;
@@ -127,7 +135,8 @@ const AccordionComponent = ({
     expandIcon,
     accordionPadding,
     accordionDetailPadding,
-    background
+    background,
+    isDivider: true
   });
 
   return (
@@ -169,6 +178,11 @@ const AccordionComponent = ({
                   <Grid>{item.content}</Grid>
                 </AccordionDetails>
               </Accordion>
+              {isDivider && (
+                <Grid className={classes.isDivider}>
+                  <Divider />
+                </Grid>
+              )}
             </Grid>
           </Grid>
         );

@@ -2,7 +2,7 @@ import React from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { AccordionComponent } from 'src/components';
-import { Grid } from '@material-ui/core';
+import { Divider, Grid, Typography } from '@material-ui/core';
 import { AvatarCustomer } from 'src/Assets/Images';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ProfileContent from './profileContent';
@@ -11,6 +11,10 @@ import { useTranslation } from 'react-i18next';
 import ChangeLanguage from './ChangeLanguage';
 import ChangeUsertype from './ChangeUsertype';
 
+type Props = {
+  text?: string;
+  image?: any;
+};
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {},
   contentContainer1: {
@@ -20,7 +24,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   contentContainer2: {
     width: '100% ',
     border: '1px solid ',
+    height: 418,
     borderColor: theme.Colors.greyDark
+  },
+  horizontalDivider: {
+    margin: theme.spacing(2, 0)
+  },
+  textStyle: {
+    padding: theme.spacing(0, 2.5),
+    fontSize: theme.MetricsSizes.small_xxx,
+    fontWeight: theme.fontWeight.bold,
+    color: theme.Colors.primary
+  },
+  containerStyle: {
+    padding: theme.spacing(1, 2)
   }
 }));
 
@@ -54,35 +71,29 @@ function MyAccount({
   const myAccountContent = [
     {
       summaryHeading: t('PROFILE.language'),
-      content: <ChangeLanguage/>,
+      content: <ChangeLanguage />,
       profileIcon: Translate,
       background: 'none'
     },
     {
       summaryHeading: t('PROFILE.userType'),
-      content: <ChangeUsertype/>,
+      content: <ChangeUsertype />,
       profileIcon: UserSwitch,
       background: 'none'
     }
   ];
   const AccountContent = [
     {
-      summaryHeading: t('PROFILE.help'),
-      content: 'Help & Support',
-      profileIcon: Help,
-      background: 'none'
+      text: t('PROFILE.help'),
+      image: Help
     },
     {
-      summaryHeading: t('PROFILE.about'),
-      content: 'About',
-      profileIcon: Outline,
-      background: 'none'
+      text: t('PROFILE.about'),
+      image: Outline
     },
     {
-      summaryHeading: t('PROFILE.logout'),
-      content: 'Log Out',
-      profileIcon: SignOut,
-      background: 'none'
+      text: t('PROFILE.logout'),
+      image: SignOut
     }
   ];
   return (
@@ -104,18 +115,32 @@ function MyAccount({
         <AccordionComponent
           displayContent={myAccountContent}
           summaryPadding={theme.spacing(0, 2)}
-          accordionDetailPadding={theme.spacing(0, 7)}
+          accordionDetailPadding={theme.spacing(0, 5.5)}
           expandIcon={true}
           isMyAccount
+          isDivider
           expandMoreIcon={<ExpandMoreIcon />}
         />
-        <AccordionComponent
-          displayContent={AccountContent}
-          isMyAccount
-          accordionExpanded={accordionExpanded}
-          summaryPadding={theme.spacing(0, 2)}
-          accordionDetailPadding={theme.spacing(0, 7)}
-        />
+        {AccountContent.map((item, index) => {
+          return (
+            <>
+              <Grid
+                key={index}
+                container
+                direction="row"
+                className={classes.containerStyle}
+              >
+                <Grid>
+                  <img src={item.image} alt={'image'} />
+                </Grid>
+                <Typography className={classes.textStyle}>
+                  {item.text}
+                </Typography>
+              </Grid>
+              <Divider className={classes.horizontalDivider} />
+            </>
+          );
+        })}
       </Grid>
     </Grid>
   );
