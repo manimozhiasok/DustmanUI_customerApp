@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: 'none',
     fontWeight: theme.fontWeight.bold,
     fontSize: theme.MetricsSizes.small_xx,
-    fontFamily: 'DM Sans'
+    fontFamily: 'DM Sans',
+    textTransform: 'none'
   },
   buttonContainer: {
     //paddingLeft: theme.spacing(2),
@@ -87,7 +88,7 @@ const ProfileContent = ({
           style={{
             display: 'flex',
             flexDirection: 'row-reverse',
-            paddingRight: 0
+            padding: theme.spacing(2, 0, 0, 0)
           }}
         >
           <ButtonComp
@@ -105,10 +106,9 @@ const ProfileContent = ({
         </Grid>
         <Grid item xs={12}>
           <TextInputComponent
-            borderColor={theme.Colors.secondary}
             inputLabel={t('PROFILE.firstName')}
             inputLabelFont={12}
-            labelColor={theme.Colors.primary}
+            labelColor={theme.Colors.whiteGreyLight}
             variant="standard"
             disabled={isEditable}
           />
@@ -118,7 +118,7 @@ const ProfileContent = ({
           <TextInputComponent
             inputLabel={t('PROFILE.lastName')}
             inputLabelFont={12}
-            labelColor={theme.Colors.primary}
+            labelColor={theme.Colors.whiteGreyLight}
             variant="standard"
             disabled={isEditable}
           />
@@ -127,7 +127,7 @@ const ProfileContent = ({
           <TextInputComponent
             inputLabel={t('PROFILE.emailAddress')}
             inputLabelFont={12}
-            labelColor={theme.Colors.primary}
+            labelColor={theme.Colors.whiteGreyLight}
             variant="standard"
             disabled={isEditable}
           />
@@ -137,7 +137,7 @@ const ProfileContent = ({
           <TextInputComponent
             inputLabel={t('PROFILE.phoneNumber')}
             inputLabelFont={12}
-            labelColor={theme.Colors.primary}
+            labelColor={theme.Colors.whiteGreyLight}
             variant="standard"
             disabled={!isText}
             iconEnd={
@@ -165,14 +165,17 @@ const ProfileContent = ({
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body1" style={{ marginTop: 10 }}>
-                  Having Trouble?{' '}
-                  <span
-                    style={{ color: theme.Colors.secondary }}
+                <Typography
+                  variant="body1"
+                  style={{ color: theme.Colors.whiteGreyLight, marginTop: 10 }}
+                >
+                  {t('PROFILE.havingTrouble')}
+                  <Button
+                    className={classes.buttonStyle}
                     onClick={() => console.log('Resend clicked')}
                   >
-                    Resend OTP
-                  </span>
+                    {t('PROFILE.resendOTP')}
+                  </Button>
                 </Typography>
               </Grid>
               <Grid item container style={{ display: 'flex', marginTop: 15 }}>
@@ -209,7 +212,7 @@ const ProfileContent = ({
           <TextInputComponent
             inputLabel={t('PROFILE.profileAddress')}
             inputLabelFont={12}
-            labelColor={theme.Colors.primary}
+            labelColor={theme.Colors.whiteGreyLight}
             variant="standard"
             disabled={!isText}
             iconEnd={
@@ -225,10 +228,9 @@ const ProfileContent = ({
         <Grid container item xs={12}>
           <Grid item xs={9}>
             <TextInputComponent
-              disabled
               inputLabelFont={12}
               inputLabel={'CLICK HERE TO UPLOAD IMAGE'}
-              labelColor={theme.Colors.primary}
+              labelColor={theme.Colors.whiteGreyLight}
               variant="standard"
             />
           </Grid>

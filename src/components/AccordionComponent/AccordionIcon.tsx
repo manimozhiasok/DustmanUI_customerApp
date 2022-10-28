@@ -6,7 +6,6 @@ type Props = {
   profileIcon?: string;
   userName?: string;
   userEmail?: string;
-  displayIcon?: any;
 };
 
 const useStyles = makeStyles<Theme, Props>((theme) => {
@@ -32,17 +31,12 @@ const useStyles = makeStyles<Theme, Props>((theme) => {
   };
 });
 
-const AccordionIcon = ({
-  profileIcon,
-  userName,
-  userEmail,
-  displayIcon
-}: Props) => {
+const AccordionIcon = ({ profileIcon, userName, userEmail }: Props) => {
   const classes = useStyles({});
 
   return (
     <Grid direction="row" className={classes.mainContainer}>
-      <img src={profileIcon || displayIcon} alt={'image'} />
+      <img src={profileIcon} alt={'image'} />
 
       <Grid className={classes.container}>
         <Typography className={classes.subText}>{userName}</Typography>

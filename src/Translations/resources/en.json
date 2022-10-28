@@ -119,6 +119,8 @@
     "emailAddress": "EMAIL ADDRESS",
     "profileAddress": "ADDRESS",
     "profileButton": "ADD NEW ADDRESS",
-    "verify": "VERIFY"
+    "verify": "VERIFY",
+    "havingTrouble":"Having Trouble ?",
+    "resendOTP":"Resend OTP"
   }
 }
