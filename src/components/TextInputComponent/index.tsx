@@ -30,7 +30,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
       height: (props) => props.height || 46,
       padding: theme.spacing(0, 1.8),
-      fontSize: (props) => props.inputTextSize || theme.MetricsSizes.small_xxx,
+      fontSize: (props) => props.inputTextSize || theme.MetricsSizes.small_x,
+      fontFamily: 'DM Sans',
       fontWeight: (props) => props.inputTextWeight || theme.fontWeight.medium,
       backgroundColor: (props) => props.bgColor || theme.Colors.white,
       '&::placeholder': {
@@ -47,6 +48,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     ' & .MuiInput-underline.Mui-disabled:before ': {
       borderBottomStyle: 'solid'
+    },
+    ' & .MuiInput-underline:after': {
+      borderBottom: '0.5px solid #6CB044'
     }
   },
   helperRoot: {
@@ -119,7 +123,7 @@ const TextInputComponent = (props: Props) => {
               (isError && theme.Colors.redPrimary) ||
               labelColor ||
               theme.Colors.primary,
-            fontSize: inputLabelFont || theme.MetricsSizes.small_xxx,
+            fontSize: inputLabelFont || theme.MetricsSizes.small_xx,
             marginBottom: theme.MetricsSizes.tiny
           }}
         >

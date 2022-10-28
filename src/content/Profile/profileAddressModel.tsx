@@ -101,7 +101,6 @@ function ProfileAddressModel({
         fontSize: theme.MetricsSizes.regular_xxx,
         color: theme.Colors.primary
       }}
-      dialogTitleClasses={{ padding: theme.spacing(2, 0, 0, 3) }}
       dialogClasses={{ paper: classes.dialogPaper }}
       renderDialogContent={renderDialogContent}
       renderAction={renderAction}

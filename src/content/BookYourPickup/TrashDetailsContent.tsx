@@ -21,8 +21,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.MetricsSizes.small_x
   },
   textAreaStyle: {
-    fontSize: theme.MetricsSizes.small_xxx,
+    fontSize: theme.MetricsSizes.small_x,
     fontWeight: theme.fontWeight.regular,
+    fontFamily: 'DM Sans',
     padding: theme.spacing(1),
     width: '100%',
     color: theme.Colors.lightBlack,

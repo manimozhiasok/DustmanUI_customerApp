@@ -179,6 +179,7 @@ const ProfileContent = ({
             inputLabelFont={12}
             labelColor={theme.Colors.primary}
             variant="standard"
+            disabled={!isText}
             iconEnd={
               <Button
                 className={classes.buttonStyle}
