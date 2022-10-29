@@ -2,6 +2,12 @@ import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
 
+export type DefaultProp = {
+  data: any;
+  successMessage?: string;
+  failureMessage?: string;
+};
+
 type CustomerDetailsProp = {
   data: {
     quantity_kg: number | string;
@@ -35,6 +41,26 @@ export const customerOrderService = {
     const options = await apiOptions({
       url: `${Config.BASE_URL}/api/createCustomerOrder/orderer/${customerId}`,
       method: 'post',
+      data: data
+    });
+    const toastMessageConfig = {
+      success: {
+        message: successMessage
+      },
+      failure: {
+        message: failureMessage
+      }
+    };
+    return apiRequest(options, toastMessageConfig);
+  },
+
+  replace: async (
+    id: number,
+    { data, successMessage, failureMessage }: DefaultProp
+  ) => {
+    const options = await apiOptions({
+      url: `${Config.BASE_URL}/api/replaceOrder/order/${id}`,
+      method: 'put',
       data: data
     });
     const toastMessageConfig = {

@@ -41,19 +41,32 @@ export const setCustomerId = (id: number) => {
 
 export const getDateFormat = (date: any) => {
   let data = new Date(date);
-  const optionsMonth: any = { month: 'long' };
+  const optionsMonth: any = { month: 'short' };
+  const optionsLongMonth: any = { month: 'long' };
+  const optionsDay: any = { weekday: 'short' };
+  const optionsLongDay: any = { weekday: 'long' };
   const getMonth = new Intl.DateTimeFormat('en-US', optionsMonth).format(data);
+  const getLongMonth = new Intl.DateTimeFormat(
+    'en-US',
+    optionsLongMonth
+  ).format(data);
   const getDate = data.getDate();
   const getYear = data.getFullYear();
   const getTime = data.toLocaleTimeString();
-  const getDay = data.getDay();
+  const getDay = new Intl.DateTimeFormat('en-US', optionsDay).format(data);
+  const getLongDay = new Intl.DateTimeFormat('en-US', optionsLongDay).format(
+    data
+  );
   const getDateString = data.toDateString();
   return {
     getMonth,
     getDate,
     getYear,
     getTime,
-    getDateString
+    getDateString,
+    getDay,
+    getLongDay,
+    getLongMonth
   };
 };
 

@@ -90,7 +90,7 @@ const PickupAddress = ({ edit }: { edit: any }) => {
       <RadioGroup>
         {data.map((item, index) => {
           return (
-            <>
+            <React.Fragment key={index}>
               <Grid container className={classes.gridStyle}>
                 <Grid item xs={2}>
                   <Typography>{item.location}</Typography>
@@ -105,7 +105,7 @@ const PickupAddress = ({ edit }: { edit: any }) => {
                 key={item.address}
                 value={item.address}
                 id={item.id}
-                control={<Radio onChange={handleChange}/>}
+                control={<Radio onChange={handleChange} />}
                 label={
                   <Typography className={classes.radioLableStyle}>
                     {item.address}
@@ -113,12 +113,12 @@ const PickupAddress = ({ edit }: { edit: any }) => {
                 }
                 className={classes.formStyle}
               />
-              {index === data.length -1 ? '' : <Divider/>}
-            </>
+              {index === data.length - 1 ? '' : <Divider />}
+            </React.Fragment>
           );
         })}
       </RadioGroup>
-      <Grid container justifyContent='center' item xs={12}>
+      <Grid container justifyContent="center" item xs={12}>
         <ButtonComp
           buttonText={'ADD NEW ADDRESS'}
           backgroundColor="white"

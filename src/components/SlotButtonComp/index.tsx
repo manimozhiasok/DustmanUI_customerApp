@@ -13,43 +13,32 @@ export type TimeSlotDetails = {
 type Prop = {
   timeSlotDetails: TimeSlotDetails[];
   handleChangeSlot: (slot: TimeSlotDetails) => void;
-  activeButtonVal: string;
 };
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
     buttonContainer: {
       padding: theme.spacing(2, 0)
-    },
-    date: {
-      fontFamily: 'Inter',
-      fontStyle: 'normal',
-      fontSize: theme.MetricsSizes.tiny_xx,
-      padding: theme.spacing(1, 0)
     }
   };
 });
 
 const SlotButtonComp = (props: Prop) => {
-  const { timeSlotDetails, handleChangeSlot, activeButtonVal } = props;
+  const { timeSlotDetails, handleChangeSlot } = props;
   const [activeButton, setActiveButton] = useState<any>(0);
   const theme = useTheme();
   const classes = useStyles();
 
   const handleClickSlot = (selectedSlot: TimeSlotDetails) => {
     handleChangeSlot(selectedSlot);
-    setActiveButton(selectedSlot?.value);
+    setActiveButton(selectedSlot?.id);
   };
-
-  useEffect(() => {
-    setActiveButton(activeButtonVal);
-  }, [activeButtonVal]);
 
   return (
     <Grid container direction="row">
       {timeSlotDetails.map((slot: TimeSlotDetails, index) => {
         return (
-          <Grid item xs={4} key={index}>
+          <Grid item xs key={index}>
             <ButtonComp
               buttonText={slot.text}
               buttonFontSize={theme.MetricsSizes.small_xx}
@@ -57,12 +46,12 @@ const SlotButtonComp = (props: Prop) => {
               buttonFontWeight={theme.fontWeight.regular}
               height={theme.MetricsSizes.large_x}
               backgroundColor={
-                activeButton === slot.value
+                activeButton === slot.id
                   ? theme.Colors.secondary
                   : theme.Colors.lightWhiteGrey
               }
               buttonTextColor={
-                activeButton === slot.value
+                activeButton === slot.id
                   ? theme.Colors.white
                   : theme.Colors.black
               }
@@ -70,7 +59,7 @@ const SlotButtonComp = (props: Prop) => {
                 <SunIcon
                   fontSize="small"
                   stroke={
-                    activeButton === slot.value
+                    activeButton === slot.id
                       ? theme.Colors.white
                       : theme.Colors.black
                   }
@@ -78,17 +67,21 @@ const SlotButtonComp = (props: Prop) => {
               }
               onClickButton={() => handleClickSlot(slot)}
             />
-            <Grid container className={classes.date}>
-              <Grid item xs={2}>
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              style={{ marginTop: theme.spacing(1) }}
+            >
+              <Grid item style={{ paddingTop: theme.MetricsSizes.tiny }}>
                 <DateIcon />
               </Grid>
               <Grid
                 item
-                xs={10}
                 style={{
-                  padding: 2,
                   fontSize: theme.MetricsSizes.tiny_xx,
-                  fontWeight: theme.fontWeight.regular
+                  fontWeight: theme.fontWeight.regular,
+                  marginLeft: theme.MetricsSizes.tiny + 1
                 }}
               >
                 {slot.time}

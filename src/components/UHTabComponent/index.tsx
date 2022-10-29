@@ -6,7 +6,6 @@ import {
   Divider,
   Theme,
   Grid,
-  Typography,
   useTheme
 } from '@material-ui/core';
 import { ORIENTATION } from 'src/Config/constant';
@@ -107,7 +106,7 @@ const UHTabComponent = (props: Props) => {
                         direction="row"
                         className={classes.contentContainer}
                       >
-                        {item.tabIcon ? (
+                        {item?.tabIcon ? (
                           <img
                             src={item.tabIcon}
                             alt="icon"
@@ -117,16 +116,16 @@ const UHTabComponent = (props: Props) => {
                             }}
                           />
                         ) : null}
-                        {item.label}
+                        {item?.label}
                       </Grid>
                     ) : (
                       item.label
                     )
                   }
                   key={index}
-                  value={item.value || index}
+                  value={item?.value || item?.id || index}
                   //  icon={ renderIcon(item.tabIcon)}
-                  disabled={!!item.disabled}
+                  disabled={!!item?.disabled}
                   className={classes.tabContent}
                   classes={{
                     ...tabClasses

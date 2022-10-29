@@ -32,10 +32,25 @@ const ScheduleYourPickup = ({ edit }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const timeSlotDetails1 = [
-    { id: 1, text: t('PICKUP.morning'), time: '9:00 AM  - 12:00 PM', value: 'morning' },
-    { id: 2, text: t('PICKUP.noon'), time: '1:00 PM  - 4:00 PM', value: 'afternoon' },
-    { id: 3, text: t('PICKUP.evening'), time: '4:00 PM  - 7:00 PM', value: 'evening' }
+  const timeSlotDetails = [
+    {
+      id: 1,
+      text: t('PICKUP.morning'),
+      time: '9:00 AM  - 12:00 PM',
+      value: 'morning'
+    },
+    {
+      id: 2,
+      text: t('PICKUP.noon'),
+      time: '1:00 PM  - 4:00 PM',
+      value: 'afternoon'
+    },
+    {
+      id: 3,
+      text: t('PICKUP.evening'),
+      time: '4:00 PM  - 7:00 PM',
+      value: 'evening'
+    }
   ];
 
   const handleChangeSlot = (selectedSlot: TimeSlotDetails) => {
@@ -74,7 +89,7 @@ const ScheduleYourPickup = ({ edit }) => {
 
   return (
     <Grid container spacing={3} className={classes.calendarContainerStyle}>
-      <Grid item xs={6}>
+      <Grid item xs>
         <Card className={classes.cardStyle}>
           <Calendar
             onChange={setPickupDate}
@@ -93,16 +108,18 @@ const ScheduleYourPickup = ({ edit }) => {
           />
         </Card>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs>
         <Grid container direction="column">
           <Grid item xs={12}>
             <Typography className={classes.heading}>Slot</Typography>
           </Grid>
-          <SlotButtonComp
-            timeSlotDetails={timeSlotDetails1}
-            handleChangeSlot={handleChangeSlot}
-            activeButtonVal={edit.getValue('customer_order_details').slot}
-          />
+          <Grid item xs={12}>
+            <SlotButtonComp
+              timeSlotDetails={timeSlotDetails}
+              handleChangeSlot={handleChangeSlot}
+              // activeButtonVal={edit.getValue('customer_order_details').slot}
+            />
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

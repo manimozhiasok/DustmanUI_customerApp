@@ -69,8 +69,8 @@ const OrderPreviewComp = ({
 }: {
   orderItems: any[];
   isCancelButton?: boolean;
-  onClickViewDetails?: () => void;
-  onClickCancelButton?: () => void;
+  onClickViewDetails?: (orderData: any) => void;
+  onClickCancelButton?: (orderId: number) => void;
 }) => {
   const classes = useStyles();
   const { t } = useTranslation();
@@ -78,7 +78,7 @@ const OrderPreviewComp = ({
   return (
     <>
       {orderItems.map((item, index) => {
-        const { getTime, getDateString } = getDateFormat(item.updated_at);
+        const { getTime, getDateString } = getDateFormat(item?.updated_at);
         return (
           <Grid
             container
@@ -97,7 +97,7 @@ const OrderPreviewComp = ({
               <Grid item className={classes.contentContainer}>
                 <Typography className={classes.subText}>
                   {t('orders')}
-                  {item.order_id}
+                  {item?.order_id}
                 </Typography>
                 <Grid style={{ display: 'flex', alignItems: 'center' }}>
                   <Typography className={classes.category}>
@@ -109,11 +109,14 @@ const OrderPreviewComp = ({
                   <Grid className={classes.imageAlign}>
                     <ImageTextComponent
                       icon={weightIcon}
-                      value={`${item.quantity_kg} Kg`}
+                      value={`${item?.quantity_kg} Kg`}
                     />
                   </Grid>
                   <Grid className={classes.imageAlign}>
-                    <ImageTextComponent icon={locationIcon} value={item.city} />
+                    <ImageTextComponent
+                      icon={locationIcon}
+                      value={item?.city}
+                    />
                   </Grid>
                 </Grid>
                 <Grid className={classes.buttonAlign}>
@@ -125,18 +128,23 @@ const OrderPreviewComp = ({
                     buttonTextColor={theme.Colors.secondary}
                     height={theme.MetricsSizes.medium_xx}
                     btnWidth={'110px'}
-                    style={{ marginRight: theme.spacing(1.25) }}
-                    onClickButton={onClickViewDetails}
+                    style={{
+                      marginRight: theme.spacing(1.25),
+                      borderColor: theme.Colors.secondary
+                    }}
+                    onClickButton={() => onClickViewDetails(item)}
                   />
                   {isCancelButton &&
-                    item.status_id === CUSTOMER_ORDER_STATUS.Pending && (
+                    item?.status_id === CUSTOMER_ORDER_STATUS.Pending && (
                       <ButtonComp
                         buttonText={'CANCEL'}
                         buttonFontSize={theme.MetricsSizes.tiny_xxx}
                         buttonTextColor={theme.Colors.white}
                         height={theme.MetricsSizes.medium_xx}
                         btnWidth={'72px'}
-                        onClickButton={onClickCancelButton}
+                        onClickButton={() =>
+                          onClickCancelButton(item?.order_id)
+                        }
                       />
                     )}
                 </Grid>
@@ -145,16 +153,16 @@ const OrderPreviewComp = ({
             <Grid item>
               <Grid className={classes.status}>
                 <Typography className={classes.subText}>
-                  {(item.status_id === CUSTOMER_ORDER_STATUS.Pending &&
+                  {(item?.status_id === CUSTOMER_ORDER_STATUS.Pending &&
                     'Yet to Confirm') ||
-                    (item.status_id === CUSTOMER_ORDER_STATUS.Confirmed &&
+                    (item?.status_id === CUSTOMER_ORDER_STATUS.Confirmed &&
                       `Scheduled on ${getDateString}, ${getTime}`) ||
-                    (item.status_id === CUSTOMER_ORDER_STATUS.Completed &&
+                    (item?.status_id === CUSTOMER_ORDER_STATUS.Completed &&
                       `Delivered on ${getDateString}, ${getTime}`)}
                 </Typography>
                 <img
                   src={
-                    item.status_id === CUSTOMER_ORDER_STATUS.Pending
+                    item?.status_id === CUSTOMER_ORDER_STATUS.Pending
                       ? YetToConfirm
                       : Confirm
                   }

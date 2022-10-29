@@ -4,7 +4,8 @@ import {
   useTheme,
   Box,
   Typography,
-  Theme
+  Theme,
+  Grid
 } from '@material-ui/core';
 
 type Props = {
@@ -33,7 +34,7 @@ const Heading = ({
   headerFontWeight,
   headerFontSize
 }: {
-  headingText: string | JSX.Element;
+  headingText: string;
   headingColor?: string;
   headerFontSize?: string | number;
   headerFontWeight?: number;
@@ -42,9 +43,9 @@ const Heading = ({
   const theme = useTheme();
 
   return (
-    <Box className={classes.headingContainer}>
+    <Grid className={classes.headingContainer}>
       <Typography className={classes.headingStyle}>{headingText}</Typography>
-    </Box>
+    </Grid>
   );
 };
 

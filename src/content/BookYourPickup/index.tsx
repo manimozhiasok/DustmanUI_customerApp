@@ -90,7 +90,7 @@ function BookYourPickup() {
     }
   };
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     try {
       const response: any =
         await API_SERVICES.customerOrderService.getAllTrashCategory(
@@ -107,7 +107,7 @@ function BookYourPickup() {
     } finally {
       setLoading(false);
     }
-  }, [userDetails]);
+  };
 
   const handleTrashCatItems = (itemIds: any[]) => {
     edit.update({ order_items: itemIds });
@@ -115,7 +115,7 @@ function BookYourPickup() {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   const bookYourPickupAccordionContent = [
     {

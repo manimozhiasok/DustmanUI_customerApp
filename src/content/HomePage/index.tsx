@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import AddressDisplay from './AddressDisplay';
-import { TabComponent } from 'src/components';
+import { UHTabComponent } from 'src/components';
 import BookYourPickup from 'src/content/BookYourPickup';
 import Profile from 'src/content/Profile';
 import OrdersPages from 'src/content/OrdersPage';
 import { BookYourPageImage } from 'src/Assets/Images';
-//import { createBrowserHistory } from 'history';
+import { ORIENTATION } from 'src/Config/constant';
 
 const useStyles = makeStyles((theme: Theme) => ({
   superOuterContainer: {
@@ -20,58 +20,53 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   addressContainer: {
     padding: theme.spacing(0, 0, 1, 0)
+  },
+  tabContainer: {
+    backgroundColor: 'transparent'
   }
 }));
 
 function HomePage() {
   const classes = useStyles();
   const theme = useTheme();
-  const [tabToDisplay, setTabToDisplay] = useState(0);
-  // const history = createBrowserHistory();
+  const tabItems = [
+    { id: 1, label: 'Book Your Pickup', component: () => <BookYourPickup /> },
+    { id: 2, label: 'Orders', component: () => <OrdersPages /> },
+    { id: 3, label: 'Profile', component: () => <Profile /> }
+  ];
+  const [selectedTab, setSelectedTab] = useState(tabItems[0]?.id);
 
-  const handleSetSelectedTab = (value) => {
-    setTabToDisplay(value);
+  const onTabChange = (value: any) => {
+    setSelectedTab(value);
   };
 
-  function TabContent(props) {
-    const { children, value, index } = props;
-    return value === index && <>{children}</>;
-  }
-
-  // useEffect(() => {
-  //   history.listen(({ action }) => {
-  //     if (action === 'POP') {
-  //       history.go(1);
-  //     }
-  //   });
-  // }, []);
+  const renderTabContent = (tabVal?: any) => {
+    const findActiveTab = tabItems.find(({ id }) => id === tabVal);
+    return <Grid>{findActiveTab ? findActiveTab.component() : null}</Grid>;
+  };
 
   return (
     <Grid className={classes.superOuterContainer}>
       <Grid container>
         <Grid
           item
-          xs={tabToDisplay === 0 ? 8 : 12}
+          xs={selectedTab === tabItems[0]?.id ? 8 : 12}
           className={classes.addressContainer}
         >
           <AddressDisplay />
         </Grid>
-        <Grid item xs={tabToDisplay === 0 ? 8 : 12}>
-          <TabComponent
-            displayContent={['Book Your Pickup', 'Orders', 'Profile']}
-            onTabChange={handleSetSelectedTab}
+        <Grid item xs={selectedTab === tabItems[0]?.id ? 8 : 12}>
+          <UHTabComponent
+            currentTabVal={selectedTab}
+            tabContent={tabItems}
+            orientation={ORIENTATION.HORIZONTAL}
+            tabIndicatorColor={theme.Colors.secondary}
+            tabContainerClassName={classes.tabContainer}
+            renderTabContent={renderTabContent}
+            onTabChange={onTabChange}
           />
-          <TabContent value={tabToDisplay} index={0}>
-            <BookYourPickup />
-          </TabContent>
-          <TabContent value={tabToDisplay} index={1}>
-            <OrdersPages />
-          </TabContent>
-          <TabContent value={tabToDisplay} index={2}>
-            <Profile />
-          </TabContent>
         </Grid>
-        {tabToDisplay === 0 && (
+        {selectedTab === tabItems[0]?.id && (
           <Grid item xs={4} className={classes.imageContainer}>
             <img src={BookYourPageImage} alt="Image" />
           </Grid>

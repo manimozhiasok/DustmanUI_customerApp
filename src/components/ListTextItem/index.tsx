@@ -10,30 +10,26 @@ import {
 const useStyles = makeStyles((theme: Theme) => {
   return {
     outerContainer: {
-      paddingTop: theme.spacing(1)
-    },
-    mapStyle: {
-      marginLeft: theme.spacing(6)
+      marginTop: theme.spacing(1.75)
     },
     imgContainer: {
       paddingLeft: theme.spacing(1.6)
     },
     valueStyle: {
-      paddingLeft: theme.MetricsSizes.regular_x,
-      fontSize: theme.MetricsSizes.regular
+      marginLeft: theme.spacing(2.4)
     }
   };
 });
 
 type Props = {
-  image?: any;
-  img?: any;
-  value?: any;
+  icon?: any;
+  firstImg?: any;
+  value?: string;
   secImage?: any;
 };
 
 const ListTextItem = (props: Props) => {
-  const { image, img, value, secImage } = props;
+  const { icon, firstImg, value, secImage } = props;
   const classes = useStyles();
 
   useEffect(() => {
@@ -41,37 +37,27 @@ const ListTextItem = (props: Props) => {
   }, []);
 
   return (
-    <>
-      <Grid container spacing={1} className={classes.outerContainer}>
-        {image && (
-          <Grid item>
-            <img src={image} />
+    <Grid container className={classes.outerContainer}>
+      {icon && (
+        <Grid item>
+          <img src={icon} />
+        </Grid>
+      )}
+      <Grid item xs className={classes.valueStyle}>
+        {value && <Typography variant="h5">{value}</Typography>}
+        {firstImg && (
+          <Grid
+            container
+            className={classes.imgContainer}
+            direction="row"
+            spacing={2}
+          >
+            <Grid item>{firstImg}</Grid>
+            <Grid item>{secImage}</Grid>
           </Grid>
         )}
-        <Grid item xs={9}>
-          {value && (
-            <Typography variant="h4" className={classes.valueStyle}>
-              {value}
-            </Typography>
-          )}
-          {img && (
-            <Grid
-              container
-              className={classes.imgContainer}
-              direction="row"
-              spacing={8}
-            >
-              <Grid item xs={6}>
-                {img}
-              </Grid>
-              <Grid item xs={6}>
-                {secImage}
-              </Grid>
-            </Grid>
-          )}
-        </Grid>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

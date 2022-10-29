@@ -100,7 +100,8 @@
     "cancelButton": "CANCEL",
     "pending": "Pending",
     "confirmed": "Confirmed",
-    "completed": "Completed"
+    "completed": "Completed",
+    "cancelCustomerOrder": "Are you sure want to cancel the order?"
   },
 
   "PROFILE": {
@@ -120,7 +121,7 @@
     "profileAddress": "ADDRESS",
     "profileButton": "ADD NEW ADDRESS",
     "verify": "VERIFY",
-    "havingTrouble":"Having Trouble ?",
-    "resendOTP":"Resend OTP"
+    "havingTrouble": "Having Trouble ?",
+    "resendOTP": "Resend OTP"
   }
 }

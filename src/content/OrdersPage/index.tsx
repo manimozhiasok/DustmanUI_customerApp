@@ -2,18 +2,17 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-import PendingOrderModal from './PendingOrderModal';
-import ConfirmedOrderModal from './ConfirmedOrderModel';
-import CompletedOrderModal from './CompletedOrderModal';
+import CustomerOrderModal from './CustomerOrderModal';
 import { API_SERVICES } from 'src/Services';
 import { useTranslation } from 'react-i18next';
 import useUserInfo from 'src/hooks/useUserInfo';
 import {
+  CONFIRM_MODAL,
   CUSTOMER_ORDER_STATUS,
   HTTP_STATUSES,
   ORIENTATION
 } from 'src/Config/constant';
-import { UHTabComponent } from 'src/components';
+import { UHConfirmModal, UHTabComponent } from 'src/components';
 import {
   CompletedOrdersIcon,
   ConfirmedOrdersIcon,
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   tabContentContainer: {
     margin: theme.spacing(0, 2)
   },
-  selectedTab: {
+  selectedTabStyle: {
     color: theme.Colors.whitePure,
     background: theme.Colors.secondary,
     fontWeight: theme.fontWeight.medium
@@ -58,31 +57,17 @@ function OrdersPage() {
   );
   const [orderDetails, setOrderDetails] = useState([]);
   const [modalOpen, setModalOpen] = useState<any>({ open: false });
-  // const [confirmedModalOpen, setConfirmedModalOpen] = useState<any>({
-  //   open: false
-  // });
-  // const [completedModalOpen, setCompletedModalOpen] = useState<any>({
-  //   open: false
-  // });
+  const [confirmModal, setConfirmModal] = useState<any>({
+    open: false
+  });
   const { t } = useTranslation();
 
-  const onClickViewDetails = () => {
+  const onClickViewDetails = (orderData: any) => {
     setModalOpen({
-      open: true
+      open: true,
+      orderData: orderData
     });
   };
-
-  // const onClick = () => {
-  //   setConfirmedModalOpen({
-  //     open: true
-  //   });
-  // };
-
-  // const handleClick = () => {
-  //   setCompletedModalOpen({
-  //     open: true
-  //   });
-  // };
 
   const OrdersTabItems = [
     {
@@ -115,6 +100,37 @@ function OrdersPage() {
     }
   }, [selectedTab]);
 
+  const onClickCancelButton = (orderId: number) => {
+    const onCancelClick = () => {
+      setConfirmModal({ open: false });
+    };
+    const onConfirmClick = async () => {
+      let updateData = {
+        status_id: 4
+      };
+      const response: any = await API_SERVICES.customerOrderService.replace(
+        orderId,
+        {
+          data: updateData,
+          successMessage: 'Order cancelled successfully!'
+        }
+      );
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        onCancelClick();
+        setModalOpen({ open: false });
+        fetchData();
+      }
+    };
+    let props = {
+      color: theme.Colors.redPrimary,
+      description: t('ORDER.cancelCustomerOrder'),
+      title: t('cancelOrder'),
+      iconType: CONFIRM_MODAL.cancel
+    };
+    setConfirmModal({ open: true, onConfirmClick, onCancelClick, ...props });
+    //   fetchData();
+  };
+
   const renderTabContent = () => {
     return (
       <Grid className={classes.tabContentContainer}>
@@ -122,7 +138,7 @@ function OrdersPage() {
           orderItems={orderDetails}
           isCancelButton={true}
           onClickViewDetails={onClickViewDetails}
-          //  onClickCancelButton={onClickCancelButton}
+          onClickCancelButton={onClickCancelButton}
         />
       </Grid>
     );
@@ -141,10 +157,10 @@ function OrdersPage() {
       <Grid className={classes.outerContainer}>
         <Grid className={classes.contentContainer}>
           <UHTabComponent
-            currentTabVal={undefined}
+            currentTabVal={selectedTab}
             tabContent={OrdersTabItems}
             orientation={ORIENTATION.VERTICAL}
-            tabClasses={{ selected: classes.selectedTab }}
+            tabClasses={{ selected: classes.selectedTabStyle }}
             tabIndicatorColor={theme.Colors.primary}
             isDivider={false}
             tabContainerClassName={classes.tabContainer}
@@ -155,18 +171,13 @@ function OrdersPage() {
         </Grid>
       </Grid>
       {modalOpen.open && (
-        <PendingOrderModal onClose={() => setModalOpen({ open: false })} />
-      )}
-      {/* {confirmedModalOpen.open && (
-        <ConfirmedOrderModal
-          onClose={() => setConfirmedModalOpen({ open: false })}
+        <CustomerOrderModal
+          onClose={() => setModalOpen({ open: false })}
+          {...modalOpen}
+          onCancelButtonClick={onClickCancelButton}
         />
       )}
-      {completedModalOpen.open && (
-        <CompletedOrderModal
-          onClose={() => setCompletedModalOpen({ open: false })}
-        />
-      )} */}
+      {confirmModal.open && <UHConfirmModal {...confirmModal} />}
     </>
   );
 }

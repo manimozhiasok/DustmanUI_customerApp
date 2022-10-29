@@ -12,8 +12,7 @@ import {
 const useStyles = makeStyles((theme: Theme) => ({
   eachItem: {
     '&.MuiGrid-item': {
-      padding: theme.spacing(1, 0, 1, 0),
-      marginBottom: theme.spacing(2)
+      padding: theme.spacing(1, 0)
     }
   },
   checkbox: {
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.Colors.greyScaleMedium,
     width: theme.MetricsSizes.regular,
     height: theme.MetricsSizes.regular,
-    '&:not($checked).MuiCheckbox-colorSecondary': {
+    '&.MuiCheckbox-colorSecondary': {
       backgroundColor: theme.Colors.greyScaleMedium,
       padding: 0,
       borderRadius: 0
@@ -106,13 +105,7 @@ function ChooseCategoryComponent({
           : -1;
         const isActive: boolean = findActiveImage !== -1;
         return (
-          <Grid
-            item
-            xs={3}
-            key={index}
-            justifyContent="center"
-            className={classes.eachItem}
-          >
+          <Grid item xs={3} key={index} className={classes.eachItem}>
             <FormControlLabel
               value={item.name}
               labelPlacement="bottom"
@@ -132,9 +125,8 @@ function ChooseCategoryComponent({
                     src={item.image_url}
                     alt="Image Not Found"
                     style={{
-                      borderWidth: '1px',
+                      border: '1px solid',
                       borderColor: getBorderColor(isActive),
-                      borderStyle: 'solid',
                       borderRadius: theme.MetricsSizes.tiny_x,
                       width: '100px',
                       height: '100px',

@@ -15,12 +15,12 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => {
       fontWeight: (props) => props.leftContentFontWeight,
       marginBottom: theme.MetricsSizes.tiny_xx
     },
-    rightContainer: {
+    rightContentStyle: {
       color: theme.Colors.mediumGrey,
       fontSize: (props) => props.rightContentFontSize,
       fontWeight: (props) => props.rightContentFontWeight
     },
-    rightStyle: {
+    rightContainer: {
       marginLeft: theme.spacing(1)
     }
   };
@@ -54,30 +54,28 @@ const DialogContentDetails = ({
   });
   const theme = useTheme();
   return (
-    <>
-      <Grid container style={{ paddingLeft: 7 }}>
-        {contentDetails.map((item: any, index: number) => {
-          return (
-            <Grid container key={index}>
-              <Grid item>
-                <Typography variant="h4" className={classes.leftContentStyle}>
-                  {item.content}:
-                </Typography>
-              </Grid>
-              <Grid item className={classes.rightStyle}>
-                {item.isLink ? (
-                  <LinkComp title={item.value} />
-                ) : (
-                  <Typography variant="h4" className={classes.rightContainer}>
-                    {item.value}
-                  </Typography>
-                )}
-              </Grid>
+    <Grid container>
+      {contentDetails.map((item: any, index: number) => {
+        return (
+          <Grid item container xs={12} key={index}>
+            <Grid item>
+              <Typography variant="h4" className={classes.leftContentStyle}>
+                {item.content}:
+              </Typography>
             </Grid>
-          );
-        })}
-      </Grid>
-    </>
+            <Grid item xs className={classes.rightContainer}>
+              {item.isLink ? (
+                <LinkComp title={item.value} />
+              ) : (
+                <Typography variant="h4" className={classes.rightContentStyle}>
+                  {item.value}
+                </Typography>
+              )}
+            </Grid>
+          </Grid>
+        );
+      })}
+    </Grid>
   );
 };
 

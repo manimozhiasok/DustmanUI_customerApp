@@ -1,6 +1,5 @@
 .react-calendar {
-  width: 350px;
-  max-width: 100%;
+  width: 100%;
   background: white;
   border: 1px solid #f1f1ee00;
   font-family: 'Helvetica Neue';

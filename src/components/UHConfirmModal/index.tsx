@@ -15,7 +15,6 @@ import {
 } from '@material-ui/core';
 import ButtonComp from '../ButtonComp';
 import { CONFIRM_MODAL } from 'src/Config/constant';
-import { Delete } from '@material-ui/icons';
 import * as Icons from '@material-ui/icons';
 
 type styleProps = {
@@ -26,7 +25,7 @@ type styleProps = {
 const useStyles = makeStyles<Theme, styleProps>((theme: Theme) => {
   return {
     title: {
-      fontWeight: 600
+      fontWeight: theme.fontWeight.mediumBold
     },
     description: {
       align: 'center'
@@ -43,7 +42,7 @@ const useStyles = makeStyles<Theme, styleProps>((theme: Theme) => {
         alpha(props.color || theme.Colors.primary, 0.2)
     },
     buttonAlignment: {
-      margin: 15
+      margin: theme.spacing(2)
     },
     dialogPaper: {
       width: (props) => props.dialogWidth || 400,
@@ -79,6 +78,21 @@ const UHConfirmModal = ({
   const types = {
     [CONFIRM_MODAL.delete]: {
       icon: 'Delete'
+    },
+    [CONFIRM_MODAL.publish]: {
+      icon: 'PublishOutlined'
+    },
+    [CONFIRM_MODAL.cancel]: {
+      icon: 'CancelOutlined'
+    },
+    [CONFIRM_MODAL.accept]: {
+      icon: 'DoneOutlined'
+    },
+    [CONFIRM_MODAL.reject]: {
+      icon: 'BlockOutlined'
+    },
+    [CONFIRM_MODAL.moveToDustman]: {
+      icon: 'MoveToInbox'
     }
   };
 
@@ -99,7 +113,7 @@ const UHConfirmModal = ({
 
   return (
     <Dialog open={open} classes={{ paper: classes.dialogPaper }}>
-      <DialogTitle>
+      <DialogTitle disableTypography>
         {renderIcon()}
         <Typography align="center" variant="h4" className={classes.title}>
           {title}

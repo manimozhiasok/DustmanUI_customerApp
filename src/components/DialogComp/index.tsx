@@ -37,6 +37,7 @@ type DialogProp = {
   dialogClasses?: any;
   dialogTitleStyle?: React.CSSProperties;
   rootStyle?: React.CSSProperties;
+  children?: React.ReactNode;
   dialogTitleClasses?: any;
 };
 
@@ -71,33 +72,33 @@ const DialogComp = ({
   avatarImg,
   dialogClasses,
   dialogTitleClasses,
-  dialogTitleStyle
+
+  dialogTitleStyle,
+  children
 }: DialogProp) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <Dialog
-        open={open}
-        onClose={onClose}
-        className={classes.root}
-        maxWidth={maxWidth || 'lg'}
-        classes={{ ...dialogClasses }}
-      >
-        <DialogTitle style={{ ...dialogTitleClasses }}>
-          <DialogTitleComp
-            avatarImg={avatarImg}
-            dialogTitle={dialogTitle}
-            onClose={onClose}
-            dialogTitleStyle={dialogTitleStyle}
-          />
-        </DialogTitle>
-        {renderDialogContent && (
-          <DialogContent>{renderDialogContent()}</DialogContent>
-        )}
-        {renderAction && <DialogActions>{renderAction()}</DialogActions>}
-      </Dialog>
-    </div>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      className={classes.root}
+      maxWidth={maxWidth || 'lg'}
+      classes={{ ...dialogClasses }}
+    >
+      <DialogTitle classes={{ ...dialogTitleClasses }}>
+        <DialogTitleComp
+          avatarImg={avatarImg}
+          dialogTitle={dialogTitle}
+          onClose={onClose}
+          dialogTitleStyle={dialogTitleStyle}
+        />
+      </DialogTitle>
+      <DialogContent>
+        {(renderDialogContent && renderDialogContent()) || children}
+      </DialogContent>
+      {renderAction && <DialogActions>{renderAction()}</DialogActions>}
+    </Dialog>
   );
 };
 
