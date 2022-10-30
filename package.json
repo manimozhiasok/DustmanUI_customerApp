@@ -1,5 +1,15 @@
 {
+  "name": "dustman",
+  "version": "1.0.0",
+  "description": "dustman project",
+  "main": "index.tsx",
+  "homepage":"https://www.unitedhands.cc/dustman",
   "private": false,
+    "keywords": [
+       "dustman"
+  ],
+  "author": "rajeshkumar.c@unitedhands.cc",
+  "license": "ISC",
   "dependencies": {
     "@emotion/react": "11.9.0",
     "@emotion/styled": "11.8.1",
@@ -47,6 +57,7 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --write \"./**/*.{ts,tsx,js,jsx,json}\" --config ./.prettierrc"
   },
+  
   "browserslist": {
     "production": [
       ">0.2%",
