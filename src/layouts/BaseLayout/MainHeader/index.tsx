@@ -25,14 +25,15 @@ const MainHeader = () => {
   const classes = useStyles();
 
   return (
-    <Grid container direction="row" className={classes.headerContainer}>
-      <Grid item className={classes.leftContainer}>
-        <HeaderLeftContent />
-      </Grid>
-      <Grid item className={classes.rightContainer}>
-        <HeaderRightContent />
-      </Grid>
-    </Grid>
+    // <Grid container direction="row" className={classes.headerContainer}>
+    //   <Grid item className={classes.leftContainer}>
+    //     <HeaderLeftContent />
+    //   </Grid>
+    //   <Grid item className={classes.rightContainer}>
+    //     <HeaderRightContent />
+    //   </Grid>
+    // </Grid>
+    <HeaderRightContent />
   );
 };
 
