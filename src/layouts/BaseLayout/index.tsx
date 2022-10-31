@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom';
 import { Box, Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
 import MainHeader from './MainHeader';
 import LandingPage from 'src/content/LandingPage';
+import Footer from './Footer';
+import NavBar from './NavBar';
 interface BaseLayoutProps {
   children?: ReactNode;
 }
@@ -36,8 +38,10 @@ const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
         flexDirection: 'column'
       }}
     >
-      <MainHeader />
+      {/* <MainHeader /> */}
+      <NavBar />
       {children || <Outlet />}
+      <Footer />
     </Box>
   );
 };
