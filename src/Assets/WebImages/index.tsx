@@ -29,6 +29,12 @@ import ph from './ph.png';
 import f1 from './f1.png';
 import f2 from './f2.png';
 import f3 from './f3.png';
+import otherPic from './other-pic.png';
+import icon1 from './icon1.png';
+import icon2 from './icon2.png';
+import icon3 from './icon3.png';
+import icon4 from './icon4.png';
+import logo3x from './logo_3x.png';
 export {
   btn2,
   home1,
@@ -60,5 +66,11 @@ export {
   ph,
   f1,
   f2,
-  f3
+  f3,
+  otherPic,
+  icon1,
+  icon2,
+  icon3,
+  icon4,
+  logo3x
 };

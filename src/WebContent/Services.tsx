@@ -1,10 +1,11 @@
 import React from 'react';
+import { icon1, icon2, icon3, icon4, otherPic } from 'src/Assets';
 import '../../src/newstyle.css';
 
 function Services() {
   return (
     <>
-      <img className="other-pic" src="images/other-pic.png" alt="" />
+      <img className="other-pic" src={otherPic} alt="" />
       <section>
         <div className="other-page1">
           <div className="side-head">
@@ -18,7 +19,7 @@ function Services() {
           <div className="container">
             <div className="box">
               <div className="square">
-                <img className="icon-img" src="images/icon1.png" alt="" />
+                <img className="icon-img" src={icon1} alt="" />
               </div>
 
               <h2>
@@ -36,7 +37,7 @@ function Services() {
 
             <div className="box">
               <div className="square">
-                <img className="icon-img" src="images/icon2.png" alt="" />
+                <img className="icon-img" src={icon2} alt="" />
               </div>
 
               <h2>
@@ -54,7 +55,7 @@ function Services() {
 
             <div className="box">
               <div className="square">
-                <img className="icon-img" src="images/icon3.png" alt="" />
+                <img className="icon-img" src={icon3} alt="" />
               </div>
               <h2>
                 Plastic <br></br>Recycling
@@ -70,7 +71,7 @@ function Services() {
 
             <div className="box">
               <div className="square">
-                <img className="icon-img" src="images/icon4.png" alt="" />
+                <img className="icon-img" src={icon4} alt="" />
               </div>
               <h2>
                 Metal <br></br>Recycling

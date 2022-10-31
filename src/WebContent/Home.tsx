@@ -1,4 +1,30 @@
 import React from 'react';
+import {
+  aboutPh,
+  app3,
+  btn2,
+  client1,
+  client2,
+  client3,
+  client4,
+  client5,
+  client6,
+  contactArrow,
+  DropDown,
+  google3,
+  home1,
+  home2,
+  home3,
+  home4,
+  iconbox1,
+  iconbox2,
+  iconbox3,
+  iconbox4,
+  Logo,
+  logo3x,
+  stock,
+  stock1
+} from 'src/Assets';
 import '../../src/newstyle.css';
 
 function Home() {
@@ -7,7 +33,7 @@ function Home() {
       <div className="backfill"></div>
       <nav className="navbar">
         <div>
-          <img className="logo" src="images/logo_3x.png" alt="logo" />
+          <img className="logo" src={logo3x} alt="logo" />
         </div>
         <div className="navigation-bar">
           <ul className="nav-list" id="navi-list">
@@ -32,7 +58,7 @@ function Home() {
           <div className="empty"></div>
           <div className="login-item">
             <button className="login-btn" id="login-btn">
-              Log in <img src="images/drop-down.png" />
+              Log in <img src={DropDown} />
             </button>
             <div className="login-list" id="login-list">
               <a href="http://localhost:3000/homepage/customer-info">
@@ -45,7 +71,7 @@ function Home() {
       </nav>
       <header>
         <div className="logo">
-          <img src="images/logo.png" alt="" />
+          <img src={Logo} alt="" />
         </div>
 
         <button className="nav-toggle" aria-label="toggle navigation">
@@ -82,7 +108,7 @@ function Home() {
 
             <li className="login-item">
               <button className="login-btn" id="login-btn-resp">
-                Log in <img src="images/drop-down.png" />
+                Log in <img src={DropDown} />
               </button>
               <div className="login-list" id="login-list-resp">
                 <a
@@ -109,32 +135,32 @@ function Home() {
               Leader in electrical Waste Management & Recycling Solutions
             </p>
             <a href="about.html">
-              <img className="knowmore-btn" src="images/btn2.png" alt="" />
+              <img className="knowmore-btn" src={btn2} alt="" />
             </a>
           </div>
           <div className="home-pic">
-            <img className="home-pic1" src="images/stock.png" alt="" />
-            <img className="home-pic2" src="images/stock1.png" alt="" />
+            <img className="home-pic1" src={stock} alt="" />
+            <img className="home-pic2" src={stock1} alt="" />
           </div>
         </div>
         <div className="landing2">
           <div className="round">
-            <img src="images/iconbox1.png" alt="" />
+            <img src={iconbox1} alt="" />
             <p>TNPCB Approved</p>
           </div>
 
           <div className="round">
-            <img src="images/iconbox2.png" alt="" />
+            <img src={iconbox2} alt="" />
             <p>50+ Staff Members</p>
           </div>
 
           <div className="round">
-            <img src="images/iconbox3.png" alt="" />
+            <img src={iconbox3} alt="" />
             <p>Bank Support</p>
           </div>
 
           <div className="round">
-            <img src="images/iconbox4.png" alt="" />
+            <img src={iconbox4} alt="" />
             <p>All Vehicle Types</p>
           </div>
         </div>
@@ -144,7 +170,7 @@ function Home() {
           <p className="home-title1">Why Dustman</p>
           <div className="home-why">
             <div>
-              <img src="images/home1.png" alt="" />
+              <img src={home1} alt="" />
               <h3>Specialised Recycling</h3>
               <p>
                 Our state-of-art recycling facility to provide sustainable and
@@ -155,7 +181,7 @@ function Home() {
               </p>
             </div>
             <div>
-              <img src="images/home2.png" alt="" />
+              <img src={home2} alt="" />
               <h3>Removal & Disposal</h3>
               <p>
                 Pride in providing Computer E-Waste removal services to support
@@ -166,7 +192,7 @@ function Home() {
               </p>
             </div>
             <div>
-              <img src="images/home3.png" alt="" />
+              <img src={home3} alt="" />
               <h3>Integrated Logistics</h3>
               <p>
                 Logistics cost is one of he biggest factors in managing e-waste
@@ -174,93 +200,6 @@ function Home() {
                 logistics costs lays a huge burden on the organized sector
                 working in e-waste.
               </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="landing4">
-          <div className="home-left">
-            <img src="images/home4.png" alt="" />
-            <img className="cap1" src="images/home6.png" alt="" />
-            <img className="cap2" src="images/home7.png" alt="" />
-          </div>
-
-          <div className="home-right">
-            <div className="right-text">
-              <p>We are specialists in</p>
-              <h2 className="home-title1">What We Do</h2>
-            </div>
-            <div className="wrapper_left">
-              <ul>
-                <li data-li="cer-recycle" className="active">
-                  <p>Certified Recycling</p>
-                </li>
-                <li data-li="data-dest">
-                  <p>Data Destruction</p>
-                </li>
-                <li data-li="it-refur">
-                  <p>IT Refurbish</p>
-                </li>
-                <li data-li="ewaste">
-                  <p>E-Waste Scrap</p>
-                </li>
-                <li data-li="doorto">
-                  <p>Door To Door</p>
-                </li>
-                <li data-li="reportto">
-                  <p>Report To Customers</p>
-                </li>
-              </ul>
-            </div>
-
-            <div className="wrapper_right">
-              <div className="item cer-recycle">
-                <h3>Certified Recycling</h3>
-                <p className="psg">
-                  We provide a 'Green Certificate' or a 'Destruction
-                  Certificate' to each of our clients after the safe disposal of
-                  their e-waste.
-                </p>
-              </div>
-              <div className="item data-dest" style={{ display: 'none' }}>
-                <h3>Data Destruction</h3>
-                <p className="psg">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Dolores numquam, molestias eius consequuntur deserunt non modi
-                  repudiandae id aspernatur alias?
-                </p>
-              </div>
-              <div className="item it-refur" style={{ display: 'none' }}>
-                <h3>IT Refurbish</h3>
-                <p className="psg">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-                  labore excepturi voluptas voluptatem at quisquam quo
-                  voluptatibus sit?
-                </p>
-              </div>
-              <div className="item ewaste" style={{ display: 'none' }}>
-                <h3>E-Waste Scrap</h3>
-                <p className="psg">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed,
-                  porro sapiente eos commodi itaque ullam iure quo tempora
-                  neque?
-                </p>
-              </div>
-              <div className="item doorto" style={{ display: 'none' }}>
-                <h3>Door To Door</h3>
-                <p className="psg">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Mollitia, magnam ea at necessitatibus rem dolorem quis
-                  corporis nihil. Inventore, nisi.
-                </p>
-              </div>
-              <div className="item reportto" style={{ display: 'none' }}>
-                <h3>Report To Customers</h3>
-                <p className="psg">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut
-                  consequatur earum expedita quod quis itaque!
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -275,28 +214,28 @@ function Home() {
 
           <div className="client-list">
             <div className="client">
-              <img src="images/client1.png" alt="" />
+              <img src={client1} alt="" />
             </div>
             <div className="client">
-              <img src="images/client2.png" alt="" />
+              <img src={client2} alt="" />
             </div>
             <div className="client">
-              <img src="images/client3.png" alt="" />
+              <img src={client3} alt="" />
             </div>
             <div className="client">
-              <img src="images/client4.png" alt="" />
+              <img src={client4} alt="" />
             </div>
             <div className="client">
-              <img src="images/client5.png" alt="" />
+              <img src={client5} alt="" />
             </div>
             <div className="client">
-              <img src="images/client6.png" alt="" />
+              <img src={client6} alt="" />
             </div>
           </div>
         </div>
 
         <div className="landing6">
-          <img className="home-ph-image" src="images/about-ph.png" alt="" />
+          <img className="home-ph-image" src={aboutPh} alt="" />
           <div className="ph-text">
             <h5>Mobile apps</h5>
             <h1>
@@ -308,8 +247,8 @@ function Home() {
             </p>
             <div className="play-btn">
               {/* <!-- <img src="images/111.png" alt=""> --> */}
-              <img className="play-btn-img" src="images/google3.png" alt="" />
-              <img className="play-btn-img" src="images/app3.png" alt="" />
+              <img className="play-btn-img" src={google3} alt="" />
+              <img className="play-btn-img" src={app3} alt="" />
             </div>
           </div>
         </div>
@@ -320,7 +259,7 @@ function Home() {
           <p className="get-in">Get in touch.</p>
           <a href="contact.html">
             <button className="contact-btn">
-              Contact Us <img src="images/contact-arrow.png" alt="" />
+              Contact Us <img src={contactArrow} alt="" />
             </button>
           </a>
         </div>
