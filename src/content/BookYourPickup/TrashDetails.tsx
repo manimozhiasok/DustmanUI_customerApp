@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     gap: theme.spacing(2),
     alignItems: 'center',
     width: '100%',
-    height: '195px',
+    height: '225px',
     fontSize: theme.MetricsSizes.small_xx,
     color: theme.Colors.darkGrey,
     fontWeight: theme.fontWeight.regular

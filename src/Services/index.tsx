@@ -4,6 +4,7 @@ import { imageUploadService } from './imageUploadService';
 import { generalService } from './generalService';
 import { customerRegisterService } from './customerRegisterService';
 import { customerProfileService } from './customerProfileService';
+import { customerAddressService } from './customerAddressService';
 
 export const API_SERVICES = {
   customerOrderService,
@@ -11,5 +12,6 @@ export const API_SERVICES = {
   imageUploadService,
   generalService,
   customerProfileService,
-  customerRegisterService
+  customerRegisterService,
+  customerAddressService
 };

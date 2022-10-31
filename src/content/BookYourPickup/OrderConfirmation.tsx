@@ -7,6 +7,8 @@ import {
 } from '@material-ui/core';
 import { ButtonComp, DialogContentDetails } from 'src/components';
 import { useTranslation } from 'react-i18next';
+import useUserInfo from 'src/hooks/useUserInfo';
+import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -33,6 +35,27 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
+  const { userAddressDetails } = useUserInfo();
+  const timeSlotDetails = [
+    {
+      id: 1,
+      text: t('PICKUP.morning'),
+      time: '9:00 AM  - 12:00 PM',
+      value: 'morning'
+    },
+    {
+      id: 2,
+      text: t('PICKUP.noon'),
+      time: '1:00 PM  - 4:00 PM',
+      value: 'afternoon'
+    },
+    {
+      id: 3,
+      text: t('PICKUP.evening'),
+      time: '4:00 PM  - 7:00 PM',
+      value: 'evening'
+    }
+  ];
 
   const getTrashValue = () => {
     const data =
@@ -40,18 +63,47 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
       edit.getValue('order_items').map((element) => {
         return (
           trashData.length &&
-          trashData.filter((list) => list.id === element)[0].name
+          trashData.filter((list: { id: any }) => list.id === element)[0].name
         );
       });
     return data.length ? data.toString() : '';
   };
 
+  const getAddressData =
+    (edit.getValue('order_address_id') &&
+      userAddressDetails?.length &&
+      userAddressDetails.filter(
+        (item) => item.id === edit.getValue('order_address_id')
+      )) ||
+    [];
+
+  const getSlotValues = () => {
+    if (
+      edit.getValue('customer_order_details')?.pickup_time &&
+      edit.getValue('customer_order_details')?.slot
+    ) {
+      let data = `${
+        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+          .getDay
+      }, ${
+        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+          .getDate
+      } ${
+        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+          .getMonth
+      } ${
+        timeSlotDetails.find(
+          (item) => item.value === edit.getValue('customer_order_details')?.slot
+        ).time
+      }`;
+      return data;
+    }
+  };
+
   const rightContent = [
     {
       content: t('PICKUP.slot'),
-      value: `${edit.getValue('customer_order_details').pickup_time}, ${
-        edit.getValue('customer_order_details').slot
-      }`
+      value: getSlotValues()
     },
     {
       content: t('PICKUP.userName'),
@@ -61,13 +113,12 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
 
     {
       content: t('address'),
-      value: `${edit.getValue('order_address').address_line1}, ${
-        edit.getValue('order_address').address_line2
-      }, ${edit.getValue('order_address').city}, ${
-        edit.getValue('order_address').state
-      }`
+      value: getAddressData[0]?.address ?? ''
     },
-    { content: t('PICKUP.mobile'), value: edit.getValue('order_address').mobile_number }
+    {
+      content: t('PICKUP.mobile'),
+      value: getAddressData[0]?.mobile_number ?? ''
+    }
   ];
 
   return (
@@ -81,7 +132,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.subtitle}>
-          {t('PICKUP.notified')}
+            {t('PICKUP.notified')}
           </Typography>
         </Grid>
       </Grid>

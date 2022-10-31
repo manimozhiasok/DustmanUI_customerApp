@@ -15,6 +15,7 @@ const DualActionButton = (props: Props) => {
   const { onLeftButtonClick, onRightButtonClick, disabledRightBtn, styles } =
     props;
   const classes = useStyles({});
+
   return (
     <Box
       style={{
@@ -30,7 +31,7 @@ const DualActionButton = (props: Props) => {
         backgroundColor={theme.Colors.grey}
         height="40px"
         buttonText="Cancel"
-        buttonFontSize={theme.MetricsSizes.small_xx}
+        buttonFontSize={theme.MetricsSizes.small_xxx}
         buttonTextColor={theme.Colors.primary}
         buttonFontWeight={theme.fontWeight.medium}
         btnWidth="95px"
@@ -42,7 +43,7 @@ const DualActionButton = (props: Props) => {
         backgroundColor={theme.Colors.primary}
         height="40px"
         buttonText="Save"
-        buttonFontSize={theme.MetricsSizes.small_xx}
+        buttonFontSize={theme.MetricsSizes.small_xxx}
         buttonTextColor={theme.Colors.white}
         buttonFontWeight={theme.fontWeight.medium}
         btnWidth="95px"

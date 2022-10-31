@@ -36,11 +36,6 @@ const CustomerOrderModal = (props: Props) => {
       open={true}
       onClose={onClose}
       dialogClasses={{ paper: classes.dialogPaper }}
-      dialogTitleStyle={{
-        fontWeight: theme.fontWeight.bold,
-        fontSize: theme.MetricsSizes.regular_xxx,
-        color: theme.Colors.blueDark
-      }}
       dialogTitleClasses={{ root: classes.dialogTitleRoot }}
     >
       <OrderModalComp

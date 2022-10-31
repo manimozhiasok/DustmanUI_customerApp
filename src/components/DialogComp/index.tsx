@@ -6,7 +6,8 @@ import {
   DialogTitle,
   Grid,
   makeStyles,
-  Theme
+  Theme,
+  useTheme
 } from '@material-ui/core';
 import React from 'react';
 import ListItemCell from '../ListItemCell';
@@ -72,11 +73,11 @@ const DialogComp = ({
   avatarImg,
   dialogClasses,
   dialogTitleClasses,
-
   dialogTitleStyle,
   children
 }: DialogProp) => {
   const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <Dialog
@@ -91,7 +92,12 @@ const DialogComp = ({
           avatarImg={avatarImg}
           dialogTitle={dialogTitle}
           onClose={onClose}
-          dialogTitleStyle={dialogTitleStyle}
+          dialogTitleStyle={{
+            fontWeight: theme.fontWeight.bold,
+            fontSize: theme.MetricsSizes.regular_xxx,
+            color: theme.Colors.blueDark,
+            ...dialogTitleStyle
+          }}
         />
       </DialogTitle>
       <DialogContent>
