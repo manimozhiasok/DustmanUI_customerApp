@@ -351,7 +351,7 @@ footer .sym {
 /* Home Page Style */
 
 .landing1 {
-    padding: 100px;
+    padding: 40px;
     padding-top: 0;
     padding-right: 0;
     margin-right: 0;
@@ -419,15 +419,15 @@ footer .sym {
 
 .home-title {
     font-family: "Space Grotesk";
-    font-weight: 700;
-    font-size: 64px;
-    line-height: 75.52px;
-    letter-spacing: -0.02em;
+    /* font-weight: 700; */
+    /* font-size: 64px; */
+    /* line-height: 75.52px; */
+    /* letter-spacing: -0.02em; */
     color: #333333;
     text-align: left;
     margin-top: 1rem;
-    width: 433px;
-    margin-bottom: -1rem;
+    /* width: 433px; */
+    /* margin-bottom: -1rem; */
 }
 
 .home-sub {
@@ -438,7 +438,7 @@ footer .sym {
     color: #010a44;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    width: 354px;
+    /* width: 354px; */
 }
 
 .knowmore-btn {
