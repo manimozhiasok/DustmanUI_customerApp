@@ -1,10 +1,24 @@
 import React from 'react';
 import '../../src/newstyle.css';
-
+import {
+  gallery,
+  g1,
+  g2,
+  g3,
+  g4,
+  g5,
+  g6,
+  g7,
+  g8,
+  g9,
+  g10,
+  g11,
+  g12
+} from 'src/Assets';
 function Gallery() {
   return (
     <>
-      <img className="gallery-pic" src="images/gallery.png" alt="" />
+      <img className="gallery-pic" src={gallery} alt="" />
       <section>
         <div className="gallery-page">
           <div className="side-head">
@@ -34,69 +48,69 @@ function Gallery() {
             </div>
             <div className="pictures">
               <div className="gallery-pictures" data-category="Facilities">
-                <img src="images/g1.png" alt="" />
+                <img src={g1} alt="" />
                 <h3 className="pic-title">Special Equipment's</h3>
               </div>
               <div className="gallery-pictures" data-category="Facilities">
-                <img src="images/g2.png" alt="" />
+                <img src={g2} alt="" />
                 <h3 className="pic-title">Forklifts</h3>
               </div>
               <div className="gallery-pictures" data-category="Facilities">
-                <img src="images/g3.png" alt="" />
+                <img src={g3} alt="" />
                 <h3 className="pic-title">Vehicles</h3>
               </div>
               <div
                 className="gallery-pictures"
                 data-category="Woodern Recycling Unit"
               >
-                <img src="images/g4.png" alt="" />
+                <img src={g4} alt="" />
                 <h3 className="pic-title">Making Door's</h3>
               </div>
               <div
                 className="gallery-pictures"
                 data-category="Woodern Recycling Unit"
               >
-                <img src="images/g5.png" alt="" />
+                <img src={g5} alt="" />
                 <h3 className="pic-title">Making Furniture's</h3>
               </div>
               <div
                 className="gallery-pictures"
                 data-category="Woodern Recycling Unit"
               >
-                <img src="images/g6.png" alt="" />
+                <img src={g6} alt="" />
                 <h3 className="pic-title">Making Wood Reaper</h3>
               </div>
               <div className="gallery-pictures" data-category="Facilities">
-                <img src="images/g7.png" alt="" />
+                <img src={g7} alt="" />
                 <h3 className="pic-title">Processing Machine</h3>
               </div>
               <div
                 className="gallery-pictures"
                 data-category="Plastic Recycling Unit"
               >
-                <img src="images/g8.png" alt="" />
+                <img src={g8} alt="" />
                 <h3 className="pic-title">LDPE Granules</h3>
               </div>
               <div
                 className="gallery-pictures"
                 data-category="Plastic Recycling Unit"
               >
-                <img src="images/g9.png" alt="" />
+                <img src={g9} alt="" />
                 <h3 className="pic-title">Nylon Granules</h3>
               </div>
               <div className="gallery-pictures" data-category="Cotton Box">
-                <img src="images/g10.png" alt="" />
+                <img src={g10} alt="" />
                 <h3 className="pic-title">Paper Rolls</h3>
               </div>
               <div className="gallery-pictures" data-category="Cotton Box">
-                <img src="images/g11.png" alt="" />
+                <img src={g11} alt="" />
                 <h3 className="pic-title">Loose Carton Boxes</h3>
               </div>
               <div
                 className="gallery-pictures"
                 data-category="Zero Waste Scrap"
               >
-                <img src="images/g12.png" alt="" />
+                <img src={g12} alt="" />
                 <h3 className="pic-title">Industrial Solid Waste</h3>
               </div>
             </div>

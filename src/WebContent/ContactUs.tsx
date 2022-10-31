@@ -1,10 +1,19 @@
 import React from 'react';
 import '../../src/newstyle.css';
-
+import {
+  contactPic,
+  contact,
+  client1,
+  client2,
+  client3,
+  client4,
+  client5,
+  client6
+} from 'src/Assets';
 function ContactUs() {
   return (
     <>
-      <img className="contact-pic" src="images/contact-pic.png" alt="" />
+      <img className="contact-pic" src={contactPic} alt="" />
       <section>
         <div className="contact-page1">
           <div className="side-head">
@@ -59,7 +68,7 @@ function ContactUs() {
             loading="lazy"
             // referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
-          <img className="contact-map" src="images/contact.png" alt="" />
+          <img className="contact-map" src={contact} alt="" />
         </div>
         <div className="landing5">
           <div className="client-title">
@@ -70,22 +79,22 @@ function ContactUs() {
           </div>
           <div className="client-list">
             <div className="client">
-              <img src="images/client1.png" alt="" />
+              <img src={client1} alt="" />
             </div>
             <div className="client">
-              <img src="images/client2.png" alt="" />
+              <img src={client2} alt="" />
             </div>
             <div className="client">
-              <img src="images/client3.png" alt="" />
+              <img src={client3} alt="" />
             </div>
             <div className="client">
-              <img src="images/client4.png" alt="" />
+              <img src={client4} alt="" />
             </div>
             <div className="client">
-              <img src="images/client5.png" alt="" />
+              <img src={client5} alt="" />
             </div>
             <div className="client">
-              <img src="images/client6.png" alt="" />
+              <img src={client6} alt="" />
             </div>
           </div>
         </div>
