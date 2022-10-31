@@ -25,7 +25,7 @@ import {
   iconbox4
 } from 'src/Assets';
 
-function About() {
+function AboutUs() {
   return (
     <>
       <img className="about1" src={aboutPh} alt="" />
@@ -312,4 +312,4 @@ function About() {
     </>
   );
 }
-export default About;
+export default AboutUs;

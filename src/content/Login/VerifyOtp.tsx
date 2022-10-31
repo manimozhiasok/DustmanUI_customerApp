@@ -45,14 +45,14 @@ const VerifyOtp = () => {
     });
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.customer) {
-        navigateTo('/dustman-home/create-account', {
+        navigateTo('/dustman/login/create-account', {
           replace: true,
           state: { customerId: response.data.customer.id }
         });
       } else if (response?.data?.customerProfile?.customer_id) {
         updateUserInfo(response?.data?.customerProfile?.customer_id);
         setCustomerId(response.data.customerProfile.customer_id);
-        navigateTo('/customer-home', { replace: true });
+        navigateTo('/dustman/customer-home', { replace: true });
       }
     }
   };

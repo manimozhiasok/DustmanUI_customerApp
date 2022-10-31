@@ -42,7 +42,7 @@ const CustomerLogin = () => {
       });
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.message) {
-        navigateTo('/dustman-home/verify-otp', {
+        navigateTo('/dustman/login/verify-otp', {
           replace: true,
           state: { mobileNumber: response?.data?.message }
         });

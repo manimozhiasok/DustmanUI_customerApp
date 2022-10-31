@@ -43,7 +43,7 @@ const ChooseUserType = () => {
       if (response?.data?.customerProfile?.customer_id) {
         updateUserInfo(response.data.customerProfile.customer_id);
         setCustomerId(response.data.customerProfile.customer_id);
-        navigateTo('/customer-home', { replace: true });
+        navigateTo('/dustman/customer-home', { replace: true });
       }
     }
     //  navigateTo('/homepage/customer-info', { replace: true });

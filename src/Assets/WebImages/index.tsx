@@ -5,6 +5,7 @@ import home3 from './home3.png';
 import home4 from './home4.png';
 import home5 from './home5.png';
 import home6 from './home6.png';
+import home7 from './home7.png';
 import stock from './stock.png';
 import stock1 from './stock1.png';
 import iconbox1 from './iconbox1.png';
@@ -76,6 +77,7 @@ export {
   home4,
   home5,
   home6,
+  home7,
   stock,
   stock1,
   iconbox1,

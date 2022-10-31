@@ -67,6 +67,7 @@ font-family: 'Inter', sans-serif;
 .nav-list .list-item {
     display: inline-block;
     padding: 10px 20px;
+    cursor: pointer;
 }
 
 .logo {

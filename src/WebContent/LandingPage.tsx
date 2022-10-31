@@ -7,12 +7,16 @@ import {
   Theme,
   useTheme
 } from '@material-ui/core';
-import LandingPageRightContent from './LandingPageRightContent';
-import LandingPageLeftContent from './LandingPageLeftContent';
 import { LoginDrawerContext } from 'src/contexts/LoginDrawerContext';
-import { Outlet, useLocation, useMatch, useNavigate } from 'react-router';
+import {
+  Outlet,
+  useLocation,
+  useMatch,
+  useNavigate,
+  Pathname
+} from 'react-router';
 import CloseIcon from '@material-ui/icons/Close';
-import { LoginBtmImg } from 'src/Assets';
+import { home4, home6, home7, LoginBtmImg } from 'src/Assets';
 import { createBrowserHistory } from 'history';
 import {
   btn2,
@@ -41,7 +45,7 @@ import {
   f1,
   f2,
   f3
-} from 'src/Assets/WebImages';
+} from 'src/Assets';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
@@ -70,23 +74,61 @@ const useStyles = makeStyles((theme: Theme) => ({
 function LandingPage() {
   const classes = useStyles();
   const theme = useTheme();
-  const { isLoginDrawerOpen, closeLoginDrawer } =
-    useContext(LoginDrawerContext);
+  // const { isLoginDrawerOpen, closeLoginDrawer } =
+  //   useContext(LoginDrawerContext);
   const navigateTo = useNavigate();
 
   const location = useLocation();
-  const match = useMatch('/dustman-home');
+  // const match = useMatch('/dustman');
 
-  const handleCloseIconClick = () => {
-    closeLoginDrawer();
-    navigateTo('/dustman-home', { replace: true });
+  // const handleCloseIconClick = () => {
+  //   closeLoginDrawer();
+  //   navigateTo('/dustman', { replace: true });
+  // };
+
+  const handleClickNavigation = (url: Pathname) => {
+    navigateTo(url);
   };
 
-  useEffect(() => {
-    if (match !== null) {
-      closeLoginDrawer();
-    }
-  }, [match]);
+  // useEffect(() => {
+  //   if (match !== null) {
+  //     closeLoginDrawer();
+  //   }
+  // }, [match]);
+
+  // var li_elements: any = document.querySelectorAll('.wrapper_left ul li');
+  // var item_elements: any = document.querySelectorAll('.item');
+
+  // for (var i = 0; i < li_elements.length; i++) {
+  //   li_elements[i].addEventListener('click', function () {
+  //     console.log('Clicked a li option');
+  //     li_elements.forEach(function (li) {
+  //       li.classList.remove('active');
+  //     });
+
+  //     this.classList.add('active');
+  //     var li_value: any = this.getAttribute('data-li');
+  //     item_elements.forEach(function (item) {
+  //       item.style.display = 'none';
+  //     });
+  //     let liQuery: any = document.querySelector('.' + li_value);
+  //     if (li_value == 'cer-recycle') {
+  //       liQuery.style.display = 'block';
+  //     } else if (li_value == 'data-dest') {
+  //       liQuery.style.display = 'block';
+  //     } else if (li_value == 'it-refur') {
+  //       liQuery.style.display = 'block';
+  //     } else if (li_value == 'ewaste') {
+  //       liQuery.style.display = 'block';
+  //     } else if (li_value == 'doorto') {
+  //       liQuery.style.display = 'block';
+  //     } else if (li_value == 'reportto') {
+  //       liQuery.style.display = 'block';
+  //     } else {
+  //       console.log('');
+  //     }
+  //   });
+  // }
 
   return (
     <>
@@ -106,7 +148,7 @@ function LandingPage() {
             <p className="home-sub">
               Leader in electrical Waste Management & Recycling Solutions
             </p>
-            <a onClick={handleCloseIconClick}>
+            <a onClick={() => handleClickNavigation('/dustman/about-us')}>
               <img className="knowmore-btn" src={btn2} alt="" />
             </a>
           </div>
@@ -176,6 +218,93 @@ function LandingPage() {
             </div>
           </div>
         </div>
+        {/* landing 4 */}
+        <div className="landing4">
+          <div className="home-left">
+            <img src={home4} alt="" />
+            <img className="cap1" src={home6} alt="" />
+            <img className="cap2" src={home7} alt="" />
+          </div>
+
+          <div className="home-right">
+            <div className="right-text">
+              <p>We are specialists in</p>
+              <h2 className="home-title1">What We Do</h2>
+            </div>
+            <div className="wrapper_left">
+              <ul>
+                <li data-li="cer-recycle" className="active">
+                  <p>Certified Recycling</p>
+                </li>
+                <li data-li="data-dest">
+                  <p>Data Destruction</p>
+                </li>
+                <li data-li="it-refur">
+                  <p>IT Refurbish</p>
+                </li>
+                <li data-li="ewaste">
+                  <p>E-Waste Scrap</p>
+                </li>
+                <li data-li="doorto">
+                  <p>Door To Door</p>
+                </li>
+                <li data-li="reportto">
+                  <p>Report To Customers</p>
+                </li>
+              </ul>
+            </div>
+
+            <div className="wrapper_right">
+              <div className="item cer-recycle">
+                <h3>Certified Recycling</h3>
+                <p className="psg">
+                  We provide a 'Green Certificate' or a 'Destruction
+                  Certificate' to each of our clients after the safe disposal of
+                  their e-waste.
+                </p>
+              </div>
+              <div className="item data-dest" style={{ display: 'none' }}>
+                <h3>Data Destruction</h3>
+                <p className="psg">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolores numquam, molestias eius consequuntur deserunt non modi
+                  repudiandae id aspernatur alias?
+                </p>
+              </div>
+              <div className="item it-refur" style={{ display: 'none' }}>
+                <h3>IT Refurbish</h3>
+                <p className="psg">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                  labore excepturi voluptas voluptatem at quisquam quo
+                  voluptatibus sit?
+                </p>
+              </div>
+              <div className="item ewaste" style={{ display: 'none' }}>
+                <h3>E-Waste Scrap</h3>
+                <p className="psg">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed,
+                  porro sapiente eos commodi itaque ullam iure quo tempora
+                  neque?
+                </p>
+              </div>
+              <div className="item doorto" style={{ display: 'none' }}>
+                <h3>Door To Door</h3>
+                <p className="psg">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Mollitia, magnam ea at necessitatibus rem dolorem quis
+                  corporis nihil. Inventore, nisi.
+                </p>
+              </div>
+              <div className="item reportto" style={{ display: 'none' }}>
+                <h3>Report To Customers</h3>
+                <p className="psg">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut
+                  consequatur earum expedita quod quis itaque!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* landing 5*/}
         <div className="landing5">
           <div className="client-title">
@@ -238,7 +367,7 @@ function LandingPage() {
           <p></p>
           <p className="get-in">Get in touch.</p>
           <p>
-            <a href="contact.html">
+            <a onClick={() => handleClickNavigation('/dustman/contact-us')}>
               <button className="contact-btn">
                 Contact Us <img src={contactArrow} alt="" />
               </button>
@@ -246,7 +375,7 @@ function LandingPage() {
           </p>
         </div>
       </div>
-      {
+      {/* {
         <Drawer
           open={isLoginDrawerOpen}
           anchor={'right'}
@@ -266,7 +395,7 @@ function LandingPage() {
             </Grid>
           </Grid>
         </Drawer>
-      }
+      } */}
     </>
   );
 }
