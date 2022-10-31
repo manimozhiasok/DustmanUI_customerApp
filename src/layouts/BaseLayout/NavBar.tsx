@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import { useTheme, Theme, makeStyles } from '@material-ui/core';
 import { LoginDrawerContext } from '../../contexts/LoginDrawerContext';
 import { useNavigate } from 'react-router';
-import '../../../src/newstyle.css';
-import { Logo, DropDown } from 'src/Assets/WebImages';
+import { Logo, DropDown } from 'src/Assets';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 function NavBar() {

@@ -56,40 +56,44 @@ const PickupAddress = ({ edit }: { edit: any }) => {
     <>
       <Grid container>
         <Grid item xs={12}>
-          {userAddressDetails.length &&
-            userAddressDetails.map((item, index) => {
-              return (
-                <Grid container key={index} alignItems="center">
-                  <Grid item>
-                    <Radio
-                      onChange={handleChange}
-                      value={item.id}
-                      checked={selectedValue === item.id}
-                    />
-                  </Grid>
-                  <Grid item xs container spacing={1}>
+          {userAddressDetails?.length
+            ? userAddressDetails.map((item, index) => {
+                return (
+                  <Grid container key={index} alignItems="center">
                     <Grid item>
-                      <Typography>{'location:'}</Typography>
+                      <Radio
+                        onChange={handleChange}
+                        value={item.id}
+                        checked={selectedValue === item.id}
+                      />
                     </Grid>
-                    <Grid item xs>
-                      <Typography className={classes.locTextStyle}>
-                        {item?.city}
-                      </Typography>
+                    <Grid item xs container spacing={1}>
+                      <Grid item>
+                        <Typography>{'location:'}</Typography>
+                      </Grid>
+                      <Grid item xs>
+                        <Typography className={classes.locTextStyle}>
+                          {item?.city}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography
+                          variant="h6"
+                          className={classes.addressView}
+                        >
+                          {item?.address}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                      <Typography variant="h6" className={classes.addressView}>
-                        {item?.address}
-                      </Typography>
+                    <Grid item xs={12} className={classes.dividerStyle}>
+                      {index === userAddressDetails?.length - 1 ? null : (
+                        <Divider />
+                      )}
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} className={classes.dividerStyle}>
-                    {index === userAddressDetails?.length - 1 ? null : (
-                      <Divider />
-                    )}
-                  </Grid>
-                </Grid>
-              );
-            })}
+                );
+              })
+            : null}
         </Grid>
         <Grid container item xs={12} justifyContent="center">
           <ButtonComp

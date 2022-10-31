@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "dustman project",
   "main": "index.tsx",
-  "homepage":"https://www.unitedhands.cc/dustman",
+  "homepage":".",
   "private": false,
     "keywords": [
        "dustman"

@@ -25,7 +25,6 @@ import {
   stock,
   stock1
 } from 'src/Assets';
-import '../../src/newstyle.css';
 
 function Home() {
   return (

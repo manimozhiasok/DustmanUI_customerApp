@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../src/newstyle.css';
+
 import {
   gallery,
   g1,

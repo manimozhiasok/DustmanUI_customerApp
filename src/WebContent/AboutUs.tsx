@@ -24,7 +24,6 @@ import {
   iconbox3,
   iconbox4
 } from 'src/Assets';
-import '../../src/newstyle.css';
 
 function About() {
   return (

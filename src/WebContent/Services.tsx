@@ -1,6 +1,5 @@
 import React from 'react';
 import { icon1, icon2, icon3, icon4, otherPic } from 'src/Assets';
-import '../../src/newstyle.css';
 
 function Services() {
   return (

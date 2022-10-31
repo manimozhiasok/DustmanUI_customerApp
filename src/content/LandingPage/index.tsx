@@ -42,7 +42,7 @@ import {
   f2,
   f3
 } from 'src/Assets/WebImages';
-import '../../newstyle.css';
+
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
     width: '100%'
