@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   aboutPh,
+  about,
   cards,
   hisIcon1,
   hisIcon2,
@@ -28,7 +29,7 @@ import {
 function AboutUs() {
   return (
     <>
-      <img className="about1" src={aboutPh} alt="" />
+      <img className="about1" src={about} alt="" />
       <section />
       <div className="about-page1">
         <div className="side-head">
@@ -62,7 +63,7 @@ function AboutUs() {
       </div>
       <div className="about-page2">
         <h1 className="about-title1">Our History</h1>
-        <img className="his-img" src={cards} alt="" />
+        {/* <img className="his-img" src={cards} alt="" /> */}
 
         <div className="his-chart">
           <div className="his-icon-text">
@@ -136,7 +137,7 @@ function AboutUs() {
           <div className="about-pics">
             <img src={satisfaction} alt="" />
           </div>
-          <img className="about-pics column-right" src={satisfaction} alt="" />
+          {/* <img className="about-pics column-right" src={satisfaction} alt="" /> */}
         </div>
 
         <div className="row">
@@ -176,7 +177,7 @@ function AboutUs() {
           {/* <!-- <div className="about-pics">
                 <img src="images/financial.png" alt="">
             </div> --> */}
-          <img className="about-pics column-right" src={financial} alt="" />
+          {/* <img className="about-pics column-right" src={financial} alt="" /> */}
         </div>
 
         <div className="row">

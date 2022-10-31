@@ -69,6 +69,7 @@ import g9 from './g9.png';
 import g10 from './g10.png';
 import g11 from './g11.png';
 import g12 from './g12.png';
+import about from './about.png';
 export {
   btn2,
   home1,
@@ -140,5 +141,6 @@ export {
   g9,
   g10,
   g11,
-  g12
+  g12,
+  about
 };
