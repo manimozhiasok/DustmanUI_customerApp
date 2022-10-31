@@ -1,5 +1,29 @@
 import React from 'react';
-import { aboutPh } from 'src/Assets';
+import {
+  aboutPh,
+  cards,
+  hisIcon1,
+  hisIcon2,
+  hisIcon3,
+  hisIcon4,
+  hisIcon5,
+  line,
+  satisfaction,
+  statuary,
+  financial,
+  work,
+  leftarrow,
+  rating,
+  quotation,
+  face,
+  rightarrow,
+  google1,
+  app1,
+  iconbox1,
+  iconbox2,
+  iconbox3,
+  iconbox4
+} from 'src/Assets';
 import '../../src/newstyle.css';
 
 function About() {
@@ -39,43 +63,43 @@ function About() {
       </div>
       <div className="about-page2">
         <h1 className="about-title1">Our History</h1>
-        <img className="his-img" src="images/cards.png" alt="" />
+        <img className="his-img" src={cards} alt="" />
 
         <div className="his-chart">
           <div className="his-icon-text">
-            <img className="his-icon" src="images/his-icon1.png" alt="" />
+            <img className="his-icon" src={hisIcon1} alt="" />
             <h2>
               University<br></br>Graduated
             </h2>
             <p>1892</p>
           </div>
-          <img className="his-line" src="images/line.png" alt="" />
+          <img className="his-line" src={line} alt="" />
           <div className="his-icon-text">
-            <img className="his-icon" src="images/his-icon2.png" alt="" />
+            <img className="his-icon" src={hisIcon2} alt="" />
             <h2>
               University<br></br>Graduated
             </h2>
             <p>1894</p>
           </div>
-          <img className="his-line" src="images/line.png" alt="" />
+          <img className="his-line" src={line} alt="" />
           <div className="his-icon-text">
-            <img className="his-icon" src="images/his-icon3.png" alt="" />
+            <img className="his-icon" src={hisIcon3} alt="" />
             <h2>
               University<br></br>Graduated
             </h2>
             <p>1977</p>
           </div>
-          <img className="his-line" src="images/line.png" alt="" />
+          <img className="his-line" src={line} alt="" />
           <div className="his-icon-text">
-            <img className="his-icon" src="images/his-icon4.png" alt="" />
+            <img className="his-icon" src={hisIcon4} alt="" />
             <h2>
               University<br></br>Graduated
             </h2>
             <p>1999</p>
           </div>
-          <img className="his-line" src="images/line.png" alt="" />
+          <img className="his-line" src={line} alt="" />
           <div className="his-icon-text">
-            <img className="his-icon" src="images/his-icon5.png" alt="" />
+            <img className="his-icon" src={hisIcon5} alt="" />
             <h2>
               University<br></br>Graduated
             </h2>
@@ -111,24 +135,16 @@ function About() {
             </p>
           </div>
           <div className="about-pics">
-            <img src="images/satisfaction.png" alt="" />
+            <img src={satisfaction} alt="" />
           </div>
-          <img
-            className="about-pics column-right"
-            src="images/satisfaction.png"
-            alt=""
-          />
+          <img className="about-pics column-right" src={satisfaction} alt="" />
         </div>
 
         <div className="row">
           {/* <div className="about-pics">
                 <img src="images/statuary.png" alt="">
             </div> */}
-          <img
-            className="about-pics column-left"
-            src="images/statuary.png"
-            alt=""
-          />
+          <img className="about-pics column-left" src={statuary} alt="" />
           <div className="about-text column-right">
             <div className="up-line"></div>
             <h1>Statuary Requirement</h1>
@@ -161,19 +177,11 @@ function About() {
           {/* <!-- <div className="about-pics">
                 <img src="images/financial.png" alt="">
             </div> --> */}
-          <img
-            className="about-pics column-right"
-            src="images/financial.png"
-            alt=""
-          />
+          <img className="about-pics column-right" src={financial} alt="" />
         </div>
 
         <div className="row">
-          <img
-            className="about-pics column-left"
-            src="images/work.png"
-            alt=""
-          />
+          <img className="about-pics column-left" src={work} alt="" />
           <div className="about-text column-right">
             <div className="up-line"></div>
             <h1>Work Force</h1>
@@ -187,14 +195,14 @@ function About() {
             <img
               className="arrow"
               id="left-btn"
-              src="images/leftarrow.png"
+              src={leftarrow}
               alt="previous testimony"
             />
           </div>
         </div>
 
         <div className="testimonal testimonal-visible">
-          <img className="testi-quote" src="images/quotation.png" alt="" />
+          <img className="testi-quote" src={quotation} alt="" />
           <p className="testi-body">
             “Sed ut perspiciatis unde omnis iste natus error sit voluptatem
             accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
@@ -205,16 +213,16 @@ function About() {
             qui dolorem ipsum quia dolor sit amet, consectetur”
           </p>
           <div className="testi-center">
-            <img className="testi-face" src="images/face.png" alt="" />
+            <img className="testi-face" src={face} alt="" />
             <div className="testi-desi">
               <h2 className="testi-name">Jonathan Lee</h2>
               <p className="testi-sub">Joe’s Parents</p>
             </div>
-            <img className="testi-rate" src="images/rating.png" alt="" />
+            <img className="testi-rate" src={rating} alt="" />
           </div>
         </div>
         <div className="testimonal testimonal-hidden">
-          <img className="testi-quote" src="images/quotation.png" alt="" />
+          <img className="testi-quote" src={quotation} alt="" />
           <p className="testi-body">
             “Sed ut perspiciatis unde omnis iste natus error sit voluptatem
             accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
@@ -225,16 +233,16 @@ function About() {
             qui dolorem ipsum quia dolor sit amet, consectetur”
           </p>
           <div className="testi-center">
-            <img className="testi-face" src="images/face.png" alt="" />
+            <img className="testi-face" src={face} alt="" />
             <div className="testi-desi">
               <h2 className="testi-name">Andrew Right</h2>
               <p className="testi-sub">Chief Director</p>
             </div>
-            <img className="testi-rate" src="images/rating.png" alt="" />
+            <img className="testi-rate" src={rating} alt="" />
           </div>
         </div>
         <div className="testimonal testimonal-hidden">
-          <img className="testi-quote" src="images/quotation.png" alt="" />
+          <img className="testi-quote" src={quotation} alt="" />
           <p className="testi-body">
             “Sed ut perspiciatis unde omnis iste natus error sit voluptatem
             accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
@@ -245,12 +253,12 @@ function About() {
             qui dolorem ipsum quia dolor sit amet, consectetur”
           </p>
           <div className="testi-center">
-            <img className="testi-face" src="images/face.png" alt="" />
+            <img className="testi-face" src={face} alt="" />
             <div className="testi-desi">
               <h2 className="testi-name">Simon Lee</h2>
               <p className="testi-sub">Director</p>
             </div>
-            <img className="testi-rate" src="images/rating.png" alt="" />
+            <img className="testi-rate" src={rating} alt="" />
           </div>
         </div>
 
@@ -259,14 +267,14 @@ function About() {
             <img
               className="arrow"
               id="right-btn"
-              src="images/rightarrow.png"
+              src={rightarrow}
               alt="next testimony"
             />
           </div>
         </div>
       </div>
       <div className="about-page6">
-        <img className="about-ph-image" src="images/about-ph.png" alt="" />
+        <img className="about-ph-image" src={aboutPh} alt="" />
         <div className="about-ph-text">
           <h5>Mobile apps</h5>
           {/* <h1>Book your<br>pickup from<br>our App</h1> */}
@@ -275,30 +283,30 @@ function About() {
             exclusive deals and ease of booking.
           </p>
           <div className="play-btn">
-            <img className="play-btn-img" src="images/google1.png" alt="" />
-            <img className="play-btn-img" src="images/app1.png" alt="" />
+            <img className="play-btn-img" src={google1} alt="" />
+            <img className="play-btn-img" src={app1} alt="" />
           </div>
         </div>
       </div>
 
       <div className="landing2">
         <div className="round">
-          <img src="images/iconbox1.png" alt="" />
+          <img src={iconbox1} alt="" />
           <p>TNPCB Approved</p>
         </div>
 
         <div className="round">
-          <img src="images/iconbox2.png" alt="" />
+          <img src={iconbox2} alt="" />
           <p>50+ Staff Members</p>
         </div>
 
         <div className="round">
-          <img src="images/iconbox3.png" alt="" />
+          <img src={iconbox3} alt="" />
           <p>Bank Support</p>
         </div>
 
         <div className="round">
-          <img src="images/iconbox4.png" alt="" />
+          <img src={iconbox4} alt="" />
           <p>All Vehicle Types</p>
         </div>
       </div>

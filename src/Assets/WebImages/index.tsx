@@ -35,6 +35,24 @@ import icon2 from './icon2.png';
 import icon3 from './icon3.png';
 import icon4 from './icon4.png';
 import logo3x from './logo_3x.png';
+import cards from './cards.png';
+import hisIcon1 from './his-icon1.png';
+import hisIcon2 from './his-icon2.png';
+import hisIcon3 from './his-icon3.png';
+import hisIcon4 from './his-icon4.png';
+import hisIcon5 from './his-icon5.png';
+import line from './line.png';
+import satisfaction from './satisfaction.png';
+import statuary from './statuary.png';
+import financial from './financial.png';
+import work from './work.png';
+import leftarrow from './leftarrow.png';
+import face from './face.png';
+import rating from './rating.png';
+import quotation from './quotation.png';
+import rightarrow from './rightarrow.png';
+import google1 from './google1.png';
+import app1 from './app1.png';
 export {
   btn2,
   home1,
@@ -72,5 +90,23 @@ export {
   icon2,
   icon3,
   icon4,
-  logo3x
+  logo3x,
+  cards,
+  hisIcon1,
+  hisIcon2,
+  hisIcon3,
+  hisIcon4,
+  hisIcon5,
+  line,
+  satisfaction,
+  statuary,
+  financial,
+  work,
+  leftarrow,
+  face,
+  rating,
+  quotation,
+  rightarrow,
+  google1,
+  app1
 };
