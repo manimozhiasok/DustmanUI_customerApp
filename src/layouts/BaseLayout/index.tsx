@@ -1,9 +1,7 @@
 import { FC, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { Outlet } from 'react-router-dom';
-import { Box, Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
-import MainHeader from './MainHeader';
-import LandingPage from 'src/content/LandingPage';
+import { Box, makeStyles, Theme, useTheme } from '@material-ui/core';
 import Footer from './Footer';
 import NavBar from './NavBar';
 interface BaseLayoutProps {
@@ -11,17 +9,8 @@ interface BaseLayoutProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  mainContainer: {
-    //height: '100vh',
-  },
-  headerContainer: {
-    height: theme.spacing(11.5),
-    position: 'sticky',
-    top: 0
-  },
-  landingPageContentContainer: {
-    backgroundImage: 'linear-gradient(150deg, #FFFFFF 8.53%, #70B245 200%)',
-    zIndex: -1
+  drawerWidth: {
+    width: '520px'
   }
 }));
 
@@ -30,19 +19,20 @@ const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <Box
-      sx={{
-        flex: 1,
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column'
-      }}
-    >
-      {/* <MainHeader /> */}
-      <NavBar />
-      {children || <Outlet />}
-      <Footer />
-    </Box>
+    <>
+      <Box
+        sx={{
+          flex: 1,
+          // height: '100vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <NavBar />
+        {children || <Outlet />}
+        <Footer />
+      </Box>
+    </>
   );
 };
 

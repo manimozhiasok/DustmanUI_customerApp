@@ -45,7 +45,7 @@ const CreateAccountSignUp = () => {
       setIsError(true);
       return;
     }
-    navigateTo('/dustman/choose-user-type', {
+    navigateTo('/dustman-home/choose-user-type', {
       state: {
         formEdits: { ...initialValues, ...edit.edits },
         customerId: state?.customerId

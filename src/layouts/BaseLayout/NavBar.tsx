@@ -15,10 +15,9 @@ function NavBar() {
 
   const handleCustomerButtonClick = () => {
     toggleLoginDrawer();
-    navigateTo('/dustman/login', { replace: true });
+    navigateTo('/dustman-home/login', { replace: true });
   };
   function showLoginOptions() {
-    console.log('Clicked on login');
     document.getElementById('login-list').classList.toggle('show');
   }
   return (

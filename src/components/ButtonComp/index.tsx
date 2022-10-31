@@ -31,9 +31,6 @@ const useStyles = makeStyles<Theme, ThemeProps>((theme) => {
       },
       '&:hover': {
         backgroundColor: (props) => props.bgColor || theme.Colors.secondary
-      },
-      '&.MuiButton-root': {
-        fontFamily: 'DM Sans'
       }
     }
   };

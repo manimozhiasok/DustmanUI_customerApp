@@ -12,6 +12,7 @@ import { HTTP_STATUSES, USER_TYPE_ID } from 'src/Config/constant';
 import { useEdit } from 'src/hooks/useEdit';
 import toast from 'react-hot-toast';
 import useUserInfo from 'src/hooks/useUserInfo';
+import { setCustomerId } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -40,8 +41,9 @@ const ChooseUserType = () => {
     );
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.customerProfile?.customer_id) {
-        updateUserInfo(response?.data?.customerProfile?.customer_id);
-        navigateTo('/dustman/homepage', { replace: true });
+        updateUserInfo(response.data.customerProfile.customer_id);
+        setCustomerId(response.data.customerProfile.customer_id);
+        navigateTo('/customer-home', { replace: true });
       }
     }
     //  navigateTo('/homepage/customer-info', { replace: true });

@@ -13,13 +13,21 @@ import ApplicationRoute from './ApplicationRoute';
 
 const routes: RouteObject[] = [
   {
-    path: '',
+    path: '/',
     element: <BaseLayout />,
     children: [
       {
-        path: '/dustman',
+        path: '',
+        element: <Navigate to="dustman-home" replace />
+      },
+      {
+        path: 'dustman-home',
         element: <LandingPage />,
         children: [
+          // {
+          //   path: '',
+          //   element: <LandingPage />
+          // },
           {
             path: 'login',
             element: <ApplicationRoute />
@@ -41,20 +49,19 @@ const routes: RouteObject[] = [
             element: <ChooseUserType />
           }
         ]
-      }
-    ]
-  },
-  {
-    path: 'dustman/homepage',
-    element: <HomePageLayout />,
-    children: [
-      {
-        path: '',
-        element: <Navigate to="customer-info" replace />
       },
       {
-        path: 'customer-info',
-        element: <HomePage />
+        path: 'customer-home',
+        children: [
+          {
+            path: '',
+            element: <Navigate to="customer-info" replace />
+          },
+          {
+            path: 'customer-info',
+            element: <HomePage />
+          }
+        ]
       }
     ]
   }

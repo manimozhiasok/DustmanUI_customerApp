@@ -28,7 +28,7 @@ function App() {
       setAuthState(AUTH_STATE.SIGNED_IN);
     } else {
       setAuthState(AUTH_STATE.NOT_LOGGED_ID);
-      navigateTo('/dustman', { replace: true });
+      navigateTo('/dustman-home', { replace: true });
     }
   };
 

@@ -271,12 +271,12 @@ export const PureLightTheme = (options?: ThemeOptions) =>
                 }
             }
           }
-        },
-        MuiTab: {
-          root: {
-            fontFamily: 'DM Sans'
-          }
         }
+        ///---> need to move mui components overrides
+        // MuiTab: {
+        //   root: {
+        //   }
+        // }
       }
     }
   );
