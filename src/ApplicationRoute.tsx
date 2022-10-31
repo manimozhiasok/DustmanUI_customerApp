@@ -33,9 +33,9 @@ const ApplicationRoute = () => {
   }
 
   return authState === AUTH_STATE.SIGNED_IN ? (
-    <Navigate to="/homepage/customer-info" />
+    <Navigate to="/dustman/homepage/customer-info" />
   ) : (
-    <Navigate to="/customer-login" />
+    <Navigate to="/dustman/customer-login" />
   );
 };
 export default ApplicationRoute;

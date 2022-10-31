@@ -36,7 +36,7 @@ function HeaderRightContent() {
 
   const handleCustomerButtonClick = () => {
     toggleLoginDrawer();
-    navigateTo('/login', { replace: true });
+    navigateTo('/dustman/login', { replace: true });
   };
   function showLoginOptions() {
     console.log('Clicked on login');

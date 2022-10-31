@@ -75,11 +75,11 @@ function LandingPage() {
   const navigateTo = useNavigate();
 
   const location = useLocation();
-  const match = useMatch('/');
+  const match = useMatch('/dustman');
 
   const handleCloseIconClick = () => {
     closeLoginDrawer();
-    navigateTo('/', { replace: true });
+    navigateTo('/dustman', { replace: true });
   };
 
   useEffect(() => {

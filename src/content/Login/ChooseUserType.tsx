@@ -41,7 +41,7 @@ const ChooseUserType = () => {
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.customerProfile?.customer_id) {
         updateUserInfo(response?.data?.customerProfile?.customer_id);
-        navigateTo('/homepage', { replace: true });
+        navigateTo('/dustman/homepage', { replace: true });
       }
     }
     //  navigateTo('/homepage/customer-info', { replace: true });

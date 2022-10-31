@@ -28,7 +28,7 @@ function App() {
       setAuthState(AUTH_STATE.SIGNED_IN);
     } else {
       setAuthState(AUTH_STATE.NOT_LOGGED_ID);
-      navigateTo('/', { replace: true });
+      navigateTo('/dustman', { replace: true });
     }
   };
 

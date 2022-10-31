@@ -17,7 +17,7 @@ const routes: RouteObject[] = [
     element: <BaseLayout />,
     children: [
       {
-        path: '/',
+        path: '/dustman',
         element: <LandingPage />,
         children: [
           {
@@ -45,7 +45,7 @@ const routes: RouteObject[] = [
     ]
   },
   {
-    path: 'homepage',
+    path: 'dustman/homepage',
     element: <HomePageLayout />,
     children: [
       {
