@@ -33,15 +33,7 @@ export const initialValues = {
   order_items: [],
   description: '',
   order_images: [],
-  order_address: {
-    address_line1: '',
-    address_line2: '',
-    address_line3: '',
-    state: '',
-    city: '',
-    pincode: '',
-    mobile_number: ''
-  },
+  order_address_id: '',
   customer_order_details: {
     vehicle_id: 0,
     pickup_time: '',
@@ -90,8 +82,11 @@ function BookYourPickup() {
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
+      if (userDetails?.user_type_id === 0) {
+        return;
+      }
       const response: any =
         await API_SERVICES.customerOrderService.getAllTrashCategory(
           TRASH_CATEGORY_ID.customerTrash,
@@ -107,7 +102,7 @@ function BookYourPickup() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userDetails?.user_type_id]);
 
   const handleTrashCatItems = (itemIds: any[]) => {
     edit.update({ order_items: itemIds });
@@ -115,7 +110,7 @@ function BookYourPickup() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const bookYourPickupAccordionContent = [
     {

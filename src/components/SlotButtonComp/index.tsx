@@ -69,7 +69,6 @@ const SlotButtonComp = (props: Prop) => {
             />
             <Grid
               container
-              direction="row"
               alignItems="center"
               style={{ marginTop: theme.spacing(1) }}
             >

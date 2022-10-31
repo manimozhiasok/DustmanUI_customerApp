@@ -82,7 +82,7 @@ function OrdersPage() {
     },
     {
       tabIcon: CompletedOrdersIcon,
-      label: t('ORDER.confirmed'),
+      label: t('ORDER.completed'),
       value: CUSTOMER_ORDER_STATUS.Completed
     }
   ];

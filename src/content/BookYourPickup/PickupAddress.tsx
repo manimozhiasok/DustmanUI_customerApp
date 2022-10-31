@@ -1,24 +1,22 @@
 import {
   Divider,
-  FormControl,
-  FormControlLabel,
   Grid,
   makeStyles,
   Radio,
-  RadioGroup,
   Theme,
   Typography,
   useTheme
 } from '@material-ui/core';
-import React, { useState } from 'react';
-import { ButtonComp, DialogContentDetails } from 'src/components';
+import { useState } from 'react';
+import { ButtonComp } from 'src/components';
+import { useEdit } from 'src/hooks/useEdit';
+import useUserInfo from 'src/hooks/useUserInfo';
 import Plus from '../../Assets/Images/Plus.svg';
 import PickupAddressModal from './PickupAddressModal';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
-    radioLableStyle: {
-      fontSize: theme.MetricsSizes.small_xxx - 1,
+    addressView: {
       color: theme.Colors.darkGrey,
       fontWeight: theme.fontWeight.mediumBold
     },
@@ -26,22 +24,12 @@ const useStyles = makeStyles((theme: Theme) => {
       paddingLeft: theme.spacing(3.8),
       paddingTop: theme.spacing(2)
     },
-    leftContent: {
+    locTextStyle: {
       color: theme.Colors.darkBlue,
       fontWeight: theme.fontWeight.medium
     },
-    rightContent: {
-      color: theme.Colors.mediumGrey,
-      fontWeight: theme.fontWeight.regular
-    },
-    formStyle: {
-      //paddingBottom: theme.spacing(4)
-    },
     dividerStyle: {
-      padding: theme.spacing(2)
-    },
-    buttonStyle: {
-      justifyContent: 'center'
+      padding: theme.spacing(2, 0)
     }
   };
 });
@@ -50,35 +38,14 @@ const PickupAddress = ({ edit }: { edit: any }) => {
   const theme = useTheme();
   const classes = useStyles();
   const [openModal, setOpenModal] = useState({ open: false });
+  const { userAddressDetails } = useUserInfo();
+  const [selectedValue, setSelectedValue] = useState(0);
 
-  const data = [
-    {
-      id: '1',
-      address:
-        'New No: 42, 4th cross street, Ram Nagar, Velachery, Chennai 600042. ',
-      location: 'Location:',
-      loc: 'Velachery'
-    },
-    {
-      id: '2',
-      address: 'New No: 50, 5th cross street, TNagar, Chennai 600042.',
-      location: 'Location:',
-      loc: 'Sriberambadur'
-    },
-    {
-      id: '3',
-      address: `${edit.getValue('order_address').address_line1}, ${
-        edit.getValue('order_address').address_line2
-      }, ${edit.getValue('order_address').city}, ${
-        edit.getValue('order_address').state
-      }`,
-      location: 'Location:',
-      loc: `${edit.getValue('order_address').city}`
-    }
-  ];
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event, 'from handleChange');
+  const handleChange = (event: any) => {
+    setSelectedValue(parseInt(event.target.value));
+    edit.update({
+      order_address_id: parseInt(event.target.value)
+    });
   };
 
   const handleAddNewItem = () => {
@@ -86,62 +53,66 @@ const PickupAddress = ({ edit }: { edit: any }) => {
   };
 
   return (
-    <Grid container>
-      <RadioGroup>
-        {data.map((item, index) => {
-          return (
-            <React.Fragment key={index}>
-              <Grid container className={classes.gridStyle}>
-                <Grid item xs={2}>
-                  <Typography>{item.location}</Typography>
+    <>
+      <Grid container>
+        <Grid item xs={12}>
+          {userAddressDetails.length &&
+            userAddressDetails.map((item, index) => {
+              return (
+                <Grid container key={index} alignItems="center">
+                  <Grid item>
+                    <Radio
+                      onChange={handleChange}
+                      value={item.id}
+                      checked={selectedValue === item.id}
+                    />
+                  </Grid>
+                  <Grid item xs container spacing={1}>
+                    <Grid item>
+                      <Typography>{'location:'}</Typography>
+                    </Grid>
+                    <Grid item xs>
+                      <Typography className={classes.locTextStyle}>
+                        {item?.city}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography variant="h6" className={classes.addressView}>
+                        {item?.address}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} className={classes.dividerStyle}>
+                    {index === userAddressDetails?.length - 1 ? null : (
+                      <Divider />
+                    )}
+                  </Grid>
                 </Grid>
-                <Grid item xs={9}>
-                  <Typography className={classes.leftContent}>
-                    {item.loc}
-                  </Typography>
-                </Grid>
-              </Grid>
-              <FormControlLabel
-                key={item.address}
-                value={item.address}
-                id={item.id}
-                control={<Radio onChange={handleChange} />}
-                label={
-                  <Typography className={classes.radioLableStyle}>
-                    {item.address}
-                  </Typography>
-                }
-                className={classes.formStyle}
-              />
-              {index === data.length - 1 ? '' : <Divider />}
-            </React.Fragment>
-          );
-        })}
-      </RadioGroup>
-      <Grid container justifyContent="center" item xs={12}>
-        <ButtonComp
-          buttonText={'ADD NEW ADDRESS'}
-          backgroundColor="white"
-          buttonFontSize={theme.MetricsSizes.small_xx}
-          variant="outlined"
-          buttonTextColor={theme.Colors.secondary}
-          buttonFontWeight={theme.fontWeight.bold}
-          btnWidth={'200px'}
-          style={{
-            marginTop: 30,
-            justifyContent: 'center'
-          }}
-          startIcon={<img src={Plus} />}
-          onClickButton={handleAddNewItem}
-        />
+              );
+            })}
+        </Grid>
+        <Grid container item xs={12} justifyContent="center">
+          <ButtonComp
+            buttonText={'ADD NEW ADDRESS'}
+            backgroundColor={theme.Colors.white}
+            buttonFontSize={theme.MetricsSizes.small_xx}
+            variant="outlined"
+            buttonTextColor={theme.Colors.secondary}
+            buttonFontWeight={theme.fontWeight.bold}
+            btnWidth={'200px'}
+            style={{
+              marginTop: theme.MetricsSizes.medium_xx,
+              alignSelf: 'center'
+            }}
+            startIcon={<img src={Plus} />}
+            onClickButton={handleAddNewItem}
+          />
+        </Grid>
       </Grid>
       {openModal.open && (
-        <PickupAddressModal
-          edit={edit}
-          onClose={() => setOpenModal({ open: false })}
-        />
+        <PickupAddressModal onClose={() => setOpenModal({ open: false })} />
       )}
-    </Grid>
+    </>
   );
 };
 

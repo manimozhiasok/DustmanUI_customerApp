@@ -16,10 +16,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   textStyle: {
     color: theme.Colors.deepGrey
   },
-  optionStyle: {
-    color: theme.Colors.primary,
-    fontSize: theme.MetricsSizes.small_x
-  },
   textAreaStyle: {
     fontSize: theme.MetricsSizes.small_x,
     fontWeight: theme.fontWeight.regular,
@@ -67,7 +63,6 @@ export const LeftContent = ({ edit, trashData }) => {
           labelColor={theme.Colors.deepGrey}
           textColor={theme.Colors.darkGrey}
           backgroundColor={theme.Colors.lightWhiteGrey}
-          // value={edit.getValue('order_items')}
           value={getTrashValue()}
           borderColor={'transparent'}
           inputHeight={theme.MetricsSizes.large_xxx}
@@ -97,28 +92,27 @@ export const LeftContent = ({ edit, trashData }) => {
           inputBorderRadius={theme.MetricsSizes.tiny_x}
         />
       </Grid>
-      <Grid item xs={12}>
-        <Typography variant="h4" className={classes.textStyle}>
-          {t('PICKUP.description')}
-          <label className={classes.optionStyle}>(Optional)</label>
-        </Typography>
-        {/* <TextareaAutosize
-          minRows={5}
-          value={edit.getValue('description')}
-          onChange={(e) => edit.update({ description: e.target.value })}
-          placeholder={t('PICKUP.anyInstructionsForOurPickupExecutive')}
-          className={classes.textAreaStyle}
-        /> */}
-        <TextInputComponent
-          value={edit.getValue('description')}
-          onChange={(e) => edit.update({ description: e.target.value })}
-          placeholder={t('PICKUP.anyInstructionsForOurPickupExecutive')}
-          backgroundColor={theme.Colors.lightWhiteGrey}
-          inputHeight={123}
-          multiline
-          //rows={6}
-          borderColor={'transparent'}
-        />
+      <Grid item container xs={12}>
+        <Grid item xs={12}>
+          <Typography variant="h4" className={classes.textStyle}>
+            {t('PICKUP.description')}
+          </Typography>
+          <Typography variant="subtitle2" color="primary">
+            (Optional)
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <TextInputComponent
+            value={edit.getValue('description')}
+            onChange={(e) => edit.update({ description: e.target.value })}
+            placeholder={t('PICKUP.anyInstructionsForOurPickupExecutive')}
+            backgroundColor={theme.Colors.lightWhiteGrey}
+            inputHeight={'100%'}
+            multiline
+            minRows={6}
+            borderColor={'transparent'}
+          />
+        </Grid>
       </Grid>
     </Grid>
   );

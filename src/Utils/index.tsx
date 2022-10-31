@@ -105,12 +105,17 @@ export const isValidEmail = (email) => {
   return email?.match(emailExp);
 };
 
-export const isPhoneNumber = (number) => {
+export const isPhoneNumber = (number: string) => {
   const numberExp = /^([0-9()-]{10})$/;
   return number?.match(numberExp);
 };
 
-export const isOneTimePassWord = (number) => {
-  const numberExp = /^([0-9]{6})$/;
-  return number?.match(numberExp);
+export const isOneTimePassWord = (number: string) => {
+  const otpExp = /^([0-9]{6})$/;
+  return number?.match(otpExp);
+};
+
+export const isValidPinCode = (number: string) => {
+  const pinCodeExp = /^[1-9][0-9]{5}$/;
+  return number?.match(pinCodeExp);
 };

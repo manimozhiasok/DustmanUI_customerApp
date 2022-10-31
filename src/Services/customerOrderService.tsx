@@ -14,15 +14,7 @@ type CustomerDetailsProp = {
     order_items: number[];
     description: string;
     order_images: any[];
-    order_address: {
-      address_line1: string;
-      address_line2: string;
-      address_line3: string;
-      state: string;
-      city: string;
-      pincode: string;
-      mobile_number: string;
-    };
+    order_address_id: string | number;
     customer_order_details: {
       vehicle_id: number;
       pickup_time: string;
