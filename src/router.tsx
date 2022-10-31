@@ -4,7 +4,6 @@ import { RouteObject } from 'react-router';
 import BaseLayout from 'src/layouts/BaseLayout';
 import LandingPage from './content/LandingPage';
 import HomePage from './content/HomePage';
-import HomePageLayout from './layouts/HomePageLayout';
 import CustomerLogin from './content/Login/CustomerLogin';
 import VerifyOtp from './content/Login/VerifyOtp';
 import CreateAccountSignUp from './content/Login/CreateAccountSignUp';
