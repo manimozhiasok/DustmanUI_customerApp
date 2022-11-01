@@ -25,7 +25,7 @@ import {
   iconbox3,
   iconbox4
 } from 'src/Assets';
-
+import './website.css';
 function AboutUs() {
   return (
     <>

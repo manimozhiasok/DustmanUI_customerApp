@@ -25,7 +25,7 @@ import {
   stock,
   stock1
 } from 'src/Assets';
-
+import './website.css';
 function Home() {
   return (
     <>

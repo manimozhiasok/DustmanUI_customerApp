@@ -1,6 +1,6 @@
 import React from 'react';
 import { icon1, icon2, icon3, icon4, otherPic } from 'src/Assets';
-
+import './website.css';
 function Services() {
   return (
     <>

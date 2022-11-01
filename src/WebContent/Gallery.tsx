@@ -14,7 +14,7 @@ import {
   g11,
   g12
 } from 'src/Assets';
-
+import './website.css';
 function Gallery() {
   // const indicator: any = document.querySelector('.indicator').children;
   // const main: any = document.querySelector('.pictures').children;

@@ -46,7 +46,7 @@ import {
   f2,
   f3
 } from 'src/Assets';
-
+import './website.css';
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
     width: '100%'
