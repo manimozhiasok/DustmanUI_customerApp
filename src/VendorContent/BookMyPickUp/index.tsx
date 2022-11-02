@@ -29,20 +29,23 @@ import { useTranslation } from 'react-i18next';
 import ChooseCategoryComponent from './ChooseCategoryComponent';
 import useUserInfo from 'src/hooks/useUserInfo';
 import PickupPlace from './PickupPlace';
-// import PickupAddressModal from './PickupAddressModal';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
 export const initialValues = {
   quantity_kg: '',
-  order_items: [],
   description: '',
+  order_items: [],
+  user_type_id: USER_TYPE_ID.vendorPickup,
   order_images: [],
   order_address_id: '',
-  customer_order_details: {
+  vendor_order_pickup_details: {
     vehicle_id: 0,
     pickup_time: '',
-    slot: ''
+    slot: '',
+    from_place: '',
+    to_place: '',
+    total_distance: 0
   }
 };
 
@@ -55,24 +58,11 @@ function BookMyPickup() {
   const { t } = useTranslation();
   const { userDetails } = useUserInfo();
 
-  // const pickAddressFields = [
-  //   'address_line1',
-  //   'address_line2',
-  //   'address_line3',
-  //   'state',
-  //   'city',
-  //   'pincode',
-  //   'mobile_number'
-  // ];
-
   const handleCreateCustomerOrder = async () => {
     try {
-      // if (!edit.allFilled(...pickAddressFields)) {
-      //   return toast.error('Please Fill all the pickup address details');
-      // }
       let orderData = { ...initialValues, ...edit.edits };
       const createUserRes: any =
-        await API_SERVICES.vendorPickupDropService.create(
+        await API_SERVICES.vendorPickupDropService.createPickup(
           userDetails?.vendor_id,
           {
             data: orderData,
@@ -90,11 +80,15 @@ function BookMyPickup() {
 
   const fetchData = useCallback(async () => {
     try {
+      // if (userDetails?.id === 0) {
+      //   return;
+      //}
       const response: any =
         await API_SERVICES.vendorPickupDropService.getAllTrashCategory(
           TRASH_CATEGORY_ID.vendorPickupTrash,
           USER_TYPE_ID.vendorPickup
         );
+      console.log(response, 'response');
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         if (response?.data?.categories) {
           setTrashData(response.data.categories);
@@ -144,7 +138,7 @@ function BookMyPickup() {
     },
     {
       summaryHeading: t('pickupAddress'),
-      content: <PickupAddress edit={edit} />,
+      content: <PickupAddress />,
       displayIcon: PickupAddressIcon
     },
     {

@@ -9,32 +9,30 @@ import {
   Theme,
   Typography
 } from '@material-ui/core';
+import { bike } from 'src/Assets';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
     radioLableStyle: {
       fontSize: theme.MetricsSizes.small_xxx - 1,
-      color: theme.Colors.darkGrey,
-      fontWeight: theme.fontWeight.mediumBold
-    },
-    gridStyle: {
-      paddingLeft: theme.spacing(3.8),
-      paddingTop: theme.spacing(2)
+      color: theme.Colors.blueDark,
+      fontWeight: theme.fontWeight.mediumBold,
+      paddingTop: theme.MetricsSizes.medium_xx
     },
     leftContent: {
-      color: theme.Colors.darkBlue,
-      fontWeight: theme.fontWeight.medium
+      color: theme.Colors.darkGrey,
+      fontWeight: theme.fontWeight.medium,
+      paddingLeft: theme.spacing(2.3),
+      marginBottom: theme.spacing(3)
     },
-    rightContent: {
-      color: theme.Colors.mediumGrey,
-      fontWeight: theme.fontWeight.regular
-    },
-    formStyle: {},
     dividerStyle: {
-      padding: theme.spacing(2)
+      marginLeft: theme.MetricsSizes.small_xxx,
+      marginTop: theme.MetricsSizes.medium_xx
     },
-    radioLableAlign: {
-      justifyItems: 'right'
+    mapStyle: {
+      fontSize: theme.MetricsSizes.tiny_xx,
+      color: theme.Colors.blackPrimary,
+      marginTop: theme.MetricsSizes.tiny_x
     }
   };
 });
@@ -50,48 +48,44 @@ const PickUpAddressComponent = ({
     console.log(event, 'from handleChange');
   };
   return (
-    <>
-      <Grid container>
-        <RadioGroup>
-          {data.map((item, index) => {
-            return (
-              <>
-                <FormControlLabel
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                  key={item.address}
-                  value={item.address}
-                  id={item.id}
-                  labelPlacement="start"
-                  control={
-                    <Radio
-                      onChange={handleChange}
-                      className={classes.radioLableAlign}
-                    />
-                  }
-                  label={
-                    <Typography className={classes.radioLableStyle}>
-                      {item.address}
-                    </Typography>
-                  }
-                  className={classes.formStyle}
-                />
-
-                <Grid container className={classes.gridStyle}>
-                  <Grid item xs={2}>
-                    <img src={item.image} />
-                  </Grid>
-                  <Grid item xs={9}>
-                    <Typography>{item.description}</Typography>
-                  </Grid>
+    <Grid container>
+      <RadioGroup>
+        {data.map((item, index) => {
+          return (
+            <>
+              <Grid container key={index}>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                    labelPlacement="start"
+                    key={item.city}
+                    value={item.city}
+                    id={item.id}
+                    control={
+                      <Radio
+                        style={{ marginTop: '30px' }}
+                        onChange={handleChange}
+                      />
+                    }
+                    label={
+                      <Typography className={classes.radioLableStyle}>
+                        {item.city}
+                      </Typography>
+                    }
+                  />
                 </Grid>
-
-                {index === data.length - 1 ? '' : <Divider />}
-              </>
-            );
-          })}
-        </RadioGroup>
-      </Grid>
-    </>
+                <Grid item xs={12}>
+                  <Typography variant={'h6'} className={classes.leftContent}>
+                    {item.address}, {item.pincode}
+                  </Typography>
+                </Grid>
+              </Grid>
+              {index === data.length - 1 ? '' : <Divider />}
+            </>
+          );
+        })}
+      </RadioGroup>
+    </Grid>
   );
 };
 export default PickUpAddressComponent;

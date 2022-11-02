@@ -35,7 +35,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const { userAddressDetails } = useUserInfo();
+  const { userAddressDetails, userDetails } = useUserInfo();
   const timeSlotDetails = [
     {
       id: 1,
@@ -79,21 +79,22 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
 
   const getSlotValues = () => {
     if (
-      edit.getValue('customer_order_details')?.pickup_time &&
-      edit.getValue('customer_order_details')?.slot
+      edit.getValue('vendor_order_pickup_details')?.pickup_time &&
+      edit.getValue('vendor_order_pickup_details')?.slot
     ) {
       let data = `${
-        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+        getDateFormat(edit.getValue('vendor_order_pickup_details').pickup_time)
           .getDay
       }, ${
-        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+        getDateFormat(edit.getValue('vendor_order_pickup_details').pickup_time)
           .getDate
       } ${
-        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+        getDateFormat(edit.getValue('vendor_order_pickup_details').pickup_time)
           .getMonth
       } ${
         timeSlotDetails.find(
-          (item) => item.value === edit.getValue('customer_order_details')?.slot
+          (item) =>
+            item.value === edit.getValue('vendor_order_pickup_details')?.slot
         ).time
       }`;
       return data;
@@ -107,7 +108,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.userName'),
-      value: edit.getValue('name')
+      value: userDetails?.name
     },
     { content: t('category'), value: getTrashValue() },
 

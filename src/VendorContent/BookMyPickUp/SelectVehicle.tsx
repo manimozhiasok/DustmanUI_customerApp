@@ -21,8 +21,8 @@ function SelectVehicle({ edit }) {
 
   const handleClick = (vehicleId: number) => {
     edit.update({
-      customer_order_details: {
-        ...edit.edits.customer_order_details,
+      vendor_order_pickup_details: {
+        ...edit.edits.vendor_order_pickup_details,
         vehicle_id: vehicleId
       }
     });
@@ -31,7 +31,7 @@ function SelectVehicle({ edit }) {
   return (
     <SelectVehicleType
       dataContent={dataContent}
-      selectedVal={edit.getValue('customer_order_details').vehicle_id}
+      selectedVal={edit.getValue('vendor_order_pickup_details').vehicle_id}
       onClick={handleClick}
     />
   );

@@ -1,7 +1,7 @@
 import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
-import { vendorDropOrder } from './vendorDropOrderStub';
+import { vendorDropOrder, vendorPickupAddress } from './vendorDropOrderStub';
 
 export type DefaultProp = {
   data: any;
@@ -9,17 +9,21 @@ export type DefaultProp = {
   failureMessage?: string;
 };
 
-type vendorDetailsProp = {
+type vendorPickupDetailsProp = {
   data: {
-    quantity_kg: number | string;
-    order_items: number[];
+    quantity_kg: string | number;
     description: string;
+    order_items: number[];
+    user_type_id: number;
     order_images: any[];
     order_address_id: string | number;
-    customer_order_details: {
+    vendor_order_pickup_details: {
       vehicle_id: number;
       pickup_time: string;
       slot: string;
+      from_place: string;
+      to_place: string;
+      total_distance: number;
     };
   };
   successMessage?: string;
@@ -47,12 +51,12 @@ type vendorDropDetailsProp = {
 };
 
 export const vendorPickupDropService = {
-  create: async (
-    customerId: number,
-    { data, successMessage, failureMessage }: vendorDetailsProp
+  createPickup: async (
+    vendorId: number,
+    { data, successMessage, failureMessage }: vendorPickupDetailsProp
   ) => {
     const options = await apiOptions({
-      url: `${Config.BASE_URL}/api/createCustomerOrder/orderer/${customerId}`,
+      url: `${Config.BASE_URL}/api/createVendorOrder/orderer/${vendorId}`,
       method: 'post',
       data: data
     });
@@ -66,7 +70,6 @@ export const vendorPickupDropService = {
     };
     return apiRequest(options, toastMessageConfig);
   },
-
   dropCreate: async (
     vendorId: number,
     { data, successMessage, failureMessage }: vendorDropDetailsProp
@@ -86,7 +89,6 @@ export const vendorPickupDropService = {
     };
     return apiRequest(options, toastMessageConfig);
   },
-
   replace: async (
     id: number,
     { data, successMessage, failureMessage }: DefaultProp
@@ -107,6 +109,34 @@ export const vendorPickupDropService = {
     return apiRequest(options, toastMessageConfig);
   },
 
+  replacePickup: async (
+    id: number,
+    { data, successMessage, failureMessage }: DefaultProp
+  ) => {
+    const options = await apiOptions({
+      url: `${Config.BASE_URL}/api/replaceOrder/order/${id}`,
+      method: 'put',
+      data: data
+    });
+    const toastMessageConfig = {
+      success: {
+        message: successMessage
+      },
+      failure: {
+        message: failureMessage
+      }
+    };
+    return apiRequest(options, toastMessageConfig);
+  },
+  getDustmanLocation: async () => {
+    const options = await apiOptions({
+      url: `${Config.BASE_URL}/api/getDustmanLocation`,
+      method: 'get'
+    });
+    return vendorDropOrder.vendorDropGet;
+    //return apiRequest(options);
+  },
+
   getAllTrashCategory: async (categoryTypeId: number, userTypeId: number) => {
     const options = await apiOptions({
       url: `${Config.BASE_URL}/api/categories/categoryType/${categoryTypeId}/UserType/${userTypeId}/categoryItems/getAllCategory`,
@@ -114,13 +144,12 @@ export const vendorPickupDropService = {
     });
     return apiRequest(options);
   },
-
-  getDustmanLocation: async () => {
+  getAllPickupAddress: async (vendorId: number) => {
     const options = await apiOptions({
-      url: `${Config.BASE_URL}/api/getDustmanLocation`,
+      url: `${Config.BASE_URL}/api/getAllCustomerVendorOrderAddresss/vendor/${vendorId}`,
       method: 'get'
     });
-    // return vendorDropOrder.vendorDropGet;
-    return apiRequest(options);
+    return vendorPickupAddress.vendorAddress;
+    //return apiRequest(options);
   }
 };
