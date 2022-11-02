@@ -1,17 +1,20 @@
 import React from 'react';
 import { icon1, icon2, icon3, icon4, otherPic } from 'src/Assets';
 import './website.css';
+import { useNavigate } from 'react-router';
 function Services() {
+  const navigateTo = useNavigate();
+  const navigationToHome = () => {
+    navigateTo('/dustman', { replace: true });
+  };
   return (
     <>
       <img className="other-pic" src={otherPic} alt="" />
       <section>
         <div className="other-page1">
           <div className="side-head">
-            <a href="index.html">Home</a> |{' '}
-            <a className="current-view" href="#">
-              Services
-            </a>
+            <a onClick={navigationToHome}>Home</a> |{' '}
+            <a className="current-view">Services</a>
           </div>
           <h1>Other Services</h1>
 

@@ -1105,6 +1105,7 @@ height: 394px; */
 
     background: #ffffff;
     /* background-image: url(/src/Assets/WebImages/Vector5.svg), url(/src/Assets/WebImages/Vector6.png); */
+    background-image: url(/src/Assets/WebImages/Vector3.svg), url(/src/Assets/WebImages/Vector4.png);
     background-repeat: no-repeat, no-repeat;
     background-position-y: 100px, 825px;
     background-position-x: 200px, 100px;
@@ -1207,6 +1208,7 @@ height: 394px; */
     line-height: 21px;
     color: rgba(0, 0, 0, 0.5);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .side-head a:hover {

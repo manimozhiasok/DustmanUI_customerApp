@@ -11,17 +11,20 @@ import {
   client6
 } from 'src/Assets';
 import './website.css';
+import { useNavigate } from 'react-router';
 function ContactUs() {
+  const navigateTo = useNavigate();
+  const navigationToHome = () => {
+    navigateTo('/dustman', { replace: true });
+  };
   return (
     <>
       <img className="contact-pic" src={contactPic} alt="" />
       <section>
         <div className="contact-page1">
           <div className="side-head">
-            <a href="index.html">Home</a> |{' '}
-            <a className="current-view" href="#">
-              Contact Us
-            </a>
+            <a onClick={navigationToHome}>Home</a> |{' '}
+            <a className="current-view">Contact Us</a>
           </div>
           <div>
             <h1 className="contact-title">Contact us</h1>

@@ -25,18 +25,21 @@ import {
   iconbox3,
   iconbox4
 } from 'src/Assets';
+import { useNavigate } from 'react-router';
 import './website.css';
 function AboutUs() {
+  const navigateTo = useNavigate();
+  const navigationToHome = () => {
+    navigateTo('/dustman', { replace: true });
+  };
   return (
     <>
       <img className="about1" src={about} alt="" />
       <section />
       <div className="about-page1">
         <div className="side-head">
-          <a href="index.html">Home</a> |{' '}
-          <a className="current-view" href="#">
-            About Us
-          </a>
+          <a onClick={navigationToHome}>Home</a> |{' '}
+          <a className="current-view">About Us</a>
         </div>
         <h1 className="about-title">Who We Are</h1>
         <div className="about-body">
