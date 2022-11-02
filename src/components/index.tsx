@@ -19,3 +19,5 @@ export { default as LoginHeaderComp } from './LoginHeaderComp';
 export { default as SlotButtonComp } from './SlotButtonComp';
 export { default as UHTabComponent } from './UHTabComponent';
 export { default as ImageTextComponent } from './ImageTextComponent';
+export { default as PickUpAddressComponent } from './PickUpAddressComponent';
+export { default as PickupImageText } from './PickupImageText';

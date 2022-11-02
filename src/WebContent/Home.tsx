@@ -63,7 +63,7 @@ function Home() {
               <a href="http://localhost:3000/homepage/customer-info">
                 Customer
               </a>
-              <a href="#">Vendor</a>
+              <a href="http://localhost:3000/homepage/vendor-info">Vendor</a>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@ function Home() {
                 >
                   Customer
                 </a>
-                <a href="#">Vendor</a>
+                <a href="http://localhost:3000/homepage/vendor-info">Vendor</a>
               </div>
             </li>
           </ul>

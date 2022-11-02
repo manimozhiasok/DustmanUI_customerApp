@@ -27,6 +27,7 @@ export const CUSTOMER_STATUS = {
 
 export const CUSTOMER_ORDER_STATUS = {
   Pending: 0,
+  New: 1,
   Confirmed: 2,
   Completed: 3,
   Cancelled: 4

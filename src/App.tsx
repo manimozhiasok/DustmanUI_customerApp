@@ -1,5 +1,5 @@
 import { CssBaseline } from '@material-ui/core';
-import { useNavigate, useRoutes } from 'react-router-dom';
+import { useLocation, useNavigate, useRoutes } from 'react-router-dom';
 import router from 'src/router';
 import ThemeProvider from './theme/ThemeProvider';
 import { Toaster } from 'react-hot-toast';
@@ -20,7 +20,9 @@ function App() {
   const [authState, setAuthState] = useState(AUTH_STATE.CHECKING);
   const { updateUserInfo } = useUserInfo();
   const navigateTo = useNavigate();
+  const location = useLocation();
 
+  console.log(location, 'location');
   const fetchData = async () => {
     const userId = await getCustomerId();
     if (userId !== null) {

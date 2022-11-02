@@ -36,13 +36,12 @@ const CustomerLogin = () => {
     let data = {
       phoneNumber: inputVal
     };
-    const response: any =
-      await API_SERVICES.customerRegisterService.generateOtp({
-        data
-      });
+    const response: any = await API_SERVICES.vendorRegisterService.generateOtp({
+      data
+    });
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.phoneNumber) {
-        navigateTo('/dustman/login/verify-otp', {
+        navigateTo('/dustman/vendor-login/verify-otp', {
           replace: true,
           state: { mobileNumber: response?.data?.phoneNumber }
         });

@@ -4,14 +4,28 @@ import { API_SERVICES } from 'src/Services';
 
 export type UserDetails = {
   id: number;
+  vendor_id: number;
+  language_id: number;
+  name: string;
+  gst: string;
+  full_address: string;
+  contact_name: string;
+  mobile_number: string;
+  landline_number: string;
+  email_id: string;
+  website: string;
+  established_year: string;
+  vehicle_owned: string;
+  status_id: number;
+  location: string;
+  pincode: string;
   first_name: string;
   last_name: string;
   email: string;
   user_type_id: number;
-  language_id: number;
   image_url: string;
   customer_id: number;
-  mobile_number: string;
+  phoneNumber: string;
 };
 
 export type UserInfo = {
@@ -23,14 +37,28 @@ export type UserInfo = {
 const INITIAL_STATE: UserInfo = {
   userDetails: {
     id: 0,
+    vendor_id: 4,
     first_name: '',
     last_name: '',
     email: '',
     user_type_id: 0,
     language_id: 0,
+    name: '',
+    gst: '',
+    full_address: '',
+    contact_name: '',
+    mobile_number: '',
+    landline_number: '',
+    email_id: '',
+    website: '',
+    established_year: '',
+    vehicle_owned: '',
+    status_id: 0,
+    location: '',
+    pincode: '',
+    phoneNumber: '',
     image_url: '',
-    customer_id: 0,
-    mobile_number: ''
+    customer_id: 0
   },
   updateUserInfo: () => undefined,
   userAddressDetails: []

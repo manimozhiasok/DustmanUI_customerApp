@@ -1,4 +1,3 @@
-import { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import { RouteObject } from 'react-router';
 import BaseLayout from 'src/layouts/BaseLayout';
@@ -14,6 +13,15 @@ import Gallery from './WebContent/Gallery';
 import ContactUs from './WebContent/ContactUs';
 import LandingPage from './WebContent/LandingPage';
 import Login from './content/Login';
+//vendor route component
+import VendorLogin from './VendorContent/VendorLogin';
+import VendorPageLogin from './VendorContent/VendorLogin/VendorPageLogin';
+import VendorApplicationRoute from './VendorApplicationRoute';
+import VendorHomePage from './VendorContent/VendorHomePage';
+import VendorCreateAccountSignUp from './VendorContent/VendorLogin/VendorCreateAccountSignUp';
+import VendorVerifyOtp from './VendorContent/VendorLogin/VendorVerifyOtp';
+import VendorChooseUserType from './VendorContent/VendorLogin/VendorChooseUserType';
+import { VendorApproval } from './VendorContent/VendorLogin/VendorApproval';
 
 const routes: RouteObject[] = [
   {
@@ -71,6 +79,36 @@ const routes: RouteObject[] = [
         ]
       },
       {
+        path: 'vendor-login',
+        element: <VendorLogin />,
+        children: [
+          {
+            path: '',
+            element: <VendorApplicationRoute />
+          },
+          {
+            path: 'vendor-page-login',
+            element: <VendorPageLogin />
+          },
+          {
+            path: 'verify-otp',
+            element: <VendorVerifyOtp />
+          },
+          {
+            path: 'create-account',
+            element: <VendorCreateAccountSignUp />
+          },
+          {
+            path: 'choose-user-type',
+            element: <VendorChooseUserType />
+          },
+          {
+            path: 'vendor-approval',
+            element: <VendorApproval />
+          }
+        ]
+      },
+      {
         path: 'customer-home',
         children: [
           {
@@ -80,6 +118,19 @@ const routes: RouteObject[] = [
           {
             path: 'customer-info',
             element: <HomePage />
+          }
+        ]
+      },
+      {
+        path: 'vendor-home',
+        children: [
+          {
+            path: '',
+            element: <Navigate to="vendor-info" replace />
+          },
+          {
+            path: 'vendor-info',
+            element: <VendorHomePage />
           }
         ]
       }

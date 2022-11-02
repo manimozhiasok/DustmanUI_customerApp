@@ -17,6 +17,11 @@ function NavBar() {
     document.getElementById('login-list').classList.remove('show');
     navigateTo('/dustman/login', { replace: true });
   };
+  const handleVendorButtonClick = () => {
+    toggleLoginDrawer();
+    document.getElementById('login-list').classList.remove('show');
+    navigateTo('/dustman/vendor-login', { replace: true });
+  };
 
   function showLoginOptions() {
     document.getElementById('login-list').classList.toggle('show');
@@ -28,7 +33,6 @@ function NavBar() {
 
   return (
     <>
-      {/* <div className="backfill"></div> */}
       <nav className="navbar">
         <div>
           <img className="logo" src={Logo} alt="logo" />{' '}
@@ -76,7 +80,7 @@ function NavBar() {
             </button>
             <div className="login-list" id="login-list">
               <a onClick={handleCustomerButtonClick}>Customer</a>
-              <a href="#">Vendor</a>
+              <a onClick={handleVendorButtonClick}>Vendor</a>
             </div>
           </div>
         </div>
