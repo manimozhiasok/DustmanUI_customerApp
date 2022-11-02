@@ -18,8 +18,8 @@ import {
   ConfirmedOrdersIcon,
   PendingOrdersIcon
 } from 'src/Assets';
-import toast from 'react-hot-toast';
 import OrderPreviewComp from './OrderPreviewComp';
+import toast from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -97,43 +97,6 @@ function OrdersPage() {
     }
   ];
 
-  // const fetchData = useCallback(async () => {
-  //   try {
-  //     const response: any =
-  //       await API_SERVICES.vendorCustomerOrderService.getVendorsOrders(
-  //         userDetails?.vendor_id
-  //       );
-  //     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-  //       if (response?.data) {
-  //         let orderData = [];
-  //         for (let i = 0; i < response.data.length; i++) {
-  //           if (selectedTab === CUSTOMER_ORDER_STATUS.Pending) {
-  //             if (response.data[i].status_id === 1) {
-  //               orderData.push(response.data[i]);
-  //             }
-  //           }
-  //           if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
-  //             if (response.data[i].status_id === 2) {
-  //               orderData.push(response.data[i]);
-  //             }
-  //           }
-  //           if (selectedTab === CUSTOMER_ORDER_STATUS.Completed) {
-  //             if (response.data[i].status_id === 3) {
-  //               orderData.push(response.data[i]);
-  //               console.log('test data ', response.data[i]);
-  //             }
-  //           }
-  //         }
-  //         setOrderDetails(orderData);
-  //       }
-  //     }
-  //   } catch (err) {
-  //     toast.error(err?.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }, [selectedTab]);
-
   const fetchData = useCallback(async () => {
     try {
       const response: any = await Promise.all([
@@ -147,34 +110,21 @@ function OrdersPage() {
           userDetails?.status_id
         )
       ]);
-      console.log('----array res----', response);
       if (response[0]?.status <= HTTP_STATUSES.BAD_REQUEST) {
-        if (response[0]?.data) {
-          console.log('====array res data===', response[0].data);
-          let orderData = [];
-          console.log('---------length---------', response[0].data.length);
-          for (let i = 0; i < response[0].data.length; i++) {
-            if (selectedTab === CUSTOMER_ORDER_STATUS.Pending) {
-              if (response[0].data[i].status_id === 1) {
-                orderData.push(response[0].data[i]);
-              }
-            }
+        if (selectedTab === CUSTOMER_ORDER_STATUS.Pending) {
+          if (response[0]?.data) {
+            setOrderDetails(response[0].data);
           }
-          for (let i = 0; i < response[1].data.length; i++) {
-            if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
-              if (response[1].data[i].status_id === 2) {
-                orderData.push(response[1].data[i]);
-              }
-            }
+        }
+        if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
+          if (response[1]?.data) {
+            setOrderDetails(response[1].data);
           }
-          for (let i = 0; i < response[2].data.length; i++) {
-            if (selectedTab === CUSTOMER_ORDER_STATUS.Completed) {
-              if (response[2].data[i].status_id === 3) {
-                orderData.push(response[2].data[i]);
-              }
-            }
+        }
+        if (selectedTab === CUSTOMER_ORDER_STATUS.Completed) {
+          if (response[2]?.data) {
+            setOrderDetails(response[2].data);
           }
-          setOrderDetails(orderData);
         }
       }
     } catch (err) {
@@ -192,7 +142,7 @@ function OrdersPage() {
       let updateData = {
         status_id: 4
       };
-      const response: any = await API_SERVICES.customerOrderService.replace(
+      const response: any = await API_SERVICES.vendorPickupDropService.replace(
         orderId,
         {
           data: updateData,

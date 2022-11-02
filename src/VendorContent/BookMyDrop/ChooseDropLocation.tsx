@@ -36,28 +36,31 @@ const useStyles = makeStyles((theme: Theme) => {
   };
 });
 
-const ChooseDropLocation = () => {
+const ChooseDropLocation = ({data}) => {
   const classes = useStyles();
-  const data = [
-    {
-      id: '1',
-      address: ' Ambattur',
-      location: 'No 13, 4th cross st, sakthi nagar,',
-      loc: ' kilambakkam, chennai.'
-    },
-    {
-      id: '2',
-      address: 'kilambakkam, chennai.',
-      location: 'No 13, 4th cross st, sakthi nagar,',
-      loc: 'Sriberambadur '
-    },
-    {
-      id: '4',
-      address: 'poonamallee',
-      location: 'No 13, 4th cross st, sakthi nagar,',
-      loc: ' kilambakkam, chennai.'
-    }
-  ];
+  // const data = [
+  //   {
+  //     id: '1',
+  //     dustman_location: ' Ambattur',
+  //     address_line1: 'No 13, 4th cross st,',
+  //     address_line2:' sakthi nagar,',
+  //     address_line3: ' kilambakkam, chennai.'
+  //   },
+  //   {
+  //     id: '2',
+  //     dustman_location: 'kilambakkam, chennai.',
+  //     address_line1: 'No 13, 4th cross st,',
+  //     address_line2:'sakthi nagar,',
+  //     address_line3: 'Sriberambadur '
+  //   },
+  //   {
+  //     id: '4',
+  //     dustman_location: 'poonamallee',
+  //     address_line1: 'No 13, 4th cross st',
+  //     address_line2: ' sakthi nagar,',
+  //     address_line3: ' kilambakkam, chennai.'
+  //   }
+  // ];
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event, 'from handleChange');
@@ -74,8 +77,8 @@ const ChooseDropLocation = () => {
                   <FormControlLabel
                     style={{ display: 'flex', justifyContent: 'space-between' }}
                     labelPlacement="start"
-                    key={item.address}
-                    value={item.address}
+                    key={item.dustman_location}
+                    value={item.dustman_location}
                     id={item.id}
                     control={
                       <Radio
@@ -85,19 +88,19 @@ const ChooseDropLocation = () => {
                     }
                     label={
                       <Typography className={classes.radioLableStyle}>
-                        {item.address}
+                        {item.dustman_location}
                       </Typography>
                     }
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <Typography variant={'h6'} className={classes.leftContent}>
-                    {item.location}
+                    {item.address_line1}, {item.address_line2}, {item.address_line3}
                   </Typography>
                 </Grid>
                 <Grid item xs={11}>
                   <Typography variant={'h6'} className={classes.leftContent}>
-                    {item.loc}
+                  {item.dustman_location}, {item.city}
                   </Typography>
                 </Grid>
                 <Grid item xs={1} container justifyContent="flex-end">

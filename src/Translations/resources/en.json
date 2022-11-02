@@ -43,6 +43,8 @@
   "pickupAddress": "Pickup Address",
   "orderConfirmation": "Order Confirmation",
   "orders": "ORDER #",
+  "chooseDropLocation":"Choose Drop Location",
+  "dropOrderConfirmation": "Drop Order Confirmation",
 
   "LOGIN": {
     "loginAndAccept": "By clicking on Login, I accept the ",
@@ -102,7 +104,9 @@
     "pending": "Pending",
     "confirmed": "Confirmed",
     "completed": "Completed",
-    "cancelCustomerOrder": "Are you sure want to cancel the order?"
+    "cancelCustomerOrder": "Are you sure want to cancel the order?",
+    "new": "New",
+    "scheduled": "Scheduled"
   },
 
   "PROFILE": {

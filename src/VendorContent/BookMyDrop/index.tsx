@@ -11,13 +11,16 @@ import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
 import TrashDetails from './TrashDetails';
-import SelectVehicle from './SelectVehicle';
 import ScheduleYourPickup from './ScheduleYourPickup';
 import OrderConfirmation from './OrderConfirmation';
 import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
-import { HTTP_STATUSES, TRASH_CATEGORY_ID } from 'src/Config/constant';
+import {
+  HTTP_STATUSES,
+  TRASH_CATEGORY_ID,
+  USER_TYPE_ID
+} from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
@@ -46,7 +49,10 @@ export const initialValues = {
     vehicle_id: 0,
     pickup_time: '',
     slot: ''
-  }
+  },
+  vendor_order_drop_details:{
+    dustman_location_id: ''
+}
 };
 
 function BookMyDrop() {
@@ -54,6 +60,7 @@ function BookMyDrop() {
   const theme = useTheme();
   const [loading, setLoading] = useState(true);
   const [trashData, setTrashData] = useState([]);
+  const [location, setLocation] = useState([]);
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
   const { userDetails } = useUserInfo();
@@ -74,14 +81,15 @@ function BookMyDrop() {
       //   return toast.error('Please Fill all the pickup address details');
       // }
       let orderData = { ...initialValues, ...edit.edits };
-      const createUserRes: any = await API_SERVICES.customerOrderService.create(
-        userDetails?.vendor_id,
-        {
-          data: orderData,
-          successMessage: 'Customer order created successfully!',
-          failureMessage: 'Failed to create Customer order '
-        }
-      );
+      const createUserRes: any =
+        await API_SERVICES.vendorPickupDropService.dropCreate(
+          userDetails?.vendor_id,
+          {
+            data: orderData,
+            successMessage: 'Customer order created successfully!',
+            failureMessage: 'Failed to create Customer order '
+          }
+        );
       if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
         edit.reset();
       }
@@ -92,17 +100,26 @@ function BookMyDrop() {
 
   const fetchData = useCallback(async () => {
     try {
-      if (userDetails?.id === 0) {
-        return;
+      // if (userDetails?.id === 0) {
+      //   return;
+      // }
+      const response: any = await Promise.all([
+        API_SERVICES.vendorPickupDropService.getAllTrashCategory(
+          TRASH_CATEGORY_ID.vendorDropTrash,
+          USER_TYPE_ID.vendorDrop
+        ),
+        API_SERVICES.vendorPickupDropService.getDustmanLocation(),
+      ]);
+      if (response[0]?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response[0]?.data?.categories) {
+          setTrashData(response[0].data.categories);
+        }
       }
-      const response: any =
-        await API_SERVICES.customerOrderService.getAllTrashCategory(
-          TRASH_CATEGORY_ID.customerTrash,
-          userDetails?.id
-        );
-      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-        if (response?.data?.categories) {
-          setTrashData(response.data.categories);
+      if(response[1]?.statusCode < HTTP_STATUSES.BAD_REQUEST) {
+        console.log('inside');
+        
+        if(response[1]?.Location){
+          setLocation(response[1].Location);
         }
       }
     } catch (err) {
@@ -138,22 +155,17 @@ function BookMyDrop() {
       displayIcon: TrashDetailsIcon
     },
     {
-      summaryHeading: t('selectVehicle'),
-      content: <SelectVehicle edit={edit} />,
-      displayIcon: SelectVehicleIcon
-    },
-    {
       summaryHeading: t('scheduleYourPickup'),
       content: <ScheduleYourPickup edit={edit} />,
       displayIcon: ScheduleYourPickupIcon
     },
     {
       summaryHeading: t('chooseDropLocation'),
-      content: <ChooseDropLocation />,
+      content: <ChooseDropLocation data={location}/>,
       displayIcon: PickupAddressIcon
     },
     {
-      summaryHeading: t('orderConfirmation'),
+      summaryHeading: t('dropOrderConfirmation'),
       content: (
         <OrderConfirmation
           edit={edit}
