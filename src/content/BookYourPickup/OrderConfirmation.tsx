@@ -35,7 +35,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const { userAddressDetails } = useUserInfo();
+  const { userDetails, userAddressDetails } = useUserInfo();
   const timeSlotDetails = [
     {
       id: 1,
@@ -107,7 +107,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.userName'),
-      value: edit.getValue('name')
+      value: userDetails?.first_name
     },
     { content: t('category'), value: getTrashValue() },
 

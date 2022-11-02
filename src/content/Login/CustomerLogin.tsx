@@ -41,10 +41,10 @@ const CustomerLogin = () => {
         data
       });
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.message) {
+      if (response?.data?.phoneNumber) {
         navigateTo('/dustman/login/verify-otp', {
           replace: true,
-          state: { mobileNumber: response?.data?.message }
+          state: { mobileNumber: response?.data?.phoneNumber }
         });
       }
     }

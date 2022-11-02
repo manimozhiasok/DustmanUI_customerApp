@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { PlaceMaker } from 'src/Assets';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import useUserInfo from 'src/hooks/useUserInfo';
 const useStyles = makeStyles((theme: Theme) => ({
   addressStyle: {
     padding: theme.spacing(1, 1),
@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 function AddressDisplay() {
   const classes = useStyles();
   const theme = useTheme();
-  const address = 'no 13, 4th cross street, sakthi nagar, kilambakkam';
+  const { userAddressDetails } = useUserInfo();
+  const address = userAddressDetails[0]?.address;
   return (
     <Grid container direction="row">
       <PlaceMaker />
