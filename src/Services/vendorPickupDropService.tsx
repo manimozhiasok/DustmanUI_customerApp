@@ -1,7 +1,7 @@
 import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
-import { vendorDropOrder } from './vendorDropOrderSub';
+import { vendorDropOrder } from './vendorDropOrderStub';
 
 export type DefaultProp = {
   data: any;
@@ -120,7 +120,7 @@ export const vendorPickupDropService = {
       url: `${Config.BASE_URL}/api/getDustmanLocation`,
       method: 'get'
     });
-    return vendorDropOrder.vendorDropGet;
-    //return apiRequest(options);
+    // return vendorDropOrder.vendorDropGet;
+    return apiRequest(options);
   }
 };

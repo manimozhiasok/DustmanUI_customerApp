@@ -1,7 +1,7 @@
 import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
-import { vendorCustomerOrder, vendorCustomerOrderCompleted, vendorCustomerOrderScheduled } from './vendorCustomerOrderSub';
+import { vendorCustomerOrder, vendorCustomerOrderCompleted, vendorCustomerOrderScheduled } from './vendorCustomerOrderStub';
 
 export const vendorCustomerOrderService = {
   getVendorsOrders: async (vendorId: number) => {

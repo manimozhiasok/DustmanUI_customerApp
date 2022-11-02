@@ -115,11 +115,12 @@ function BookMyDrop() {
           setTrashData(response[0].data.categories);
         }
       }
-      if(response[1]?.statusCode < HTTP_STATUSES.BAD_REQUEST) {
+      if(response[1]?.status < HTTP_STATUSES.BAD_REQUEST) {
         console.log('inside');
         
-        if(response[1]?.Location){
-          setLocation(response[1].Location);
+        if(response[1]?.data?.Location){
+          setLocation(response[1].data.Location);
+          // setLocation(response[1].data);
         }
       }
     } catch (err) {

@@ -1,7 +1,6 @@
 export const vendorDropOrder = {
     vendorDropGet: {
-      
-      Location: [
+      data: [
         {
           id: 1,
           dustman_location: 'Ponnamalle',
@@ -59,7 +58,7 @@ export const vendorDropOrder = {
           updated_at: '2022-11-02T06:47:57.387Z'
         }
       ],
-      statusCode: 200,
+      status: 200,
     }
   };
   
