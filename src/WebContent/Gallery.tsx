@@ -15,7 +15,12 @@ import {
   g12
 } from 'src/Assets';
 import './website.css';
+import { useNavigate } from 'react-router';
 function Gallery() {
+  const navigateTo = useNavigate();
+  const navigationToHome = () => {
+    navigateTo('/dustman', { replace: true });
+  };
   // const indicator: any = document.querySelector('.indicator').children;
   // const main: any = document.querySelector('.pictures').children;
 
@@ -51,10 +56,8 @@ function Gallery() {
       <section>
         <div className="gallery-page">
           <div className="side-head">
-            <a href="index.html">Home</a> |
-            <a className="current-view" href="#">
-              Gallery
-            </a>
+            <a onClick={navigationToHome}>Home</a> |
+            <a className="current-view">Gallery</a>
           </div>
 
           <div className="gallery-container">
