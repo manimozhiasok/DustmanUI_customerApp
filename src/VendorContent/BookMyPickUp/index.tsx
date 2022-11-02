@@ -18,7 +18,11 @@ import OrderConfirmation from './OrderConfirmation';
 import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
-import { HTTP_STATUSES, TRASH_CATEGORY_ID } from 'src/Config/constant';
+import {
+  HTTP_STATUSES,
+  TRASH_CATEGORY_ID,
+  USER_TYPE_ID
+} from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
@@ -67,14 +71,15 @@ function BookMyPickup() {
       //   return toast.error('Please Fill all the pickup address details');
       // }
       let orderData = { ...initialValues, ...edit.edits };
-      const createUserRes: any = await API_SERVICES.customerOrderService.create(
-        userDetails?.vendor_id,
-        {
-          data: orderData,
-          successMessage: 'Customer order created successfully!',
-          failureMessage: 'Failed to create Customer order '
-        }
-      );
+      const createUserRes: any =
+        await API_SERVICES.vendorPickupDropService.create(
+          userDetails?.vendor_id,
+          {
+            data: orderData,
+            successMessage: 'Customer order created successfully!',
+            failureMessage: 'Failed to create Customer order '
+          }
+        );
       if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
         edit.reset();
       }
@@ -85,13 +90,10 @@ function BookMyPickup() {
 
   const fetchData = useCallback(async () => {
     try {
-      if (userDetails?.id === 0) {
-        return;
-      }
       const response: any =
-        await API_SERVICES.customerOrderService.getAllTrashCategory(
-          TRASH_CATEGORY_ID.customerTrash,
-          userDetails?.id
+        await API_SERVICES.vendorPickupDropService.getAllTrashCategory(
+          TRASH_CATEGORY_ID.vendorPickupTrash,
+          USER_TYPE_ID.vendorPickup
         );
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         if (response?.data?.categories) {
@@ -146,7 +148,7 @@ function BookMyPickup() {
       displayIcon: PickupAddressIcon
     },
     {
-      summaryHeading: 'PickUp',
+      summaryHeading: t('PICKUP.pickUp'),
       content: <PickupPlace />,
       displayIcon: SelectVehicleIcon
     },

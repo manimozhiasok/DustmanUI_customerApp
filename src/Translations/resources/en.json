@@ -86,7 +86,8 @@
     "anyInstructionsForOurPickupExecutive": "Any instructions for our pickup executive",
     "goodToSee": "Yay! Good to see you here",
     "notified": "You will be notified when your order confirms",
-    "trashPicture": "Choose your trash pictures"
+    "trashPicture": "Choose your trash pictures",
+    "pickUp":"PickUp"
   },
 
   "Landing": {
