@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Loader } from './components';
-import useUserInfo from './hooks/useUserInfo';
-import { getCustomerId } from './Utils';
+import useVendorInfo from './hooks/useVendorInfo';
+import { getVendorId } from './Utils';
 
 enum AUTH_STATE {
   NOT_LOGGED_ID,
@@ -12,12 +12,12 @@ enum AUTH_STATE {
 
 const VendorApplicationRoute = () => {
   const [authState, setAuthState] = useState(AUTH_STATE.CHECKING);
-  const { updateUserInfo } = useUserInfo();
+  const { updateVendorInfo } = useVendorInfo();
 
   const fetchData = async () => {
-    const userId = await getCustomerId();
-    if (userId !== null) {
-      updateUserInfo(userId);
+    const vendorId = await getVendorId();
+    if (vendorId !== null) {
+      updateVendorInfo(vendorId);
       setAuthState(AUTH_STATE.SIGNED_IN);
     } else {
       setAuthState(AUTH_STATE.NOT_LOGGED_ID);

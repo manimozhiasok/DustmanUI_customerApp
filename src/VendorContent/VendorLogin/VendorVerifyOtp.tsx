@@ -9,10 +9,10 @@ import {
 } from 'src/components';
 import { useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { isOneTimePassWord, setCustomerId } from 'src/Utils';
+import { isOneTimePassWord, setVendorId } from 'src/Utils';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
-import useUserInfo from 'src/hooks/useUserInfo';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -20,18 +20,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const VerifyOtp = () => {
+const VendorVerifyOtp = () => {
   const { state }: any = useLocation();
-
   const classes = useStyles();
   const theme = useTheme();
   const navigateTo = useNavigate();
   const { t } = useTranslation();
   const [inputVal, setInputVal] = useState('');
   const [isError, setIsError] = useState(false);
-  const { updateUserInfo } = useUserInfo();
+  const { updateVendorInfo } = useVendorInfo();
 
-  const handleCustomerLoginButtonClick = async () => {
+  const handleVendorLoginButtonClick = async () => {
     if (inputVal === '' || !isOneTimePassWord(inputVal)) {
       setIsError(true);
       return;
@@ -50,8 +49,8 @@ const VerifyOtp = () => {
           state: { vendorId: response.data.vendor.id }
         });
       } else if (response?.data?.vendorProfile?.vendor_id) {
-        updateUserInfo(response?.data?.vendorProfile?.vendor_id);
-        setCustomerId(response.data.vendorProfile.vendor_id);
+        updateVendorInfo(response?.data?.vendorProfile?.vendor_id);
+        setVendorId(response.data.vendorProfile.vendor_id);
         navigateTo('/dustman/vendor-home', { replace: true });
       }
     }
@@ -94,7 +93,7 @@ const VerifyOtp = () => {
           buttonText={t('LOGIN.verifyOtp')}
           backgroundColor={theme.Colors.secondary}
           btnBorderRadius={theme.MetricsSizes.tiny}
-          onClickButton={handleCustomerLoginButtonClick}
+          onClickButton={handleVendorLoginButtonClick}
           style={{ margin: theme.spacing(3, 0) }}
         />
       </Grid>
@@ -102,4 +101,4 @@ const VerifyOtp = () => {
   );
 };
 
-export default VerifyOtp;
+export default VendorVerifyOtp;

@@ -23,6 +23,7 @@ type CustomerCreateProp = {
     city: string;
     pincode: string;
   };
+
   successMessage?: string;
   failureMessage?: string;
 };
@@ -50,7 +51,7 @@ export const vendorProfileService = {
 
   getProfileByVendorId: async (id: number) => {
     const options = await apiOptions({
-      url: `${Config.BASE_URL}/api/getVendorProfilesById/vendorProfile/${id}`,
+      url: `${Config.BASE_URL}/api/getVendorProfileByVendorId/vendor/${id}`,
       method: 'get'
     });
     return apiRequest(options);

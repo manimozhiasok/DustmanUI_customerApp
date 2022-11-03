@@ -26,8 +26,8 @@ import {
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import ChooseCategoryComponent from './ChooseCategoryComponent';
-import useUserInfo from 'src/hooks/useUserInfo';
 import PickupPlace from './PickupPlace';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
@@ -65,7 +65,7 @@ function BookMyPickup() {
   const [trashData, setTrashData] = useState([]);
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
-  const { userDetails } = useUserInfo();
+  const { vendorDetails } = useVendorInfo();
 
   // const pickAddressFields = [
   //   'address_line1',
@@ -77,22 +77,22 @@ function BookMyPickup() {
   //   'mobile_number'
   // ];
 
-  const handleCreateCustomerOrder = async () => {
+  const handleCreateVendorOrder = async () => {
     try {
       // if (!edit.allFilled(...pickAddressFields)) {
       //   return toast.error('Please Fill all the pickup address details');
       // }
       let orderData = { ...initialValues, ...edit.edits };
-      const createUserRes: any =
+      const createVendorRes: any =
         await API_SERVICES.vendorPickupDropService.createPickup(
-          userDetails?.vendor_id,
+          vendorDetails?.vendor_id,
           {
             data: orderData,
-            successMessage: 'Customer order created successfully!',
-            failureMessage: 'Failed to create Customer order '
+            successMessage: 'Vendor order created successfully!',
+            failureMessage: 'Failed to create Vendor order '
           }
         );
-      if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (createVendorRes?.status < HTTP_STATUSES.BAD_REQUEST) {
         edit.reset();
       }
     } catch (err) {
@@ -117,7 +117,7 @@ function BookMyPickup() {
     } finally {
       setLoading(false);
     }
-  }, [userDetails?.id]);
+  }, [vendorDetails?.id]);
 
   const handleTrashCatItems = (itemIds: any[]) => {
     edit.update({ order_items: itemIds });
@@ -178,7 +178,7 @@ function BookMyPickup() {
       accContentDetail: () => (
         <OrderConfirmation
           edit={edit}
-          handleButtonClick={handleCreateCustomerOrder}
+          handleButtonClick={handleCreateVendorOrder}
           trashData={trashData}
         />
       ),

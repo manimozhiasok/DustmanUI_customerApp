@@ -7,8 +7,8 @@ import {
 } from '@material-ui/core';
 import { ButtonComp, DialogContentDetails } from 'src/components';
 import { useTranslation } from 'react-i18next';
-import useUserInfo from 'src/hooks/useUserInfo';
 import { getDateFormat } from 'src/Utils';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -35,7 +35,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const { userAddressDetails } = useUserInfo();
+  const { vendorAddressDetails } = useVendorInfo();
   const timeSlotDetails = [
     {
       id: 1,
@@ -71,8 +71,8 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
 
   const getAddressData =
     (edit.getValue('order_address_id') &&
-      userAddressDetails?.length &&
-      userAddressDetails.filter(
+      vendorAddressDetails?.length &&
+      vendorAddressDetails.filter(
         (item) => item.id === edit.getValue('order_address_id')
       )) ||
     [];

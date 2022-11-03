@@ -19,6 +19,7 @@ import {
   PendingOrdersIcon
 } from 'src/Assets';
 import OrderPreviewComp from './OrderPreviewComp';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 function OrdersPage() {
   const classes = useStyles();
   const theme = useTheme();
-  const { userDetails } = useUserInfo();
+  const { vendorDetails } = useVendorInfo();
   const [selectedTab, setSelectedTab] = useState<number>(
     CUSTOMER_ORDER_STATUS.Pending
   );
@@ -90,7 +91,7 @@ function OrdersPage() {
   const fetchData = useCallback(async () => {
     const response: any =
       await API_SERVICES.orderService.getCustomerOrderByStatus(
-        userDetails?.vendor_id,
+        vendorDetails?.vendor_id,
         selectedTab
       );
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {

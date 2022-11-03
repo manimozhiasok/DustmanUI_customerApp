@@ -5,7 +5,6 @@ import { Grid } from '@material-ui/core';
 import CustomerOrderDialog from './CustomerOrderDialog';
 import { API_SERVICES } from 'src/Services';
 import { useTranslation } from 'react-i18next';
-import useUserInfo from 'src/hooks/useUserInfo';
 import {
   CONFIRM_MODAL,
   CUSTOMER_ORDER_STATUS,
@@ -60,7 +59,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 function OrdersPage() {
   const classes = useStyles();
   const theme = useTheme();
-  const { userDetails } = useUserInfo();
   const [loading, setLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState<number>(
     CUSTOMER_ORDER_STATUS.Pending
@@ -100,15 +98,9 @@ function OrdersPage() {
   const fetchData = useCallback(async () => {
     try {
       const response: any = await Promise.all([
-        API_SERVICES.vendorCustomerOrderService.getVendorsOrders(
-          userDetails?.status_id
-        ),
-        API_SERVICES.vendorCustomerOrderService.getScheduledOrder(
-          userDetails?.status_id
-        ),
-        API_SERVICES.vendorCustomerOrderService.getCompletedOrder(
-          userDetails?.status_id
-        )
+        API_SERVICES.vendorCustomerOrderService.getVendorsOrders(1),
+        API_SERVICES.vendorCustomerOrderService.getScheduledOrder(1),
+        API_SERVICES.vendorCustomerOrderService.getCompletedOrder(1)
       ]);
       if (response[0]?.status <= HTTP_STATUSES.BAD_REQUEST) {
         if (selectedTab === CUSTOMER_ORDER_STATUS.Pending) {

@@ -34,9 +34,16 @@ export const getToken = () => {
 export const getCustomerId = () => {
   return JSON.parse(localStorage.getItem('customerId'));
 };
+export const getVendorId = () => {
+  return JSON.parse(localStorage.getItem('vendorId'));
+};
 
 export const setCustomerId = (id: number) => {
   return localStorage.setItem('customerId', JSON.stringify(id));
+};
+
+export const setVendorId = (id: number) => {
+  return localStorage.setItem('vendorId', JSON.stringify(id));
 };
 
 export const getDateFormat = (date: any) => {

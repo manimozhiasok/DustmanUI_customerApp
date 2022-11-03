@@ -13,6 +13,8 @@ import { useEdit } from 'src/hooks/useEdit';
 import toast from 'react-hot-toast';
 import useUserInfo from 'src/hooks/useUserInfo';
 import { vehicleImage } from 'src/Assets';
+import useVendorInfo from 'src/hooks/useVendorInfo';
+import { setCustomerId, setVendorId } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -45,39 +47,42 @@ const VendorChooseUserType = () => {
   const navigateTo = useNavigate();
   const [userTypes, setUserTypes] = useState([]);
   const edit = useEdit(state?.formEdits);
-  const { updateUserInfo } = useUserInfo();
+  const { updateVendorInfo } = useVendorInfo();
 
   const handleContinueClick = async () => {
-    if (!edit.allFilled('user_type_id')) {
-      return toast.error('Please select any one of the user type!');
-    }
+    // if (!edit.allFilled('user_type_id')) {
+    //   return toast.error('Please select any one of the user type!');
+    // }
     let data = { ...state?.formEdits, ...edit.edits };
+    console.log(data, 'choose user type data');
     const response: any = await API_SERVICES.vendorProfileService.create(
-      state?.customerId,
+      state?.vendorId,
       { data, successMessage: 'Customer profile created successfully!' }
     );
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.customerProfile?.customer_id) {
-        await updateUserInfo(response?.data?.customerProfile?.customer_id);
-        navigateTo('/vendor-home', { replace: true });
+      if (response?.data?.vendorProfile?.vendor_id) {
+        updateVendorInfo(response.data.vendorProfile.vendor_id);
+        setVendorId(response.data.vendorProfile.vendor_id);
+        navigateTo('/dustman/vendor-home', { replace: true });
       }
     }
-    navigateTo('/vendor-home/vendor-info', { replace: true });
-    navigateTo('/dustman/vendor-login/vendor-approval', {});
+    // navigateTo('/vendor-home/vendor-info', { replace: true });
+    // navigateTo('/dustman/vendor-login/vendor-approval', {});
   };
 
   const fetchData = async () => {
-    const response: any = await API_SERVICES.generalService.getAllUserTypes();
+    const response: any = await API_SERVICES.generalService.getAllVehicles();
+    console.log(response, 'vechile response');
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.user) {
-        setUserTypes(response.data.user.slice(0, 3));
+      if (response?.data?.vehicles) {
+        setUserTypes(response.data.vehicles);
       }
     }
   };
 
   const onClickRadioButton = (val: number) => {
     edit.update({
-      user_type_id: val
+      vehicle_owned: val
     });
   };
 
@@ -92,8 +97,8 @@ const VendorChooseUserType = () => {
         subText={t('LOGIN.vehicleOwned')}
       />
       <SelectUserComp
-        userTypeItems={displayElement}
-        selectedVal={edit.getValue('user_type_id')}
+        userTypeItems={userTypes}
+        selectedVal={edit.getValue('vehicle_owned')}
         onClickRadioButton={onClickRadioButton}
       />
       <ButtonComp

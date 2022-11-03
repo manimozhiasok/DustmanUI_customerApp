@@ -26,8 +26,8 @@ import {
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import ChooseCategoryComponent from './ChooseCategoryComponent';
-import useUserInfo from 'src/hooks/useUserInfo';
 import ChooseDropLocation from './ChooseDropLocation';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
@@ -74,7 +74,7 @@ function BookMyDrop() {
   const [location, setLocation] = useState([]);
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
-  const { userDetails } = useUserInfo();
+  const { vendorDetails } = useVendorInfo();
 
   // const pickAddressFields = [
   //   'address_line1',
@@ -94,7 +94,7 @@ function BookMyDrop() {
       let orderData = { ...initialValues, ...edit.edits };
       const createUserRes: any =
         await API_SERVICES.vendorPickupDropService.dropCreate(
-          userDetails?.vendor_id,
+          vendorDetails?.vendor_id,
           {
             data: orderData,
             successMessage: 'Customer order created successfully!',
@@ -111,7 +111,7 @@ function BookMyDrop() {
 
   const fetchData = useCallback(async () => {
     try {
-      // if (userDetails?.id === 0) {
+      // if (vendorDetails?.id === 0) {
       //   return;
       // }
       const response: any = await Promise.all([
@@ -139,7 +139,7 @@ function BookMyDrop() {
     } finally {
       setLoading(false);
     }
-  }, [userDetails?.id]);
+  }, [vendorDetails?.id]);
 
   const handleTrashCatItems = (itemIds: any[]) => {
     edit.update({ order_items: itemIds });

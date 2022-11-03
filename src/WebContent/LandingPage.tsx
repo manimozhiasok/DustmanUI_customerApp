@@ -99,7 +99,7 @@ function LandingPage() {
   // var li_elements: any = document.querySelectorAll('.wrapper_left ul li');
   // var item_elements: any = document.querySelectorAll('.item');
 
-  // for (var i = 0; i < li_elements.length; i++) {
+  // for (var i = 0; i <div li_elements.length; i++) {
   //   li_elements[i].addEventListener('click', function () {
   //     console.log('Clicked a li option');
   //     li_elements.forEach(function (li) {
@@ -132,6 +132,7 @@ function LandingPage() {
 
   return (
     <>
+      <div className="backfill"></div>
       <div>
         {/* landing1  */}
         <div className="landing1">

@@ -10,7 +10,7 @@ import {
 } from 'src/Config/constant';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import useUserInfo from 'src/hooks/useUserInfo';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -40,12 +40,12 @@ function PickupAddress() {
   const { t } = useTranslation();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { userDetails } = useUserInfo();
+  const { vendorDetails } = useVendorInfo();
   const fetchData = async () => {
     try {
       const response: any =
         await API_SERVICES.vendorPickupDropService.getAllPickupAddress(
-          userDetails?.vendor_id
+          vendorDetails?.vendor_id
         );
 
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {

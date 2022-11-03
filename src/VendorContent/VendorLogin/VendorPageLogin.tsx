@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const CustomerLogin = () => {
+const VendorPageLogin = () => {
   const classes = useStyles();
   const { t } = useTranslation();
   const theme = useTheme();
@@ -28,7 +28,7 @@ const CustomerLogin = () => {
   const [inputVal, setInputVal] = useState('');
   const [isError, setIsError] = useState(false);
 
-  const handleCustomerLoginButtonClick = async () => {
+  const handleVendorLoginButtonClick = async () => {
     if (inputVal === '' || !isPhoneNumber(inputVal)) {
       setIsError(true);
       return;
@@ -77,7 +77,7 @@ const CustomerLogin = () => {
           buttonText={t('LOGIN.next')}
           backgroundColor={theme.Colors.secondary}
           btnBorderRadius={theme.MetricsSizes.tiny}
-          onClickButton={handleCustomerLoginButtonClick}
+          onClickButton={handleVendorLoginButtonClick}
           style={{ margin: theme.spacing(2, 0) }}
         />
         <TermsAndConditionComp />
@@ -86,4 +86,4 @@ const CustomerLogin = () => {
   );
 };
 
-export default CustomerLogin;
+export default VendorPageLogin;
