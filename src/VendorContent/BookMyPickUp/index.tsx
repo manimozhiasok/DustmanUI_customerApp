@@ -80,15 +80,11 @@ function BookMyPickup() {
 
   const fetchData = useCallback(async () => {
     try {
-      // if (userDetails?.id === 0) {
-      //   return;
-      //}
       const response: any =
         await API_SERVICES.vendorPickupDropService.getAllTrashCategory(
           TRASH_CATEGORY_ID.vendorPickupTrash,
           USER_TYPE_ID.vendorPickup
         );
-      console.log(response, 'response');
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         if (response?.data?.categories) {
           setTrashData(response.data.categories);
