@@ -50,9 +50,9 @@ export const initialValues = {
     pickup_time: '',
     slot: ''
   },
-  vendor_order_drop_details:{
+  vendor_order_drop_details: {
     dustman_location_id: ''
-}
+  }
 };
 
 function BookMyDrop() {
@@ -108,18 +108,18 @@ function BookMyDrop() {
           TRASH_CATEGORY_ID.vendorDropTrash,
           USER_TYPE_ID.vendorDrop
         ),
-        API_SERVICES.vendorPickupDropService.getDustmanLocation(),
+        API_SERVICES.vendorPickupDropService.getDustmanLocation()
       ]);
       if (response[0]?.status < HTTP_STATUSES.BAD_REQUEST) {
         if (response[0]?.data?.categories) {
           setTrashData(response[0].data.categories);
         }
       }
-      if(response[1]?.status < HTTP_STATUSES.BAD_REQUEST) {
-        console.log('inside');
-        
-        if(response[1]?.data?.Location){
-          setLocation(response[1].data.Location);
+      if (response[1]?.status < HTTP_STATUSES.BAD_REQUEST) {
+        console.log('response1', response[1]);
+
+        if (response[1]?.data) {
+          setLocation(response[1].data);
           // setLocation(response[1].data);
         }
       }
@@ -162,7 +162,7 @@ function BookMyDrop() {
     },
     {
       summaryHeading: t('chooseDropLocation'),
-      content: <ChooseDropLocation data={location}/>,
+      content: <ChooseDropLocation data={location} />,
       displayIcon: PickupAddressIcon
     },
     {

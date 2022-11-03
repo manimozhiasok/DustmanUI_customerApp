@@ -108,7 +108,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.userName'),
-      value: userDetails?.name
+      value: userDetails?.first_name
     },
     { content: t('category'), value: getTrashValue() },
 
@@ -118,7 +118,7 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.mobile'),
-      value: getAddressData[0]?.mobile_number ?? ''
+      value: userDetails?.mobile_number ?? ''
     }
   ];
 
