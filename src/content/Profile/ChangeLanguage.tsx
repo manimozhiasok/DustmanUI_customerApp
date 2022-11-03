@@ -3,7 +3,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Check } from '@material-ui/icons';
-import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
+import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import useUserInfo from 'src/hooks/useUserInfo';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -15,32 +16,34 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     activeCheckIcon: {
       marginLeft: theme.MetricsSizes.regular_x
+    },
+    textStyle: {
+      marginLeft: theme.spacing(2.5),
+      fontSize: theme.MetricsSizes.small_xx + 1,
+      color: theme.Colors.mediumGrey,
+      fontWeight: theme.fontWeight.bold
     }
   };
 });
 
 const data = [
-  { id: 1, label: 'English', value: 'english' },
-  { id: 2, label: 'தமிழ்', value: 'tamil' },
-  { id: 3, label: 'Hindi', value: 'hindi' }
+  { label: 'English', value: 1 },
+  { label: 'தமிழ்', value: 2 },
+  { label: 'Hindi', value: 3 }
 ];
 
 export default function ChangeLanguage() {
-  const [value, setValue] = React.useState('');
+  const { userDetails } = useUserInfo();
+  const [value, setValue] = React.useState(userDetails?.language_id);
   const classes = useStyles();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
+  const handleChange = (event: any) => {
+    setValue(parseInt(event.target.value));
   };
 
   return (
     <Grid>
-      <RadioGroup
-        aria-label="language"
-        name="language1"
-        value={value}
-        onChange={handleChange}
-      >
+      <RadioGroup value={value} onChange={handleChange}>
         {data.map((item, index) => {
           return (
             <FormControlLabel
@@ -52,7 +55,11 @@ export default function ChangeLanguage() {
                   checkedIcon={<Check className={classes.activeCheckIcon} />}
                 />
               }
-              label={item.label}
+              label={
+                <Typography className={classes.textStyle}>
+                  {item.label}
+                </Typography>
+              }
               labelPlacement="start"
               className={classes.radio}
             />

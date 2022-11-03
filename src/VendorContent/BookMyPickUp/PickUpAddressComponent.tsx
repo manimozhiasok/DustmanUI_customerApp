@@ -9,7 +9,6 @@ import {
   Theme,
   Typography
 } from '@material-ui/core';
-import { bike } from 'src/Assets';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {

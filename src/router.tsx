@@ -25,112 +25,121 @@ import { VendorApproval } from './VendorContent/VendorLogin/VendorApproval';
 
 const routes: RouteObject[] = [
   {
-    path: 'dustman',
+    path: '/',
     element: <BaseLayout />,
     children: [
       {
         path: '',
-        element: <Navigate to="home" replace />
+        element: <Navigate to="dustman" replace />
       },
       {
-        path: 'home',
-        element: <LandingPage />
-      },
-      {
-        path: 'about-us',
-        element: <AboutUs />
-      },
-      {
-        path: 'services',
-        element: <Services />
-      },
-      {
-        path: 'gallery',
-        element: <Gallery />
-      },
-      {
-        path: 'contact-us',
-        element: <ContactUs />
-      },
-      {
-        path: 'login',
-        element: <Login />,
+        path: 'dustman',
         children: [
           {
             path: '',
-            element: <ApplicationRoute />
+            element: <Navigate to="home" replace />
           },
           {
-            path: 'customer-login',
-            element: <CustomerLogin />
+            path: 'home',
+            element: <LandingPage />
           },
           {
-            path: 'verify-otp',
-            element: <VerifyOtp />
+            path: 'about-us',
+            element: <AboutUs />
           },
           {
-            path: 'create-account',
-            element: <CreateAccountSignUp />
+            path: 'services',
+            element: <Services />
           },
           {
-            path: 'choose-user-type',
-            element: <ChooseUserType />
-          }
-        ]
-      },
-      {
-        path: 'vendor-login',
-        element: <VendorLogin />,
-        children: [
-          {
-            path: '',
-            element: <VendorApplicationRoute />
+            path: 'gallery',
+            element: <Gallery />
           },
           {
-            path: 'vendor-page-login',
-            element: <VendorPageLogin />
+            path: 'contact-us',
+            element: <ContactUs />
           },
           {
-            path: 'verify-otp',
-            element: <VendorVerifyOtp />
+            path: 'login',
+            element: <Login />,
+            children: [
+              {
+                path: '',
+                element: <ApplicationRoute />
+              },
+              {
+                path: 'customer-login',
+                element: <CustomerLogin />
+              },
+              {
+                path: 'verify-otp',
+                element: <VerifyOtp />
+              },
+              {
+                path: 'create-account',
+                element: <CreateAccountSignUp />
+              },
+              {
+                path: 'choose-user-type',
+                element: <ChooseUserType />
+              }
+            ]
           },
           {
-            path: 'create-account',
-            element: <VendorCreateAccountSignUp />
+            path: 'vendor-login',
+            element: <VendorLogin />,
+            children: [
+              {
+                path: '',
+                element: <VendorApplicationRoute />
+              },
+              {
+                path: 'vendor-page-login',
+                element: <VendorPageLogin />
+              },
+              {
+                path: 'verify-otp',
+                element: <VendorVerifyOtp />
+              },
+              {
+                path: 'create-account',
+                element: <VendorCreateAccountSignUp />
+              },
+              {
+                path: 'choose-user-type',
+                element: <VendorChooseUserType />
+              },
+              {
+                path: 'vendor-approval',
+                element: <VendorApproval />
+              }
+            ]
           },
           {
-            path: 'choose-user-type',
-            element: <VendorChooseUserType />
+            path: 'customer-home',
+            children: [
+              {
+                path: '',
+                element: <Navigate to="customer-info" replace />
+              },
+              {
+                path: 'customer-info',
+                element: <HomePage />
+              }
+            ]
           },
           {
-            path: 'vendor-approval',
-            element: <VendorApproval />
-          }
-        ]
-      },
-      {
-        path: 'customer-home',
-        children: [
-          {
-            path: '',
-            element: <Navigate to="customer-info" replace />
-          },
-          {
-            path: 'customer-info',
-            element: <HomePage />
-          }
-        ]
-      },
-      {
-        path: 'vendor-home',
-        children: [
-          {
-            path: '',
-            element: <Navigate to="vendor-info" replace />
-          },
-          {
-            path: 'vendor-info',
-            element: <VendorHomePage />
+            path: 'vendor-home',
+            children: [
+              {
+                path: '',
+                element: <Navigate to="vendor-info" replace />
+              },
+              {
+                path: 'vendor-info',
+                element: <VendorHomePage />
+              }
+            ]
           }
         ]
       }

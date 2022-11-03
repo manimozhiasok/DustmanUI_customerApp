@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import { AccordionComponent, Loader } from 'src/components';
+import { Loader, UHAccordionComp } from 'src/components';
 import { Grid } from '@material-ui/core';
-import { ChooseCategoryIcon } from 'src/Assets/Images';
+import { ChooseCategoryIcon, VectorIcon } from 'src/Assets/Images';
 import { TrashDetailsIcon } from 'src/Assets/Images';
 import { SelectVehicleIcon } from 'src/Assets/Images';
 import { ScheduleYourPickupIcon } from 'src/Assets/Images';
@@ -24,13 +24,22 @@ import {
   USER_TYPE_ID
 } from 'src/Config/constant';
 import toast from 'react-hot-toast';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
 import ChooseCategoryComponent from './ChooseCategoryComponent';
 import useUserInfo from 'src/hooks/useUserInfo';
 import PickupPlace from './PickupPlace';
 
-const useStyles = makeStyles((theme: Theme) => ({}));
+const useStyles = makeStyles((theme: Theme) => ({
+  accordionStyle: {
+    margin: theme.spacing(2.5, 0)
+  },
+  accordionSummaryStyle: {
+    padding: theme.spacing(4, 4.5, 4, 6.5)
+  },
+  accordionDetailStyle: {
+    padding: theme.spacing(0, 6.5, 4.5, 6.5)
+  }
+}));
 
 export const initialValues = {
   quantity_kg: '',
@@ -58,8 +67,21 @@ function BookMyPickup() {
   const { t } = useTranslation();
   const { userDetails } = useUserInfo();
 
+  // const pickAddressFields = [
+  //   'address_line1',
+  //   'address_line2',
+  //   'address_line3',
+  //   'state',
+  //   'city',
+  //   'pincode',
+  //   'mobile_number'
+  // ];
+
   const handleCreateCustomerOrder = async () => {
     try {
+      // if (!edit.allFilled(...pickAddressFields)) {
+      //   return toast.error('Please Fill all the pickup address details');
+      // }
       let orderData = { ...initialValues, ...edit.edits };
       const createUserRes: any =
         await API_SERVICES.vendorPickupDropService.createPickup(
@@ -80,9 +102,9 @@ function BookMyPickup() {
 
   const fetchData = useCallback(async () => {
     try {
-      // if (userDetails?.id === 0) {
+      // if (userDetails?.user_type_id === 0) {
       //   return;
-      //}
+      // }
       const response: any =
         await API_SERVICES.vendorPickupDropService.getAllTrashCategory(
           TRASH_CATEGORY_ID.vendorPickupTrash,
@@ -111,71 +133,90 @@ function BookMyPickup() {
 
   const bookYourPickupAccordionContent = [
     {
-      summaryHeading: t('chooseCategory'),
-      content: (
+      id: 1,
+      title: t('chooseCategory'),
+      accContentDetail: () => (
         <ChooseCategoryComponent
           data={trashData}
           InitialItemVal={edit.getValue('order_items')}
           handleChangeItem={handleTrashCatItems}
         />
       ),
-      displayIcon: ChooseCategoryIcon
+      tileIcon: ChooseCategoryIcon
     },
     {
-      summaryHeading: t('trashDetails'),
-      content: <TrashDetails edit={edit} trashData={trashData} />,
-      displayIcon: TrashDetailsIcon
+      id: 2,
+      title: t('trashDetails'),
+      accContentDetail: () => (
+        <TrashDetails edit={edit} trashData={trashData} />
+      ),
+      tileIcon: TrashDetailsIcon
     },
     {
-      summaryHeading: t('selectVehicle'),
-      content: <SelectVehicle edit={edit} />,
-      displayIcon: SelectVehicleIcon
+      id: 3,
+      title: t('selectVehicle'),
+      accContentDetail: () => <SelectVehicle edit={edit} />,
+      tileIcon: SelectVehicleIcon
     },
     {
-      summaryHeading: t('scheduleYourPickup'),
-      content: <ScheduleYourPickup edit={edit} />,
-      displayIcon: ScheduleYourPickupIcon
+      id: 4,
+      title: t('scheduleYourPickup'),
+      accContentDetail: () => <ScheduleYourPickup edit={edit} />,
+      tileIcon: ScheduleYourPickupIcon
     },
     {
-      summaryHeading: t('pickupAddress'),
-      content: <PickupAddress />,
-      displayIcon: PickupAddressIcon
+      id: 5,
+      title: t('pickupAddress'),
+      accContentDetail: () => <PickupAddress />,
+      tileIcon: PickupAddressIcon
     },
     {
-      summaryHeading: t('PICKUP.pickUp'),
-      content: <PickupPlace />,
-      displayIcon: SelectVehicleIcon
+      id: 6,
+      title: t('PICKUP.pickUp'),
+      accContentDetail: () => <PickupPlace />,
+      tileIcon: SelectVehicleIcon
     },
     {
-      summaryHeading: t('orderConfirmation'),
-      content: (
+      id: 7,
+      title: t('orderConfirmation'),
+      accContentDetail: () => (
         <OrderConfirmation
           edit={edit}
           handleButtonClick={handleCreateCustomerOrder}
           trashData={trashData}
         />
       ),
-      displayIcon: OrderConfirmationIcon
-    },
-    {
-      summaryHeading: t('orderSuccess'),
-      content: <OrderSuccess />,
-      displayIcon: OrderSuccessIcon
+      tileIcon: OrderConfirmationIcon
     }
+    // {
+    //   id: 8,
+    //   title: t('orderSuccess'),
+    //   accContentDetail: () => <OrderSuccess />,
+    //   tileIcon: OrderSuccessIcon
+    // }
   ];
+
+  const renderExpandIcons = (isActiveAccordion: boolean) => {
+    if (isActiveAccordion) {
+      return null;
+    } else {
+      return <VectorIcon />;
+    }
+  };
+
   if (loading) {
     return <Loader />;
   } else {
     return (
       <Grid>
-        <AccordionComponent
-          expandIcon={false}
-          accordionDetailPadding={theme.spacing(0, 6.5, 4.5, 6.5)}
-          accordionPadding={theme.spacing(2.25, 6.5, 1, 6.5)}
-          displayContent={bookYourPickupAccordionContent}
-          summaryPadding={theme.spacing(3.5, 6.5)}
-          summaryMargin={theme.spacing(2.5, 0)}
-          expandMoreIcon={<ExpandMoreIcon />}
+        <UHAccordionComp
+          config={bookYourPickupAccordionContent}
+          isDashedLine={true}
+          accordionOuterContainerClassName={classes.accordionStyle}
+          isLeftTileIcon={true}
+          accordionSummaryClassName={classes.accordionSummaryStyle}
+          accordionDetailClassName={classes.accordionDetailStyle}
+          renderExpandIcons={renderExpandIcons}
         />
       </Grid>
     );

@@ -10,7 +10,7 @@ import { ButtonComp } from 'src/components';
 import { useTranslation } from 'react-i18next';
 import ArrowsLeftRight from '../../Assets/Images/ArrowsLeftRight.svg';
 import CopperImage from '../../Assets/Images/CopperImage.svg';
-import PickupImageText from 'src/components/PickupImageText';
+import PickupImageText from './PickupImageText';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {

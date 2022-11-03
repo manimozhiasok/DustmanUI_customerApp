@@ -32,8 +32,8 @@ const ProfileContent = ({
   handleAddNewItem,
   handleEditListItem
 }: {
-  handleEditListItem: () => void;
-  handleAddNewItem: () => void;
+  handleEditListItem?: () => void;
+  handleAddNewItem?: () => void;
 }) => {
   const [isEditable, setIsEditable] = useState<any>(true);
   const [isText, setIsText] = useState(false);
@@ -166,7 +166,6 @@ const ProfileContent = ({
             <Grid
               style={{ marginTop: theme.MetricsSizes.tiny_xxx }}
               spacing={2}
-              xs={12}
             >
               <Grid item xs={12}>
                 <OtpInputCard

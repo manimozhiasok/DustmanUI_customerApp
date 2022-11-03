@@ -13,7 +13,6 @@ import { useTranslation } from 'react-i18next';
 import OTPInput, { ResendOTP } from 'otp-input-react';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
-import { color } from '@mui/system';
 const useStyles = makeStyles((theme: Theme) => ({
   buttonStyle: {
     color: theme.Colors.secondary,
@@ -24,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'none'
   },
   buttonContainer: {
+    // paddingBottom: theme.spacing(2),
     alignSelf: 'flex-end'
   }
 }));
@@ -32,8 +32,8 @@ const ProfileContent = ({
   handleAddNewItem,
   handleEditListItem
 }: {
-  handleEditListItem: () => void;
-  handleAddNewItem: () => void;
+  handleEditListItem?: () => void;
+  handleAddNewItem?: () => void;
 }) => {
   const [isEditable, setIsEditable] = useState<any>(true);
   const [isText, setIsText] = useState(false);
@@ -58,6 +58,21 @@ const ProfileContent = ({
     for (let key in selectedImages) {
       formData.append('file', selectedImages[key]);
     }
+    // const uploadImageRes: any =
+    //   await API_SERVICES.imageUploadService.uploadImage(formData);
+    // if (uploadImageRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+    //   if (uploadImageRes?.data?.images.length) {
+    //     let imageData = [];
+    //     uploadImageRes?.data?.images.map((item) => {
+    //       imageData.push({ image_url: item.Location });
+    //     });
+    //     if (imageData?.length) {
+    //       // edit.update({
+    //       //   order_images: [...uploadedImages, ...imageData]
+    //       // });
+    //     }
+    //   }
+    // }
   };
 
   return (
@@ -151,17 +166,17 @@ const ProfileContent = ({
             <Grid
               style={{ marginTop: theme.MetricsSizes.tiny_xxx }}
               spacing={2}
-              xs={12}
             >
               <Grid item xs={12}>
                 <OtpInputCard
                   inputClassName="bottom__border"
+                  // autoFocus
                   OTPLength={6}
                   otpType="any"
                   disabled={false}
                   inputStyles={{
                     border: 0,
-                    borderBottom: '1px solid #F68B1F'
+                    borderBottom: '1px solid #6BB043'
                   }}
                 />
               </Grid>
@@ -193,6 +208,7 @@ const ProfileContent = ({
                 <Grid item xs={3}>
                   <ButtonComp
                     buttonText={t('PROFILE.verify')}
+                    //onClickButton={() => setIsText(false)}
                     btnBorderRadius={4}
                     btnWidth={'167px'}
                     height={'48px'}

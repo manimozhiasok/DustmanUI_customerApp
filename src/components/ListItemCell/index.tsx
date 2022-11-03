@@ -1,5 +1,5 @@
-import { Avatar, Badge, Box, Grid, Typography } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Avatar, Badge, Grid, Typography } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   textStyle: {
@@ -25,13 +25,17 @@ type Props = {
   title: string;
   subTitle?: string;
   renderComponent?: () => JSX.Element;
-  avatarClassNameStyles?: React.CSSProperties;
+  avatarClassNameStyles?: any;
   titleStyle?: React.CSSProperties;
   isBadgeEnable?: boolean;
+  listStyle?: React.CSSProperties;
+  subTitleStyle?: React.CSSProperties;
 };
 
 const ListItemCell = (props: Props) => {
   const classes = useStyles();
+  const theme = useTheme();
+
   const {
     avatarImg,
     subTitle,
@@ -39,36 +43,43 @@ const ListItemCell = (props: Props) => {
     renderComponent,
     avatarClassNameStyles,
     titleStyle,
-    isBadgeEnable = false
+    isBadgeEnable = false,
+    listStyle,
+    subTitleStyle
   } = props;
+
   return (
-    <Box
+    <Grid
+      container
+      alignItems="center"
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        ...listStyle
       }}
     >
       {avatarImg && (
-        <Grid style={{ marginRight: 15 }}>
+        <Grid item style={{ marginRight: theme.MetricsSizes.small_xxx }}>
           <Avatar
             src={avatarImg}
             className={`${classes.avatarStyle} ${avatarClassNameStyles}`}
           />
         </Grid>
       )}
-      <Grid>
+      <Grid item xs>
         <Grid
           style={{
             display: 'flex'
           }}
         >
-          <Typography style={{ fontWeight: 500, ...titleStyle }}>
+          <Typography
+            style={{
+              fontWeight: theme.fontWeight.medium,
+              ...titleStyle
+            }}
+          >
             {title}
           </Typography>
           {isBadgeEnable && (
             <Badge
-              color="secondary"
               overlap="circular"
               badgeContent={'Kgs'}
               className={classes.badgeStyle}
@@ -77,13 +88,17 @@ const ListItemCell = (props: Props) => {
         </Grid>
 
         {subTitle && (
-          <Typography variant="subtitle2" className={classes.textStyle}>
+          <Typography
+            variant="subtitle2"
+            className={classes.textStyle}
+            style={subTitleStyle}
+          >
             {subTitle}
           </Typography>
         )}
         {renderComponent && renderComponent()}
       </Grid>
-    </Box>
+    </Grid>
   );
 };
 export default ListItemCell;

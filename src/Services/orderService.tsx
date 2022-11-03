@@ -48,6 +48,14 @@ export const orderService = {
     return apiRequest(options);
   },
 
+  getConfirmedCustomerOrders: async (customerId: number) => {
+    const options = await apiOptions({
+      url: `${Config.BASE_URL}/api/getMyConfirmedOrders/customer/${customerId}`,
+      method: 'get'
+    });
+    return apiRequest(options);
+  },
+
   create: async ({
     data,
     successMessage,

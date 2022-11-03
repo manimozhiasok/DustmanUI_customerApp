@@ -17,7 +17,7 @@ type StyleProps = {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
   return {
     tabContainer: {
-      backgroundColor: theme.Colors.white
+      backgroundColor: theme.Colors.whiteLightGrey
     },
     wrapper: {
       height: '100%',
@@ -48,7 +48,7 @@ type Props = {
   tabContent: any[];
   onTabChange?: (val: any) => void;
   currentTabVal: any;
-  renderTabContent?: any;
+  renderTabContent?: (currentTabVal: number | string) => React.ReactNode;
   orientation?: any;
   tabIndicatorColor?: string;
   tabClasses?: any;

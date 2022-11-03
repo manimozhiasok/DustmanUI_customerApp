@@ -1,6 +1,6 @@
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import PickUpAddressComponent from 'src/components/PickUpAddressComponent';
+import PickUpAddressComponent from './PickUpAddressComponent';
 import { bike } from 'src/Assets';
 import { API_SERVICES } from 'src/Services';
 import {
