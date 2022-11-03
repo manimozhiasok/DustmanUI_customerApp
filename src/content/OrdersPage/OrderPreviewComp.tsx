@@ -19,7 +19,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       borderColor: theme.Colors.greyDark,
       width: '100%',
       marginBottom: theme.spacing(3),
-      padding: theme.spacing(3.1, 2, 3.8, 3)
+      padding: theme.spacing(3.1, 2, 3.8, 3),
+      background: theme.Colors.whiteLightGrey
     },
     contentContainer: {
       display: 'flex',
@@ -76,7 +77,7 @@ const OrderPreviewComp = ({
   const { t } = useTranslation();
   const theme = useTheme();
   return (
-    <>
+    <Grid>
       {orderItems.map((item, index) => {
         const { getTime, getDateString } = getDateFormat(item?.updated_at);
         return (
@@ -172,7 +173,7 @@ const OrderPreviewComp = ({
           </Grid>
         );
       })}
-    </>
+    </Grid>
   );
 };
 export default OrderPreviewComp;

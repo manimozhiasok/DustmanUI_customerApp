@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
-import { ButtonComp, DialogComp, TextInputComponent } from 'src/components';
+import { DialogComp, TextInputComponent } from 'src/components';
 import { useTranslation } from 'react-i18next';
 import DualActionButton from 'src/components/DualActionButton';
 import { useEdit } from 'src/hooks/useEdit';
@@ -25,7 +25,7 @@ type Props = {
   onClose: () => void;
 };
 
-const PickupAddressModal = ({ onClose }: Props) => {
+const AddressModalComp = ({ onClose }: Props) => {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
@@ -207,4 +207,4 @@ const PickupAddressModal = ({ onClose }: Props) => {
   );
 };
 
-export default PickupAddressModal;
+export default AddressModalComp;

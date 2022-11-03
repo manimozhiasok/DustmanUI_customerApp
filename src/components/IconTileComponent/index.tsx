@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, makeStyles, Theme, createStyles } from '@material-ui/core';
 
 type Props = {
-  background?: any;
+  background?: string;
 };
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
@@ -10,9 +10,8 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) =>
     outerContainer: {
       height: theme.spacing(7.25),
       width: theme.spacing(7.25),
-      background: (props) => {
-        return props.background ? props.background : theme.Colors.primary;
-      },
+      background: (props) =>
+        props.background ? props.background : theme.Colors.primary,
       position: 'absolute',
       left: -theme.spacing(6.25),
       top: theme.spacing(2),
@@ -27,7 +26,7 @@ const IconTileComponent = ({
   background
 }: {
   iconToDisplay?: any;
-  background?: any;
+  background?: string;
 }) => {
   const classes = useStyles({
     background

@@ -17,69 +17,78 @@ import Login from './content/Login';
 
 const routes: RouteObject[] = [
   {
-    path: 'dustman',
+    path: '/',
     element: <BaseLayout />,
     children: [
       {
         path: '',
-        element: <Navigate to="home" replace />
+        element: <Navigate to="dustman" replace />
       },
       {
-        path: 'home',
-        element: <LandingPage />
-      },
-      {
-        path: 'about-us',
-        element: <AboutUs />
-      },
-      {
-        path: 'services',
-        element: <Services />
-      },
-      {
-        path: 'gallery',
-        element: <Gallery />
-      },
-      {
-        path: 'contact-us',
-        element: <ContactUs />
-      },
-      {
-        path: 'login',
-        element: <Login />,
+        path: 'dustman',
         children: [
           {
             path: '',
-            element: <ApplicationRoute />
+            element: <Navigate to="home" replace />
           },
           {
-            path: 'customer-login',
-            element: <CustomerLogin />
+            path: 'home',
+            element: <LandingPage />
           },
           {
-            path: 'verify-otp',
-            element: <VerifyOtp />
+            path: 'about-us',
+            element: <AboutUs />
           },
           {
-            path: 'create-account',
-            element: <CreateAccountSignUp />
+            path: 'services',
+            element: <Services />
           },
           {
-            path: 'choose-user-type',
-            element: <ChooseUserType />
-          }
-        ]
-      },
-      {
-        path: 'customer-home',
-        children: [
-          {
-            path: '',
-            element: <Navigate to="customer-info" replace />
+            path: 'gallery',
+            element: <Gallery />
           },
           {
-            path: 'customer-info',
-            element: <HomePage />
+            path: 'contact-us',
+            element: <ContactUs />
+          },
+          {
+            path: 'login',
+            element: <Login />,
+            children: [
+              {
+                path: '',
+                element: <ApplicationRoute />
+              },
+              {
+                path: 'customer-login',
+                element: <CustomerLogin />
+              },
+              {
+                path: 'verify-otp',
+                element: <VerifyOtp />
+              },
+              {
+                path: 'create-account',
+                element: <CreateAccountSignUp />
+              },
+              {
+                path: 'choose-user-type',
+                element: <ChooseUserType />
+              }
+            ]
+          },
+          {
+            path: 'customer-home',
+            children: [
+              {
+                path: '',
+                element: <Navigate to="customer-info" replace />
+              },
+              {
+                path: 'customer-info',
+                element: <HomePage />
+              }
+            ]
           }
         ]
       }

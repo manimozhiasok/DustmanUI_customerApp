@@ -88,11 +88,17 @@ function OrdersPage() {
   ];
 
   const fetchData = useCallback(async () => {
-    const response: any =
-      await API_SERVICES.orderService.getCustomerOrderByStatus(
+    let response: any;
+    if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
+      response = await API_SERVICES.orderService.getConfirmedCustomerOrders(
+        userDetails?.customer_id
+      );
+    } else {
+      response = await API_SERVICES.orderService.getCustomerOrderByStatus(
         userDetails?.customer_id,
         selectedTab
       );
+    }
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.orders) {
         setOrderDetails(response.data.orders);
@@ -106,7 +112,7 @@ function OrdersPage() {
     };
     const onConfirmClick = async () => {
       let updateData = {
-        status_id: 4
+        status_id: CUSTOMER_ORDER_STATUS.Cancelled
       };
       const response: any = await API_SERVICES.customerOrderService.replace(
         orderId,
@@ -128,7 +134,6 @@ function OrdersPage() {
       iconType: CONFIRM_MODAL.cancel
     };
     setConfirmModal({ open: true, onConfirmClick, onCancelClick, ...props });
-    //   fetchData();
   };
 
   const renderTabContent = () => {

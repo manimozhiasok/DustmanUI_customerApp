@@ -12,7 +12,7 @@ import { ButtonComp } from 'src/components';
 import { useEdit } from 'src/hooks/useEdit';
 import useUserInfo from 'src/hooks/useUserInfo';
 import Plus from '../../Assets/Images/Plus.svg';
-import PickupAddressModal from './PickupAddressModal';
+import AddressModalComp from './AddressModalComp';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -114,7 +114,7 @@ const PickupAddress = ({ edit }: { edit: any }) => {
         </Grid>
       </Grid>
       {openModal.open && (
-        <PickupAddressModal onClose={() => setOpenModal({ open: false })} />
+        <AddressModalComp onClose={() => setOpenModal({ open: false })} />
       )}
     </>
   );

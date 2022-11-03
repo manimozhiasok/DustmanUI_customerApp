@@ -32,6 +32,12 @@ export const CUSTOMER_ORDER_STATUS = {
   Cancelled: 4
 };
 
+export const PROFILE_TAB_VALUES = {
+  myAccount: 1,
+  changeLanguage: 2,
+  changeUserType: 3
+};
+
 export const HANDLE_SUBMIT = {
   viewUser: 'viewUser',
   createUser: 'editOrCreateUser'
