@@ -48,9 +48,9 @@ function PickupAddress() {
           userDetails?.vendor_id
         );
 
-      if (response?.statusCode < HTTP_STATUSES.BAD_REQUEST) {
-        if (response.message) {
-          setData(response.message);
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data?.message) {
+          setData(response.data.message);
         }
       }
     } catch (err) {

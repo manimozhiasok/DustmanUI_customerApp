@@ -149,7 +149,7 @@ export const vendorPickupDropService = {
       url: `${Config.BASE_URL}/api/getAllCustomerVendorOrderAddresss/vendor/${vendorId}`,
       method: 'get'
     });
-    return vendorPickupAddress.vendorAddress;
-    //return apiRequest(options);
+    //return vendorPickupAddress.vendorAddress;
+    return apiRequest(options);
   }
 };
