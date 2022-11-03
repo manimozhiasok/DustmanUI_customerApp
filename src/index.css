@@ -74,6 +74,7 @@ font-family: 'Inter', sans-serif;
     width: 186.38px;
     height: 43px;
     margin-top: 14px;
+    cursor: pointer;
 }
 
 .navbar a {
@@ -1608,6 +1609,7 @@ form .button input {
         /* width: 100%; */
         width: 186.38px;
         height: 43px;
+       
     }
 
     .nav {

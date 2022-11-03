@@ -30,12 +30,19 @@ function NavBar() {
   const handleClickNavItem = (url: Pathname) => {
     navigateTo(url);
   };
-
+  const navigationToHome = () => {
+    navigateTo('/dustman', { replace: true });
+  };
   return (
     <>
       <nav className="navbar">
         <div>
-          <img className="logo" src={Logo} alt="logo" />{' '}
+          <img
+            onClick={navigationToHome}
+            className="logo"
+            src={Logo}
+            alt="logo"
+          />{' '}
         </div>
         <div className="navigation-bar">
           <ul className="nav-list" id="navi-list">
