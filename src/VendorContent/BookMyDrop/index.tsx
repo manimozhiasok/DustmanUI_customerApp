@@ -14,7 +14,7 @@ import TrashDetails from './TrashDetails';
 // import SelectVehicle from './SelectVehicle';
 import ScheduleYourPickup from './ScheduleYourPickup';
 // import PickupAddress from './PickupAddress';
-import OrderConfirmation from './OrderConfirmation';
+import OrderConfirmation from './DropOrderConfirmation';
 import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
@@ -26,8 +26,9 @@ import {
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import ChooseCategoryComponent from './ChooseCategoryComponent';
-import ChooseDropLocation from './ChooseDropLocation';
 import useVendorInfo from 'src/hooks/useVendorInfo';
+import ChooseDropLocation from './ChooseDropLocation';
+import DropOrderConfirmation from './DropOrderConfirmation';
 
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
@@ -46,23 +47,11 @@ export const initialValues = {
   order_items: [],
   description: '',
   order_images: [],
-  order_address_id: '',
-  order_address: {
-    address_line1: '',
-    address_line2: '',
-    address_line3: '',
-    state: '',
-    city: '',
-    pincode: '',
-    mobile_number: ''
-  },
-  customer_order_details: {
-    vehicle_id: 0,
+  user_type_id:5,
+  vendor_order_drop_details: {
+    dustman_location_id: '',
     pickup_time: '',
     slot: ''
-  },
-  vendor_order_drop_details: {
-    dustman_location_id: ''
   }
 };
 
@@ -76,32 +65,19 @@ function BookMyDrop() {
   const { t } = useTranslation();
   const { vendorDetails } = useVendorInfo();
 
-  // const pickAddressFields = [
-  //   'address_line1',
-  //   'address_line2',
-  //   'address_line3',
-  //   'state',
-  //   'city',
-  //   'pincode',
-  //   'mobile_number'
-  // ];
-
-  const handleCreateCustomerOrder = async () => {
+  const handleVendorDropOrder = async () => {
     try {
-      // if (!edit.allFilled(...pickAddressFields)) {
-      //   return toast.error('Please Fill all the pickup address details');
-      // }
       let orderData = { ...initialValues, ...edit.edits };
-      const createUserRes: any =
-        await API_SERVICES.vendorPickupDropService.dropCreate(
+      const recponse: any =
+        await API_SERVICES.vendorPickupDropService.createVendorOrderDrop(
           vendorDetails?.vendor_id,
           {
             data: orderData,
-            successMessage: 'Customer order created successfully!',
-            failureMessage: 'Failed to create Customer order '
+            successMessage: 'Drop order completed successfully!',
+            failureMessage: 'Failed to do drop order '
           }
         );
-      if (createUserRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (recponse?.status < HTTP_STATUSES.BAD_REQUEST) {
         edit.reset();
       }
     } catch (err) {
@@ -111,9 +87,6 @@ function BookMyDrop() {
 
   const fetchData = useCallback(async () => {
     try {
-      // if (vendorDetails?.id === 0) {
-      //   return;
-      // }
       const response: any = await Promise.all([
         API_SERVICES.vendorPickupDropService.getAllTrashCategory(
           TRASH_CATEGORY_ID.vendorDropTrash,
@@ -149,7 +122,7 @@ function BookMyDrop() {
     fetchData();
   }, [fetchData]);
 
-  const bookYourPickupAccordionContent = [
+  const bookMyDropAccordionContent = [
     {
       id: 1,
       title: t('chooseCategory'),
@@ -179,16 +152,16 @@ function BookMyDrop() {
     {
       id: 4,
       title: t('chooseDropLocation'),
-      accContentDetail: () => <ChooseDropLocation data={location} />,
+      accContentDetail: () => <ChooseDropLocation data={location} edit={edit}/>,
       tileIcon: PickupAddressIcon
     },
     {
       id: 6,
-      title: t('orderConfirmation'),
+      title: t('dropOrderConfirmation'),
       accContentDetail: () => (
-        <OrderConfirmation
+        <DropOrderConfirmation
           edit={edit}
-          handleButtonClick={handleCreateCustomerOrder}
+          handleButtonClick={handleVendorDropOrder}
           trashData={trashData}
         />
       ),
@@ -216,7 +189,7 @@ function BookMyDrop() {
     return (
       <Grid>
         <UHAccordionComp
-          config={bookYourPickupAccordionContent}
+          config={bookMyDropAccordionContent}
           isDashedLine={true}
           accordionOuterContainerClassName={classes.accordionStyle}
           isLeftTileIcon={true}

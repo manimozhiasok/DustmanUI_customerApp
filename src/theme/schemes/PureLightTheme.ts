@@ -56,7 +56,8 @@ const defaultColors = {
     100: '#7B6F72'
   },
   ORANGE: {
-    900: '#FF3B30'
+    900: '#FF3B30',
+    800: '#F68B1F'
   },
   RED: {
     900: '#E10600',
@@ -80,12 +81,14 @@ const Colors = {
   greyDark: defaultColors.GREY[800],
   black: defaultColors.BLACK[900],
   orange: defaultColors.ORANGE[900],
+  secondaryOrange: defaultColors.ORANGE[800],
   greyLight: defaultColors.GREY[600],
   greyPrimary: defaultColors.GREY[900],
   greyMedium: defaultColors.GREY[700],
   grey: defaultColors.GREY[500],
   greyScaleMedium: defaultColors.GREY['a300'],
   blackPrimary: defaultColors.BLACK[800],
+  blackPrimaryGrey: defaultColors. BLACK[700],
   whitePure: defaultColors.WHITE[900],
   whitePrimary: defaultColors.WHITE[700],
   accentGrey: defaultColors.GREY[400],

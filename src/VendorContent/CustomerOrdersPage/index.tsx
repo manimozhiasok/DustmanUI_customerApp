@@ -5,6 +5,7 @@ import { Grid } from '@material-ui/core';
 import CustomerOrderDialog from './CustomerOrderDialog';
 import { API_SERVICES } from 'src/Services';
 import { useTranslation } from 'react-i18next';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 import {
   CONFIRM_MODAL,
   CUSTOMER_ORDER_STATUS,
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   selectedTabStyle: {
     color: theme.Colors.whitePure,
-    background: theme.Colors.secondary,
+    background: theme.Colors.secondaryOrange,
     fontWeight: theme.fontWeight.medium
   },
   buttonContainer: {
@@ -59,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 function OrdersPage() {
   const classes = useStyles();
   const theme = useTheme();
+  const { vendorDetails } = useVendorInfo();
   const [loading, setLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState<number>(
     CUSTOMER_ORDER_STATUS.Pending
@@ -98,9 +100,15 @@ function OrdersPage() {
   const fetchData = useCallback(async () => {
     try {
       const response: any = await Promise.all([
-        API_SERVICES.vendorCustomerOrderService.getVendorsOrders(1),
-        API_SERVICES.vendorCustomerOrderService.getScheduledOrder(1),
-        API_SERVICES.vendorCustomerOrderService.getCompletedOrder(1)
+        API_SERVICES.vendorCustomerOrderService.getCustomerOrderByVendorLocation(
+          vendorDetails?.status_id
+        ),
+        API_SERVICES.vendorCustomerOrderService.getAllVendorScheduledOrder(
+          vendorDetails?.status_id
+        ),
+        API_SERVICES.vendorCustomerOrderService.getAllVendorCompletedOrder(
+          vendorDetails?.status_id
+        )
       ]);
       if (response[0]?.status <= HTTP_STATUSES.BAD_REQUEST) {
         if (selectedTab === CUSTOMER_ORDER_STATUS.Pending) {

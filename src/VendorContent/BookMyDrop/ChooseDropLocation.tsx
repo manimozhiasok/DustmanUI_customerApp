@@ -9,7 +9,8 @@ import {
   Typography
 } from '@material-ui/core';
 import { locationIcon } from 'src/Assets';
-import React from 'react';
+import React, { useState } from 'react';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -36,86 +37,96 @@ const useStyles = makeStyles((theme: Theme) => {
   };
 });
 
-const ChooseDropLocation = ({data}) => {
+const ChooseDropLocation = ({ data, edit }) => {
+  const { vendorAddressDetails } = useVendorInfo();
+  const [selectedValue, setSelectedValue] = useState(0);
+  const [checked, setChecked] = useState();
   const classes = useStyles();
-  // const data = [
-  //   {
-  //     id: '1',
-  //     dustman_location: ' Ambattur',
-  //     address_line1: 'No 13, 4th cross st,',
-  //     address_line2:' sakthi nagar,',
-  //     address_line3: ' kilambakkam, chennai.'
-  //   },
-  //   {
-  //     id: '2',
-  //     dustman_location: 'kilambakkam, chennai.',
-  //     address_line1: 'No 13, 4th cross st,',
-  //     address_line2:'sakthi nagar,',
-  //     address_line3: 'Sriberambadur '
-  //   },
-  //   {
-  //     id: '4',
-  //     dustman_location: 'poonamallee',
-  //     address_line1: 'No 13, 4th cross st',
-  //     address_line2: ' sakthi nagar,',
-  //     address_line3: ' kilambakkam, chennai.'
-  //   }
-  // ];
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event, 'from handleChange');
+  const handleChange = (event: any, check) => {
+    setSelectedValue(parseInt(event.target.value));
+    console.log('id',event.target);
+    
+    //setSelectedValue(event.target.value);
+
+    console.log('event', event.target.value);
+    setChecked(check)
+    console.log('hi', selectedValue);
+    
+    edit.update({
+      order_address_id: parseInt(event.target.value)
+    });
   };
 
   return (
     <Grid container>
       <RadioGroup>
-        {data.map((item, index) => {
-          return (
-            <>
-              <Grid container key={index}>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                    labelPlacement="start"
-                    key={item.dustman_location}
-                    value={item.dustman_location}
-                    id={item.id}
-                    control={
-                      <Radio
-                        style={{ marginTop: '30px' }}
-                        onChange={handleChange}
+        {data?.length ? data.map((item, index) => {
+        {/* {vendorAddressDetails?.length
+          ? vendorAddressDetails.map((item, index) => { */}
+              return (
+                <>
+                  <Grid container key={index}>
+                    <Grid item xs={12}>
+                      <FormControlLabel
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between'
+                        }}
+                        labelPlacement="start"
+                        //key={item.dustman_location}
+                        value={item.dustman_location}
+                        //checked={selectedValue === item.id}
+                        id={item.id}
+                        control={
+                          <Radio
+                          //checked={selectedValue === item.id}
+                            style={{ marginTop: '30px' }}
+                            onChange={handleChange}
+                          />
+                        }
+                        label={
+                          <Typography className={classes.radioLableStyle}>
+                            {item.dustman_location}
+                          </Typography>
+                        }
                       />
-                    }
-                    label={
-                      <Typography className={classes.radioLableStyle}>
-                        {item.dustman_location}
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography
+                        variant={'h6'}
+                        className={classes.leftContent}
+                      >
+                        {item.address_line1}, {item.address_line2},{' '}
+                        {item.address_line3}
                       </Typography>
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography variant={'h6'} className={classes.leftContent}>
-                    {item.address_line1}, {item.address_line2}, {item.address_line3}
-                  </Typography>
-                </Grid>
-                <Grid item xs={11}>
-                  <Typography variant={'h6'} className={classes.leftContent}>
-                  {item.dustman_location}, {item.city}
-                  </Typography>
-                </Grid>
-                <Grid item xs={1} container justifyContent="flex-end">
-                  <img
-                    src={locationIcon}
-                    width={'20.38px'}
-                    height={'15.75px'}
-                  />
-                  <Typography className={classes.mapStyle}>view Map</Typography>
-                </Grid>
-              </Grid>
-              <Divider className={classes.dividerStyle} />
-            </>
-          );
-        })}
+                    </Grid>
+                    <Grid item xs={11}>
+                      <Typography
+                        variant={'h6'}
+                        className={classes.leftContent}
+                      >
+                        {item.dustman_location}, {item.city}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={1} container justifyContent="flex-end">
+                      <img
+                        src={locationIcon}
+                        width={'20.38px'}
+                        height={'15.75px'}
+                      />
+                      <Typography className={classes.mapStyle}>
+                        view Map
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  {index === data?.length - 1 ? null : (
+                    <Divider className={classes.dividerStyle} />
+                  )}
+                </>
+              );
+            })
+          : null}
       </RadioGroup>
     </Grid>
   );

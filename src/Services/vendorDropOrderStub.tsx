@@ -3,6 +3,7 @@ export const vendorDropOrder = {
     data: [
       {
         id: 1,
+        dustman_loaction_id: 1,
         dustman_location: 'Ponnamalle',
         address_line1: '4/44',
         address_line2: 'Main Road',
@@ -17,6 +18,7 @@ export const vendorDropOrder = {
       },
       {
         id: 2,
+        dustman_loaction_id: 1,
         dustman_location: 'Sriberambadur',
         address_line1: '4/44',
         address_line2: 'Main Road',
@@ -31,6 +33,7 @@ export const vendorDropOrder = {
       },
       {
         id: 3,
+        dustman_loaction_id: 1,
         dustman_location: 'Ambattur',
         address_line1: '4/44',
         address_line2: 'Main Road',
@@ -45,6 +48,7 @@ export const vendorDropOrder = {
       },
       {
         id: 4,
+        dustman_loaction_id: 1,
         dustman_location: 'Adayar',
         address_line1: '4/44',
         address_line2: 'Main Road',

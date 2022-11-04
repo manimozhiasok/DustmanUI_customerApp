@@ -67,8 +67,8 @@ const ScheduleYourPickup = ({ edit }) => {
       let hour = start + Math.random() * (end - start);
       data.setHours(hour);
       edit.update({
-        customer_order_details: {
-          ...edit.edits.customer_order_details,
+        vendor_order_drop_details: {
+          ...edit.edits.vendor_order_drop_details,
           pickup_time: data.toISOString(),
           slot: slot
         }

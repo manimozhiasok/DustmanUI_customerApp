@@ -4,7 +4,7 @@ import { Config } from 'src/Config';
 import { vendorCustomerOrder, vendorCustomerOrderCompleted, vendorCustomerOrderScheduled } from './vendorCustomerOrderStub';
 
 export const vendorCustomerOrderService = {
-  getVendorsOrders: async (vendorId: number) => {
+  getCustomerOrderByVendorLocation: async (vendorId: number) => {
     const options = await apiOptions({
       url: `${Config.BASE_URL}/api/getOrderByVendorLocation/vendor/${vendorId}`,
       method: 'get'
@@ -12,7 +12,7 @@ export const vendorCustomerOrderService = {
     return vendorCustomerOrder.VendorCustomerOrderGet;
     //return apiRequest(options);
   },
-  getScheduledOrder: async (vendorId: number) => {
+  getAllVendorScheduledOrder: async (vendorId: number) => {
     const options = await apiOptions({
       url: `${Config.BASE_URL}/api/getAllVendorScheduledOrders/vendor/${vendorId}`,
       method: 'get'
@@ -20,7 +20,7 @@ export const vendorCustomerOrderService = {
     return vendorCustomerOrderScheduled.VendorCustomerOrderGet;
     //return apiRequest(options);
   },
-  getCompletedOrder: async (vendorId: number) => {
+  getAllVendorCompletedOrder: async (vendorId: number) => {
     const options = await apiOptions({
       url: `${Config.BASE_URL}/api/getAllVendorCompletedOrders/vendor/${vendorId}`,
       method: 'get'

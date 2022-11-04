@@ -143,12 +143,12 @@ const OrderPreviewComp = ({
                     backgroundColor={theme.Colors.whiteLightGrey}
                     buttonFontSize={theme.MetricsSizes.tiny_xxx}
                     variant="outlined"
-                    buttonTextColor={theme.Colors.secondary}
+                    buttonTextColor={theme.Colors.secondaryOrange}
                     height={theme.MetricsSizes.medium_xx}
                     btnWidth={'110px'}
                     style={{
                       marginRight: theme.spacing(1.25),
-                      borderColor: theme.Colors.secondary
+                      borderColor: theme.Colors.secondaryOrange
                     }}
                     onClickButton={() => onClickViewDetails(item)}
                   />
@@ -160,6 +160,7 @@ const OrderPreviewComp = ({
                             ? 'BUY ORDER'
                             : 'CANCEL'
                         }
+                        backgroundColor={theme.Colors.secondaryOrange}
                         buttonFontSize={theme.MetricsSizes.tiny_xxx}
                         buttonTextColor={theme.Colors.white}
                         height={theme.MetricsSizes.medium_xx}

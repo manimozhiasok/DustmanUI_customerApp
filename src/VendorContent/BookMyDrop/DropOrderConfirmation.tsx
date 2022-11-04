@@ -7,8 +7,8 @@ import {
 } from '@material-ui/core';
 import { ButtonComp, DialogContentDetails } from 'src/components';
 import { useTranslation } from 'react-i18next';
+import useUserInfo from 'src/hooks/useUserInfo';
 import { getDateFormat } from 'src/Utils';
-import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -31,11 +31,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function OrderConfirmation({ edit, handleButtonClick, trashData }) {
+function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const { vendorAddressDetails } = useVendorInfo();
+  const { userAddressDetails } = useUserInfo();
   const timeSlotDetails = [
     {
       id: 1,
@@ -70,30 +70,31 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
   };
 
   const getAddressData =
-    (edit.getValue('order_address_id') &&
-      vendorAddressDetails?.length &&
-      vendorAddressDetails.filter(
-        (item) => item.id === edit.getValue('order_address_id')
+    (edit.getValue('vendor_order_drop_details')?.dustman_location_id &&
+      userAddressDetails?.length &&
+      userAddressDetails.filter(
+        (item) => item.id === edit.getValue('vendor_order_drop_details')?.dustman_location_id
       )) ||
     [];
+    console.log("getAddressData",getAddressData);
 
   const getSlotValues = () => {
     if (
-      edit.getValue('customer_order_details')?.pickup_time &&
-      edit.getValue('customer_order_details')?.slot
+      edit.getValue('vendor_order_drop_details')?.pickup_time &&
+      edit.getValue('vendor_order_drop_details')?.slot
     ) {
       let data = `${
-        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+        getDateFormat(edit.getValue('vendor_order_drop_details').pickup_time)
           .getDay
       }, ${
-        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+        getDateFormat(edit.getValue('vendor_order_drop_details').pickup_time)
           .getDate
       } ${
-        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+        getDateFormat(edit.getValue('vendor_order_drop_details').pickup_time)
           .getMonth
       } ${
         timeSlotDetails.find(
-          (item) => item.value === edit.getValue('customer_order_details')?.slot
+          (item) => item.value === edit.getValue('vendor_order_drop_details')?.slot
         ).time
       }`;
       return data;
@@ -157,4 +158,4 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
   );
 }
 
-export default OrderConfirmation;
+export default DropOrderConfirmation;

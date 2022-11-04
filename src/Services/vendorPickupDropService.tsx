@@ -36,14 +36,11 @@ type vendorDropDetailsProp = {
     order_items: number[];
     description: string;
     order_images: any[];
-    order_address_id: string | number;
-    customer_order_details: {
-      vehicle_id: number;
+    user_type_id: number,
+    vendor_order_drop_details: {
+      dustman_location_id: string | number;
       pickup_time: string;
       slot: string;
-    };
-    vendor_order_drop_details: {
-      dustman_location_id: number | string;
     };
   };
   successMessage?: string;
@@ -70,7 +67,7 @@ export const vendorPickupDropService = {
     };
     return apiRequest(options, toastMessageConfig);
   },
-  dropCreate: async (
+  createVendorOrderDrop: async (
     vendorId: number,
     { data, successMessage, failureMessage }: vendorDropDetailsProp
   ) => {
