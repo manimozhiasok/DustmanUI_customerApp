@@ -16,6 +16,9 @@ import ScheduleYourPickupIcon from './ScheduleYourPickupIcon.svg';
 import PickupAddressIcon from './PickupAddressIcon.svg';
 import OrderConfirmationIcon from './OrderConfirmationIcon.svg';
 import OrderSuccessIcon from './OrderSuccessIcon.svg';
+import CheckImageVendor from './CheckImageVendor.svg';
+import VendorLoginImage from './VendorLoginImage.svg';
+
 import All from './All.svg';
 import Carton from './Carton.svg';
 import Cart from './Cart.svg';
@@ -101,5 +104,7 @@ export {
   UserSwitch,
   VectorIcon,
   CrownIcon,
-  VendorConfirm
+  VendorConfirm,
+  VendorLoginImage,
+  CheckImageVendor
 };

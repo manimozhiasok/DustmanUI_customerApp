@@ -9,10 +9,10 @@ import {
 } from 'src/components';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { TermsAndConditionComp } from './TermsAndConditionComp';
 import { isPhoneNumber } from 'src/Utils';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
+import { TermsAndConditionComp } from 'src/content/Login/TermsAndConditionComp';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {

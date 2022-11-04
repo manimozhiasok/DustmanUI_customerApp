@@ -20,7 +20,7 @@ import VendorApplicationRoute from './VendorApplicationRoute';
 import VendorHomePage from './VendorContent/VendorHomePage';
 import VendorCreateAccountSignUp from './VendorContent/VendorLogin/VendorCreateAccountSignUp';
 import VendorVerifyOtp from './VendorContent/VendorLogin/VendorVerifyOtp';
-import ChooseVehicleType from './VendorContent/VendorLogin/ChooseVehicle';
+import ChooseVehicleType from './VendorContent/VendorLogin/ChooseVehicleType';
 import { VendorApproval } from './VendorContent/VendorLogin/VendorApproval';
 
 const routes: RouteObject[] = [

@@ -8,10 +8,10 @@ import {
 } from 'src/components';
 import { useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { TermsAndConditionComp } from './TermsAndConditionComp';
 import { useEdit } from 'src/hooks/useEdit';
 import { useState } from 'react';
 import { isValidEmail } from 'src/Utils';
+import { TermsAndConditionComp } from 'src/content/Login/TermsAndConditionComp';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -74,7 +74,8 @@ const VendorCreateAccountSignUp = () => {
       state: {
         formEdits: { ...initialValues, ...edit.edits },
         vendorId: state?.vendorId
-      }
+      },
+      replace: true
     });
   };
 

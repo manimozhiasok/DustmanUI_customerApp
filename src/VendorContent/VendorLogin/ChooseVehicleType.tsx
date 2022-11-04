@@ -4,15 +4,12 @@ import { makeStyles } from '@material-ui/styles';
 import { ButtonComp, LoginHeaderComp } from 'src/components';
 import { useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { TermsAndConditionComp } from './TermsAndConditionComp';
 import SelectVehicleComp from './SelectVehicleComp';
 import { useEffect, useState } from 'react';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
 import { useEdit } from 'src/hooks/useEdit';
 import toast from 'react-hot-toast';
-import useVendorInfo from 'src/hooks/useVendorInfo';
-import { setVendorId } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -26,9 +23,8 @@ const ChooseVehicleType = () => {
   const { state }: any = useLocation();
   const theme = useTheme();
   const navigateTo = useNavigate();
-  const [vendorTypes, setVendorTypes] = useState([]);
+  const [vehicleTypes, setVehicleTypes] = useState([]);
   const edit = useEdit(state?.formEdits);
-  const { updateVendorInfo } = useVendorInfo();
 
   const handleContinueClick = async () => {
     if (!edit.allFilled('vehicle_owned')) {
@@ -40,13 +36,9 @@ const ChooseVehicleType = () => {
       { data, successMessage: 'Vendor profile created successfully!' }
     );
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.vendorProfile?.vendor_id) {
-        updateVendorInfo(response.data.vendorProfile.vendor_id);
-        setVendorId(response.data.vendorProfile.vendor_id);
-        navigateTo('/dustman/vendor-login/vendor-approval', {
-          replace: true
-        });
-      }
+      navigateTo('/dustman/vendor-login/vendor-approval', {
+        replace: true
+      });
     }
   };
 
@@ -54,7 +46,7 @@ const ChooseVehicleType = () => {
     const response: any = await API_SERVICES.generalService.getAllVehicles();
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.vehicles) {
-        setVendorTypes(response.data.vehicles);
+        setVehicleTypes(response.data.vehicles);
       }
     }
   };
@@ -77,7 +69,7 @@ const ChooseVehicleType = () => {
         color={theme.Colors.orangePrimary}
       />
       <SelectVehicleComp
-        vendorTypeItems={vendorTypes}
+        vendorTypeItems={vehicleTypes}
         selectedVal={edit.getValue('vehicle_owned')}
         onClickVehicleCheckbox={onClickVehicleCheckbox}
       />
@@ -88,7 +80,6 @@ const ChooseVehicleType = () => {
         onClickButton={handleContinueClick}
         style={{ margin: theme.spacing(2, 0) }}
       />
-      <TermsAndConditionComp />
     </Grid>
   );
 };

@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
 import { useTheme, Grid, Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { ButtonComp } from 'src/components';
 import { useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { checkImage } from 'src/Assets';
-import { LoginDrawerContext } from 'src/contexts/LoginDrawerContext';
+import { CheckImageVendor } from 'src/Assets';
 
 const useStyles = makeStyles((theme: Theme) => ({
   loginDrawerStyle: {},
@@ -21,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   subText: {
     color: theme.Colors.lightBlueGrey,
     fontWeight: theme.fontWeight.regular,
-    fontSize: theme.MetricsSizes.small_xx
+    fontSize: theme.MetricsSizes.small_xx,
+    paddingBottom: theme.spacing(3)
   },
   mainContainer: {
     textAlign: 'center'
@@ -38,53 +37,40 @@ export const VendorApproval = (edit) => {
   const navigateTo = useNavigate();
   const { state }: any = useLocation();
 
-  const { isLoginDrawerOpen, closeLoginDrawer } =
-    useContext(LoginDrawerContext);
-
-  const handleCloseIconClick = () => {
-    closeLoginDrawer();
-    navigateTo('/dustman', { replace: true });
-  };
-  const handleContinueClick = () => {
-    // if (
-    //   !edit.allFilled(...RequiredFields) ||
-    //   !isValidEmail(edit.getValue('email'))
-    // ) {
-    //   setIsError(true);
-    //   return;
-    // }
-    navigateTo('/dustman/vendor-home', {
-      state: {
-        formEdits: {
-          // ...initialValues,
-          ...edit.edits
-        },
-        customerId: state?.customerId
-      }
+  const handleBackToHomeButtonClick = () => {
+    navigateTo('/dustman', {
+      replace: true
     });
   };
   return (
     <>
       <Grid container className={classes.mainContainer}>
         <Grid item xs={12}>
-          <img src={checkImage} width={'93.85px'} height={'93.85px'} />
+          <img
+            src={CheckImageVendor}
+            width={'93.85px'}
+            height={'93.85px'}
+            color={theme.Colors.orangePrimary}
+          />
         </Grid>
         <Grid item xs={12} className={classes.successText}>
-          <Typography className={classes.text}>{t('orderPlaced')}</Typography>
+          <Typography className={classes.text}>
+            {t('LOGIN.registrationSuccessful')}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h3" className={classes.subText}>
-            {t('orderConfirm')}
+            {t('LOGIN.registrationConfirmation')}
             <br />
             {t('orderDescription')}
           </Typography>
         </Grid>
       </Grid>
       <ButtonComp
-        buttonText={'Go to My Orders'}
+        buttonText={'Back to Home'}
         backgroundColor={theme.Colors.orangePrimary}
         btnBorderRadius={theme.MetricsSizes.tiny}
-        onClickButton={handleContinueClick}
+        onClickButton={handleBackToHomeButtonClick}
         style={{ margin: theme.spacing(2, 0) }}
       />
     </>

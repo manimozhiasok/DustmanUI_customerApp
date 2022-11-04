@@ -49,9 +49,15 @@ const VendorVerifyOtp = () => {
           state: { vendorId: response.data.vendor.id }
         });
       } else if (response?.data?.vendorProfile?.vendor_id) {
-        updateVendorInfo(response?.data?.vendorProfile?.vendor_id);
-        setVendorId(response.data.vendorProfile.vendor_id);
-        navigateTo('/dustman/vendor-home', { replace: true });
+        if (response.data.vendorProfile.status_id === 1) {
+          navigateTo('/dustman/vendor-login/vendor-approval', {
+            replace: true
+          });
+        } else if (response.data.vendorProfile.status_id === 2) {
+          updateVendorInfo(response?.data?.vendorProfile?.vendor_id);
+          setVendorId(response.data.vendorProfile.vendor_id);
+          navigateTo('/dustman/vendor-home', { replace: true });
+        }
       }
     }
   };

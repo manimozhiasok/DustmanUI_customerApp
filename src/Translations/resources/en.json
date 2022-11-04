@@ -75,7 +75,9 @@
     "landlineNumber":"Landline Number",
     "establishedYear":"Established Year",
     "vehicleOwned":"Vehicle Owned",
-    "pinCode": "Pincode"
+    "pinCode": "Pincode",
+    "registrationSuccessful":"Vendor Registration Successful",
+    "registrationConfirmation":"Your Registration was Successful"
   },
 
   "PICKUP": {

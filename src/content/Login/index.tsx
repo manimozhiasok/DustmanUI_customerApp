@@ -51,7 +51,10 @@ const Login = () => {
       classes={{ paper: classes.drawerWidth }}
     >
       <Grid className={classes.loginDrawerStyle}>
-        <CloseIcon onClick={handleCloseIconClick} />
+        <CloseIcon
+          style={{ cursor: 'pointer' }}
+          onClick={handleCloseIconClick}
+        />
         <Box
           sx={{
             padding: theme.spacing(4, 10, 6, 3.8)

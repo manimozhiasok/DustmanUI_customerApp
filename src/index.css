@@ -109,24 +109,25 @@ font-family: 'Inter', sans-serif;
     cursor: pointer;
 }
 
-/* .login-list{
-    display: block;
+.login-list{
+    /* display: block;
     width: 157px;
-    height: 78px;
-    margin-left:75%; 
+    height: 78px; */
+    /* margin-left:75%;  */
  }   
 
  .login-list a{
-    background: #424242;
-    padding: 1rem;
-    list-style: none;
+    /* background: #424242;
+    /* padding: 1rem; */
+    /* list-style: none;
     font-weight: 400;
 font-size: 14px;
 line-height: 18px;
 border-bottom: 0.5px solid;
-text-align: center;
-color: #FFFFFF;
- } */
+text-align: center; */ 
+    cursor: pointer;
+/* color: #FFFFFF; */
+ }
 
 /* .login-btn {
     background-color: #04AA6D;
