@@ -15,10 +15,13 @@ import {
 import { UHConfirmModal, UHTabComponent } from 'src/components';
 import {
   CompletedOrdersIcon,
+  Confirm,
   ConfirmedOrdersIcon,
-  PendingOrdersIcon
+  PendingOrdersIcon,
+  YetToConfirm
 } from 'src/Assets';
 import OrderPreviewComp from './OrderPreviewComp';
+import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -139,12 +142,39 @@ function OrdersPage() {
   const renderTabContent = () => {
     return (
       <Grid className={classes.tabContentContainer}>
-        <OrderPreviewComp
-          orderItems={orderDetails}
-          isCancelButton={true}
-          onClickViewDetails={onClickViewDetails}
-          onClickCancelButton={onClickCancelButton}
-        />
+        {orderDetails?.length
+          ? orderDetails.map((item, index) => {
+              const { getTime, getDateString } = getDateFormat(
+                item?.pickup_time
+              );
+
+              return (
+                <Grid key={index}>
+                  <OrderPreviewComp
+                    orderItems={item}
+                    handleClickButtonOne={onClickViewDetails}
+                    handleClickButtonTwo={onClickCancelButton}
+                    orderStatusText={
+                      (item?.status_id === CUSTOMER_ORDER_STATUS.Pending &&
+                        'Yet to Confirm') ||
+                      (item?.status_id === CUSTOMER_ORDER_STATUS.Confirmed &&
+                        `Scheduled on ${getDateString}, ${getTime}`) ||
+                      (item?.status_id === CUSTOMER_ORDER_STATUS.Completed &&
+                        `Delivered on ${getDateString}, ${getTime}`)
+                    }
+                    statusIcon={
+                      item?.status_id === CUSTOMER_ORDER_STATUS.Pending
+                        ? YetToConfirm
+                        : Confirm
+                    }
+                    isButtonTwo={
+                      item?.status_id === CUSTOMER_ORDER_STATUS.Pending
+                    }
+                  />
+                </Grid>
+              );
+            })
+          : null}
       </Grid>
     );
   };

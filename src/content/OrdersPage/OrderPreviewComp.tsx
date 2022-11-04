@@ -1,4 +1,5 @@
 import {
+  Checkbox,
   createStyles,
   Grid,
   makeStyles,
@@ -6,11 +7,10 @@ import {
   Typography,
   useTheme
 } from '@material-ui/core';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Confirm, locationIcon, weightIcon, YetToConfirm } from 'src/Assets';
+import { locationIcon, weightIcon } from 'src/Assets';
 import { ButtonComp, ImageTextComponent } from 'src/components';
-import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
-import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -62,118 +62,138 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const OrderPreviewComp = ({
-  orderItems,
-  isCancelButton,
-  onClickViewDetails,
-  onClickCancelButton
-}: {
-  orderItems: any[];
-  isCancelButton?: boolean;
-  onClickViewDetails?: (orderData: any) => void;
-  onClickCancelButton?: (orderId: number) => void;
-}) => {
+type OrderCompProp = {
+  orderItems: any;
+  isButtonOne?: boolean;
+  isButtonTwo?: boolean;
+  handleClickButtonOne?: (orderData: any) => void;
+  handleClickButtonTwo?: (orderId: number) => void;
+  isCheckBox?: boolean;
+  handleCheckboxChange?: (orderId: number, isChecked: boolean) => void;
+  leftButtonText?: string;
+  rightButtonText?: string;
+  orderStatusText?: string;
+  statusIcon?: any;
+  buttonOneStyle?: React.CSSProperties;
+  buttonTwoStyle?: React.CSSProperties;
+};
+
+const OrderPreviewComp = (props: OrderCompProp) => {
+  const {
+    orderItems,
+    isButtonTwo = false,
+    isButtonOne = true,
+    handleClickButtonOne,
+    handleClickButtonTwo,
+    isCheckBox = false,
+    handleCheckboxChange,
+    rightButtonText,
+    leftButtonText,
+    orderStatusText,
+    statusIcon,
+    buttonOneStyle,
+    buttonTwoStyle
+  } = props;
   const classes = useStyles();
   const { t } = useTranslation();
   const theme = useTheme();
+
   return (
-    <Grid>
-      {orderItems.map((item, index) => {
-        const { getTime, getDateString } = getDateFormat(item?.updated_at);
-        return (
-          <Grid
-            container
-            className={classes.outerContainer}
-            direction="row"
-            key={index}
-          >
-            <Grid container item xs direction="row">
-              <Grid item className={classes.imageContainer}>
-                <img
-                  src={item?.order_images[0]}
-                  alt="order_images"
-                  className={classes.imageStyle}
+    <>
+      <Grid
+        container
+        className={classes.outerContainer}
+        direction="row"
+        alignItems={isCheckBox ? 'center' : 'flex-start'}
+      >
+        <Grid container item xs direction="row">
+          <Grid item className={classes.imageContainer}>
+            <img
+              src={orderItems?.order_images[0]}
+              alt="order_images"
+              className={classes.imageStyle}
+            />
+          </Grid>
+          <Grid item className={classes.contentContainer}>
+            <Typography className={classes.subText}>
+              {t('orders')}
+              {orderItems?.order_id}
+            </Typography>
+            <Grid style={{ display: 'flex', alignItems: 'center' }}>
+              <Typography className={classes.category}>
+                {t('category')}:
+                <span className={classes.categoryText}>
+                  {orderItems?.order_items?.toString()}
+                </span>
+              </Typography>
+              <Grid className={classes.imageAlign}>
+                <ImageTextComponent
+                  icon={weightIcon}
+                  value={`${orderItems?.quantity_kg} Kg`}
                 />
               </Grid>
-              <Grid item className={classes.contentContainer}>
-                <Typography className={classes.subText}>
-                  {t('orders')}
-                  {item?.order_id}
-                </Typography>
-                <Grid style={{ display: 'flex', alignItems: 'center' }}>
-                  <Typography className={classes.category}>
-                    {t('category')}:
-                    <span className={classes.categoryText}>
-                      {item?.order_items?.toString()}
-                    </span>
-                  </Typography>
-                  <Grid className={classes.imageAlign}>
-                    <ImageTextComponent
-                      icon={weightIcon}
-                      value={`${item?.quantity_kg} Kg`}
-                    />
-                  </Grid>
-                  <Grid className={classes.imageAlign}>
-                    <ImageTextComponent
-                      icon={locationIcon}
-                      value={item?.city}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid className={classes.buttonAlign}>
-                  <ButtonComp
-                    buttonText={'VIEW DETAILS'}
-                    backgroundColor={theme.Colors.whiteLightGrey}
-                    buttonFontSize={theme.MetricsSizes.tiny_xxx}
-                    variant="outlined"
-                    buttonTextColor={theme.Colors.secondary}
-                    height={theme.MetricsSizes.medium_xx}
-                    btnWidth={'110px'}
-                    style={{
-                      marginRight: theme.spacing(1.25),
-                      borderColor: theme.Colors.secondary
-                    }}
-                    onClickButton={() => onClickViewDetails(item)}
-                  />
-                  {isCancelButton &&
-                    item?.status_id === CUSTOMER_ORDER_STATUS.Pending && (
-                      <ButtonComp
-                        buttonText={'CANCEL'}
-                        buttonFontSize={theme.MetricsSizes.tiny_xxx}
-                        buttonTextColor={theme.Colors.white}
-                        height={theme.MetricsSizes.medium_xx}
-                        btnWidth={'72px'}
-                        onClickButton={() =>
-                          onClickCancelButton(item?.order_id)
-                        }
-                      />
-                    )}
-                </Grid>
+              <Grid className={classes.imageAlign}>
+                <ImageTextComponent
+                  icon={locationIcon}
+                  value={orderItems?.city}
+                />
               </Grid>
             </Grid>
-            <Grid item>
-              <Grid className={classes.status}>
-                <Typography className={classes.subText}>
-                  {(item?.status_id === CUSTOMER_ORDER_STATUS.Pending &&
-                    'Yet to Confirm') ||
-                    (item?.status_id === CUSTOMER_ORDER_STATUS.Confirmed &&
-                      `Scheduled on ${getDateString}, ${getTime}`) ||
-                    (item?.status_id === CUSTOMER_ORDER_STATUS.Completed &&
-                      `Delivered on ${getDateString}, ${getTime}`)}
-                </Typography>
-                <img
-                  src={
-                    item?.status_id === CUSTOMER_ORDER_STATUS.Pending
-                      ? YetToConfirm
-                      : Confirm
+            <Grid className={classes.buttonAlign}>
+              {isButtonOne ? (
+                <ButtonComp
+                  buttonText={leftButtonText || 'VIEW DETAILS'}
+                  backgroundColor={theme.Colors.whiteLightGrey}
+                  buttonFontSize={theme.MetricsSizes.tiny_xxx}
+                  variant="outlined"
+                  buttonTextColor={theme.Colors.secondary}
+                  height={theme.MetricsSizes.medium_xx}
+                  btnWidth={'110px'}
+                  style={{
+                    marginRight: theme.spacing(1.25),
+                    borderColor: theme.Colors.secondary,
+                    ...buttonOneStyle
+                  }}
+                  onClickButton={() => handleClickButtonOne(orderItems)}
+                />
+              ) : null}
+              {isButtonTwo ? (
+                <ButtonComp
+                  buttonText={rightButtonText || 'CANCEL'}
+                  buttonFontSize={theme.MetricsSizes.tiny_xxx}
+                  buttonTextColor={theme.Colors.white}
+                  height={theme.MetricsSizes.medium_xx}
+                  style={buttonTwoStyle}
+                  btnWidth={'72px'}
+                  onClickButton={() =>
+                    handleClickButtonTwo(orderItems?.order_id)
                   }
                 />
-              </Grid>
+              ) : null}
             </Grid>
           </Grid>
-        );
-      })}
-    </Grid>
+        </Grid>
+        {isCheckBox ? (
+          <Grid item>
+            <Checkbox
+              className={classes.checkbox}
+              onChange={(_, checked) =>
+                handleCheckboxChange(orderItems?.order_id, checked)
+              }
+            />
+          </Grid>
+        ) : (
+          <Grid item>
+            <Grid className={classes.status}>
+              <Typography className={classes.subText}>
+                {orderStatusText}
+              </Typography>
+              <img src={statusIcon} />
+            </Grid>
+          </Grid>
+        )}
+      </Grid>
+    </>
   );
 };
 export default OrderPreviewComp;
