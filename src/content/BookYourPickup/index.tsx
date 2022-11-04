@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import { Loader, UHAccordionComp } from 'src/components';
+import {
+  ChooseCategoryComponent,
+  Loader,
+  UHAccordionComp,
+  UHSelectYourPickUpComp
+} from 'src/components';
 import { Grid } from '@material-ui/core';
 import { ChooseCategoryIcon, VectorIcon } from 'src/Assets/Images';
 import { TrashDetailsIcon } from 'src/Assets/Images';
@@ -12,7 +17,6 @@ import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
 import TrashDetails from './TrashDetails';
 import SelectVehicle from './SelectVehicle';
-import ScheduleYourPickup from './ScheduleYourPickup';
 import PickupAddress from './PickupAddress';
 import OrderConfirmation from './OrderConfirmation';
 import OrderSuccess from './OrderSuccess';
@@ -21,7 +25,6 @@ import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES, TRASH_CATEGORY_ID } from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import ChooseCategoryComponent from 'src/components/ChooseCategoryComponent';
 import useUserInfo from 'src/hooks/useUserInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -120,6 +123,16 @@ function BookYourPickup() {
     fetchData();
   }, [fetchData]);
 
+  const updateSelectedDate = (dateString: string, slot: string) => {
+    edit.update({
+      customer_order_details: {
+        ...edit.edits.customer_order_details,
+        pickup_time: dateString,
+        slot: slot
+      }
+    });
+  };
+
   const bookYourPickupAccordionContent = [
     {
       id: 1,
@@ -150,7 +163,9 @@ function BookYourPickup() {
     {
       id: 4,
       title: t('scheduleYourPickup'),
-      accContentDetail: () => <ScheduleYourPickup edit={edit} />,
+      accContentDetail: () => (
+        <UHSelectYourPickUpComp updateSelectedDate={updateSelectedDate} />
+      ),
       tileIcon: ScheduleYourPickupIcon
     },
     {

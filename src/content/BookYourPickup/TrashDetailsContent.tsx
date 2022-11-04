@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export const LeftContent = ({ edit, trashData }) => {
+export const TrashDetailsContent = ({ edit, trashData }) => {
   const theme = useTheme();
   const classes = useStyles();
   const { t } = useTranslation();

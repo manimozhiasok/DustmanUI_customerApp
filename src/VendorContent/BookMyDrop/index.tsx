@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import { Loader, UHAccordionComp } from 'src/components';
+import {
+  ChooseCategoryComponent,
+  Loader,
+  UHAccordionComp
+} from 'src/components';
 import { Grid } from '@material-ui/core';
 import { ChooseCategoryIcon, VectorIcon } from 'src/Assets/Images';
 import { TrashDetailsIcon } from 'src/Assets/Images';
@@ -25,7 +29,6 @@ import {
 } from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import ChooseCategoryComponent from 'src/components/ChooseCategoryComponent';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 import ChooseDropLocation from './ChooseDropLocation';
 import DropOrderConfirmation from './DropOrderConfirmation';
@@ -47,7 +50,7 @@ export const initialValues = {
   order_items: [],
   description: '',
   order_images: [],
-  user_type_id:5,
+  user_type_id: 5,
   vendor_order_drop_details: {
     dustman_location_id: '',
     pickup_time: '',
@@ -154,7 +157,9 @@ function BookMyDrop() {
     {
       id: 4,
       title: t('chooseDropLocation'),
-      accContentDetail: () => <ChooseDropLocation data={location} edit={edit}/>,
+      accContentDetail: () => (
+        <ChooseDropLocation data={location} edit={edit} />
+      ),
       tileIcon: PickupAddressIcon
     },
     {

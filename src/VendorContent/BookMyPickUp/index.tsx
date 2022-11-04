@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import { Loader, UHAccordionComp } from 'src/components';
+import {
+  ChooseCategoryComponent,
+  Loader,
+  UHAccordionComp
+} from 'src/components';
 import { Grid } from '@material-ui/core';
 import { ChooseCategoryIcon, VectorIcon } from 'src/Assets/Images';
 import { TrashDetailsIcon } from 'src/Assets/Images';
@@ -25,7 +29,6 @@ import {
 } from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import ChooseCategoryComponent from 'src/components/ChooseCategoryComponent';
 import PickupPlace from './PickupPlace';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 

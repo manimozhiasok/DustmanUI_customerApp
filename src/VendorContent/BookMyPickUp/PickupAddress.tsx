@@ -41,6 +41,7 @@ function PickupAddress() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { vendorDetails } = useVendorInfo();
+
   const fetchData = async () => {
     try {
       const response: any =
@@ -62,7 +63,7 @@ function PickupAddress() {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   return (
     <>

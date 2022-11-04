@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
-import { LeftContent } from './TrashDetailsContent';
+import { TrashDetailsContent } from './TrashDetailsContent';
 import { AddPhotoAlternate } from '@material-ui/icons';
 import { ButtonComp } from 'src/components';
 import { API_SERVICES } from 'src/Services';
@@ -72,7 +72,7 @@ function TrashDetails({ edit, trashData }: Props) {
   return (
     <Grid container spacing={2} justifyContent="center">
       <Grid item xs={6}>
-        <LeftContent edit={edit} trashData={trashData} />
+        <TrashDetailsContent edit={edit} trashData={trashData} />
       </Grid>
       <Grid item xs={6}>
         <Grid className={classes.gridStyle}>

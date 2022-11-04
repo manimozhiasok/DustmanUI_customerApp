@@ -1,15 +1,22 @@
 import { useCallback } from 'react';
-import { Grid, makeStyles, Theme, Typography, useTheme } from '@material-ui/core';
+import {
+  Grid,
+  makeStyles,
+  Theme,
+  Typography,
+  useTheme
+} from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import './Calendar.css';
 import Card from '@material-ui/core/Card';
 import { SlotButtonComp } from 'src/components';
 import { TimeSlotDetails } from 'src/components/SlotButtonComp';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles((theme: Theme) => {
+type Props = {
+  activeTileColor?: string;
+};
+const useStyles = makeStyles<Theme, Props>((theme) => {
   return {
     cardStyle: {
       boxShadow: '0px 8.93293px 26.7988px rgba(5, 16, 55, 0.1)'
@@ -22,14 +29,26 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     calendarContainerStyle: {
       padding: theme.spacing(2, 0, 3, 0)
+    },
+    calendar: {
+      '& .react-calendar__tile--active, .react-calendar__tile--now:enabled:hover, .react-calendar__tile--now:enabled:focus, .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus':
+        {
+          background: (props) => props.activeTileColor || theme.Colors.secondary
+        }
     }
   };
 });
 
-const ScheduleYourPickup = ({ edit }) => {
+const UHSelectYourPickUpComp = ({
+  updateSelectedDate,
+  activeTileColor
+}: {
+  updateSelectedDate: (isoDateString: string, slot: string) => void;
+  activeTileColor?: string;
+}) => {
   const [pickupDate, setPickupDate] = useState<any>(new Date());
   const [selectedSlotVal, setSelectedSlotVal] = useState<any>({});
-  const classes = useStyles();
+  const classes = useStyles({ activeTileColor });
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -67,13 +86,7 @@ const ScheduleYourPickup = ({ edit }) => {
       let data = new Date(initialDate);
       let hour = start + Math.random() * (end - start);
       data.setHours(hour);
-      edit.update({
-        customer_order_details: {
-          ...edit.edits.customer_order_details,
-          pickup_time: data.toISOString(),
-          slot: slot
-        }
-      });
+      updateSelectedDate(data.toISOString(), slot);
     },
     [selectedSlotVal, pickupDate]
   );
@@ -106,6 +119,7 @@ const ScheduleYourPickup = ({ edit }) => {
             calendarType="US"
             minDate={new Date()}
             showNeighboringMonth={false}
+            className={classes.calendar}
           />
         </Card>
       </Grid>
@@ -126,4 +140,4 @@ const ScheduleYourPickup = ({ edit }) => {
   );
 };
 
-export default ScheduleYourPickup;
+export default UHSelectYourPickUpComp;

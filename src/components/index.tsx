@@ -21,3 +21,5 @@ export { default as ImageTextComponent } from './ImageTextComponent';
 export { default as UHAccordionComp } from './UHAccordionComp';
 export { default as UHIconTextComp } from './UHIconTextComp';
 export { default as UHOrderPreviewComp } from './UHOrderPreviewComp';
+export { default as ChooseCategoryComponent } from './ChooseCategoryComponent';
+export { default as UHSelectYourPickUpComp } from './UHSelectYourPickUpComp';
