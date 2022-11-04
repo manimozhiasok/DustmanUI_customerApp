@@ -64,7 +64,18 @@
     "lastName": "Last Name",
     "email": "Email",
     "continue": "Continue",
-    "chooseUserType": "Choose User Type"
+    "chooseUserType": "Choose User Type",
+    "companyName":"Company Name",
+    "gstNumber":"GST Number",
+    "mobileNumber":"Mobile Number",
+    "location":"Location",
+    "address":"Address",
+    "contactName":"Contact Name",
+    "website":"Website",
+    "landlineNumber":"Landline Number",
+    "establishedYear":"Established Year",
+    "vehicleOwned":"Vehicle Owned",
+    "pinCode": "Pincode"
   },
 
   "PICKUP": {

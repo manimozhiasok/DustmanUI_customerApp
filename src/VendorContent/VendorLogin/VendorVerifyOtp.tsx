@@ -65,6 +65,7 @@ const VendorVerifyOtp = () => {
       <LoginHeaderComp
         title={t('LOGIN.loginSignUp')}
         subText={t('LOGIN.enterPhoneVerify')}
+        color={theme.Colors.orangePrimary}
       />
       <Grid className={classes.container}>
         <TextInputComponent
@@ -91,7 +92,7 @@ const VendorVerifyOtp = () => {
         />
         <ButtonComp
           buttonText={t('LOGIN.verifyOtp')}
-          backgroundColor={theme.Colors.secondary}
+          backgroundColor={theme.Colors.orangePrimary}
           btnBorderRadius={theme.MetricsSizes.tiny}
           onClickButton={handleVendorLoginButtonClick}
           style={{ margin: theme.spacing(3, 0) }}

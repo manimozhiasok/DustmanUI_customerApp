@@ -82,7 +82,7 @@ export const VendorApproval = (edit) => {
       </Grid>
       <ButtonComp
         buttonText={'Go to My Orders'}
-        backgroundColor={theme.Colors.secondary}
+        backgroundColor={theme.Colors.orangePrimary}
         btnBorderRadius={theme.MetricsSizes.tiny}
         onClickButton={handleContinueClick}
         style={{ margin: theme.spacing(2, 0) }}

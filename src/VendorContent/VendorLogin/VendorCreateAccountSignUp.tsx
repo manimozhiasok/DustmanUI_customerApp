@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { TermsAndConditionComp } from './TermsAndConditionComp';
 import { useEdit } from 'src/hooks/useEdit';
 import { useState } from 'react';
+import { isValidEmail } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -27,7 +28,7 @@ const VendorCreateAccountSignUp = () => {
   const { state }: any = useLocation();
 
   const initialValues = {
-    name: ' ',
+    name: '',
     gst: '',
     full_address: '',
     location: '',
@@ -47,17 +48,29 @@ const VendorCreateAccountSignUp = () => {
     pincode: ''
   };
   const edit = useEdit(initialValues);
-  const RequiredFields = ['name', 'gst', 'mobile_number'];
+  const RequiredFields = [
+    'name',
+    'gst',
+    'mobile_number',
+    'email_id',
+    'location',
+    'full_address',
+    'pincode',
+    'contact_name',
+    'website',
+    'landline_number',
+    'established_year'
+  ];
 
   const handleContinueClick = () => {
-    // if (
-    //   !edit.allFilled(...RequiredFields) ||
-    //   !isValidEmail(edit.getValue('email'))
-    // ) {
-    //   setIsError(true);
-    //   return;
-    // }
-    navigateTo('/dustman/vendor-login/choose-user-type', {
+    if (
+      !edit.allFilled(...RequiredFields) ||
+      !isValidEmail(edit.getValue('email_id'))
+    ) {
+      setIsError(true);
+      return;
+    }
+    navigateTo('/dustman/vendor-login/choose-vehicle-type', {
       state: {
         formEdits: { ...initialValues, ...edit.edits },
         vendorId: state?.vendorId
@@ -70,6 +83,7 @@ const VendorCreateAccountSignUp = () => {
       <LoginHeaderComp
         title={t('LOGIN.signUp')}
         subText={t('LOGIN.userProfile')}
+        color={theme.Colors.orangePrimary}
       />
       <Grid className={classes.container}>
         <TextInputComponent
@@ -80,7 +94,20 @@ const VendorCreateAccountSignUp = () => {
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
           helperText={
-            isError && !edit.allFilled('name') && 'Please Enter your first name'
+            isError && !edit.allFilled('name') && 'Please Enter your name'
+          }
+        />
+        <TextInputComponent
+          inputHeight={66}
+          placeholderText={t('LOGIN.contactName')}
+          value={edit.getValue('contact_name')}
+          onChange={(e) => edit.update({ contact_name: e.target.value })}
+          inputBorderRadius={0}
+          textColor={theme.Colors.primary}
+          helperText={
+            isError &&
+            !edit.allFilled('contact_name') &&
+            'Please Enter your contact name'
           }
         />
         <TextInputComponent
@@ -101,24 +128,24 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ mobile_number: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          // helperText={
-          //   isError &&
-          //   !edit.allFilled('mobile_number') &&
-          //   'Please Enter your last name'
-          // }
+          helperText={
+            isError &&
+            !edit.allFilled('mobile_number') &&
+            'Please Enter your mobile number'
+          }
         />
         <TextInputComponent
           inputHeight={66}
           placeholderText={t('LOGIN.email')}
-          value={edit.getValue('email')}
-          onChange={(e) => edit.update({ email: e.target.value })}
+          value={edit.getValue('email_id')}
+          onChange={(e) => edit.update({ email_id: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          // helperText={
-          //   ((isError && !edit.allFilled('email')) ||
-          //     (isError && !isValidEmail(edit.getValue('email')))) &&
-          //   'Please Enter your valid email address'
-          // }
+          helperText={
+            ((isError && !edit.allFilled('email_id')) ||
+              (isError && !isValidEmail(edit.getValue('email_id')))) &&
+            'Please Enter your valid email address'
+          }
         />
         <TextInputComponent
           inputHeight={66}
@@ -127,11 +154,11 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ location: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          // helperText={
-          //   isError &&
-          //   !edit.allFilled('location') &&
-          //   'Please Enter your last name'
-          // }
+          helperText={
+            isError &&
+            !edit.allFilled('location') &&
+            'Please Enter your location'
+          }
         />
         <TextInputComponent
           inputHeight={66}
@@ -140,25 +167,24 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ full_address: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          // helperText={
-          //   isError &&
-          //   !edit.allFilled('full_address') &&
-          //   'Please Enter your last name'
-          // }
+          helperText={
+            isError &&
+            !edit.allFilled('full_address') &&
+            'Please Enter your full address'
+          }
         />
         <TextInputComponent
           inputHeight={66}
-          placeholderText={t('LOGIN.contactName')}
-          value={edit.getValue('contact_name')}
-          onChange={(e) => edit.update({ contact_name: e.target.value })}
+          placeholderText={t('LOGIN.pinCode')}
+          value={edit.getValue('pincode')}
+          onChange={(e) => edit.update({ pincode: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          // helperText={
-          //   isError &&
-          //   !edit.allFilled('contact_name') &&
-          //   'Please Enter your last name'
-          // }
+          helperText={
+            isError && !edit.allFilled('Pincode') && 'Please Enter your pincode'
+          }
         />
+
         <TextInputComponent
           inputHeight={66}
           placeholderText={t('LOGIN.website')}
@@ -166,11 +192,9 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ website: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          // helperText={
-          //   isError &&
-          //   !edit.allFilled('website') &&
-          //   'Please Enter your last name'
-          // }
+          helperText={
+            isError && !edit.allFilled('website') && 'Please Enter your website'
+          }
         />
         <TextInputComponent
           inputHeight={66}
@@ -179,11 +203,11 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ landline_number: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          // helperText={
-          //   isError &&
-          //   !edit.allFilled('landline_number') &&
-          //   'Please Enter your last name'
-          // }
+          helperText={
+            isError &&
+            !edit.allFilled('landline_number') &&
+            'Please Enter your landline number'
+          }
         />
         <TextInputComponent
           inputHeight={66}
@@ -192,15 +216,15 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ established_year: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          // helperText={
-          //   isError &&
-          //   !edit.allFilled('established_year') &&
-          //   'Please Enter your last name'
-          // }
+          helperText={
+            isError &&
+            !edit.allFilled('established_year') &&
+            'Please Enter your established year'
+          }
         />
         <ButtonComp
           buttonText={t('LOGIN.continue')}
-          backgroundColor={theme.Colors.secondary}
+          backgroundColor={theme.Colors.orangePrimary}
           btnBorderRadius={theme.MetricsSizes.tiny}
           onClickButton={handleContinueClick}
           style={{ margin: theme.spacing(2, 0) }}

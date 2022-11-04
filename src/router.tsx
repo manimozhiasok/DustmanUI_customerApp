@@ -20,7 +20,7 @@ import VendorApplicationRoute from './VendorApplicationRoute';
 import VendorHomePage from './VendorContent/VendorHomePage';
 import VendorCreateAccountSignUp from './VendorContent/VendorLogin/VendorCreateAccountSignUp';
 import VendorVerifyOtp from './VendorContent/VendorLogin/VendorVerifyOtp';
-import VendorChooseUserType from './VendorContent/VendorLogin/VendorChooseUserType';
+import ChooseVehicleType from './VendorContent/VendorLogin/ChooseVehicle';
 import { VendorApproval } from './VendorContent/VendorLogin/VendorApproval';
 
 const routes: RouteObject[] = [
@@ -106,8 +106,8 @@ const routes: RouteObject[] = [
                 element: <VendorCreateAccountSignUp />
               },
               {
-                path: 'choose-user-type',
-                element: <VendorChooseUserType />
+                path: 'choose-vehicle-type',
+                element: <ChooseVehicleType />
               },
               {
                 path: 'vendor-approval',

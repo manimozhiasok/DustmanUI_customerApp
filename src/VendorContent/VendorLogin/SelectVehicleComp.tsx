@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme, Grid, Typography, Box } from '@material-ui/core';
+import { useTheme, Grid, Typography, Box, Checkbox } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
-import { borderRadius } from '@mui/system';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textStyle: {
@@ -25,38 +24,59 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   textContainer: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   textContainer1: {
-    marginTop: 5,
-    paddingLeft: 20
-  },
-  radioContainer: {
-    backgroundColor: theme.Colors.white,
-    borderColor: theme.Colors.greyAccent,
-    padding: 5,
-    border: '1px solid'
+    paddingLeft: theme.spacing(3)
   }
 }));
 
 type Prop = {
-  userTypeItems: any[];
-  selectedVal: number;
-  onClickRadioButton: (val: number) => void;
+  vendorTypeItems: any[];
+  selectedVal: any[];
+  onClickVehicleCheckbox: (val: any) => void;
 };
 
-const SelectUserComp = ({
-  userTypeItems,
+const SelectVehicleComp = ({
+  vendorTypeItems,
   selectedVal,
-  onClickRadioButton
+  onClickVehicleCheckbox
 }: Prop) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const theme = useTheme();
-  const [activeCard, setActiveCard] = useState(0);
+  const [selectedItemId, setSelectedItemId] = useState<string[]>([]);
+
+  const onChange = (itemIds: any[]) => {
+    if (onClickVehicleCheckbox) {
+      onClickVehicleCheckbox(itemIds);
+    } else {
+      setSelectedItemId(itemIds);
+    }
+  };
+
+  const isUnselected = (selId: string) => {
+    const items =
+      selectedItemId.length &&
+      selectedItemId.filter((itemId) => selId !== itemId);
+
+    if (items.length < selectedItemId.length) {
+      onChange(items);
+      return true;
+    }
+    return false;
+  };
+
+  const handleOnClick = (itemId: string) => {
+    if (isUnselected(itemId)) {
+      return;
+    }
+    onChange([...selectedItemId, itemId]);
+  };
 
   useEffect(() => {
-    setActiveCard(selectedVal);
+    setSelectedItemId(selectedVal);
   }, [selectedVal]);
 
   return (
@@ -64,20 +84,20 @@ const SelectUserComp = ({
       <Typography variant="h4">
         Provide your available vehicle details to transport the trash.
       </Typography>
-      {userTypeItems.map((item, index) => {
+      {vendorTypeItems.map((item, index) => {
+        const findActiveImage: number = selectedItemId.length
+          ? selectedItemId.findIndex((selId) => selId === item.id)
+          : -1;
+        const isActive: boolean = findActiveImage !== -1;
         return (
           <Grid
             className={classes.boxMainContainer}
             key={index}
             style={{
               background:
-                activeCard === item.id
+                selectedItemId === item.id
                   ? 'linear-gradient(rgba(239, 71, 35, 0.2),rgba(246, 141, 31, 0.2))'
-                  : theme.Colors.whiteGrey,
-              border:
-                activeCard === item.id
-                  ? `1px solid rgba(107, 176, 67, 0.2)`
-                  : 'none'
+                  : theme.Colors.whiteGrey
             }}
           >
             <Grid className={classes.textContainer}>
@@ -92,22 +112,15 @@ const SelectUserComp = ({
                 }}
               />
               <Typography className={classes.textContainer1}>
-                {item.text}
+                {item.name}
               </Typography>
             </Grid>
-            <Grid
-              className={classes.radioContainer}
-              onClick={() => onClickRadioButton(item.id)}
-            >
-              <Box
-                sx={{ height: 12, width: 12 }}
-                style={{
-                  backgroundColor:
-                    activeCard === item.id
-                      ? theme.Colors.secondary
-                      : theme.Colors.white
-                }}
-              ></Box>
+            <Grid>
+              <Checkbox
+                style={{ color: theme.Colors.orangePrimary }}
+                onChange={() => handleOnClick(item.id)}
+                checked={isActive}
+              />
             </Grid>
           </Grid>
         );
@@ -116,4 +129,4 @@ const SelectUserComp = ({
   );
 };
 
-export default React.memo(SelectUserComp);
+export default React.memo(SelectVehicleComp);

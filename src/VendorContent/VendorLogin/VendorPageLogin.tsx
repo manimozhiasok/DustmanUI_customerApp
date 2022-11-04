@@ -58,6 +58,7 @@ const VendorPageLogin = () => {
       <LoginHeaderComp
         title={t('LOGIN.loginSignUp')}
         subText={t('LOGIN.enterPhoneNumber')}
+        color={theme.Colors.orangePrimary}
       />
       <Grid className={classes.container}>
         <TextInputComponent
@@ -75,7 +76,7 @@ const VendorPageLogin = () => {
         />
         <ButtonComp
           buttonText={t('LOGIN.next')}
-          backgroundColor={theme.Colors.secondary}
+          backgroundColor={theme.Colors.orangePrimary}
           btnBorderRadius={theme.MetricsSizes.tiny}
           onClickButton={handleVendorLoginButtonClick}
           style={{ margin: theme.spacing(2, 0) }}
