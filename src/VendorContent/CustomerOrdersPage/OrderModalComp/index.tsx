@@ -6,9 +6,13 @@ import {
   makeStyles,
   Typography
 } from '@material-ui/core';
-import ListTextItem from 'src/components/ListTextItem';
 import { Image, Phone, Scales, MapPin, DateIcon } from 'src/Assets';
-import { ButtonComp, DialogContentDetails, Heading } from 'src/components';
+import {
+  ButtonComp,
+  DialogContentDetails,
+  Heading,
+  UHIconTextComp
+} from 'src/components';
 import { useTranslation } from 'react-i18next';
 import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 import { getDateFormat } from 'src/Utils';
@@ -92,7 +96,7 @@ const OrderModalComp = (props: Props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <ListTextItem icon={MapPin} value={orderData?.address} />
+        <UHIconTextComp icon={MapPin} value={orderData?.address} />
       </Grid>
       {isCompletedOrder && (
         <>
@@ -141,16 +145,16 @@ const OrderModalComp = (props: Props) => {
       )}
       <Grid item xs={12} container>
         <Grid item xs={4}>
-          <ListTextItem
+          <UHIconTextComp
             icon={Phone}
             value={orderData?.registered_mobile_number?.toString().substring(2)}
           />
         </Grid>
         <Grid item xs>
-          <ListTextItem icon={Scales} value={orderData?.quantity_kg} />
+          <UHIconTextComp icon={Scales} value={orderData?.quantity_kg} />
         </Grid>
         <Grid item xs={12}>
-          <ListTextItem
+          <UHIconTextComp
             icon={Image}
             firstImg={
               <img

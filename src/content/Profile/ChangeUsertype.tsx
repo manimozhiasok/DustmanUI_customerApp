@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 const data = [
-  { label: 'English', value: 1 },
-  { label: 'தமிழ்', value: 2 },
-  { label: 'Hindi', value: 3 }
+  { id: 1, label: 'Home', value: 1 },
+  { id: 2, label: 'Commercial', value: 2 },
+  { id: 3, label: 'Industry', value: 3 }
 ];
 
 export default function ChangeLanguage() {

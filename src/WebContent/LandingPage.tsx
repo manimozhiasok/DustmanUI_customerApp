@@ -132,7 +132,6 @@ function LandingPage() {
 
   return (
     <>
-      <div className="backfill"></div>
       <div>
         {/* landing1  */}
         <div className="landing1">

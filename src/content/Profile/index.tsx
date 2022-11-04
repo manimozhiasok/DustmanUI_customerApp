@@ -4,18 +4,26 @@ import { Grid, Theme, Typography, useTheme } from '@material-ui/core';
 import {
   CompletedOrdersIcon,
   PendingOrdersIcon,
-  ConfirmedOrdersIcon
+  ConfirmedOrdersIcon,
+  AvatarCustomer
 } from 'src/Assets/Images';
 import ProfileAddressModel from './profileAddressModel';
 import { useTranslation } from 'react-i18next';
 import { ORIENTATION, PROFILE_TAB_VALUES } from 'src/Config/constant';
-import { ListItemCell, UHAccordionComp, UHTabComponent } from 'src/components';
+import {
+  ListItemCell,
+  UHAccordionComp,
+  UHIconTextComp,
+  UHTabComponent
+} from 'src/components';
 import ProfileContent from './profileContent';
 import ChangeLanguage from './ChangeLanguage';
 import ChangeUsertype from './ChangeUsertype';
 import useUserInfo from 'src/hooks/useUserInfo';
 import { Help, Outline, SignOut, Translate, UserSwitch } from 'src/Assets';
 import { ChevronRight, ExpandMore } from '@material-ui/icons';
+import { UHIconTextProps } from 'src/components/UHIconTextComp';
+import { useNavigate } from 'react-router';
 
 const useStyles = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -71,22 +79,30 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 64
   },
   textStyle: {
-    marginLeft: theme.spacing(2.5),
     fontSize: theme.MetricsSizes.small_xx + 1,
     color: theme.Colors.mediumGrey,
     fontWeight: theme.fontWeight.bold
   }
 }));
 
-const RenderIconText = ({ image, text }) => {
+type RenderIconTextProp = UHIconTextProps & {
+  image?: any;
+  text?: string;
+  renderDetail?: () => JSX.Element;
+};
+
+const RenderIconText = (props: RenderIconTextProp) => {
+  const { image, text, renderDetail, ...rest } = props;
   const classes = useStyles();
+  const renderComponent = () => {
+    if (renderDetail) {
+      return renderDetail();
+    }
+    return <Typography className={classes.textStyle}>{text}</Typography>;
+  };
+
   return (
-    <Grid container alignItems="center">
-      <img src={image} alt={'image'} />
-      <Typography className={classes.textStyle} component="div">
-        {text}
-      </Typography>
-    </Grid>
+    <UHIconTextComp icon={image} renderComponent={renderComponent} {...rest} />
   );
 };
 
@@ -94,6 +110,7 @@ function Profile() {
   const classes = useStyles();
   const theme = useTheme();
   const { userAddressDetails, userDetails } = useUserInfo();
+  const navigateTo = useNavigate();
   const [selectedTab, setSelectedTab] = useState<number>(
     PROFILE_TAB_VALUES.myAccount
   );
@@ -130,7 +147,11 @@ function Profile() {
       accContentDetail: () => <ProfileContent />,
       renderAccordionTitle: () => (
         <ListItemCell
-          avatarImg={userDetails?.image_url}
+          avatarImg={
+            userDetails?.image_url !== ''
+              ? userDetails?.image_url
+              : AvatarCustomer
+          }
           title={userDetails?.first_name}
           subTitle={userDetails?.email}
           avatarClassNameStyles={classes.avatarStyle}
@@ -167,18 +188,9 @@ function Profile() {
   ];
 
   const staticContents = [
-    {
-      text: t('PROFILE.help'),
-      image: Help
-    },
-    {
-      text: t('PROFILE.about'),
-      image: Outline
-    },
-    {
-      text: t('PROFILE.logout'),
-      image: SignOut
-    }
+    { id: 1, text: t('PROFILE.help'), image: Help },
+    { id: 2, text: t('PROFILE.about'), image: Outline },
+    { id: 3, text: t('PROFILE.logout'), image: SignOut }
   ];
 
   const renderExpandIcons = (isActiveAccordion: boolean) => {
@@ -186,6 +198,13 @@ function Profile() {
       return <ExpandMore />;
     } else {
       return <ChevronRight />;
+    }
+  };
+
+  const handleClick = (id: number) => {
+    if (id === 3) {
+      localStorage.removeItem('customerId');
+      navigateTo('/dustman', { replace: true });
     }
   };
 
@@ -198,7 +217,6 @@ function Profile() {
           accordionOuterContainerClassName={classes.accordionProfileStyle}
           isBorder={true}
           customActiveAccItem={[selectedTab]}
-          expanded={selectedTab === PROFILE_TAB_VALUES.myAccount}
           renderExpandIcons={renderExpandIcons}
         />
         <Grid className={classes.tabContentEachContainer}>
@@ -213,7 +231,7 @@ function Profile() {
               <Grid
                 key={index}
                 className={classes.accordionStaticContentStyle}
-                component="div"
+                onClick={() => handleClick(item?.id)}
               >
                 <RenderIconText image={item?.image} text={item?.text} />
               </Grid>

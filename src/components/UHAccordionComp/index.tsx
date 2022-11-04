@@ -58,16 +58,10 @@ const UHAccordionComp = (props: Props) => {
   let activeItem = customActiveAccItem ?? [];
 
   const onOpen = (id: string | number) => {
-    if (activeItem.length) {
-      return;
-    }
     setActiveItemIds([...activeItemIds, id]);
   };
 
   const onClose = (id: string | number) => {
-    if (activeItem.length) {
-      return;
-    }
     if (activeItemIds.includes(id)) {
       const newActiveIds = activeItemIds.filter((activeId) => activeId !== id);
       setActiveItemIds(newActiveIds);

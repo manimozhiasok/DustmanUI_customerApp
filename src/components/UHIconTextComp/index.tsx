@@ -1,49 +1,56 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   makeStyles,
   Theme,
-  useTheme,
   Grid,
-  Typography
+  Typography,
+  GridProps,
+  useTheme
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
-    outerContainer: {
-      marginTop: theme.spacing(1.75)
-    },
     imgContainer: {
       paddingLeft: theme.spacing(1.6)
-    },
-    valueStyle: {
-      marginLeft: theme.spacing(2.4)
     }
   };
 });
 
-type Props = {
+export type UHIconTextProps = GridProps & {
   icon?: any;
   firstImg?: any;
   value?: string;
   secImage?: any;
+  renderComponent?: () => JSX.Element;
+  textContentStyle?: React.CSSProperties;
 };
 
-const ListTextItem = (props: Props) => {
-  const { icon, firstImg, value, secImage } = props;
+const UHIconTextComp = (props: UHIconTextProps) => {
+  const {
+    icon,
+    firstImg,
+    value,
+    secImage,
+    renderComponent,
+    textContentStyle,
+    ...rest
+  } = props;
   const classes = useStyles();
-
-  useEffect(() => {
-    //api call to get data
-  }, []);
+  const theme = useTheme();
 
   return (
-    <Grid container className={classes.outerContainer}>
+    <Grid container {...rest}>
       {icon && (
-        <Grid item>
-          <img src={icon} />
-        </Grid>
+        // <Grid item>
+        <img src={icon} />
+        // </Grid>
       )}
-      <Grid item xs className={classes.valueStyle}>
+      <Grid
+        item
+        xs
+        style={{ marginLeft: theme.spacing(2.4), ...textContentStyle }}
+      >
+        {renderComponent && renderComponent()}
         {value && <Typography variant="h5">{value}</Typography>}
         {firstImg && (
           <Grid
@@ -61,4 +68,4 @@ const ListTextItem = (props: Props) => {
   );
 };
 
-export default ListTextItem;
+export default UHIconTextComp;

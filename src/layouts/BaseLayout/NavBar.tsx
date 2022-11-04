@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useTheme, Theme, makeStyles } from '@material-ui/core';
 import { LoginDrawerContext } from '../../contexts/LoginDrawerContext';
-import { Pathname, useNavigate } from 'react-router';
+import { Pathname, useMatch, useNavigate } from 'react-router';
 import { Logo, DropDown } from 'src/Assets';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
@@ -30,9 +30,16 @@ function NavBar() {
   const handleClickNavItem = (url: Pathname) => {
     navigateTo(url);
   };
+
   const navigationToHome = () => {
     navigateTo('/dustman', { replace: true });
   };
+  const homePage = useMatch('dustman/home');
+  const aboutUs = useMatch('dustman/about-us');
+  const services = useMatch('dustman/services');
+  const gallery = useMatch('dustman/gallery');
+  const contactUs = useMatch('dustman/contact-us');
+
   return (
     <>
       <nav className="navbar">
@@ -48,29 +55,41 @@ function NavBar() {
           <ul className="nav-list" id="navi-list">
             <li className="list-item">
               <a
-                className="current-page"
+                className={homePage && 'current-page'}
                 onClick={() => handleClickNavItem('/dustman/home')}
               >
                 Home
               </a>
             </li>
             <li className="list-item">
-              <a onClick={() => handleClickNavItem('/dustman/about-us')}>
+              <a
+                className={aboutUs && 'current-page'}
+                onClick={() => handleClickNavItem('/dustman/about-us')}
+              >
                 About Us
               </a>
             </li>
             <li className="list-item">
-              <a onClick={() => handleClickNavItem('/dustman/services')}>
+              <a
+                className={services && 'current-page'}
+                onClick={() => handleClickNavItem('/dustman/services')}
+              >
                 Services
               </a>
             </li>
             <li className="list-item">
-              <a onClick={() => handleClickNavItem('/dustman/gallery')}>
+              <a
+                className={gallery && 'current-page'}
+                onClick={() => handleClickNavItem('/dustman/gallery')}
+              >
                 Gallery
               </a>
             </li>
             <li className="list-item">
-              <a onClick={() => handleClickNavItem('/dustman/contact-us')}>
+              <a
+                className={contactUs && 'current-page'}
+                onClick={() => handleClickNavItem('/dustman/contact-us')}
+              >
                 Contact Us
               </a>
             </li>

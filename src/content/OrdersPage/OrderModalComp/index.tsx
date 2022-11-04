@@ -6,9 +6,13 @@ import {
   makeStyles,
   Typography
 } from '@material-ui/core';
-import ListTextItem from 'src/components/ListTextItem';
 import { Image, Phone, Scales, MapPin, DateIcon } from 'src/Assets';
-import { ButtonComp, DialogContentDetails, Heading } from 'src/components';
+import {
+  ButtonComp,
+  DialogContentDetails,
+  Heading,
+  UHIconTextComp
+} from 'src/components';
 import { useTranslation } from 'react-i18next';
 import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 import { getDateFormat } from 'src/Utils';
@@ -31,6 +35,9 @@ const useStyles = makeStyles((theme: Theme) => {
       color: theme.Colors.mediumBlack,
       marginBottom: theme.MetricsSizes.tiny,
       fontWeight: theme.fontWeight.regular
+    },
+    listStyle: {
+      marginTop: theme.spacing(1.75)
     }
   };
 });
@@ -91,8 +98,8 @@ const OrderModalComp = (props: Props) => {
           rightContentFontWeight={theme.fontWeight.regular}
         />
       </Grid>
-      <Grid item xs={12}>
-        <ListTextItem icon={MapPin} value={orderData?.address} />
+      <Grid item xs={12} className={classes.listStyle}>
+        <UHIconTextComp icon={MapPin} value={orderData?.address} />
       </Grid>
       {isCompletedOrder && (
         <>
@@ -125,7 +132,7 @@ const OrderModalComp = (props: Props) => {
                 }`}
               </Typography>
             </Grid>
-            <Grid item style={{ display: 'grid' }}>
+            <Grid item component="div">
               <DateIcon width={18} height={18} />
             </Grid>
             <Grid item>
@@ -140,20 +147,20 @@ const OrderModalComp = (props: Props) => {
         </>
       )}
       <Grid item xs={12} container>
-        <Grid item xs={4}>
-          <ListTextItem
+        <Grid item xs={4} className={classes.listStyle}>
+          <UHIconTextComp
             icon={Phone}
             value={orderData?.registered_mobile_number?.toString().substring(2)}
           />
         </Grid>
         {/* <Grid item xs={6}>
-          <ListTextItem icon={MapTrifold} value={location} />
+          <UHIconTextComp icon={MapTrifold} value={location} />
         </Grid> */}
-        <Grid item xs>
-          <ListTextItem icon={Scales} value={orderData?.quantity_kg} />
+        <Grid item xs className={classes.listStyle}>
+          <UHIconTextComp icon={Scales} value={orderData?.quantity_kg} />
         </Grid>
-        <Grid item xs={12}>
-          <ListTextItem
+        <Grid item xs={12} className={classes.listStyle}>
+          <UHIconTextComp
             icon={Image}
             firstImg={
               <img
