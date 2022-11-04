@@ -19,7 +19,7 @@ function MapComponent() {
     });
   }, []);
   return (
-    <LoadScript googleMapsApiKey="AIzaSyCoMS_1in6qyb6anwcEbYZ4I3SXDgH2AgI">
+    <LoadScript googleMapsApiKey="">
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
         <Marker
           visible={true}
