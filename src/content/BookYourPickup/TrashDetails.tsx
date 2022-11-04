@@ -87,7 +87,12 @@ function TrashDetails({ edit, trashData }: Props) {
             />
             {t('PICKUP.trashPicture')}
           </Grid>
-          <CarouselContent data={uploadedImages} show={4} length={length} />
+          <CarouselContent
+            data={uploadedImages}
+            show={4}
+            length={length}
+            edit={edit}
+          />
         </Grid>
       </Grid>
     </Grid>

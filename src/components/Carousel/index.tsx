@@ -39,7 +39,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: theme.MetricsSizes.tiny_x,
     width: theme.MetricsSizes.large_xx * 2,
     height: theme.MetricsSizes.large_xx * 2,
-    opacity: 1.0
+    opacity: 1.0,
+    cursor: 'pointer'
   },
   gridStyle: {
     paddingLeft: theme.spacing(0.5),
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   iconGrid: {
     width: '100%',
     display: 'flex',
-    zIndex: 1,
+    // zIndex: 1,
     padding: theme.spacing(0, 1),
     height: '90px',
     position: 'absolute',
@@ -86,10 +87,10 @@ export const Carousel = (props: CarouselProp) => {
   );
 };
 
-const CarouselContent = ({ data, show, length }: any) => {
+const CarouselContent = ({ data, show, length, edit }: any) => {
   const classes = useStyles();
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  console.log(edit, '----------edit--------');
   const handleNextClick = () => {
     if (currentIndex < length) {
       if (currentIndex < length - show) {
@@ -104,6 +105,21 @@ const CarouselContent = ({ data, show, length }: any) => {
     }
   };
 
+  function handleClick(index, title) {
+    console.log(index, '-------index---------');
+    console.log('title', title);
+    const newArr = data.findIndex((object) => {
+      return object.image_url === title.image_url;
+    });
+    console.log(newArr);
+    data.splice(newArr, 1);
+    console.log(data);
+    // setSelected(index);
+    // setTitle(title);
+    edit.update({
+      order_images: [data]
+    });
+  }
   return (
     <Grid className={classes.carouselStyle}>
       <Grid className={classes.iconGrid}>
@@ -118,11 +134,13 @@ const CarouselContent = ({ data, show, length }: any) => {
         {data.map((item: { image_url: string }, index: React.Key) => {
           return (
             <Grid key={index} className={classes.gridStyle}>
-              <img
-                src={item.image_url}
-                alt="image not found"
-                className={classes.imageStyle}
-              />
+              <div onClick={() => handleClick(index, item?.image_url)}>
+                <img
+                  src={item?.image_url}
+                  // alt="image not found"
+                  className={classes.imageStyle}
+                />
+              </div>
             </Grid>
           );
         })}
