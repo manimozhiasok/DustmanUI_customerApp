@@ -78,7 +78,7 @@ type OrderCompProp = {
   buttonTwoStyle?: React.CSSProperties;
 };
 
-const OrderPreviewComp = (props: OrderCompProp) => {
+const UHOrderPreviewComp = (props: OrderCompProp) => {
   const {
     orderItems,
     isButtonTwo = false,
@@ -196,4 +196,4 @@ const OrderPreviewComp = (props: OrderCompProp) => {
     </>
   );
 };
-export default OrderPreviewComp;
+export default UHOrderPreviewComp;

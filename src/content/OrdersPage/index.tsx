@@ -12,7 +12,11 @@ import {
   HTTP_STATUSES,
   ORIENTATION
 } from 'src/Config/constant';
-import { UHConfirmModal, UHTabComponent } from 'src/components';
+import {
+  UHConfirmModal,
+  UHOrderPreviewComp,
+  UHTabComponent
+} from 'src/components';
 import {
   CompletedOrdersIcon,
   Confirm,
@@ -20,7 +24,6 @@ import {
   PendingOrdersIcon,
   YetToConfirm
 } from 'src/Assets';
-import OrderPreviewComp from './OrderPreviewComp';
 import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -150,7 +153,7 @@ function OrdersPage() {
 
               return (
                 <Grid key={index}>
-                  <OrderPreviewComp
+                  <UHOrderPreviewComp
                     orderItems={item}
                     handleClickButtonOne={onClickViewDetails}
                     handleClickButtonTwo={onClickCancelButton}

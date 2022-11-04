@@ -20,3 +20,4 @@ export { default as UHTabComponent } from './UHTabComponent';
 export { default as ImageTextComponent } from './ImageTextComponent';
 export { default as UHAccordionComp } from './UHAccordionComp';
 export { default as UHIconTextComp } from './UHIconTextComp';
+export { default as UHOrderPreviewComp } from './UHOrderPreviewComp';
