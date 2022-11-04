@@ -77,7 +77,7 @@ function VendorHomePage() {
             currentTabVal={selectedTab}
             tabContent={tabItems}
             orientation={ORIENTATION.HORIZONTAL}
-            tabIndicatorColor={theme.Colors.secondary}
+            tabIndicatorColor={theme.Colors.orangePrimary}
             tabContainerClassName={classes.tabContainer}
             renderTabContent={renderTabContent}
             onTabChange={onTabChange}

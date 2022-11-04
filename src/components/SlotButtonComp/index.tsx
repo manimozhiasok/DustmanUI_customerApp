@@ -12,6 +12,7 @@ export type TimeSlotDetails = {
 
 type Prop = {
   timeSlotDetails: TimeSlotDetails[];
+  activeButtonColor?: string;
   handleChangeSlot: (slot: TimeSlotDetails) => void;
 };
 
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 const SlotButtonComp = (props: Prop) => {
-  const { timeSlotDetails, handleChangeSlot } = props;
+  const { timeSlotDetails, handleChangeSlot, activeButtonColor } = props;
   const [activeButton, setActiveButton] = useState<any>(0);
   const theme = useTheme();
   const classes = useStyles();
@@ -45,9 +46,14 @@ const SlotButtonComp = (props: Prop) => {
               btnWidth={100}
               buttonFontWeight={theme.fontWeight.regular}
               height={theme.MetricsSizes.large_x}
+              // backgroundColor={
+              //   activeButton === slot.id
+              //     ? theme.Colors.secondary
+              //     : theme.Colors.lightWhiteGrey
+              // }
               backgroundColor={
                 activeButton === slot.id
-                  ? theme.Colors.secondary
+                  ? activeButtonColor 
                   : theme.Colors.lightWhiteGrey
               }
               buttonTextColor={

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Theme, Typography, useTheme } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -30,6 +30,7 @@ const ScheduleYourPickup = ({ edit }) => {
   const [pickupDate, setPickupDate] = useState<any>(new Date());
   const [selectedSlotVal, setSelectedSlotVal] = useState<any>({});
   const classes = useStyles();
+  const theme = useTheme();
   const { t } = useTranslation();
 
   const timeSlotDetails = [
@@ -89,7 +90,7 @@ const ScheduleYourPickup = ({ edit }) => {
 
   return (
     <Grid container spacing={3} className={classes.calendarContainerStyle}>
-      <Grid item xs>
+      <Grid item xs={6}>
         <Card className={classes.cardStyle}>
           <Calendar
             onChange={setPickupDate}
@@ -108,18 +109,17 @@ const ScheduleYourPickup = ({ edit }) => {
           />
         </Card>
       </Grid>
-      <Grid item xs>
+      <Grid item xs={6}>
         <Grid container direction="column">
           <Grid item xs={12}>
             <Typography className={classes.heading}>Slot</Typography>
           </Grid>
-          <Grid item xs={12}>
-            <SlotButtonComp
-              timeSlotDetails={timeSlotDetails}
-              handleChangeSlot={handleChangeSlot}
-              // activeButtonVal={edit.getValue('customer_order_details').slot}
-            />
-          </Grid>
+          <SlotButtonComp
+            timeSlotDetails={timeSlotDetails}
+            handleChangeSlot={handleChangeSlot}
+            activeButtonColor={theme.Colors.secondary}
+            // activeButtonVal={edit.getValue('customer_order_details').slot}
+          />
         </Grid>
       </Grid>
     </Grid>

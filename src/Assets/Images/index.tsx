@@ -47,6 +47,7 @@ import SignOut from './SignOut.svg';
 import Translate from './Translate.svg';
 import UserSwitch from './UserSwitch.svg';
 import { ReactComponent as VectorIcon } from './Vector.svg';
+import CrownIcon from './crown.svg';
 
 export {
   DustmanLogoHorizontal,
@@ -97,5 +98,6 @@ export {
   SignOut,
   Translate,
   UserSwitch,
-  VectorIcon
+  VectorIcon,
+  CrownIcon
 };

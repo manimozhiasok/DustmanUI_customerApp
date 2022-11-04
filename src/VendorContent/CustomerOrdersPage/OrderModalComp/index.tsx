@@ -16,6 +16,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 import { getDateFormat } from 'src/Utils';
+import { CrownIcon } from 'src/Assets';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {

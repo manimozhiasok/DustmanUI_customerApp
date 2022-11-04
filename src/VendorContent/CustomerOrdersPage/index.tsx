@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   selectedTabStyle: {
     color: theme.Colors.whitePure,
-    background: theme.Colors.secondaryOrange,
+    background: theme.Colors.orangePrimary,
     fontWeight: theme.fontWeight.medium
   },
   buttonContainer: {
@@ -134,7 +134,7 @@ function OrdersPage() {
     }
   }, [selectedTab]);
 
-  const onClickCancelButton = (orderId: number) => {
+  const onClickBuyOrderButton = (orderId: number) => {
     const onCancelClick = () => {
       setConfirmModal({ open: false });
     };
@@ -173,7 +173,7 @@ function OrdersPage() {
             orderItems={orderDetails}
             isCancelButton={true}
             onClickViewDetails={onClickViewDetails}
-            onClickCancelButton={onClickCancelButton}
+            onClickCancelButton={onClickBuyOrderButton}
             orderStatus
           />
         </Grid>
@@ -182,6 +182,7 @@ function OrdersPage() {
             <ButtonComp
               buttonText={'BUY ORDERS'}
               buttonFontSize={16}
+              backgroundColor={theme.Colors.orangePrimary}
               variant="contained"
               buttonFontWeight={500}
               btnBorderRadius={105}
@@ -224,7 +225,7 @@ function OrdersPage() {
         <CustomerOrderDialog
           onClose={() => setModalOpen({ open: false })}
           {...modalOpen}
-          onCancelButtonClick={onClickCancelButton}
+          onCancelButtonClick={onClickBuyOrderButton}
         />
       )}
       {confirmModal.open && <UHConfirmModal {...confirmModal} />}

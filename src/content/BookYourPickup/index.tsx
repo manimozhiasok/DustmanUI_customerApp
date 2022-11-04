@@ -21,7 +21,7 @@ import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES, TRASH_CATEGORY_ID } from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import ChooseCategoryComponent from './ChooseCategoryComponent';
+import ChooseCategoryComponent from 'src/components/ChooseCategoryComponent';
 import useUserInfo from 'src/hooks/useUserInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({

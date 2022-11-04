@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Theme, Typography, useTheme } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -30,6 +30,7 @@ const ScheduleYourPickup = ({ edit }) => {
   const [pickupDate, setPickupDate] = useState<any>(new Date());
   const [selectedSlotVal, setSelectedSlotVal] = useState<any>({});
   const classes = useStyles();
+  const theme = useTheme();
   const { t } = useTranslation();
 
   const timeSlotDetails1 = [
@@ -116,6 +117,7 @@ const ScheduleYourPickup = ({ edit }) => {
           <SlotButtonComp
             timeSlotDetails={timeSlotDetails1}
             handleChangeSlot={handleChangeSlot}
+            activeButtonColor={theme.Colors.orangePrimary}
           />
         </Grid>
       </Grid>

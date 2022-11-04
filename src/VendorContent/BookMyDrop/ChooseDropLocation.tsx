@@ -25,6 +25,11 @@ const useStyles = makeStyles((theme: Theme) => {
       fontWeight: theme.fontWeight.medium,
       paddingLeft: theme.spacing(2.3)
     },
+    radio: {
+      '&.MuiRadio-colorSecondary.Mui-checked': {
+        color: theme.Colors.orangePrimary
+      }
+    },
     dividerStyle: {
       marginLeft: theme.MetricsSizes.small_xxx,
       marginTop: theme.MetricsSizes.medium_xx
@@ -81,6 +86,7 @@ const ChooseDropLocation = ({ data, edit }) => {
                         control={
                           <Radio
                           //checked={selectedValue === item.id}
+                          className={classes.radio}
                             style={{ marginTop: '30px' }}
                             onChange={handleChange}
                           />

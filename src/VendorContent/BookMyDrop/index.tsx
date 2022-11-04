@@ -25,7 +25,7 @@ import {
 } from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
-import ChooseCategoryComponent from './ChooseCategoryComponent';
+import ChooseCategoryComponent from 'src/components/ChooseCategoryComponent';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 import ChooseDropLocation from './ChooseDropLocation';
 import DropOrderConfirmation from './DropOrderConfirmation';
@@ -131,6 +131,8 @@ function BookMyDrop() {
           data={trashData}
           InitialItemVal={edit.getValue('order_items')}
           handleChangeItem={handleTrashCatItems}
+          activeBorderColor={theme.Colors.orangePrimary}
+          checkBoxColor={theme.Colors.orangePrimary}
         />
       ),
       tileIcon: ChooseCategoryIcon

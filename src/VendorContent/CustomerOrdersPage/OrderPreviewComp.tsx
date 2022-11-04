@@ -17,7 +17,11 @@ import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
-    checkbox: {},
+    checkbox: {
+      '&.MuiCheckbox-colorSecondary.Mui-checked':{
+        color: theme.Colors.orangePrimary
+      }
+    },
 
     outerContainer: {
       border: '0.5px solid',
@@ -143,12 +147,12 @@ const OrderPreviewComp = ({
                     backgroundColor={theme.Colors.whiteLightGrey}
                     buttonFontSize={theme.MetricsSizes.tiny_xxx}
                     variant="outlined"
-                    buttonTextColor={theme.Colors.secondaryOrange}
+                    buttonTextColor={theme.Colors.orangePrimary}
                     height={theme.MetricsSizes.medium_xx}
                     btnWidth={'110px'}
                     style={{
                       marginRight: theme.spacing(1.25),
-                      borderColor: theme.Colors.secondaryOrange
+                      borderColor: theme.Colors.orangePrimary
                     }}
                     onClickButton={() => onClickViewDetails(item)}
                   />
@@ -160,7 +164,7 @@ const OrderPreviewComp = ({
                             ? 'BUY ORDER'
                             : 'CANCEL'
                         }
-                        backgroundColor={theme.Colors.secondaryOrange}
+                        backgroundColor={theme.Colors.orangePrimary}
                         buttonFontSize={theme.MetricsSizes.tiny_xxx}
                         buttonTextColor={theme.Colors.white}
                         height={theme.MetricsSizes.medium_xx}
