@@ -11,6 +11,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { locationIcon, weightIcon } from 'src/Assets';
 import { ButtonComp, ImageTextComponent } from 'src/components';
+import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -146,12 +147,10 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
                   backgroundColor={theme.Colors.whiteLightGrey}
                   buttonFontSize={theme.MetricsSizes.tiny_xxx}
                   variant="outlined"
-                  buttonTextColor={theme.Colors.secondary}
                   height={theme.MetricsSizes.medium_xx}
                   btnWidth={'110px'}
                   style={{
                     marginRight: theme.spacing(1.25),
-                    borderColor: theme.Colors.secondary,
                     ...buttonOneStyle
                   }}
                   onClickButton={() => handleClickButtonOne(orderItems)}
@@ -160,11 +159,11 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
               {isButtonTwo ? (
                 <ButtonComp
                   buttonText={rightButtonText || 'CANCEL'}
+                  style={buttonTwoStyle}
                   buttonFontSize={theme.MetricsSizes.tiny_xxx}
                   buttonTextColor={theme.Colors.white}
                   height={theme.MetricsSizes.medium_xx}
-                  style={buttonTwoStyle}
-                  btnWidth={'72px'}
+                  btnWidth={'100px'}
                   onClickButton={() =>
                     handleClickButtonTwo(orderItems?.order_id)
                   }
@@ -173,7 +172,7 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
             </Grid>
           </Grid>
         </Grid>
-        {isCheckBox ? (
+        {isCheckBox && CUSTOMER_ORDER_STATUS.New == orderItems.status_id && (
           <Grid item>
             <Checkbox
               className={classes.checkbox}
@@ -182,7 +181,8 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
               }
             />
           </Grid>
-        ) : (
+        )}
+        {orderStatusText && (
           <Grid item>
             <Grid className={classes.status}>
               <Typography className={classes.subText}>

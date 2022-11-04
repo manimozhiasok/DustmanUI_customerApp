@@ -12,14 +12,23 @@ import {
   HTTP_STATUSES,
   ORIENTATION
 } from 'src/Config/constant';
-import { ButtonComp, UHConfirmModal, UHTabComponent } from 'src/components';
+import {
+  ButtonComp,
+  UHConfirmModal,
+  UHOrderPreviewComp,
+  UHTabComponent
+} from 'src/components';
 import {
   CompletedOrdersIcon,
   ConfirmedOrdersIcon,
-  PendingOrdersIcon
+  PendingOrdersIcon,
+  Confirm,
+  YetToConfirm
 } from 'src/Assets';
-import OrderPreviewComp from './OrderPreviewComp';
+
 import toast from 'react-hot-toast';
+import { getDateFormat } from 'src/Utils';
+import { Schedule } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -70,6 +79,7 @@ function OrdersPage() {
   const [confirmModal, setConfirmModal] = useState<any>({
     open: false
   });
+
   const { t } = useTranslation();
 
   const onClickViewDetails = (orderData: any) => {
@@ -169,13 +179,52 @@ function OrdersPage() {
     return (
       <>
         <Grid className={classes.tabContentContainer}>
-          <OrderPreviewComp
-            orderItems={orderDetails}
-            isCancelButton={true}
-            onClickViewDetails={onClickViewDetails}
-            onClickCancelButton={onClickBuyOrderButton}
-            orderStatus
-          />
+          {orderDetails?.length
+            ? orderDetails.map((item, index) => {
+                const { getTime, getDateString } = getDateFormat(
+                  item?.pickup_time
+                );
+                return (
+                  <Grid key={index}>
+                    <UHOrderPreviewComp
+                      orderItems={item}
+                      isButtonOne
+                      isCheckBox
+                      handleClickButtonOne={onClickViewDetails}
+                      handleClickButtonTwo={onClickBuyOrderButton}
+                      orderStatusText={
+                        (item?.status_id === CUSTOMER_ORDER_STATUS.Pending &&
+                          'Yet to Confirm') ||
+                        (item?.status_id === CUSTOMER_ORDER_STATUS.Confirmed &&
+                          `Scheduled on ${getDateString}, ${getTime}`) ||
+                        (item?.status_id == CUSTOMER_ORDER_STATUS.Completed &&
+                          `Delivered on ${getDateString}, ${getTime}`)
+                      }
+                      statusIcon={
+                        item?.status_id === CUSTOMER_ORDER_STATUS.Pending
+                          ? YetToConfirm
+                          : Confirm
+                      }
+                      isButtonTwo={
+                        item?.status_id != CUSTOMER_ORDER_STATUS.Completed
+                      }
+                      rightButtonText={
+                        item?.status_id === CUSTOMER_ORDER_STATUS.New
+                          ? 'BUY ORDER'
+                          : 'CANCEL'
+                      }
+                      buttonTwoStyle={{
+                        background: theme.Colors.orangePrimary
+                      }}
+                      buttonOneStyle={{
+                        border: '0.5px solid #F68B1F',
+                        color: theme.Colors.orangePrimary
+                      }}
+                    />
+                  </Grid>
+                );
+              })
+            : null}
         </Grid>
         <Grid className={classes.buttonContainer}>
           {selectedTab === CUSTOMER_ORDER_STATUS.Pending ? (

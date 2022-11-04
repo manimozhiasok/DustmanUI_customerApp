@@ -12,14 +12,21 @@ import {
   HTTP_STATUSES,
   ORIENTATION
 } from 'src/Config/constant';
-import { UHConfirmModal, UHTabComponent } from 'src/components';
+import {
+  UHConfirmModal,
+  UHOrderPreviewComp,
+  UHTabComponent
+} from 'src/components';
 import {
   CompletedOrdersIcon,
   ConfirmedOrdersIcon,
-  PendingOrdersIcon
+  PendingOrdersIcon,
+  YetToConfirm,
+  Confirm
 } from 'src/Assets';
-import OrderPreviewComp from './OrderPreviewComp';
 import useVendorInfo from 'src/hooks/useVendorInfo';
+import { getDateFormat } from 'src/Utils';
+import toast from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -135,12 +142,47 @@ function OrdersPage() {
   const renderTabContent = () => {
     return (
       <Grid className={classes.tabContentContainer}>
-        <OrderPreviewComp
-          orderItems={orderDetails}
-          isCancelButton={true}
-          onClickViewDetails={onClickViewDetails}
-          onClickCancelButton={onClickCancelButton}
-        />
+        {orderDetails?.length
+          ? orderDetails.map((item, index) => {
+              const { getTime, getDateString } = getDateFormat(
+                item?.pickup_time
+              );
+
+              return (
+                <Grid key={index}>
+                  <UHOrderPreviewComp
+                    orderItems={item}
+                    isButtonOne
+                    handleClickButtonOne={onClickViewDetails}
+                    handleClickButtonTwo={onClickCancelButton}
+                    orderStatusText={
+                      (item?.status_id === CUSTOMER_ORDER_STATUS.Pending &&
+                        'Yet to Confirm') ||
+                      (item?.status_id === CUSTOMER_ORDER_STATUS.Confirmed &&
+                        `Scheduled on ${getDateString}, ${getTime}`) ||
+                      (item?.status_id === CUSTOMER_ORDER_STATUS.Completed &&
+                        `Delivered on ${getDateString}, ${getTime}`)
+                    }
+                    statusIcon={
+                      item?.status_id === CUSTOMER_ORDER_STATUS.Pending
+                        ? YetToConfirm
+                        : Confirm
+                    }
+                    isButtonTwo={
+                      item?.status_id === CUSTOMER_ORDER_STATUS.Pending
+                    }
+                    buttonTwoStyle={{
+                      background: theme.Colors.orangePrimary
+                    }}
+                    buttonOneStyle={{
+                      border: '0.5px solid #F68B1F',
+                      color: theme.Colors.orangePrimary
+                    }}
+                  />
+                </Grid>
+              );
+            })
+          : null}
       </Grid>
     );
   };
