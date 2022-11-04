@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Box, makeStyles, Theme, useTheme } from '@material-ui/core';
 import Footer from './Footer';
 import NavBar from './NavBar';
+// import MapComponent from 'src/content/Map/MapComponent';
 interface BaseLayoutProps {
   children?: ReactNode;
 }
@@ -29,6 +30,8 @@ const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
         }}
       >
         <NavBar />
+
+        {/* <MapComponent /> */}
         {children || <Outlet />}
         <Footer />
       </Box>
