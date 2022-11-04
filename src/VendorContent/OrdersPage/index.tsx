@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   selectedTabStyle: {
     color: theme.Colors.whitePure,
-    background: theme.Colors.secondary,
+    background: theme.Colors.orangePrimary,
     fontWeight: theme.fontWeight.medium
   }
 }));

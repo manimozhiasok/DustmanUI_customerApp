@@ -10,7 +10,12 @@ import {
 } from '@material-ui/core';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Confirm, locationIcon, weightIcon, YetToConfirm } from 'src/Assets';
+import {
+  locationIcon,
+  weightIcon,
+  YetToConfirm,
+  VendorConfirm
+} from 'src/Assets';
 import { ButtonComp, ImageTextComponent } from 'src/components';
 import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 import { getDateFormat } from 'src/Utils';
@@ -18,7 +23,7 @@ import { getDateFormat } from 'src/Utils';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     checkbox: {
-      '&.MuiCheckbox-colorSecondary.Mui-checked':{
+      '&.MuiCheckbox-colorSecondary.Mui-checked': {
         color: theme.Colors.orangePrimary
       }
     },
@@ -199,7 +204,7 @@ const OrderPreviewComp = ({
                     src={
                       item?.status_id === CUSTOMER_ORDER_STATUS.Pending
                         ? YetToConfirm
-                        : Confirm
+                        : VendorConfirm
                     }
                   />
                 </Grid>

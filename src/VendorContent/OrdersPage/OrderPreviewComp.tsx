@@ -16,8 +16,6 @@ import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
-    checkbox: {},
-
     outerContainer: {
       border: '0.5px solid',
       borderColor: theme.Colors.greyDark,
@@ -142,12 +140,12 @@ const OrderPreviewComp = ({
                     backgroundColor={theme.Colors.whiteLightGrey}
                     buttonFontSize={theme.MetricsSizes.tiny_xxx}
                     variant="outlined"
-                    buttonTextColor={theme.Colors.secondary}
+                    buttonTextColor={theme.Colors.orangePrimary}
                     height={theme.MetricsSizes.medium_xx}
                     btnWidth={'110px'}
                     style={{
                       marginRight: theme.spacing(1.25),
-                      borderColor: theme.Colors.secondary
+                      borderColor: theme.Colors.orangePrimary
                     }}
                     onClickButton={() => onClickViewDetails(item)}
                   />
@@ -160,6 +158,7 @@ const OrderPreviewComp = ({
                             : 'CANCEL'
                         }
                         buttonFontSize={theme.MetricsSizes.tiny_xxx}
+                        backgroundColor={theme.Colors.orangePrimary}
                         buttonTextColor={theme.Colors.white}
                         height={theme.MetricsSizes.medium_xx}
                         btnWidth={'100px'}

@@ -41,6 +41,7 @@ import LoginBtmImg from './LoginBtmImg.svg';
 import Date from './Date.svg';
 import YetToConfirm from './yetToConfirm.svg';
 import Confirm from './confirm.svg';
+import VendorConfirm from './VendorConfirm.svg';
 import Help from './Help.svg';
 import Outline from './Outline.svg';
 import SignOut from './SignOut.svg';
@@ -99,5 +100,6 @@ export {
   Translate,
   UserSwitch,
   VectorIcon,
-  CrownIcon
+  CrownIcon,
+  VendorConfirm
 };

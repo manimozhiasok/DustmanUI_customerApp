@@ -179,7 +179,7 @@ const OrderModalComp = (props: Props) => {
         <Grid item xs={12} className={classes.btnStyle}>
           <ButtonComp
             buttonText={t('ORDER.cancelButton')}
-            backgroundColor={theme.Colors.primaryGreen}
+            backgroundColor={theme.Colors.orangePrimary}
             buttonFontSize={theme.MetricsSizes.regular}
             buttonTextColor={theme.Colors.white}
             buttonFontWeight={theme.fontWeight.medium}
