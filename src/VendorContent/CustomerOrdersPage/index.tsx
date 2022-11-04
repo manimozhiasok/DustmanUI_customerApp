@@ -33,7 +33,8 @@ import { Schedule } from '@material-ui/icons';
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
     padding: theme.spacing(6.5, 3, 6.5, 3),
-    background: theme.Colors.whitePure
+    background: theme.Colors.whitePure,
+    position: 'relative'
   },
   outerContainer: {
     margin: theme.spacing(1.75, 0, 1.75, 0),
@@ -57,12 +58,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: theme.fontWeight.medium
   },
   buttonContainer: {
-    position: 'sticky',
-    bottom: 0,
-    zIndex: 1,
+    position: 'absolute',
     left: '50%',
-    display: 'inline-flex',
-    transform: 'translateX(-50%)'
+    bottom: 28
   }
 }));
 
@@ -226,7 +224,7 @@ function OrdersPage() {
               })
             : null}
         </Grid>
-        <Grid className={classes.buttonContainer}>
+        {/* <Grid className={classes.buttonContainer}>
           {selectedTab === CUSTOMER_ORDER_STATUS.Pending ? (
             <ButtonComp
               buttonText={'BUY ORDERS'}
@@ -239,7 +237,7 @@ function OrdersPage() {
               btnWidth={'217px'}
             />
           ) : null}
-        </Grid>
+        </Grid> */}
       </>
     );
   };
@@ -256,6 +254,7 @@ function OrdersPage() {
     <>
       <Grid className={classes.outerContainer}>
         <Grid className={classes.contentContainer}>
+          
           <UHTabComponent
             currentTabVal={selectedTab}
             tabContent={OrdersTabItems}
@@ -268,6 +267,20 @@ function OrdersPage() {
             tabContentClassName={classes.tabContentStyle}
             onTabChange={onTabChange}
           />
+           <Grid className={classes.buttonContainer}>
+          {selectedTab === CUSTOMER_ORDER_STATUS.Pending ? (
+            <ButtonComp
+              buttonText={'BUY ORDERS'}
+              buttonFontSize={16}
+              backgroundColor={theme.Colors.orangePrimary}
+              variant="contained"
+              buttonFontWeight={500}
+              btnBorderRadius={105}
+              height={'48px'}
+              btnWidth={'217px'}
+            />
+          ) : null}
+        </Grid>
         </Grid>
       </Grid>
       {modalOpen.open && (
