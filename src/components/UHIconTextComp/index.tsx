@@ -7,17 +7,26 @@ import {
   GridProps,
   useTheme
 } from '@material-ui/core';
+import { CrownIcon } from 'src/Assets/Images';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
     imgContainer: {
       paddingLeft: theme.spacing(1.6)
+    },
+    blurText: {
+      filter: 'blur(3px)'
+    },
+    clearText: {
+      color: theme.Colors.darkGrey
     }
   };
 });
 
 export type UHIconTextProps = GridProps & {
   icon?: any;
+  isCrown?: boolean;
+  isBlur?: boolean;
   firstImg?: any;
   value?: string;
   secImage?: any;
@@ -33,6 +42,8 @@ const UHIconTextComp = (props: UHIconTextProps) => {
     secImage,
     renderComponent,
     textContentStyle,
+    isCrown,
+    isBlur,
     ...rest
   } = props;
   const classes = useStyles();
@@ -41,9 +52,12 @@ const UHIconTextComp = (props: UHIconTextProps) => {
   return (
     <Grid container {...rest}>
       {icon && (
-        // <Grid item>
-        <img src={icon} />
-        // </Grid>
+        <Grid item>
+          {isCrown && (
+              <img src={CrownIcon} />
+          )}
+            <img src={icon} />
+        </Grid>
       )}
       <Grid
         item
@@ -51,7 +65,14 @@ const UHIconTextComp = (props: UHIconTextProps) => {
         style={{ marginLeft: theme.spacing(2.4), ...textContentStyle }}
       >
         {renderComponent && renderComponent()}
-        {value && <Typography variant="h5">{value}</Typography>}
+        {value && (
+          <Typography
+            variant="h5"
+            className={isBlur ? classes.blurText : classes.clearText}
+          >
+            {value}
+          </Typography>
+        )}
         {firstImg && (
           <Grid
             container

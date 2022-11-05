@@ -90,6 +90,7 @@ declare module '@material-ui/core/styles' {
       whiteGreyLight: string;
       blackPrimaryGrey: string;
       orangePrimary: string;
+      greyNobel: string;
     };
     general: {
       borderRadiusSm: number;
@@ -199,6 +200,7 @@ declare module '@material-ui/core/styles' {
       greyAccent: string;
       whiteGreyLight: string;
       blackPrimaryGrey: string;
+      greyNobel: string;
     };
     general: {
       borderRadiusSm: number;

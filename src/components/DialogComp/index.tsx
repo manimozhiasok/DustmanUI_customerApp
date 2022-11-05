@@ -40,21 +40,25 @@ type DialogProp = {
   rootStyle?: React.CSSProperties;
   children?: React.ReactNode;
   dialogTitleClasses?: any;
+  chipText?: string;
 };
 
 export const DialogTitleComp = ({
   avatarImg,
   dialogTitle,
   onClose,
-  dialogTitleStyle
+  dialogTitleStyle,
+  chipText
 }) => {
   const classes = useStyles();
+
   return (
     <Box className={classes.titleStyle}>
       <ListItemCell
         avatarImg={avatarImg}
         title={dialogTitle}
         titleStyle={dialogTitleStyle}
+        chipText={chipText}
       />
       <Box>
         <CloseIcon onClick={onClose} fontSize="medium" color="disabled" />
@@ -74,7 +78,8 @@ const DialogComp = ({
   dialogClasses,
   dialogTitleClasses,
   dialogTitleStyle,
-  children
+  children,
+  chipText
 }: DialogProp) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -92,6 +97,7 @@ const DialogComp = ({
           avatarImg={avatarImg}
           dialogTitle={dialogTitle}
           onClose={onClose}
+          chipText={chipText}
           dialogTitleStyle={{
             fontWeight: theme.fontWeight.bold,
             fontSize: theme.MetricsSizes.regular_xxx,

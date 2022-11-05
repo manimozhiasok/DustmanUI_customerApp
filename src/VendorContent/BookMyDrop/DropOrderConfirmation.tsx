@@ -7,8 +7,9 @@ import {
 } from '@material-ui/core';
 import { ButtonComp, DialogContentDetails } from 'src/components';
 import { useTranslation } from 'react-i18next';
-import useUserInfo from 'src/hooks/useUserInfo';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 import { getDateFormat } from 'src/Utils';
+import useUserInfo from 'src/hooks/useUserInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -35,7 +36,8 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const { userAddressDetails } = useUserInfo();
+  const { vendorAddressDetails, vendorDetails } = useVendorInfo();
+  const { userDetails } = useUserInfo();
   const timeSlotDetails = [
     {
       id: 1,
@@ -71,8 +73,8 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
 
   const getAddressData =
     (edit.getValue('vendor_order_drop_details')?.dustman_location_id &&
-      userAddressDetails?.length &&
-      userAddressDetails.filter(
+    vendorAddressDetails?.length &&
+    vendorAddressDetails.filter(
         (item) => item.id === edit.getValue('vendor_order_drop_details')?.dustman_location_id
       )) ||
     [];
@@ -108,7 +110,8 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.userName'),
-      value: edit.getValue('name')
+      //value: edit.getValue('name')
+      value: userDetails?.first_name
     },
     { content: t('category'), value: getTrashValue() },
 
@@ -118,7 +121,9 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.mobile'),
-      value: getAddressData[0]?.mobile_number ?? ''
+      //value: getAddressData[0]?.mobile_number ?? ''
+      //value: vendorDetails?.mobile_number ?? ''
+      value: userDetails?.mobile_number ?? ''
     }
   ];
 
@@ -152,6 +157,7 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
           height={theme.MetricsSizes.large_xxx}
           buttonFontWeight={theme.fontWeight.medium}
           onClickButton={handleButtonClick}
+          backgroundColor={theme.Colors.orangePrimary}
         />
       </Grid>
     </Grid>

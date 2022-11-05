@@ -18,7 +18,6 @@ import TrashDetails from './TrashDetails';
 import SelectVehicle from './SelectVehicle';
 import ScheduleYourPickup from './ScheduleYourPickup';
 import PickupAddress from './PickupAddress';
-import OrderConfirmation from './OrderConfirmation';
 import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
@@ -31,6 +30,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import PickupPlace from './PickupPlace';
 import useVendorInfo from 'src/hooks/useVendorInfo';
+import PickupOrderConfirmation from './PickupOrderConfirmation';
 
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
@@ -179,9 +179,9 @@ function BookMyPickup() {
     },
     {
       id: 7,
-      title: t('orderConfirmation'),
+      title: t('pickupOrderConfirmation'),
       accContentDetail: () => (
-        <OrderConfirmation
+        <PickupOrderConfirmation
           edit={edit}
           handleButtonClick={handleCreateVendorOrder}
           trashData={trashData}

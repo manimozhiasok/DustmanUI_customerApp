@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function OrderConfirmation({ edit, handleButtonClick, trashData }) {
+function PickupOrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
@@ -152,10 +152,11 @@ function OrderConfirmation({ edit, handleButtonClick, trashData }) {
           height={theme.MetricsSizes.large_xxx}
           buttonFontWeight={theme.fontWeight.medium}
           onClickButton={handleButtonClick}
+          backgroundColor={theme.Colors.orangePrimary}
         />
       </Grid>
     </Grid>
   );
 }
 
-export default OrderConfirmation;
+export default PickupOrderConfirmation;

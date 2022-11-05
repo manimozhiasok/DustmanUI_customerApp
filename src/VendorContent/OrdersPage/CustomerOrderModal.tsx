@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { DialogComp } from 'src/components';
-import OrderModalComp from './OrderModalComp';
+import { DialogComp, UHOrderModalComponent } from 'src/components';
 import { useTranslation } from 'react-i18next';
+import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -32,15 +32,21 @@ const CustomerOrderModal = (props: Props) => {
 
   return (
     <DialogComp
-      dialogTitle={`Order ${orderData?.order_id}`}
+      dialogTitle={`Order ${orderData?.id}`}
       open={true}
       onClose={onClose}
       dialogClasses={{ paper: classes.dialogPaper }}
       dialogTitleClasses={{ root: classes.dialogTitleRoot }}
+      chipText={orderData?.user_type}
     >
-      <OrderModalComp
+      <UHOrderModalComponent
         orderData={orderData}
         onCancelButtonClick={() => onCancelButtonClick(orderData?.order_id)}
+        isPendingOrder={
+          orderData?.status_id !== CUSTOMER_ORDER_STATUS.Confirmed ||
+          orderData?.user_type !== 'Pickup'
+        }
+        cancelButtonColor={theme.Colors.orangePrimary}
       />
     </DialogComp>
   );

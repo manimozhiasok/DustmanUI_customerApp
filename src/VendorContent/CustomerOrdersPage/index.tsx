@@ -265,6 +265,7 @@ function OrdersPage() {
         <CustomerOrderDialog
           onClose={() => setModalOpen({ open: false })}
           {...modalOpen}
+          selectedTab={selectedTab}
           // onCancelButtonClick={onCancelOrderButton}
         />
       )}

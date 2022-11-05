@@ -45,6 +45,9 @@
   "orders": "ORDER #",
   "chooseDropLocation":"Choose Drop Location",
   "dropOrderConfirmation": "Drop Order Confirmation",
+  "orderCompleted": "Order Completed",
+  "vendorDetails": "Vendor Details",
+  "pickupOrderConfirmation": "PickUp Order Confirmation",
 
   "LOGIN": {
     "loginAndAccept": "By clicking on Login, I accept the ",

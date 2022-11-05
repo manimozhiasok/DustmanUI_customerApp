@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { DialogComp } from 'src/components';
-import OrderModalComp from './OrderModalComp';
+import { DialogComp, UHOrderModalComponent } from 'src/components';
 import { useTranslation } from 'react-i18next';
+import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => {
 
 type Props = {
   onClose: () => void;
-  orderData: any;
+  orderData?: any;
   onCancelButtonClick?: (orderId: number) => void;
 };
 
@@ -30,17 +30,28 @@ const CustomerOrderModal = (props: Props) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
+  const isPendingOrder = (orderData?.status_id === CUSTOMER_ORDER_STATUS.New ||
+
+    orderData?.status_id === CUSTOMER_ORDER_STATUS.Pending);
+    const isConfirmedOrder =
+      orderData?.status_id === CUSTOMER_ORDER_STATUS.Confirmed;
+    const isCompletedOrder =
+      orderData?.status_id === CUSTOMER_ORDER_STATUS.Completed;
+  
   return (
     <DialogComp
-      dialogTitle={`Order ${orderData?.order_id}`}
+      dialogTitle={`Order ${orderData?.order_id} `}
       open={true}
       onClose={onClose}
       dialogClasses={{ paper: classes.dialogPaper }}
       dialogTitleClasses={{ root: classes.dialogTitleRoot }}
     >
-      <OrderModalComp
+      <UHOrderModalComponent
         orderData={orderData}
         onCancelButtonClick={() => onCancelButtonClick(orderData?.order_id)}
+        isPendingOrder={isPendingOrder}
+        isConfirmedOrder={isConfirmedOrder}
+        isCompletedOrder={isCompletedOrder}
       />
     </DialogComp>
   );

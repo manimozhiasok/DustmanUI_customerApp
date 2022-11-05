@@ -13,7 +13,7 @@ export const vendorCustomerOrderService = {
       url: `${Config.BASE_URL}/api/getOrderByVendorLocation/vendor/${vendorId}`,
       method: 'get'
     });
-    // return vendorCustomerOrder.VendorCustomerOrderGet;
+    //return vendorCustomerOrder.VendorCustomerOrderGet;
     return apiRequest(options);
   },
 
@@ -22,7 +22,7 @@ export const vendorCustomerOrderService = {
       url: `${Config.BASE_URL}/api/getAllVendorScheduledOrders/vendor/${vendorId}`,
       method: 'get'
     });
-    // return vendorCustomerOrderScheduled.VendorCustomerOrderGet;
+    //return vendorCustomerOrderScheduled.VendorCustomerOrderGet;
     return apiRequest(options);
   },
 

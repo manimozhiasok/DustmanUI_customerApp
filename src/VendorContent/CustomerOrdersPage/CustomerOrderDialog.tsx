@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { DialogComp } from 'src/components';
-import OrderModalComp from './OrderModalComp';
+import { DialogComp, UHOrderModalComponent } from 'src/components';
 import { useTranslation } from 'react-i18next';
+import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -22,10 +22,11 @@ type Props = {
   onClose: () => void;
   orderData: any;
   onCancelButtonClick?: (orderId: number) => void;
+  selectedTab: number;
 };
 
 const CustomerOrderDialog = (props: Props) => {
-  const { onClose, orderData, onCancelButtonClick } = props;
+  const { onClose, orderData, onCancelButtonClick, selectedTab } = props;
   const theme = useTheme();
   const classes = useStyles();
   const { t } = useTranslation();
@@ -38,9 +39,13 @@ const CustomerOrderDialog = (props: Props) => {
       dialogClasses={{ paper: classes.dialogPaper }}
       dialogTitleClasses={{ root: classes.dialogTitleRoot }}
     >
-      <OrderModalComp
+      <UHOrderModalComponent
         orderData={orderData}
         onCancelButtonClick={() => onCancelButtonClick(orderData?.order_id)}
+        isBlur={orderData?.status_id === CUSTOMER_ORDER_STATUS.New}
+        isCrown={orderData?.status_id === CUSTOMER_ORDER_STATUS.New}
+        isPendingOrder={orderData?.status_id !== CUSTOMER_ORDER_STATUS.Completed}
+        cancelButtonColor={theme.Colors.orangePrimary}
       />
     </DialogComp>
   );

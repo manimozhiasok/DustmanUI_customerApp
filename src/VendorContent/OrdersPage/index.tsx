@@ -5,7 +5,6 @@ import { Grid } from '@material-ui/core';
 import CustomerOrderModal from './CustomerOrderModal';
 import { API_SERVICES } from 'src/Services';
 import { useTranslation } from 'react-i18next';
-import useUserInfo from 'src/hooks/useUserInfo';
 import {
   CONFIRM_MODAL,
   CUSTOMER_ORDER_STATUS,

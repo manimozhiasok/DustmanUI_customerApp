@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme: Theme) => {
       fontSize: theme.MetricsSizes.tiny_xx,
       color: theme.Colors.blackPrimary,
       marginTop: theme.MetricsSizes.tiny_x
+    },
+    radio: {
+      marginTop: theme.MetricsSizes.medium_xx,
+      '&.MuiRadio-colorSecondary.Mui-checked': {
+        color: theme.Colors.orangePrimary
+      }
     }
   };
 });
@@ -62,7 +68,7 @@ const PickUpAddressComponent = ({
                     id={item.id}
                     control={
                       <Radio
-                        style={{ marginTop: '30px' }}
+                        className={classes.radio}
                         onChange={handleChange}
                       />
                     }

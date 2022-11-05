@@ -1,4 +1,4 @@
-import { Avatar, Badge, Grid, Typography } from '@material-ui/core';
+import { Avatar, Badge, Chip, Grid, Typography } from '@material-ui/core';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -18,6 +18,19 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       padding: theme.spacing(1, 0),
       color: theme.Colors.white
     }
+  },
+  chipAlign: {
+    paddingLeft: theme.spacing(1),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  chipStyle: {
+    color: theme.Colors.greyNobel,
+    fontSize: theme.MetricsSizes.small_x,
+    fontWeight: theme.fontWeight.regular,
+    borderColor: theme.Colors.whiteGreyLight,
+    border: '1px solid'
   }
 }));
 type Props = {
@@ -30,6 +43,9 @@ type Props = {
   isBadgeEnable?: boolean;
   listStyle?: React.CSSProperties;
   subTitleStyle?: React.CSSProperties;
+  chipVariant?: any;
+  chipSize?: any;
+  chipText?: string;
 };
 
 const ListItemCell = (props: Props) => {
@@ -45,7 +61,10 @@ const ListItemCell = (props: Props) => {
     titleStyle,
     isBadgeEnable = false,
     listStyle,
-    subTitleStyle
+    subTitleStyle,
+    chipVariant,
+    chipSize,
+    chipText
   } = props;
 
   return (
@@ -78,6 +97,16 @@ const ListItemCell = (props: Props) => {
           >
             {title}
           </Typography>
+          {chipText && (
+            <Grid className={classes.chipAlign}>
+              <Chip
+                label={chipText}
+                size={chipSize || 'small'}
+                variant= {chipVariant || 'outlined'}
+                className={classes.chipStyle}
+              />
+            </Grid>
+          )}
           {isBadgeEnable && (
             <Badge
               overlap="circular"

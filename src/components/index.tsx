@@ -23,3 +23,4 @@ export { default as UHIconTextComp } from './UHIconTextComp';
 export { default as UHOrderPreviewComp } from './UHOrderPreviewComp';
 export { default as ChooseCategoryComponent } from './ChooseCategoryComponent';
 export { default as UHSelectYourPickUpComp } from './UHSelectYourPickUpComp';
+export { default as UHOrderModalComponent } from './UHOrderModalComponent';

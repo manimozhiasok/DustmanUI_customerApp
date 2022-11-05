@@ -14,7 +14,6 @@ import {
   UHIconTextComp
 } from 'src/components';
 import { useTranslation } from 'react-i18next';
-import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -45,10 +44,27 @@ const useStyles = makeStyles((theme: Theme) => {
 type Props = {
   orderData: any;
   onCancelButtonClick?: () => void;
+  cancelButtonColor?: string;
+  headingColor?: string;
+  isCrown?: any;
+  isBlur?: any;
+  isCompletedOrder?: any;
+  isConfirmedOrder?: any;
+  isPendingOrder?: any;
 };
 
-const OrderModalComp = (props: Props) => {
-  const { orderData, onCancelButtonClick } = props;
+const UHOrderModalComponent = (props: Props) => {
+  const {
+    orderData,
+    onCancelButtonClick,
+    cancelButtonColor,
+    headingColor,
+    isCrown,
+    isBlur,
+    isPendingOrder,
+    isConfirmedOrder,
+    isCompletedOrder
+  } = props;
   const theme = useTheme();
   const classes = useStyles();
   const { t } = useTranslation();
@@ -72,11 +88,6 @@ const OrderModalComp = (props: Props) => {
       value: 'evening'
     }
   ];
-  const isPendingOrder = orderData?.status_id === CUSTOMER_ORDER_STATUS.Pending;
-  const isConfirmedOrder =
-    orderData?.status_id === CUSTOMER_ORDER_STATUS.Confirmed;
-  const isCompletedOrder =
-    orderData?.status_id === CUSTOMER_ORDER_STATUS.Completed;
 
   const contentDetails = [
     { content: t('category'), value: orderData?.order_items.toString() },
@@ -99,7 +110,12 @@ const OrderModalComp = (props: Props) => {
         />
       </Grid>
       <Grid item xs={12} className={classes.listStyle}>
-        <UHIconTextComp icon={MapPin} value={orderData?.address} />
+        <UHIconTextComp
+          isCrown={isCrown}
+          isBlur={isBlur}
+          icon={MapPin}
+          value={orderData?.address}
+        />
       </Grid>
       {isCompletedOrder && (
         <>
@@ -108,10 +124,10 @@ const OrderModalComp = (props: Props) => {
           </Grid>
           <Grid item xs={12}>
             <Heading
-              headingText={'Order Completed'}
+              headingText={t('orderCompleted')}
               headerFontSize={theme.MetricsSizes.regular_xxx}
               headerFontWeight={theme.fontWeight.bold}
-              headingColor={theme.Colors.secondary}
+              headingColor={headingColor || theme.Colors.secondary}
             />
           </Grid>
           <Grid
@@ -147,15 +163,17 @@ const OrderModalComp = (props: Props) => {
         </>
       )}
       <Grid item xs={12} container>
-        <Grid item xs={4} className={classes.listStyle}>
+        <Grid item xs={6} className={classes.listStyle}>
           <UHIconTextComp
             icon={Phone}
+            isCrown={isCrown}
+            isBlur={isBlur}
             value={orderData?.registered_mobile_number?.toString().substring(2)}
           />
         </Grid>
-        {/* <Grid item xs={6}>
-          <UHIconTextComp icon={MapTrifold} value={location} />
-        </Grid> */}
+        {/* <Grid item xs={6} className={classes.listStyle}>                // Future Use
+            <UHIconTextComp isCrown={isCrown} icon={MapTrifold} value={'location'} />
+          </Grid> */}                 
         <Grid item xs className={classes.listStyle}>
           <UHIconTextComp icon={Scales} value={orderData?.quantity_kg} />
         </Grid>
@@ -185,7 +203,7 @@ const OrderModalComp = (props: Props) => {
         <Grid item xs={12} className={classes.btnStyle}>
           <ButtonComp
             buttonText={t('ORDER.cancelButton')}
-            backgroundColor={theme.Colors.primaryGreen}
+            backgroundColor={cancelButtonColor || theme.Colors.secondary}
             buttonFontSize={theme.MetricsSizes.regular}
             buttonTextColor={theme.Colors.white}
             buttonFontWeight={theme.fontWeight.medium}
@@ -203,10 +221,10 @@ const OrderModalComp = (props: Props) => {
           </Grid>
           <Grid item xs={12}>
             <Heading
-              headingText={'Vendor Details'}
+              headingText={t('vendorDetails')}
               headerFontSize={theme.MetricsSizes.regular_xxx}
               headerFontWeight={theme.fontWeight.bold}
-              headingColor={theme.Colors.secondary}
+              headingColor={headingColor || theme.Colors.secondary}
             />
           </Grid>
           <Grid
@@ -254,4 +272,4 @@ const OrderModalComp = (props: Props) => {
   );
 };
 
-export default OrderModalComp;
+export default UHOrderModalComponent;

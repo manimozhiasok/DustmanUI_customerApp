@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => {
       paddingLeft: theme.spacing(2.3)
     },
     radio: {
+      marginTop: theme.MetricsSizes.medium_xx,
       '&.MuiRadio-colorSecondary.Mui-checked': {
         color: theme.Colors.orangePrimary
       }
@@ -45,19 +46,10 @@ const useStyles = makeStyles((theme: Theme) => {
 const ChooseDropLocation = ({ data, edit }) => {
   const { vendorAddressDetails } = useVendorInfo();
   const [selectedValue, setSelectedValue] = useState(0);
-  const [checked, setChecked] = useState();
   const classes = useStyles();
 
   const handleChange = (event: any, check) => {
     setSelectedValue(parseInt(event.target.value));
-    console.log('id',event.target);
-    
-    //setSelectedValue(event.target.value);
-
-    console.log('event', event.target.value);
-    setChecked(check)
-    console.log('hi', selectedValue);
-    
     edit.update({
       order_address_id: parseInt(event.target.value)
     });
@@ -66,9 +58,12 @@ const ChooseDropLocation = ({ data, edit }) => {
   return (
     <Grid container>
       <RadioGroup>
-        {data?.length ? data.map((item, index) => {
-        {/* {vendorAddressDetails?.length
-          ? vendorAddressDetails.map((item, index) => { */}
+        {data?.length
+          ? data.map((item, index) => {
+              {
+                /* {vendorAddressDetails?.length
+          ? vendorAddressDetails.map((item, index) => { */
+              }
               return (
                 <>
                   <Grid container key={index}>
@@ -85,9 +80,8 @@ const ChooseDropLocation = ({ data, edit }) => {
                         id={item.id}
                         control={
                           <Radio
-                          //checked={selectedValue === item.id}
-                          className={classes.radio}
-                            style={{ marginTop: '30px' }}
+                            //checked={selectedValue === item.id}
+                            className={classes.radio}
                             onChange={handleChange}
                           />
                         }
