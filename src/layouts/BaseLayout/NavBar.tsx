@@ -2,7 +2,10 @@ import { useContext } from 'react';
 import { useTheme, Theme, makeStyles } from '@material-ui/core';
 import { LoginDrawerContext } from '../../contexts/LoginDrawerContext';
 import { Pathname, useMatch, useNavigate } from 'react-router';
-import { Logo, DropDown } from 'src/Assets';
+import { Logo, DropDown, UserAvatarIcon } from 'src/Assets';
+import useVendorInfo from 'src/hooks/useVendorInfo';
+import useUserInfo from 'src/hooks/useUserInfo';
+import { ListItemCell } from 'src/components';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 function NavBar() {
@@ -11,6 +14,8 @@ function NavBar() {
   const navigateTo = useNavigate();
   const { toggleLoginDrawer, isLoginDrawerOpen } =
     useContext(LoginDrawerContext);
+  const { vendorDetails } = useVendorInfo();
+  const { userDetails } = useUserInfo();
 
   const handleCustomerButtonClick = () => {
     toggleLoginDrawer();
@@ -39,6 +44,8 @@ function NavBar() {
   const services = useMatch('dustman/services');
   const gallery = useMatch('dustman/gallery');
   const contactUs = useMatch('dustman/contact-us');
+  const customerHome = useMatch('/dustman/customer-home/customer-info');
+  const vendorHome = useMatch('/dustman/vendor-home/vendor-info');
 
   return (
     <>
@@ -95,20 +102,39 @@ function NavBar() {
             </li>
           </ul>
           <div className="empty"></div>
-          <div className="login-item">
-            <button
-              className="login-btn"
-              id="login-btn"
-              onClick={showLoginOptions}
-            >
-              Log in
-              <img src={DropDown} />
-            </button>
-            <div className="login-list" id="login-list">
-              <a onClick={handleCustomerButtonClick}>Customer</a>
-              <a onClick={handleVendorButtonClick}>Vendor</a>
+          {customerHome || vendorHome ? (
+            <div>
+              {(customerHome && (
+                <ListItemCell
+                  avatarImg={userDetails?.image_url || UserAvatarIcon}
+                  title={userDetails?.first_name}
+                  titleStyle={{ fontSize: theme.MetricsSizes.small_xxx }}
+                />
+              )) ||
+                (vendorHome && (
+                  <ListItemCell
+                    avatarImg={vendorDetails?.image_url || UserAvatarIcon}
+                    title={vendorDetails?.contact_name}
+                    titleStyle={{ fontSize: theme.MetricsSizes.small_xxx }}
+                  />
+                ))}
             </div>
-          </div>
+          ) : (
+            <div className="login-item">
+              <button
+                className="login-btn"
+                id="login-btn"
+                onClick={showLoginOptions}
+              >
+                Log in
+                <img src={DropDown} />
+              </button>
+              <div className="login-list" id="login-list">
+                <a onClick={handleCustomerButtonClick}>Customer</a>
+                <a onClick={handleVendorButtonClick}>Vendor</a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
     </>

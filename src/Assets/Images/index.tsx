@@ -54,6 +54,7 @@ import { ReactComponent as VectorIcon } from './Vector.svg';
 import CrownIcon from './crown.svg';
 import confirmVendor from './confirmVendor.svg';
 import yetToConfirmVendor from './yetToConfirmVendor.svg';
+import UserAvatarIcon from './UserAvatarIcon.svg';
 
 export {
   DustmanLogoHorizontal,
@@ -110,5 +111,6 @@ export {
   VendorLoginImage,
   CheckImageVendor,
   confirmVendor,
-  yetToConfirmVendor
+  yetToConfirmVendor,
+  UserAvatarIcon
 };
