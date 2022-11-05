@@ -11,8 +11,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { locationIcon, weightIcon } from 'src/Assets';
 import { ButtonComp, ImageTextComponent } from 'src/components';
+type StyleProp = {
+  checkBoxColor?: string;
+};
 
-const useStyles = makeStyles<Theme>((theme: Theme) =>
+const useStyles = makeStyles<Theme, StyleProp>((theme: Theme) =>
   createStyles({
     outerContainer: {
       border: '0.5px solid',
@@ -58,6 +61,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     imageStyle: {
       width: '100px',
       height: '100px'
+    },
+    checkbox: {
+      '&.MuiCheckbox-colorSecondary.Mui-checked': {
+        backgroundColor: theme.Colors.white,
+        color: (prop) => prop.checkBoxColor || theme.Colors.orangePrimary
+      }
     }
   })
 );
@@ -79,6 +88,7 @@ type OrderCompProp = {
   isButtonThree?: boolean;
   buttonThreeText?: string;
   buttonThreeStyle?: React.CSSProperties;
+  checkBoxColor?: string;
   handleClickButtonThree?: (orderData: any) => void;
 };
 
@@ -100,9 +110,10 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
     isButtonThree,
     buttonThreeText,
     buttonThreeStyle,
+    checkBoxColor,
     handleClickButtonThree
   } = props;
-  const classes = useStyles();
+  const classes = useStyles({ checkBoxColor });
   const { t } = useTranslation();
   const theme = useTheme();
 
@@ -125,7 +136,7 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
           <Grid item className={classes.contentContainer}>
             <Typography className={classes.subText}>
               {t('orders')}
-              {orderItems?.order_id}
+              {orderItems?.id}
             </Typography>
             <Grid style={{ display: 'flex', alignItems: 'center' }}>
               <Typography className={classes.category}>

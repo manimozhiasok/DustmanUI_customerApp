@@ -52,6 +52,8 @@ import Translate from './Translate.svg';
 import UserSwitch from './UserSwitch.svg';
 import { ReactComponent as VectorIcon } from './Vector.svg';
 import CrownIcon from './crown.svg';
+import confirmVendor from './confirmVendor.svg';
+import yetToConfirmVendor from './yetToConfirmVendor.svg';
 
 export {
   DustmanLogoHorizontal,
@@ -106,5 +108,7 @@ export {
   CrownIcon,
   VendorConfirm,
   VendorLoginImage,
-  CheckImageVendor
+  CheckImageVendor,
+  confirmVendor,
+  yetToConfirmVendor
 };

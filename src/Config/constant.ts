@@ -24,6 +24,11 @@ export const CUSTOMER_STATUS = {
   3: 'Completed',
   4: 'Cancelled'
 };
+export const VENDOR_ORDER_STATUS={
+  Pending:0,
+  Scheduled:2,
+  Completed:3
+}
 
 export const CUSTOMER_ORDER_STATUS = {
   Pending: 0,

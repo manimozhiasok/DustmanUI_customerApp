@@ -10,7 +10,8 @@ import {
   CONFIRM_MODAL,
   CUSTOMER_ORDER_STATUS,
   HTTP_STATUSES,
-  ORIENTATION
+  ORIENTATION,
+  VENDOR_ORDER_STATUS
 } from 'src/Config/constant';
 import {
   UHConfirmModal,
@@ -21,8 +22,8 @@ import {
   CompletedOrdersIcon,
   ConfirmedOrdersIcon,
   PendingOrdersIcon,
-  YetToConfirm,
-  Confirm
+  yetToConfirmVendor,
+  confirmVendor
 } from 'src/Assets';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 import { getDateFormat } from 'src/Utils';
@@ -61,7 +62,7 @@ function OrdersPage() {
   const theme = useTheme();
   const { vendorDetails } = useVendorInfo();
   const [selectedTab, setSelectedTab] = useState<number>(
-    CUSTOMER_ORDER_STATUS.Pending
+    VENDOR_ORDER_STATUS.Pending
   );
   const [orderDetails, setOrderDetails] = useState([]);
   const [modalOpen, setModalOpen] = useState<any>({ open: false });
@@ -97,7 +98,7 @@ function OrdersPage() {
 
   const fetchData = useCallback(async () => {
     const response: any =
-      await API_SERVICES.orderService.getCustomerOrderByStatus(
+      await API_SERVICES.vendorMyOrderService.getVendorOrderByStatus(
         vendorDetails?.vendor_id,
         selectedTab
       );
@@ -165,8 +166,8 @@ function OrdersPage() {
                     }
                     statusIcon={
                       item?.status_id === CUSTOMER_ORDER_STATUS.Pending
-                        ? YetToConfirm
-                        : Confirm
+                        ? yetToConfirmVendor
+                        : confirmVendor
                     }
                     isButtonTwo={
                       item?.status_id === CUSTOMER_ORDER_STATUS.Pending

@@ -22,7 +22,7 @@ import {
   CompletedOrdersIcon,
   ConfirmedOrdersIcon,
   PendingOrdersIcon,
-  Confirm,
+  confirmVendor,
   YetToConfirm
 } from 'src/Assets';
 
@@ -101,6 +101,9 @@ function OrdersPage() {
 
   const fetchData = useCallback(async () => {
     try {
+      if (vendorDetails?.vendor_id === 0) {
+        return;
+      }
       let response: any;
       if (selectedTab === CUSTOMER_ORDER_STATUS.New) {
         response =
@@ -127,7 +130,7 @@ function OrdersPage() {
     } catch (err) {
       toast.error(err?.message);
     }
-  }, [selectedTab]);
+  }, [selectedTab, vendorDetails?.vendor_id]);
 
   const onCancelOrderButton = (orderId: number) => {
     const onCancelClick = () => {
@@ -159,7 +162,9 @@ function OrdersPage() {
     setConfirmModal({ open: true, onConfirmClick, onCancelClick, ...props });
   };
 
-  const onClickBuyOrderButton = () => {};
+  const onClickBuyOrderButton = (orderId: number) => {
+    let customerOrders = [];
+  };
 
   const renderTabContent = () => {
     return (
@@ -195,7 +200,7 @@ function OrdersPage() {
                     statusIcon={
                       selectedTab === CUSTOMER_ORDER_STATUS.Pending
                         ? YetToConfirm
-                        : Confirm
+                        : confirmVendor
                     }
                     buttonTwoText={
                       selectedTab === CUSTOMER_ORDER_STATUS.New

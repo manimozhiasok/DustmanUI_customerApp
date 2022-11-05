@@ -31,7 +31,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     '&.MuiCheckbox-colorSecondary.Mui-checked': {
       backgroundColor: theme.Colors.white,
-      color: (prop) => prop.checkBoxColor || theme.Colors.secondaryOrange
+      color: (prop) => prop.checkBoxColor || theme.Colors.secondary
     },
     '&.MuiCheckbox-colorSecondary.Mui-checked:hover': {
       backgroundColor: theme.Colors.white
