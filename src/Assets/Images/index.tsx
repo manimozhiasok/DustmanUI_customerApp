@@ -18,7 +18,6 @@ import OrderConfirmationIcon from './OrderConfirmationIcon.svg';
 import OrderSuccessIcon from './OrderSuccessIcon.svg';
 import CheckImageVendor from './CheckImageVendor.svg';
 import VendorLoginImage from './VendorLoginImage.svg';
-
 import All from './All.svg';
 import Carton from './Carton.svg';
 import Cart from './Cart.svg';
@@ -52,6 +51,9 @@ import Translate from './Translate.svg';
 import UserSwitch from './UserSwitch.svg';
 import { ReactComponent as VectorIcon } from './Vector.svg';
 import CrownIcon from './crown.svg';
+import VendorYetToConfirm from './VendorYetToConfirm.svg';
+import RoundPattern from './Vector3.svg';
+import DottedPattern from './Vector4.svg';
 
 export {
   DustmanLogoHorizontal,
@@ -106,5 +108,8 @@ export {
   CrownIcon,
   VendorConfirm,
   VendorLoginImage,
-  CheckImageVendor
+  CheckImageVendor,
+  VendorYetToConfirm,
+  RoundPattern,
+  DottedPattern
 };

@@ -21,7 +21,7 @@ import {
   CompletedOrdersIcon,
   ConfirmedOrdersIcon,
   PendingOrdersIcon,
-  YetToConfirm,
+  VendorYetToConfirm,
   Confirm
 } from 'src/Assets';
 import useVendorInfo from 'src/hooks/useVendorInfo';
@@ -63,6 +63,7 @@ function OrdersPage() {
   const [selectedTab, setSelectedTab] = useState<number>(
     CUSTOMER_ORDER_STATUS.Pending
   );
+  const [loading, setLoading] = useState(false);
   const [orderDetails, setOrderDetails] = useState([]);
   const [modalOpen, setModalOpen] = useState<any>({ open: false });
   const [confirmModal, setConfirmModal] = useState<any>({
@@ -95,50 +96,96 @@ function OrdersPage() {
     }
   ];
 
-  const fetchData = useCallback(async () => {
-    const response: any =
-      await API_SERVICES.orderService.getCustomerOrderByStatus(
-        vendorDetails?.vendor_id,
-        selectedTab
-      );
-    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.orders) {
-        setOrderDetails(response.data.orders);
-      }
-    }
-  }, [selectedTab]);
-
-  const onClickCancelButton = (orderId: number) => {
-    const onCancelClick = () => {
-      setConfirmModal({ open: false });
-    };
-    const onConfirmClick = async () => {
-      let updateData = {
-        status_id: 4
-      };
-      const response: any = await API_SERVICES.customerOrderService.replace(
-        orderId,
-        {
-          data: updateData,
-          successMessage: 'Order cancelled successfully!'
+  // const fetchData = useCallback(async () => {
+  //     try {
+  //       const response: any =
+  //       await API_SERVICES.vendorOrderService.getAllOrder(
+  //           vendorDetails?.vendor_id,
+  //           vendorDetails?.status_id,
+  //         );
+  //       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+  //         if (response?.data) {
+  //           console.log('response.data.message', response.data);
+  //           console.log('response.data.message id', response.data);
+  //           console.log('---------res---------', response.data.status_Id);
+  //           console.log('---------length---------', response.data.length);
+  //           let apiData = [];
+  //           for (let i = 0; i < response.data.length; i++) {
+  //             if (selectedTab === CUSTOMER_ORDER_STATUS.Pending) {
+  //               if (response.data[i].status_id === 0) {
+  //                 apiData.push(response.data[i]);
+  //                 console.log('test data ', response.data[i]);
+  //               }
+  //             }
+  //             if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
+  //               if (response.data[i].status_id === 2) {
+  //                 apiData.push(response.data[i]);
+  //                 console.log('test data ', response.data[i]);
+  //               }
+  //             }
+  //             if (selectedTab === CUSTOMER_ORDER_STATUS.Completed) {
+  //               if (response.data[i].status_id === 3) {
+  //                 apiData.push(response.data[i]);
+  //                 console.log('test data ', response.data[i]);
+  //               }
+  //             }
+  //           }
+  //           setOrderDetails(apiData);
+  //         }
+  //       }
+  //     } catch (err) {
+  //       toast.error(err?.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }, [selectedTab]);
+  
+    const fetchData = useCallback(async () => {
+      const response: any =
+        await API_SERVICES.vendorOrderService.getAllOrder(
+          vendorDetails?.vendor_id,
+          selectedTab,
+        );
+        if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+          if (response?.data?.orders) {
+            setOrderDetails(response.data.orders);
+          }
         }
-      );
-      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-        onCancelClick();
-        setModalOpen({ open: false });
+      }, [selectedTab]);
+  
+   
+  
+    const onClickCancelButton = (orderId: number) => {
+      const onCancelClick = () => {
+        setConfirmModal({ open: false });
+      };
+      const onConfirmClick = async () => {
+        let updateData = {
+          status_id: 4
+        };
+        const response: any = await API_SERVICES.vendorPickupDropService.replace(
+          orderId,
+          {
+            data: updateData,
+            successMessage: 'Order cancelled successfully!'
+          }
+        );
+        if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+          onCancelClick();
+          setModalOpen({ open: false });
+          fetchData();
+        }
+      };
+      let props = {
+        color: theme.Colors.redPrimary,
+        description: t('ORDER.cancelCustomerOrder'),
+        title: t('cancelOrder'),
+        iconType: CONFIRM_MODAL.cancel
+      };
+      setConfirmModal({ open: true, onConfirmClick, onCancelClick, ...props });
         fetchData();
-      }
     };
-    let props = {
-      color: theme.Colors.redPrimary,
-      description: t('ORDER.cancelCustomerOrder'),
-      title: t('cancelOrder'),
-      iconType: CONFIRM_MODAL.cancel
-    };
-    setConfirmModal({ open: true, onConfirmClick, onCancelClick, ...props });
-    //   fetchData();
-  };
-
+  
   const renderTabContent = () => {
     return (
       <Grid className={classes.tabContentContainer}>
@@ -165,7 +212,7 @@ function OrdersPage() {
                     }
                     statusIcon={
                       item?.status_id === CUSTOMER_ORDER_STATUS.Pending
-                        ? YetToConfirm
+                        ? VendorYetToConfirm
                         : Confirm
                     }
                     isButtonTwo={

@@ -5,7 +5,11 @@ import { UHTabComponent } from 'src/components';
 import BookYourPickup from 'src/content/BookYourPickup';
 import Profile from 'src/content/Profile';
 import OrdersPages from 'src/content/OrdersPage';
-import { BookYourPageImage } from 'src/Assets/Images';
+import {
+  BookYourPageImage,
+  RoundPattern,
+  DottedPattern
+} from 'src/Assets/Images';
 import { ORIENTATION } from 'src/Config/constant';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -46,7 +50,18 @@ function HomePage() {
   };
 
   return (
-    <Grid className={classes.superOuterContainer}>
+    <Grid
+      className={classes.superOuterContainer}
+      style={{
+        backgroundImage:
+          selectedTab === tabItems[0]?.id
+            ? `url(${RoundPattern}), url(${DottedPattern})`
+            : 'none',
+        backgroundPositionY: '-7rem, 29rem',
+        backgroundPositionX: '68rem, right',
+        backgroundRepeat: ' no-repeat, no-repeat'
+      }}
+    >
       <Grid container>
         <Grid
           item
