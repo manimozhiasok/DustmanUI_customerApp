@@ -35,6 +35,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   textarea: {
     resize: 'both',
     marginTop: '-50px'
+  },
+  spanStyle: {
+    fontWeight: theme.fontWeight.regular,
+    fontSize: theme.MetricsSizes.small_x,
+    color: theme.Colors.deepGrey
   }
 }));
 
@@ -61,7 +66,7 @@ export const TrashDetailsContent = ({ edit, trashData }) => {
         <TextInputComponent
           inputLabel={t('category')}
           labelColor={theme.Colors.deepGrey}
-          textColor={theme.Colors.darkGrey}
+          textColor={theme.Colors.primary}
           backgroundColor={theme.Colors.lightWhiteGrey}
           value={getTrashValue()}
           borderColor={'transparent'}
@@ -75,11 +80,9 @@ export const TrashDetailsContent = ({ edit, trashData }) => {
           inputLabel={t('PICKUP.weight')}
           placeholderText={t('PICKUP.approxWeight')}
           value={edit.getValue('quantity_kg')}
-          onChange={(e) =>
-            edit.update({ quantity_kg: parseInt(e.target.value) })
-          }
+          onChange={(e) => edit.update({ quantity_kg: e.target.value })}
           labelColor={theme.Colors.deepGrey}
-          textColor={theme.Colors.lightBlack}
+          textColor={theme.Colors.primary}
           backgroundColor={theme.Colors.lightWhiteGrey}
           borderColor={'transparent'}
           inputHeight={theme.MetricsSizes.large_xxx}
@@ -96,9 +99,7 @@ export const TrashDetailsContent = ({ edit, trashData }) => {
         <Grid item xs={12}>
           <Typography variant="h4" className={classes.textStyle}>
             {t('PICKUP.description')}
-          </Typography>
-          <Typography variant="subtitle2" color="primary">
-            (Optional)
+            <span className={classes.spanStyle}> (Optional)</span>
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -107,6 +108,7 @@ export const TrashDetailsContent = ({ edit, trashData }) => {
             onChange={(e) => edit.update({ description: e.target.value })}
             placeholder={t('PICKUP.anyInstructionsForOurPickupExecutive')}
             backgroundColor={theme.Colors.lightWhiteGrey}
+            textColor={theme.Colors.primary}
             inputHeight={'100%'}
             multiline
             minRows={6}

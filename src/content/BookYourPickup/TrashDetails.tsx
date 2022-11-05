@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   gridStyle: {
     marginTop: theme.spacing(3.5),
-    backgroundColor: theme.Colors.lightBlackGrey,
+    backgroundColor: '#e2e1e1',
     padding: theme.spacing(1, 0, 1, 0),
     borderRadius: theme.spacing(1)
   }

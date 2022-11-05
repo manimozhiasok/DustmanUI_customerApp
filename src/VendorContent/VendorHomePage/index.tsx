@@ -12,8 +12,8 @@ import VendorProfile from '../VendorProfile';
 
 const useStyles = makeStyles((theme: Theme) => ({
   superOuterContainer: {
-    background:
-      'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(14.66deg, #F68B1F -27.51%, #FFFFFF 54.57%)',
+    background: '#E8E8E8',
+    //   'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(14.66deg, #F68B1F -27.51%, #FFFFFF 54.57%)',
     width: '100%',
     padding: theme.spacing(3, 12, 12, 16)
   },

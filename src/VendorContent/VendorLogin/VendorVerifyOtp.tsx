@@ -89,7 +89,7 @@ const VendorVerifyOtp = () => {
           onChange={handleChange}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          type={'number'}
+          type="tel"
           helperText={
             ((isError && inputVal === '') ||
               (isError && inputVal !== '' && !isOneTimePassWord(inputVal))) &&
