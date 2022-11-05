@@ -27,13 +27,10 @@ import {
 import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  contentContainer: {
-    padding: theme.spacing(6.5, 3, 6.5, 3),
-    background: theme.Colors.whitePure
-  },
   outerContainer: {
-    margin: theme.spacing(1.75, 0, 1.75, 0),
-    background: theme.Colors.whitePure
+    padding: theme.spacing(6.5, 3, 6.5, 3),
+    background: theme.Colors.whitePure,
+    margin: theme.spacing(1.75, 0, 1.75, 0)
   },
   tabContainer: {
     border: '0.5px solid',
@@ -59,7 +56,7 @@ function OrdersPage() {
   const theme = useTheme();
   const { userDetails } = useUserInfo();
   const [selectedTab, setSelectedTab] = useState<number>(
-    CUSTOMER_ORDER_STATUS.Pending
+    CUSTOMER_ORDER_STATUS.New
   );
   const [orderDetails, setOrderDetails] = useState([]);
   const [modalOpen, setModalOpen] = useState<any>({ open: false });
@@ -79,7 +76,7 @@ function OrdersPage() {
     {
       tabIcon: PendingOrdersIcon,
       label: t('ORDER.pending'),
-      value: CUSTOMER_ORDER_STATUS.Pending
+      value: CUSTOMER_ORDER_STATUS.New
     },
     {
       tabIcon: ConfirmedOrdersIcon,
@@ -150,7 +147,6 @@ function OrdersPage() {
               const { getTime, getDateString } = getDateFormat(
                 item?.pickup_time
               );
-
               return (
                 <Grid key={index}>
                   <UHOrderPreviewComp
@@ -158,7 +154,8 @@ function OrdersPage() {
                     handleClickButtonOne={onClickViewDetails}
                     handleClickButtonTwo={onClickCancelButton}
                     orderStatusText={
-                      (item?.status_id === CUSTOMER_ORDER_STATUS.Pending &&
+                      ((item?.status_id === CUSTOMER_ORDER_STATUS.New ||
+                        item?.status_id === CUSTOMER_ORDER_STATUS.Pending) &&
                         'Yet to Confirm') ||
                       (item?.status_id === CUSTOMER_ORDER_STATUS.Confirmed &&
                         `Scheduled on ${getDateString}, ${getTime}`) ||
@@ -166,11 +163,13 @@ function OrdersPage() {
                         `Delivered on ${getDateString}, ${getTime}`)
                     }
                     statusIcon={
+                      item?.status_id === CUSTOMER_ORDER_STATUS.New ||
                       item?.status_id === CUSTOMER_ORDER_STATUS.Pending
                         ? YetToConfirm
                         : Confirm
                     }
                     isButtonTwo={
+                      item?.status_id === CUSTOMER_ORDER_STATUS.New ||
                       item?.status_id === CUSTOMER_ORDER_STATUS.Pending
                     }
                   />
@@ -193,20 +192,18 @@ function OrdersPage() {
   return (
     <>
       <Grid className={classes.outerContainer}>
-        <Grid className={classes.contentContainer}>
-          <UHTabComponent
-            currentTabVal={selectedTab}
-            tabContent={OrdersTabItems}
-            orientation={ORIENTATION.VERTICAL}
-            tabClasses={{ selected: classes.selectedTabStyle }}
-            tabIndicatorColor={theme.Colors.primary}
-            isDivider={false}
-            tabContainerClassName={classes.tabContainer}
-            renderTabContent={renderTabContent}
-            tabContentClassName={classes.tabContentStyle}
-            onTabChange={onTabChange}
-          />
-        </Grid>
+        <UHTabComponent
+          currentTabVal={selectedTab}
+          tabContent={OrdersTabItems}
+          orientation={ORIENTATION.VERTICAL}
+          tabClasses={{ selected: classes.selectedTabStyle }}
+          tabIndicatorColor={theme.Colors.primary}
+          isDivider={false}
+          tabContainerClassName={classes.tabContainer}
+          renderTabContent={renderTabContent}
+          tabContentClassName={classes.tabContentStyle}
+          onTabChange={onTabChange}
+        />
       </Grid>
       {modalOpen.open && (
         <CustomerOrderModal
