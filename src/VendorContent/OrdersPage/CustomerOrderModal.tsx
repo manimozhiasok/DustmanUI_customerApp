@@ -42,6 +42,10 @@ const CustomerOrderModal = (props: Props) => {
       <UHOrderModalComponent
         orderData={orderData}
         onCancelButtonClick={() => onCancelButtonClick(orderData?.order_id)}
+        isConfirmedOrder={
+          orderData?.status_id === CUSTOMER_ORDER_STATUS.Confirmed &&
+          orderData?.user_type === 'Pickup'
+        }
         isPendingOrder={
           orderData?.status_id !== CUSTOMER_ORDER_STATUS.Confirmed ||
           orderData?.user_type !== 'Pickup'

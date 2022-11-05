@@ -33,5 +33,24 @@ export const vendorCustomerOrderService = {
     });
     //return vendorCustomerOrderCompleted.VendorCustomerOrderGet;
     return apiRequest(options);
+  },
+  vendorBuyingOrder: async (
+    vendorId: number,
+    { data, successMessage, failureMessage }
+  ) => {
+    const options = await apiOptions({
+      url: `${Config.BASE_URL}/api/buyingCustomerOrder/vendor/${vendorId}`,
+      method: 'post',
+      data: data
+    });
+    const toastMessageConfig = {
+      success: {
+        message: successMessage
+      },
+      failure: {
+        message: failureMessage
+      }
+    };
+    return apiRequest(options, toastMessageConfig);
   }
 };

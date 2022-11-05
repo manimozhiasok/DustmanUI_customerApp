@@ -162,8 +162,25 @@ function OrdersPage() {
     setConfirmModal({ open: true, onConfirmClick, onCancelClick, ...props });
   };
 
-  const onClickBuyOrderButton = (orderId: number) => {
-    let customerOrders = [];
+  const onClickBuyOrderButton = async (orderId: number) => {
+    try {
+      let orderData = [orderId];
+      console.log(orderData);
+      const UpdateOrder: any =
+        await API_SERVICES.vendorCustomerOrderService.vendorBuyingOrder(
+          vendorDetails?.vendor_id,
+          {
+            data: { buyedOrderList: orderData },
+            successMessage: 'customer Order Accepted!',
+            failureMessage: 'order not accepted'
+          }
+        );
+      // if (UpdateOrder?.status < HTTP_STATUSES.BAD_REQUEST) {
+
+      // }
+    } catch (err) {
+      toast.error(err?.message);
+    }
   };
 
   const renderTabContent = () => {
