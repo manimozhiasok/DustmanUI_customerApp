@@ -8,15 +8,13 @@ import {
   FormControlLabel,
   Typography
 } from '@material-ui/core';
-
 type StyleProps = {
-  color: string;
-}
+  checkBoxColor: string;
+};
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   eachItem: {
     '&.MuiGrid-item': {
-      padding: theme.spacing(1, 0, 1, 0),
-      marginBottom: theme.spacing(2)
+      padding: theme.spacing(1, 0)
     }
   },
   checkbox: {
@@ -26,18 +24,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.Colors.greyScaleMedium,
     width: theme.MetricsSizes.regular,
     height: theme.MetricsSizes.regular,
-    '&:not($checked).MuiCheckbox-colorSecondary': {
+    '&.MuiCheckbox-colorSecondary': {
       backgroundColor: theme.Colors.greyScaleMedium,
       padding: 0,
       borderRadius: 0
     },
     '&.MuiCheckbox-colorSecondary.Mui-checked': {
       backgroundColor: theme.Colors.white,
-      color: (prop) => prop.color || theme.Colors.secondaryOrange
+      color: (prop) => prop.checkBoxColor || theme.Colors.secondaryOrange
     },
     '&.MuiCheckbox-colorSecondary.Mui-checked:hover': {
       backgroundColor: theme.Colors.white
-    },
+    }
   },
   description: {
     paddingTop: theme.spacing(1),
@@ -62,7 +60,7 @@ function ChooseCategoryComponent({
   InitialItemVal,
   checkBoxColor
 }: Props) {
-  const classes = useStyles({color: checkBoxColor});
+  const classes = useStyles({ checkBoxColor });
   const theme = useTheme();
   const [selectedItemId, setSelectedItemId] = useState<string[]>([]);
 
@@ -112,13 +110,7 @@ function ChooseCategoryComponent({
           : -1;
         const isActive: boolean = findActiveImage !== -1;
         return (
-          <Grid
-            item
-            xs={3}
-            key={index}
-            justifyContent="center"
-            className={classes.eachItem}
-          >
+          <Grid item xs={3} key={index} className={classes.eachItem}>
             <FormControlLabel
               value={item.name}
               labelPlacement="bottom"
@@ -138,9 +130,8 @@ function ChooseCategoryComponent({
                     src={item.image_url}
                     alt="Image Not Found"
                     style={{
-                      borderWidth: '1px',
+                      border: '1px solid',
                       borderColor: getBorderColor(isActive),
-                      borderStyle: 'solid',
                       borderRadius: theme.MetricsSizes.tiny_x,
                       width: '100px',
                       height: '100px',

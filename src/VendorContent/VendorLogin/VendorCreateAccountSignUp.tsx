@@ -70,7 +70,7 @@ const VendorCreateAccountSignUp = () => {
       setIsError(true);
       return;
     }
-    navigateTo('/dustman/vendor-login/choose-vehicle-type', {
+    navigateTo('/dustman/vendor/choose-vehicle-type', {
       state: {
         formEdits: { ...initialValues, ...edit.edits },
         vendorId: state?.vendorId

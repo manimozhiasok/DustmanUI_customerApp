@@ -11,7 +11,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { locationIcon, weightIcon } from 'src/Assets';
 import { ButtonComp, ImageTextComponent } from 'src/components';
-import { CUSTOMER_ORDER_STATUS } from 'src/Config/constant';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -71,12 +70,16 @@ type OrderCompProp = {
   handleClickButtonTwo?: (orderId: number) => void;
   isCheckBox?: boolean;
   handleCheckboxChange?: (orderId: number, isChecked: boolean) => void;
-  leftButtonText?: string;
-  rightButtonText?: string;
+  buttonOneText?: string;
+  buttonTwoText?: string;
   orderStatusText?: string;
   statusIcon?: any;
   buttonOneStyle?: React.CSSProperties;
   buttonTwoStyle?: React.CSSProperties;
+  isButtonThree?: boolean;
+  buttonThreeText?: string;
+  buttonThreeStyle?: React.CSSProperties;
+  handleClickButtonThree?: (orderData: any) => void;
 };
 
 const UHOrderPreviewComp = (props: OrderCompProp) => {
@@ -88,12 +91,16 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
     handleClickButtonTwo,
     isCheckBox = false,
     handleCheckboxChange,
-    rightButtonText,
-    leftButtonText,
+    buttonTwoText,
+    buttonOneText,
     orderStatusText,
     statusIcon,
     buttonOneStyle,
-    buttonTwoStyle
+    buttonTwoStyle,
+    isButtonThree,
+    buttonThreeText,
+    buttonThreeStyle,
+    handleClickButtonThree
   } = props;
   const classes = useStyles();
   const { t } = useTranslation();
@@ -143,14 +150,17 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
             <Grid className={classes.buttonAlign}>
               {isButtonOne ? (
                 <ButtonComp
-                  buttonText={leftButtonText || 'VIEW DETAILS'}
+                  buttonText={buttonOneText || 'VIEW DETAILS'}
                   backgroundColor={theme.Colors.whiteLightGrey}
                   buttonFontSize={theme.MetricsSizes.tiny_xxx}
                   variant="outlined"
+                  buttonTextColor={theme.Colors.secondary}
                   height={theme.MetricsSizes.medium_xx}
                   btnWidth={'110px'}
                   style={{
                     marginRight: theme.spacing(1.25),
+                    borderColor: theme.Colors.secondary,
+                    borderRadius: theme.MetricsSizes.tiny,
                     ...buttonOneStyle
                   }}
                   onClickButton={() => handleClickButtonOne(orderItems)}
@@ -158,21 +168,39 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
               ) : null}
               {isButtonTwo ? (
                 <ButtonComp
-                  buttonText={rightButtonText || 'CANCEL'}
-                  style={buttonTwoStyle}
+                  buttonText={buttonTwoText || 'CANCEL'}
                   buttonFontSize={theme.MetricsSizes.tiny_xxx}
                   buttonTextColor={theme.Colors.white}
                   height={theme.MetricsSizes.medium_xx}
-                  btnWidth={'100px'}
+                  style={{
+                    marginRight: theme.spacing(1.25),
+                    borderRadius: theme.MetricsSizes.tiny,
+                    ...buttonTwoStyle
+                  }}
+                  btnWidth={'72px'}
                   onClickButton={() =>
                     handleClickButtonTwo(orderItems?.order_id)
                   }
                 />
               ) : null}
+              {isButtonThree ? (
+                <ButtonComp
+                  buttonText={buttonThreeText || 'COMPLETE'}
+                  buttonFontSize={theme.MetricsSizes.tiny_xxx}
+                  buttonTextColor={theme.Colors.white}
+                  height={theme.MetricsSizes.medium_xx}
+                  style={{
+                    borderRadius: theme.MetricsSizes.tiny,
+                    ...buttonThreeStyle
+                  }}
+                  btnWidth={'72px'}
+                  onClickButton={() => handleClickButtonThree(orderItems)}
+                />
+              ) : null}
             </Grid>
           </Grid>
         </Grid>
-        {isCheckBox && CUSTOMER_ORDER_STATUS.New == orderItems.status_id && (
+        {isCheckBox && (
           <Grid item>
             <Checkbox
               className={classes.checkbox}

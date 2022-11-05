@@ -41,7 +41,7 @@ const VendorPageLogin = () => {
     });
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.phoneNumber) {
-        navigateTo('/dustman/vendor-login/verify-otp', {
+        navigateTo('/dustman/vendor/verify-otp', {
           replace: true,
           state: { mobileNumber: response?.data?.phoneNumber }
         });

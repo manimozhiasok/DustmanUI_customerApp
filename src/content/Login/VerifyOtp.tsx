@@ -45,7 +45,7 @@ const VerifyOtp = () => {
     });
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.customer) {
-        navigateTo('/dustman/login/create-account', {
+        navigateTo('/dustman/customer/create-account', {
           replace: true,
           state: { customerId: response.data.customer.id }
         });

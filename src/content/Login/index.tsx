@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { LoginDrawerContext } from 'src/contexts/LoginDrawerContext';
 import CloseIcon from '@material-ui/icons/Close';
 import { LoginBtmImg } from 'src/Assets';
+import LandingPage from 'src/WebContent/LandingPage';
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawerWidth: {
@@ -45,28 +46,31 @@ const Login = () => {
   }, [match]);
 
   return (
-    <Drawer
-      open={isLoginDrawerOpen}
-      anchor={'right'}
-      classes={{ paper: classes.drawerWidth }}
-    >
-      <Grid className={classes.loginDrawerStyle}>
-        <CloseIcon
-          style={{ cursor: 'pointer' }}
-          onClick={handleCloseIconClick}
-        />
-        <Box
-          sx={{
-            padding: theme.spacing(4, 10, 6, 3.8)
-          }}
-        >
-          <Outlet />
-        </Box>
-        <Grid className={classes.imageStyle}>
-          <img src={LoginBtmImg} alt="LoginBtmImg" />
+    <>
+      <LandingPage />
+      <Drawer
+        open={isLoginDrawerOpen}
+        anchor={'right'}
+        classes={{ paper: classes.drawerWidth }}
+      >
+        <Grid className={classes.loginDrawerStyle}>
+          <CloseIcon
+            style={{ cursor: 'pointer' }}
+            onClick={handleCloseIconClick}
+          />
+          <Box
+            sx={{
+              padding: theme.spacing(4, 10, 6, 3.8)
+            }}
+          >
+            <Outlet />
+          </Box>
+          <Grid className={classes.imageStyle}>
+            <img src={LoginBtmImg} alt="LoginBtmImg" />
+          </Grid>
         </Grid>
-      </Grid>
-    </Drawer>
+      </Drawer>
+    </>
   );
 };
 

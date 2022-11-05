@@ -60,7 +60,7 @@ const routes: RouteObject[] = [
             element: <ContactUs />
           },
           {
-            path: 'login',
+            path: 'customer',
             element: <Login />,
             children: [
               {
@@ -86,7 +86,7 @@ const routes: RouteObject[] = [
             ]
           },
           {
-            path: 'vendor-login',
+            path: 'vendor',
             element: <VendorLogin />,
             children: [
               {

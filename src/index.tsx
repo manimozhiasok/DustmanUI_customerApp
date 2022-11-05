@@ -7,14 +7,17 @@ import * as serviceWorker from 'src/serviceWorker';
 import { UserInfoProvider } from './contexts/UserContext';
 import './Translations';
 import { LoginDrawerProvider } from 'src/contexts/LoginDrawerContext';
+import { VendorInfoProvider } from './contexts/VendorContext';
 
 ReactDOM.render(
   <HelmetProvider>
     <LoginDrawerProvider>
       <UserInfoProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <VendorInfoProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </VendorInfoProvider>
       </UserInfoProvider>
     </LoginDrawerProvider>
   </HelmetProvider>,

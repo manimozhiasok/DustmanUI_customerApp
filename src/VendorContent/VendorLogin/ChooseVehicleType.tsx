@@ -36,7 +36,7 @@ const ChooseVehicleType = () => {
       { data, successMessage: 'Vendor profile created successfully!' }
     );
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      navigateTo('/dustman/vendor-login/vendor-approval', {
+      navigateTo('/dustman/vendor/vendor-approval', {
         replace: true
       });
     }

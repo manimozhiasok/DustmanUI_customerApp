@@ -44,13 +44,13 @@ const VendorVerifyOtp = () => {
     });
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.vendor) {
-        navigateTo('/dustman/vendor-login/create-account', {
+        navigateTo('/dustman/vendor/create-account', {
           replace: true,
           state: { vendorId: response.data.vendor.id }
         });
       } else if (response?.data?.vendorProfile?.vendor_id) {
         if (response.data.vendorProfile.status_id === 1) {
-          navigateTo('/dustman/vendor-login/vendor-approval', {
+          navigateTo('/dustman/vendor/vendor-approval', {
             replace: true
           });
         } else if (response.data.vendorProfile.status_id === 2) {

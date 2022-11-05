@@ -28,17 +28,13 @@ import {
 
 import toast from 'react-hot-toast';
 import { getDateFormat } from 'src/Utils';
-import { Schedule } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  contentContainer: {
+  outerContainer: {
+    margin: theme.spacing(1.75, 0, 1.75, 0),
     padding: theme.spacing(6.5, 3, 6.5, 3),
     background: theme.Colors.whitePure,
     position: 'relative'
-  },
-  outerContainer: {
-    margin: theme.spacing(1.75, 0, 1.75, 0),
-    background: theme.Colors.whitePure
   },
   tabContainer: {
     border: '0.5px solid',
@@ -67,18 +63,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 function OrdersPage() {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation();
   const { vendorDetails } = useVendorInfo();
-  const [loading, setLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState<number>(
-    CUSTOMER_ORDER_STATUS.Pending
+    CUSTOMER_ORDER_STATUS.New
   );
   const [orderDetails, setOrderDetails] = useState([]);
   const [modalOpen, setModalOpen] = useState<any>({ open: false });
   const [confirmModal, setConfirmModal] = useState<any>({
     open: false
   });
-
-  const { t } = useTranslation();
 
   const onClickViewDetails = (orderData: any) => {
     setModalOpen({
@@ -91,7 +85,7 @@ function OrdersPage() {
     {
       tabIcon: PendingOrdersIcon,
       label: t('ORDER.new'),
-      value: CUSTOMER_ORDER_STATUS.Pending
+      value: CUSTOMER_ORDER_STATUS.New
     },
     {
       tabIcon: ConfirmedOrdersIcon,
@@ -107,48 +101,41 @@ function OrdersPage() {
 
   const fetchData = useCallback(async () => {
     try {
-      const response: any = await Promise.all([
-        API_SERVICES.vendorCustomerOrderService.getCustomerOrderByVendorLocation(
-          vendorDetails?.status_id
-        ),
-        API_SERVICES.vendorCustomerOrderService.getAllVendorScheduledOrder(
-          vendorDetails?.status_id
-        ),
-        API_SERVICES.vendorCustomerOrderService.getAllVendorCompletedOrder(
-          vendorDetails?.status_id
-        )
-      ]);
-      if (response[0]?.status <= HTTP_STATUSES.BAD_REQUEST) {
-        if (selectedTab === CUSTOMER_ORDER_STATUS.Pending) {
-          if (response[0]?.data) {
-            setOrderDetails(response[0].data);
-          }
-        }
-        if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
-          if (response[1]?.data) {
-            setOrderDetails(response[1].data);
-          }
-        }
-        if (selectedTab === CUSTOMER_ORDER_STATUS.Completed) {
-          if (response[2]?.data) {
-            setOrderDetails(response[2].data);
-          }
+      let response: any;
+      if (selectedTab === CUSTOMER_ORDER_STATUS.New) {
+        response =
+          await API_SERVICES.vendorCustomerOrderService.getCustomerOrderByVendorLocation(
+            vendorDetails?.vendor_id
+          );
+      } else if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
+        response =
+          await API_SERVICES.vendorCustomerOrderService.getAllVendorScheduledOrder(
+            vendorDetails?.vendor_id
+          );
+      } else if (selectedTab === CUSTOMER_ORDER_STATUS.Completed) {
+        response =
+          await API_SERVICES.vendorCustomerOrderService.getAllVendorCompletedOrder(
+            vendorDetails?.vendor_id
+          );
+      }
+
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data?.orders) {
+          setOrderDetails(response.data.orders);
         }
       }
     } catch (err) {
       toast.error(err?.message);
-    } finally {
-      setLoading(false);
     }
   }, [selectedTab]);
 
-  const onClickBuyOrderButton = (orderId: number) => {
+  const onCancelOrderButton = (orderId: number) => {
     const onCancelClick = () => {
       setConfirmModal({ open: false });
     };
     const onConfirmClick = async () => {
       let updateData = {
-        status_id: 4
+        status_id: CUSTOMER_ORDER_STATUS.Cancelled
       };
       const response: any = await API_SERVICES.vendorPickupDropService.replace(
         orderId,
@@ -170,75 +157,66 @@ function OrdersPage() {
       iconType: CONFIRM_MODAL.cancel
     };
     setConfirmModal({ open: true, onConfirmClick, onCancelClick, ...props });
-    //   fetchData();
   };
+
+  const onClickBuyOrderButton = () => {};
 
   const renderTabContent = () => {
     return (
-      <>
-        <Grid className={classes.tabContentContainer}>
-          {orderDetails?.length
-            ? orderDetails.map((item, index) => {
-                const { getTime, getDateString } = getDateFormat(
-                  item?.pickup_time
-                );
-                return (
-                  <Grid key={index}>
-                    <UHOrderPreviewComp
-                      orderItems={item}
-                      isButtonOne
-                      isCheckBox
-                      handleClickButtonOne={onClickViewDetails}
-                      handleClickButtonTwo={onClickBuyOrderButton}
-                      orderStatusText={
-                        (item?.status_id === CUSTOMER_ORDER_STATUS.Pending &&
-                          'Yet to Confirm') ||
-                        (item?.status_id === CUSTOMER_ORDER_STATUS.Confirmed &&
-                          `Scheduled on ${getDateString}, ${getTime}`) ||
-                        (item?.status_id == CUSTOMER_ORDER_STATUS.Completed &&
-                          `Delivered on ${getDateString}, ${getTime}`)
-                      }
-                      statusIcon={
-                        item?.status_id === CUSTOMER_ORDER_STATUS.Pending
-                          ? YetToConfirm
-                          : Confirm
-                      }
-                      isButtonTwo={
-                        item?.status_id != CUSTOMER_ORDER_STATUS.Completed
-                      }
-                      rightButtonText={
-                        item?.status_id === CUSTOMER_ORDER_STATUS.New
-                          ? 'BUY ORDER'
-                          : 'CANCEL'
-                      }
-                      buttonTwoStyle={{
-                        background: theme.Colors.orangePrimary
-                      }}
-                      buttonOneStyle={{
-                        border: '0.5px solid #F68B1F',
-                        color: theme.Colors.orangePrimary
-                      }}
-                    />
-                  </Grid>
-                );
-              })
-            : null}
-        </Grid>
-        {/* <Grid className={classes.buttonContainer}>
-          {selectedTab === CUSTOMER_ORDER_STATUS.Pending ? (
-            <ButtonComp
-              buttonText={'BUY ORDERS'}
-              buttonFontSize={16}
-              backgroundColor={theme.Colors.orangePrimary}
-              variant="contained"
-              buttonFontWeight={500}
-              btnBorderRadius={105}
-              height={'48px'}
-              btnWidth={'217px'}
-            />
-          ) : null}
-        </Grid> */}
-      </>
+      <Grid className={classes.tabContentContainer}>
+        {orderDetails?.length
+          ? orderDetails.map((item, index) => {
+              const { getTime, getDateString } = getDateFormat(
+                item?.pickup_time
+              );
+              return (
+                <Grid key={index}>
+                  <UHOrderPreviewComp
+                    orderItems={item}
+                    isButtonOne={
+                      selectedTab !== CUSTOMER_ORDER_STATUS.Completed
+                    }
+                    isButtonTwo={
+                      selectedTab !== CUSTOMER_ORDER_STATUS.Completed
+                    }
+                    isCheckBox={selectedTab === CUSTOMER_ORDER_STATUS.New}
+                    handleClickButtonOne={onClickViewDetails}
+                    handleClickButtonTwo={
+                      selectedTab === CUSTOMER_ORDER_STATUS.New
+                        ? onClickBuyOrderButton
+                        : onCancelOrderButton
+                    }
+                    orderStatusText={
+                      (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed &&
+                        `Scheduled on ${getDateString}, ${getTime}`) ||
+                      (selectedTab == CUSTOMER_ORDER_STATUS.Completed &&
+                        `Delivered on ${getDateString}, ${getTime}`)
+                    }
+                    statusIcon={
+                      selectedTab === CUSTOMER_ORDER_STATUS.Pending
+                        ? YetToConfirm
+                        : Confirm
+                    }
+                    buttonTwoText={
+                      selectedTab === CUSTOMER_ORDER_STATUS.New
+                        ? 'BUY ORDER'
+                        : 'CANCEL'
+                    }
+                    buttonTwoStyle={{
+                      background: theme.Colors.orangePrimary,
+                      width: 100
+                    }}
+                    buttonOneStyle={{
+                      border: '0.5px solid',
+                      borderColor: theme.Colors.orangePrimary,
+                      color: theme.Colors.orangePrimary
+                    }}
+                  />
+                </Grid>
+              );
+            })
+          : null}
+      </Grid>
     );
   };
 
@@ -253,41 +231,36 @@ function OrdersPage() {
   return (
     <>
       <Grid className={classes.outerContainer}>
-        <Grid className={classes.contentContainer}>
-          
-          <UHTabComponent
-            currentTabVal={selectedTab}
-            tabContent={OrdersTabItems}
-            orientation={ORIENTATION.VERTICAL}
-            tabClasses={{ selected: classes.selectedTabStyle }}
-            tabIndicatorColor={theme.Colors.primary}
-            isDivider={false}
-            tabContainerClassName={classes.tabContainer}
-            renderTabContent={renderTabContent}
-            tabContentClassName={classes.tabContentStyle}
-            onTabChange={onTabChange}
-          />
-           <Grid className={classes.buttonContainer}>
-          {selectedTab === CUSTOMER_ORDER_STATUS.Pending ? (
+        <UHTabComponent
+          currentTabVal={selectedTab}
+          tabContent={OrdersTabItems}
+          orientation={ORIENTATION.VERTICAL}
+          tabClasses={{ selected: classes.selectedTabStyle }}
+          tabIndicatorColor={theme.Colors.primary}
+          isDivider={false}
+          tabContainerClassName={classes.tabContainer}
+          renderTabContent={renderTabContent}
+          tabContentClassName={classes.tabContentStyle}
+          onTabChange={onTabChange}
+        />
+        <Grid className={classes.buttonContainer}>
+          {selectedTab === CUSTOMER_ORDER_STATUS.New ? (
             <ButtonComp
               buttonText={'BUY ORDERS'}
-              buttonFontSize={16}
+              buttonFontSize={theme.MetricsSizes.small_xxx}
               backgroundColor={theme.Colors.orangePrimary}
-              variant="contained"
-              buttonFontWeight={500}
               btnBorderRadius={105}
               height={'48px'}
               btnWidth={'217px'}
             />
           ) : null}
         </Grid>
-        </Grid>
       </Grid>
       {modalOpen.open && (
         <CustomerOrderDialog
           onClose={() => setModalOpen({ open: false })}
           {...modalOpen}
-          onCancelButtonClick={onClickBuyOrderButton}
+          // onCancelButtonClick={onCancelOrderButton}
         />
       )}
       {confirmModal.open && <UHConfirmModal {...confirmModal} />}

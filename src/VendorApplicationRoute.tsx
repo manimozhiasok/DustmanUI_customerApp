@@ -33,9 +33,9 @@ const VendorApplicationRoute = () => {
   }
 
   return authState === AUTH_STATE.SIGNED_IN ? (
-    <Navigate to="/dustman/vendor-home" />
+    <Navigate to="/dustman/vendor-home" replace />
   ) : (
-    <Navigate to="/dustman/vendor-login/vendor-page-login" />
+    <Navigate to="/dustman/vendor/vendor-page-login" replace />
   );
 };
 export default VendorApplicationRoute;

@@ -15,12 +15,12 @@ function NavBar() {
   const handleCustomerButtonClick = () => {
     toggleLoginDrawer();
     document.getElementById('login-list').classList.remove('show');
-    navigateTo('/dustman/login', { replace: true });
+    navigateTo('/dustman/customer', { replace: true });
   };
   const handleVendorButtonClick = () => {
     toggleLoginDrawer();
     document.getElementById('login-list').classList.remove('show');
-    navigateTo('/dustman/vendor-login', { replace: true });
+    navigateTo('/dustman/vendor', { replace: true });
   };
 
   function showLoginOptions() {
