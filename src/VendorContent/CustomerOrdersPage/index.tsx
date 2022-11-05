@@ -175,9 +175,9 @@ function OrdersPage() {
             failureMessage: 'order not accepted'
           }
         );
-      // if (UpdateOrder?.status < HTTP_STATUSES.BAD_REQUEST) {
-
-      // }
+      if (UpdateOrder?.status < HTTP_STATUSES.BAD_REQUEST) {
+        fetchData();
+      }
     } catch (err) {
       toast.error(err?.message);
     }
