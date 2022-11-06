@@ -6,9 +6,7 @@ import DualActionButton from 'src/components/DualActionButton';
 import { useEdit } from 'src/hooks/useEdit';
 import toast from 'react-hot-toast';
 import { isPhoneNumber, isValidPinCode } from 'src/Utils';
-import { API_SERVICES } from 'src/Services';
-import useUserInfo from 'src/hooks/useUserInfo';
-import { HTTP_STATUSES } from 'src/Config/constant';
+import { AddressData } from 'src/Services/customerAddressService';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -23,15 +21,23 @@ const useStyles = makeStyles((theme: Theme) => {
 
 type Props = {
   onClose: () => void;
+  handleSaveButtonClick: (
+    data: AddressData,
+    modalCloseCallback: () => void
+  ) => void;
+  modalTitle?: string;
 };
 
-const AddressModalComp = ({ onClose }: Props) => {
+const UHAddressModalComp = ({
+  onClose,
+  handleSaveButtonClick,
+  modalTitle
+}: Props) => {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
   const [isError, setIsError] = useState(false);
-  const { userDetails, updateUserInfo } = useUserInfo();
-  const initialAddressValues = {
+  const initialAddressValues: AddressData = {
     address_line1: '',
     address_line2: '',
     address_line3: '',
@@ -62,21 +68,7 @@ const AddressModalComp = ({ onClose }: Props) => {
       return;
     }
     let data = { ...initialAddressValues, ...edit.edits };
-    const response: any = await API_SERVICES.customerAddressService.create(
-      userDetails?.customer_id,
-      {
-        data,
-        successMessage: 'Address created successfully',
-        failureMessage: 'Failed to add new address'
-      }
-    );
-    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.message) {
-        let id = response?.data?.message?.customer_id;
-        updateUserInfo(id);
-        onClose();
-      }
-    }
+    handleSaveButtonClick(data, onClose);
   };
 
   const renderAction = () => {
@@ -91,7 +83,7 @@ const AddressModalComp = ({ onClose }: Props) => {
   return (
     <DialogComp
       open={true}
-      dialogTitle={'Pickup Address'}
+      dialogTitle={modalTitle || 'Pickup Address'}
       dialogClasses={{ paper: classes.dialogPaper }}
       onClose={onClose}
       renderAction={renderAction}
@@ -207,4 +199,4 @@ const AddressModalComp = ({ onClose }: Props) => {
   );
 };
 
-export default AddressModalComp;
+export default UHAddressModalComp;

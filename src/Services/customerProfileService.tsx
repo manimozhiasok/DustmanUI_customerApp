@@ -14,6 +14,19 @@ type CustomerCreateProp = {
   failureMessage?: string;
 };
 
+type CustomerProfileUpdateProp = {
+  data: {
+    user_type_id?: number;
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    image_url?: string;
+    language_id?: number;
+  };
+  successMessage?: string;
+  failureMessage?: string;
+};
+
 export const customerProfileService = {
   create: async (
     customerId: number,
@@ -41,5 +54,25 @@ export const customerProfileService = {
       method: 'get'
     });
     return apiRequest(options);
+  },
+
+  updateCustomerProfile: async (
+    customerId: number,
+    { data, successMessage, failureMessage }: CustomerProfileUpdateProp
+  ) => {
+    const options = await apiOptions({
+      url: `${Config.BASE_URL}/api/updateCustomerProfile/${customerId}`,
+      method: 'patch',
+      data: data
+    });
+    const toastMessageConfig = {
+      success: {
+        message: successMessage
+      },
+      failure: {
+        message: failureMessage
+      }
+    };
+    return apiRequest(options, toastMessageConfig);
   }
 };

@@ -24,11 +24,12 @@ export const CUSTOMER_STATUS = {
   3: 'Completed',
   4: 'Cancelled'
 };
-export const VENDOR_ORDER_STATUS={
-  Pending:0,
-  Scheduled:2,
-  Completed:3
-}
+
+export const VENDOR_ORDER_STATUS = {
+  Pending: 0,
+  Scheduled: 2,
+  Completed: 3
+};
 
 export const CUSTOMER_ORDER_STATUS = {
   Pending: 0,
@@ -64,6 +65,12 @@ export const USER_TYPE_ID = {
   industry: 3,
   vendorPickup: 4,
   vendorDrop: 5
+};
+
+export const LANGUAGE_ID = {
+  english: 1,
+  tamil: 2,
+  hindi: 3
 };
 
 export const GET_USER_CATEGORY = {

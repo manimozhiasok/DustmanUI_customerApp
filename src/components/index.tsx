@@ -24,3 +24,6 @@ export { default as UHOrderPreviewComp } from './UHOrderPreviewComp';
 export { default as ChooseCategoryComponent } from './ChooseCategoryComponent';
 export { default as UHSelectYourPickUpComp } from './UHSelectYourPickUpComp';
 export { default as UHOrderModalComponent } from './UHOrderModalComponent';
+export { default as UHSelectComp } from './UHSelectComp';
+export { default as UHPickYourAddressComp } from './UHPickYourAddressComp';
+export { default as UHAddressModalComp } from './UHAddressModalComp';

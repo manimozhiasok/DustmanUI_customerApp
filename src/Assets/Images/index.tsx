@@ -55,6 +55,7 @@ import CrownIcon from './crown.svg';
 import confirmVendor from './confirmVendor.svg';
 import yetToConfirmVendor from './yetToConfirmVendor.svg';
 import UserAvatarIcon from './UserAvatarIcon.svg';
+import Plus from './Plus.svg';
 
 export {
   DustmanLogoHorizontal,
@@ -112,5 +113,6 @@ export {
   CheckImageVendor,
   confirmVendor,
   yetToConfirmVendor,
-  UserAvatarIcon
+  UserAvatarIcon,
+  Plus
 };

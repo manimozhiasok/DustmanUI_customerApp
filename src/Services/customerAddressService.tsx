@@ -2,16 +2,18 @@ import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
 
+export type AddressData = {
+  address_line1: string;
+  address_line2: string;
+  address_line3: string;
+  state: string;
+  city: string;
+  pincode: string;
+  mobile_number: string;
+};
+
 type AddressCreateProp = {
-  data: {
-    address_line1: string;
-    address_line2: string;
-    address_line3: string;
-    state: string;
-    city: string;
-    pincode: string;
-    mobile_number: string;
-  };
+  data: AddressData;
   successMessage?: string;
   failureMessage?: string;
 };

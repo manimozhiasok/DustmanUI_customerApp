@@ -9,21 +9,27 @@ import {
 } from 'src/Assets/Images';
 import ProfileAddressModel from './profileAddressModel';
 import { useTranslation } from 'react-i18next';
-import { ORIENTATION, PROFILE_TAB_VALUES } from 'src/Config/constant';
+import {
+  HTTP_STATUSES,
+  LANGUAGE_ID,
+  ORIENTATION,
+  PROFILE_TAB_VALUES,
+  USER_TYPE_ID
+} from 'src/Config/constant';
 import {
   ListItemCell,
   UHAccordionComp,
   UHIconTextComp,
+  UHSelectComp,
   UHTabComponent
 } from 'src/components';
 import ProfileContent from './profileContent';
-import ChangeLanguage from './ChangeLanguage';
-import ChangeUsertype from './ChangeUsertype';
 import useUserInfo from 'src/hooks/useUserInfo';
 import { Help, Outline, SignOut, Translate, UserSwitch } from 'src/Assets';
-import { ChevronRight, ExpandMore } from '@material-ui/icons';
+import { ChevronRight, ExpandLess, ExpandMore } from '@material-ui/icons';
 import { UHIconTextProps } from 'src/components/UHIconTextComp';
 import { useNavigate } from 'react-router';
+import { API_SERVICES } from 'src/Services';
 
 const useStyles = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -63,12 +69,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   accordionSummary: {
     padding: theme.spacing(3, 2, 3, 0)
   },
+  accordionDetailStyle: {
+    padding: theme.spacing(2, 3.5, 4.5, 2.25)
+  },
+  accordionSummaryExpanded: { padding: theme.spacing(3, 2, 0, 0) },
   accordionStaticContentStyle: {
     padding: theme.spacing(3, 2, 3, 0),
     backgroundColor: theme.Colors.whiteLightGrey,
     cursor: 'pointer',
     borderBottom: '0.5px solid',
     borderBottomColor: theme.Colors.greyDark
+  },
+  accordionStaticContentStyle1: {
+    padding: theme.spacing(3, 2, 3, 0),
+    backgroundColor: theme.Colors.whiteLightGrey,
+    cursor: 'pointer'
   },
   accordionClassName: {
     borderBottom: '0.5px solid',
@@ -106,10 +121,10 @@ const RenderIconText = (props: RenderIconTextProp) => {
   );
 };
 
-function Profile() {
+const Profile = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const { userAddressDetails, userDetails } = useUserInfo();
+  const { userAddressDetails, userDetails, updateUserInfo } = useUserInfo();
   const navigateTo = useNavigate();
   const [selectedTab, setSelectedTab] = useState<number>(
     PROFILE_TAB_VALUES.myAccount
@@ -118,6 +133,24 @@ function Profile() {
   const [openModal, setOpenModal] = useState<any>({
     open: false
   });
+
+  const staticContents = [
+    { id: 1, text: t('PROFILE.help'), image: Help },
+    { id: 2, text: t('PROFILE.about'), image: Outline },
+    { id: 3, text: t('PROFILE.logout'), image: SignOut }
+  ];
+
+  const languageData = [
+    { label: 'English', value: LANGUAGE_ID.english },
+    { label: 'தமிழ்', value: LANGUAGE_ID.tamil },
+    { label: 'Hindi', value: LANGUAGE_ID.hindi }
+  ];
+
+  const userTypeData = [
+    { label: 'Home', value: USER_TYPE_ID.home },
+    { label: 'Commercial', value: USER_TYPE_ID.commercial },
+    { label: 'Industry', value: USER_TYPE_ID.industry }
+  ];
 
   const OrdersTabItems = [
     {
@@ -139,6 +172,39 @@ function Profile() {
 
   const onTabChange = (tabValue: any) => {
     setSelectedTab(tabValue);
+  };
+
+  const handleChangeItem = async (selectedVal: number, type?: string) => {
+    try {
+      if (
+        selectedVal === userDetails?.user_type_id ||
+        selectedVal === userDetails?.language_id
+      ) {
+        return;
+      }
+      let data: { language_id?: number; user_type_id?: number } = {
+        user_type_id: selectedVal
+      };
+      let successMessage = 'UserType updated successfully';
+      if (type === 'language') {
+        data = {
+          language_id: selectedVal
+        };
+        successMessage = 'Language updated successfully';
+      }
+      const response: any =
+        await API_SERVICES.customerProfileService.updateCustomerProfile(
+          userDetails?.id,
+          { data, successMessage }
+        );
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data?.profile) {
+          updateUserInfo(response.data.profile.customer_id);
+        }
+      }
+    } catch (e) {
+      console.log(e, '--profile update err--');
+    }
   };
 
   const accordionContent = [
@@ -170,34 +236,72 @@ function Profile() {
     }
   ];
 
-  const accContent = [
+  const accordionContentSub = [
     {
       id: 2,
-      accContentDetail: () => <ChangeLanguage />,
-      renderAccordionTitle: () => (
-        <RenderIconText image={Translate} text={t('PROFILE.language')} />
-      )
+      expanded: selectedTab === PROFILE_TAB_VALUES.changeLanguage,
+      accordionSummaryClassName:
+        selectedTab === PROFILE_TAB_VALUES.changeLanguage
+          ? classes.accordionSummaryExpanded
+          : classes.accordionSummary,
+      renderAccordionTitle: () =>
+        selectedTab === PROFILE_TAB_VALUES.changeLanguage ? (
+          <RenderIconText
+            image={Translate}
+            renderDetail={() => (
+              <UHSelectComp
+                initialValue={userDetails?.language_id}
+                labelData={languageData}
+                handleChangeItem={(selectedVal) =>
+                  handleChangeItem(selectedVal, 'language')
+                }
+              />
+            )}
+            style={{ alignItems: 'flex-start' }}
+          />
+        ) : (
+          <RenderIconText image={Translate} text={t('PROFILE.language')} />
+        )
     },
     {
       id: 3,
-      accContentDetail: () => <ChangeUsertype />,
-      renderAccordionTitle: () => (
-        <RenderIconText image={UserSwitch} text={t('PROFILE.userType')} />
-      )
+      accordionSummaryClassName:
+        selectedTab === PROFILE_TAB_VALUES.changeUserType
+          ? classes.accordionSummaryExpanded
+          : classes.accordionSummary,
+      expanded: selectedTab === PROFILE_TAB_VALUES.changeUserType,
+      renderAccordionTitle: () =>
+        selectedTab === PROFILE_TAB_VALUES.changeUserType ? (
+          <RenderIconText
+            image={UserSwitch}
+            renderDetail={() => (
+              <UHSelectComp
+                initialValue={userDetails?.user_type_id}
+                labelData={userTypeData}
+                handleChangeItem={handleChangeItem}
+              />
+            )}
+            style={{ alignItems: 'flex-start' }}
+          />
+        ) : (
+          <RenderIconText image={UserSwitch} text={t('PROFILE.userType')} />
+        )
     }
   ];
 
-  const staticContents = [
-    { id: 1, text: t('PROFILE.help'), image: Help },
-    { id: 2, text: t('PROFILE.about'), image: Outline },
-    { id: 3, text: t('PROFILE.logout'), image: SignOut }
-  ];
-
-  const renderExpandIcons = (isActiveAccordion: boolean) => {
+  const renderMyAccountExpandIcons = (isActiveAccordion: boolean) => {
     if (isActiveAccordion) {
       return <ExpandMore />;
     } else {
       return <ChevronRight />;
+    }
+  };
+
+  const renderChangeLangUserExpandIcons = (isActiveAccordion: boolean) => {
+    if (isActiveAccordion) {
+      return <ExpandLess style={{ alignSelf: 'flex-start' }} />;
+    } else {
+      return <ExpandMore />;
     }
   };
 
@@ -215,28 +319,35 @@ function Profile() {
           config={accordionContent}
           accordionSummaryClassName={classes.accordionSummaryStyle}
           accordionOuterContainerClassName={classes.accordionProfileStyle}
+          accordionDetailClassName={classes.accordionDetailStyle}
           isBorder={true}
           customActiveAccItem={[selectedTab]}
-          renderExpandIcons={renderExpandIcons}
+          renderExpandIcons={renderMyAccountExpandIcons}
+          expanded={selectedTab === PROFILE_TAB_VALUES.myAccount}
         />
         <Grid className={classes.tabContentEachContainer}>
           <UHAccordionComp
-            config={accContent}
-            accordionSummaryClassName={classes.accordionSummary}
+            config={accordionContentSub}
+            renderExpandIcons={renderChangeLangUserExpandIcons}
             accordionOuterContainerClassName={classes.accordionClassName}
             customActiveAccItem={[selectedTab]}
           />
-          {staticContents.map((item, index) => {
-            return (
-              <Grid
-                key={index}
-                className={classes.accordionStaticContentStyle}
-                onClick={() => handleClick(item?.id)}
-              >
-                <RenderIconText image={item?.image} text={item?.text} />
-              </Grid>
-            );
-          })}
+          {staticContents.length &&
+            staticContents.map((item, index) => {
+              return (
+                <Grid
+                  key={index}
+                  className={
+                    item.id === staticContents.length
+                      ? classes.accordionStaticContentStyle1
+                      : classes.accordionStaticContentStyle
+                  }
+                  onClick={() => handleClick(item?.id)}
+                >
+                  <RenderIconText image={item?.image} text={item?.text} />
+                </Grid>
+              );
+            })}
         </Grid>
       </Grid>
     );
@@ -267,6 +378,6 @@ function Profile() {
       )}
     </>
   );
-}
+};
 
 export default Profile;

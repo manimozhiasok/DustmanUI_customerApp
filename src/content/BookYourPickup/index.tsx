@@ -5,6 +5,7 @@ import {
   ChooseCategoryComponent,
   Loader,
   UHAccordionComp,
+  UHPickYourAddressComp,
   UHSelectYourPickUpComp
 } from 'src/components';
 import { Grid } from '@material-ui/core';
@@ -17,7 +18,6 @@ import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
 import TrashDetails from './TrashDetails';
 import SelectVehicle from './SelectVehicle';
-import PickupAddress from './PickupAddress';
 import OrderConfirmation from './OrderConfirmation';
 import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
@@ -26,6 +26,7 @@ import { HTTP_STATUSES, TRASH_CATEGORY_ID } from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import useUserInfo from 'src/hooks/useUserInfo';
+import { AddressData } from 'src/Services/customerAddressService';
 
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
@@ -59,7 +60,7 @@ function BookYourPickup() {
   const [trashData, setTrashData] = useState([]);
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
-  const { userDetails } = useUserInfo();
+  const { userDetails, userAddressDetails, updateUserInfo } = useUserInfo();
 
   // const pickAddressFields = [
   //   'address_line1',
@@ -133,6 +134,33 @@ function BookYourPickup() {
     });
   };
 
+  const handleChangeAddress = (selectedAddressId: number) => {
+    edit.update({
+      order_address_id: selectedAddressId
+    });
+  };
+
+  const handleSaveButtonClick = async (
+    addressData: AddressData,
+    modalClose: () => void
+  ) => {
+    const response: any = await API_SERVICES.customerAddressService.create(
+      userDetails?.customer_id,
+      {
+        data: addressData,
+        successMessage: 'New address added successfully',
+        failureMessage: 'Failed to add new address'
+      }
+    );
+    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (response?.data?.message) {
+        let id = response?.data?.message?.customer_id;
+        updateUserInfo(id);
+        modalClose();
+      }
+    }
+  };
+
   const bookYourPickupAccordionContent = [
     {
       id: 1,
@@ -171,7 +199,13 @@ function BookYourPickup() {
     {
       id: 5,
       title: t('pickupAddress'),
-      accContentDetail: () => <PickupAddress edit={edit} />,
+      accContentDetail: () => (
+        <UHPickYourAddressComp
+          handleSaveButtonClick={handleSaveButtonClick}
+          addressData={userAddressDetails}
+          handleChangeAddress={handleChangeAddress}
+        />
+      ),
       tileIcon: PickupAddressIcon
     },
     {

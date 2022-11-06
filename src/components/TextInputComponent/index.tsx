@@ -42,6 +42,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
       borderColor: (props) => props.borderColor || theme.Colors.lightGrey,
       borderWidth: '1px'
+    },
+    '& .MuiInput-root': {
+      fontSize: theme.MetricsSizes.small_xx + 1,
+      fontWeight: theme.fontWeight.bold,
+      color: theme.Colors.mediumGrey
+    },
+    '& .MuiInput-underline::before, .MuiInput-underline:hover::before': {
+      borderBottom: '0.5px solid',
+      borderBottomColor: theme.Colors.greyDark
+    },
+    '& .MuiInput-underline::after': {
+      borderBottom: '0.5px solid',
+      borderBottomColor: theme.Colors.secondary
     }
   },
   helperRoot: {
