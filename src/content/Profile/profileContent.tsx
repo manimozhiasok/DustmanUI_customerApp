@@ -99,7 +99,7 @@ const ProfileContent = ({
           inputLabelFont={theme.MetricsSizes.small_x}
           labelColor={theme.Colors.whiteGreyLight}
           variant="standard"
-          autoFocus
+          // autoFocus
           value={edit.getValue('first_name')}
           name="first_name"
           onChange={handleChange}
@@ -120,7 +120,7 @@ const ProfileContent = ({
           inputLabelFont={theme.MetricsSizes.small_x}
           labelColor={theme.Colors.whiteGreyLight}
           variant="standard"
-          autoFocus
+          // autoFocus
           onChange={handleChange}
           value={edit.getValue('last_name')}
           name="last_name"
@@ -141,7 +141,7 @@ const ProfileContent = ({
           inputLabelFont={theme.MetricsSizes.small_x}
           labelColor={theme.Colors.whiteGreyLight}
           variant="standard"
-          autoFocus
+          // autoFocus
           onChange={handleChange}
           value={edit.getValue('email')}
           name="email"
@@ -162,7 +162,7 @@ const ProfileContent = ({
           inputLabelFont={theme.MetricsSizes.small_x}
           labelColor={theme.Colors.whiteGreyLight}
           variant="standard"
-          autoFocus
+          // autoFocus
           onChange={handleChange}
           value={edit.getValue('mobile_number')}
           name="mobile_number"

@@ -213,6 +213,7 @@ const Profile = () => {
       accContentDetail: () => <ProfileContent />,
       renderAccordionTitle: () => (
         <ListItemCell
+          isEditIcon
           avatarImg={
             userDetails?.image_url !== ''
               ? userDetails?.image_url

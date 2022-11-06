@@ -1,5 +1,13 @@
-import { Avatar, Badge, Chip, Grid, Typography } from '@material-ui/core';
+import {
+  Avatar,
+  Badge,
+  Chip,
+  Grid,
+  IconButton,
+  Typography
+} from '@material-ui/core';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { Create } from '@material-ui/icons';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   textStyle: {
@@ -23,7 +31,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     paddingLeft: theme.spacing(1),
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   chipStyle: {
     color: theme.Colors.greyNobel,
@@ -31,6 +39,15 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     fontWeight: theme.fontWeight.regular,
     borderColor: theme.Colors.whiteGreyLight,
     border: '1px solid'
+  },
+  editIconStyle: {
+    color: theme.Colors.primary,
+    bottom: 0,
+    position: 'absolute',
+    background: theme.Colors.grey,
+    right: 0,
+    width: 10,
+    height: 10
   }
 }));
 type Props = {
@@ -46,6 +63,7 @@ type Props = {
   chipVariant?: any;
   chipSize?: any;
   chipText?: string;
+  isEditIcon?: boolean;
 };
 
 const ListItemCell = (props: Props) => {
@@ -64,7 +82,8 @@ const ListItemCell = (props: Props) => {
     subTitleStyle,
     chipVariant,
     chipSize,
-    chipText
+    chipText,
+    isEditIcon = false
   } = props;
 
   return (
@@ -76,11 +95,22 @@ const ListItemCell = (props: Props) => {
       }}
     >
       {avatarImg && (
-        <Grid item style={{ marginRight: theme.MetricsSizes.small_xxx }}>
+        <Grid
+          item
+          style={{
+            marginRight: theme.MetricsSizes.small_xxx,
+            position: 'relative'
+          }}
+        >
           <Avatar
             src={avatarImg}
             className={`${classes.avatarStyle} ${avatarClassNameStyles}`}
           />
+          {isEditIcon && (
+            <IconButton className={classes.editIconStyle}>
+              <Create style={{ padding: theme.MetricsSizes.tiny }} />
+            </IconButton>
+          )}
         </Grid>
       )}
       <Grid item xs>
@@ -102,7 +132,7 @@ const ListItemCell = (props: Props) => {
               <Chip
                 label={chipText}
                 size={chipSize || 'small'}
-                variant= {chipVariant || 'outlined'}
+                variant={chipVariant || 'outlined'}
                 className={classes.chipStyle}
               />
             </Grid>
