@@ -30,7 +30,7 @@ const useStyles = makeStyles<Theme, StyleProp>((theme: Theme) =>
       flexDirection: 'column',
       marginTop: theme.spacing(1)
     },
-    imageContainer: { paddingRight: theme.spacing(2) },
+    imageContainer: { paddingRight: theme.spacing(2), width: 100, height: 100 },
     subText: {
       fontSize: theme.MetricsSizes.tiny_xxx,
       color: theme.Colors.darkGrey
@@ -129,7 +129,7 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
           <Grid item className={classes.imageContainer}>
             <img
               src={orderItems?.order_images[0]}
-              alt="order_images"
+              alt="images"
               className={classes.imageStyle}
             />
           </Grid>
