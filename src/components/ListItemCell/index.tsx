@@ -47,7 +47,10 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     background: theme.Colors.grey,
     right: 0,
     width: 10,
-    height: 10
+    height: 10,
+    '&:hover': {
+      background: theme.Colors.grey
+    }
   }
 }));
 type Props = {
@@ -64,6 +67,7 @@ type Props = {
   chipSize?: any;
   chipText?: string;
   isEditIcon?: boolean;
+  onClickEditIcon?: () => void;
 };
 
 const ListItemCell = (props: Props) => {
@@ -83,7 +87,8 @@ const ListItemCell = (props: Props) => {
     chipVariant,
     chipSize,
     chipText,
-    isEditIcon = false
+    isEditIcon = false,
+    onClickEditIcon
   } = props;
 
   return (
@@ -107,7 +112,10 @@ const ListItemCell = (props: Props) => {
             className={`${classes.avatarStyle} ${avatarClassNameStyles}`}
           />
           {isEditIcon && (
-            <IconButton className={classes.editIconStyle}>
+            <IconButton
+              className={classes.editIconStyle}
+              onClick={onClickEditIcon}
+            >
               <Create style={{ padding: theme.MetricsSizes.tiny }} />
             </IconButton>
           )}

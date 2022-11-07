@@ -42,7 +42,8 @@ export const CUSTOMER_ORDER_STATUS = {
 export const PROFILE_TAB_VALUES = {
   myAccount: 1,
   changeLanguage: 2,
-  changeUserType: 3
+  changeUserType: 3,
+  orderManagement: 3
 };
 
 export const HANDLE_SUBMIT = {

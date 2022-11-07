@@ -30,6 +30,7 @@ import { ChevronRight, ExpandLess, ExpandMore } from '@material-ui/icons';
 import { UHIconTextProps } from 'src/components/UHIconTextComp';
 import { useNavigate } from 'react-router';
 import { API_SERVICES } from 'src/Services';
+import toast from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -207,6 +208,8 @@ const Profile = () => {
     }
   };
 
+  const onClickEditIcon = () => {};
+
   const accordionContent = [
     {
       id: 1,
@@ -214,6 +217,7 @@ const Profile = () => {
       renderAccordionTitle: () => (
         <ListItemCell
           isEditIcon
+          onClickEditIcon={onClickEditIcon}
           avatarImg={
             userDetails?.image_url !== ''
               ? userDetails?.image_url
@@ -310,6 +314,7 @@ const Profile = () => {
     if (id === 3) {
       localStorage.removeItem('customerId');
       navigateTo('/dustman', { replace: true });
+      toast.success('User logged out successfully!');
     }
   };
 
