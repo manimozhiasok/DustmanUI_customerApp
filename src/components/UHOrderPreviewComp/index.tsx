@@ -28,9 +28,10 @@ const useStyles = makeStyles<Theme, StyleProp>((theme: Theme) =>
     contentContainer: {
       display: 'flex',
       flexDirection: 'column',
-      marginTop: theme.spacing(1)
+      marginTop: theme.spacing(1),
+      marginLeft: theme.spacing(2)
     },
-    imageContainer: { paddingRight: theme.spacing(2), width: 100, height: 100 },
+
     subText: {
       fontSize: theme.MetricsSizes.tiny_xxx,
       color: theme.Colors.darkGrey
@@ -122,11 +123,10 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
       <Grid
         container
         className={classes.outerContainer}
-        direction="row"
         alignItems={isCheckBox ? 'center' : 'flex-start'}
       >
-        <Grid container item xs direction="row">
-          <Grid item className={classes.imageContainer}>
+        <Grid container item xs>
+          <Grid item>
             <img
               src={orderItems?.order_images[0]}
               alt="images"
