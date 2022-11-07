@@ -43,27 +43,21 @@ const useStyles = makeStyles((theme: Theme) => {
   };
 });
 
-const ChooseDropLocation = ({ data, edit }) => {
+const ChooseDropLocation = ({ data, edit, handleChangeAddress }) => {
   const { vendorAddressDetails } = useVendorInfo();
   const [selectedValue, setSelectedValue] = useState(0);
   const classes = useStyles();
 
-  const handleChange = (event: any, check) => {
+  const handleChange = (event: any) => {
     setSelectedValue(parseInt(event.target.value));
-    edit.update({
-      order_address_id: parseInt(event.target.value)
-    });
+    handleChangeAddress(parseInt(event.target.value));
   };
 
   return (
     <Grid container>
       <RadioGroup>
-        {data?.length
-          ? data.map((item, index) => {
-              {
-                /* {vendorAddressDetails?.length
-          ? vendorAddressDetails.map((item, index) => { */
-              }
+        {vendorAddressDetails?.length
+          ? vendorAddressDetails.map((item, index) => {
               return (
                 <>
                   <Grid container key={index}>
@@ -74,20 +68,18 @@ const ChooseDropLocation = ({ data, edit }) => {
                           justifyContent: 'space-between'
                         }}
                         labelPlacement="start"
-                        //key={item.dustman_location}
-                        value={item.dustman_location}
-                        //checked={selectedValue === item.id}
-                        id={item.id}
+                        key={item.dustman_location}
+                        value={item.id}
                         control={
                           <Radio
-                            //checked={selectedValue === item.id}
+                            checked={selectedValue === item.id}
                             className={classes.radio}
                             onChange={handleChange}
                           />
                         }
                         label={
                           <Typography className={classes.radioLableStyle}>
-                            {item.dustman_location}
+                            {item.city}
                           </Typography>
                         }
                       />
@@ -97,8 +89,7 @@ const ChooseDropLocation = ({ data, edit }) => {
                         variant={'h6'}
                         className={classes.leftContent}
                       >
-                        {item.address_line1}, {item.address_line2},{' '}
-                        {item.address_line3}
+                        {item.address}
                       </Typography>
                     </Grid>
                     <Grid item xs={11}>
@@ -106,7 +97,7 @@ const ChooseDropLocation = ({ data, edit }) => {
                         variant={'h6'}
                         className={classes.leftContent}
                       >
-                        {item.dustman_location}, {item.city}
+                        {item.city}
                       </Typography>
                     </Grid>
                     <Grid item xs={1} container justifyContent="flex-end">
@@ -120,7 +111,7 @@ const ChooseDropLocation = ({ data, edit }) => {
                       </Typography>
                     </Grid>
                   </Grid>
-                  {index === data?.length - 1 ? null : (
+                  {index === vendorAddressDetails?.length - 1 ? null : (
                     <Divider className={classes.dividerStyle} />
                   )}
                 </>

@@ -9,7 +9,6 @@ import { ButtonComp, DialogContentDetails } from 'src/components';
 import { useTranslation } from 'react-i18next';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 import { getDateFormat } from 'src/Utils';
-import useUserInfo from 'src/hooks/useUserInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -37,7 +36,6 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
   const theme = useTheme();
   const { t } = useTranslation();
   const { vendorAddressDetails, vendorDetails } = useVendorInfo();
-  const { userDetails } = useUserInfo();
   const timeSlotDetails = [
     {
       id: 1,
@@ -73,12 +71,13 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
 
   const getAddressData =
     (edit.getValue('vendor_order_drop_details')?.dustman_location_id &&
-    vendorAddressDetails?.length &&
-    vendorAddressDetails.filter(
-        (item) => item.id === edit.getValue('vendor_order_drop_details')?.dustman_location_id
+      vendorAddressDetails?.length &&
+      vendorAddressDetails.filter(
+        (item) =>
+          item.id ===
+          edit.getValue('vendor_order_drop_details')?.dustman_location_id
       )) ||
     [];
-    console.log("getAddressData",getAddressData);
 
   const getSlotValues = () => {
     if (
@@ -96,7 +95,8 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
           .getMonth
       } ${
         timeSlotDetails.find(
-          (item) => item.value === edit.getValue('vendor_order_drop_details')?.slot
+          (item) =>
+            item.value === edit.getValue('vendor_order_drop_details')?.slot
         ).time
       }`;
       return data;
@@ -110,8 +110,7 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.userName'),
-      //value: edit.getValue('name')
-      value: userDetails?.first_name
+      value: vendorDetails?.name
     },
     { content: t('category'), value: getTrashValue() },
 
@@ -121,9 +120,7 @@ function DropOrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.mobile'),
-      //value: getAddressData[0]?.mobile_number ?? ''
-      //value: vendorDetails?.mobile_number ?? ''
-      value: userDetails?.mobile_number ?? ''
+      value: getAddressData[0]?.mobile_number ?? ''
     }
   ];
 

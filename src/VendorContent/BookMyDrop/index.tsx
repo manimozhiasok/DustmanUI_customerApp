@@ -4,21 +4,17 @@ import { makeStyles } from '@material-ui/styles';
 import {
   ChooseCategoryComponent,
   Loader,
-  UHAccordionComp
+  UHAccordionComp,
+  UHSelectYourPickUpComp
 } from 'src/components';
 import { Grid } from '@material-ui/core';
 import { ChooseCategoryIcon, VectorIcon } from 'src/Assets/Images';
 import { TrashDetailsIcon } from 'src/Assets/Images';
-import { SelectVehicleIcon } from 'src/Assets/Images';
 import { ScheduleYourPickupIcon } from 'src/Assets/Images';
 import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
 import TrashDetails from './TrashDetails';
-// import SelectVehicle from './SelectVehicle';
-import ScheduleYourPickup from './ScheduleYourPickup';
-// import PickupAddress from './PickupAddress';
-import OrderConfirmation from './DropOrderConfirmation';
 import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
@@ -103,11 +99,8 @@ function BookMyDrop() {
         }
       }
       if (response[1]?.status < HTTP_STATUSES.BAD_REQUEST) {
-        console.log('response1', response[1]);
-
-        if (response[1]?.data) {
-          setLocation(response[1].data);
-          // setLocation(response[1].data);
+        if (response[1]?.data?.Location) {
+          setLocation(response[1].data.Location);
         }
       }
     } catch (err) {
@@ -124,6 +117,25 @@ function BookMyDrop() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  const handleChangeAddress = (selectedAddressId: number) => {
+    edit.update({
+      vendor_order_drop_details: {
+        ...edit.edits.vendor_order_drop_details,
+        dustman_location_id: selectedAddressId
+      }
+    });
+  };
+
+  const updateSelectedDate = (dateString: string, slot: string) => {
+    edit.update({
+      vendor_order_drop_details: {
+        ...edit.edits.vendor_order_drop_details,
+        pickup_time: dateString,
+        slot: slot
+      }
+    });
+  };
 
   const bookMyDropAccordionContent = [
     {
@@ -151,14 +163,24 @@ function BookMyDrop() {
     {
       id: 3,
       title: t('scheduleYourPickup'),
-      accContentDetail: () => <ScheduleYourPickup edit={edit} />,
+      accContentDetail: () => (
+        <UHSelectYourPickUpComp
+          updateSelectedDate={updateSelectedDate}
+          activeTileColor={theme.Colors.orangePrimary}
+          activeButtonColor={theme.Colors.orangePrimary}
+        />
+      ),
       tileIcon: ScheduleYourPickupIcon
     },
     {
       id: 4,
       title: t('chooseDropLocation'),
       accContentDetail: () => (
-        <ChooseDropLocation data={location} edit={edit} />
+        <ChooseDropLocation
+          data={location}
+          edit={edit}
+          handleChangeAddress={handleChangeAddress}
+        />
       ),
       tileIcon: PickupAddressIcon
     },

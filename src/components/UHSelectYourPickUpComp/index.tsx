@@ -41,10 +41,12 @@ const useStyles = makeStyles<Theme, Props>((theme) => {
 
 const UHSelectYourPickUpComp = ({
   updateSelectedDate,
-  activeTileColor
+  activeTileColor,
+  activeButtonColor
 }: {
   updateSelectedDate: (isoDateString: string, slot: string) => void;
   activeTileColor?: string;
+  activeButtonColor?: string;
 }) => {
   const [pickupDate, setPickupDate] = useState<any>(new Date());
   const [selectedSlotVal, setSelectedSlotVal] = useState<any>({});
@@ -131,7 +133,7 @@ const UHSelectYourPickUpComp = ({
           <SlotButtonComp
             timeSlotDetails={timeSlotDetails}
             handleChangeSlot={handleChangeSlot}
-            activeButtonColor={theme.Colors.secondary}
+            activeButtonColor={activeButtonColor}
             // activeButtonVal={edit.getValue('customer_order_details').slot}
           />
         </Grid>

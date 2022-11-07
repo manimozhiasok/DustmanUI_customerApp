@@ -192,7 +192,7 @@ function BookYourPickup() {
       id: 4,
       title: t('scheduleYourPickup'),
       accContentDetail: () => (
-        <UHSelectYourPickUpComp updateSelectedDate={updateSelectedDate} />
+        <UHSelectYourPickUpComp updateSelectedDate={updateSelectedDate} activeButtonColor={theme.Colors.secondary}/>
       ),
       tileIcon: ScheduleYourPickupIcon
     },

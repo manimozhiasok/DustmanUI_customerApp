@@ -130,8 +130,8 @@ export const vendorPickupDropService = {
       url: `${Config.BASE_URL}/api/getDustmanLocation`,
       method: 'get'
     });
-    return vendorDropOrder.vendorDropGet;
-    //return apiRequest(options);
+    //return vendorDropOrder.vendorDropGet;
+    return apiRequest(options);
   },
 
   getAllTrashCategory: async (categoryTypeId: number, userTypeId: number) => {
