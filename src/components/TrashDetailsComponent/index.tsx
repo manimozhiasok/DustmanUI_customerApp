@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Grid, makeStyles, Theme, useTheme } from '@material-ui/core';
-import { LeftContent } from './TrashDetailsContent';
 import { AddPhotoAlternate } from '@material-ui/icons';
 import { ButtonComp } from 'src/components';
-import { API_SERVICES } from 'src/Services';
-import { HTTP_STATUSES } from 'src/Config/constant';
 import CarouselContent from 'src/components/Carousel';
 import { useTranslation } from 'react-i18next';
+import { TrashDetailsContent } from './TrashDetailContent';
 
 const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
@@ -27,8 +25,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.MetricsSizes.large_xx * 2
   },
   gridStyle: {
-    marginTop: theme.spacing(2.8),
-    backgroundColor: theme.Colors.lightBlackGrey,
+    marginTop: theme.spacing(3.5),
+    backgroundColor: '#e2e1e1',
     padding: theme.spacing(1, 0, 1, 0),
     borderRadius: theme.spacing(1)
   }
@@ -37,42 +35,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 type Props = {
   trashData?: any;
   edit?: any;
+  onUploadFiles?: any;
+  uploadedImages?: any;
 };
 
-function TrashDetails({ edit, trashData }: Props) {
+function TrashDetailsComponent({
+  edit,
+  trashData,
+  onUploadFiles,
+  uploadedImages
+}: Props) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const uploadedImages = edit.getValue('order_images');
   const length = uploadedImages.length;
-
-  const onUploadFiles = async (event: any) => {
-    let formData = new FormData();
-    let selectedImages = event.target.files;
-    for (let key in selectedImages) {
-      formData.append('file', selectedImages[key]);
-    }
-    const uploadImageRes: any =
-      await API_SERVICES.imageUploadService.uploadImage(formData);
-    if (uploadImageRes?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (uploadImageRes?.data?.images.length) {
-        let imageData = [];
-        uploadImageRes?.data?.images.map((item) => {
-          imageData.push({ image_url: item.Location });
-        });
-        if (imageData?.length) {
-          edit.update({
-            order_images: [...uploadedImages, ...imageData]
-          });
-        }
-      }
-    }
-  };
 
   return (
     <Grid container spacing={2} justifyContent="center">
       <Grid item xs={6}>
-        <LeftContent edit={edit} trashData={trashData} />
+        <TrashDetailsContent edit={edit} trashData={trashData} />
       </Grid>
       <Grid item xs={6}>
         <Grid className={classes.gridStyle}>
@@ -94,4 +75,4 @@ function TrashDetails({ edit, trashData }: Props) {
   );
 }
 
-export default TrashDetails;
+export default TrashDetailsComponent;

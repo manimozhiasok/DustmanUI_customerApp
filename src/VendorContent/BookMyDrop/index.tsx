@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import {
   ChooseCategoryComponent,
   Loader,
+  TrashDetailsComponent,
   UHAccordionComp,
   UHSelectYourPickUpComp
 } from 'src/components';
@@ -14,7 +15,6 @@ import { ScheduleYourPickupIcon } from 'src/Assets/Images';
 import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
-import TrashDetails from './TrashDetails';
 import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
@@ -63,6 +63,7 @@ function BookMyDrop() {
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
   const { vendorDetails } = useVendorInfo();
+  const uploadedImages = edit.getValue('order_images');
 
   const handleVendorDropOrder = async () => {
     try {
@@ -117,6 +118,28 @@ function BookMyDrop() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+  const onUploadFiles = async (event: any) => {
+    let formData = new FormData();
+    let selectedImages = event.target.files;
+    for (let key in selectedImages) {
+      formData.append('file', selectedImages[key]);
+    }
+    const uploadImageRes: any =
+      await API_SERVICES.imageUploadService.uploadImage(formData);
+    if (uploadImageRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (uploadImageRes?.data?.images.length) {
+        let imageData = [];
+        uploadImageRes?.data?.images.map((item) => {
+          imageData.push({ image_url: item.Location });
+        });
+        if (imageData?.length) {
+          edit.update({
+            order_images: [...uploadedImages, ...imageData]
+          });
+        }
+      }
+    }
+  };
 
   const handleChangeAddress = (selectedAddressId: number) => {
     edit.update({
@@ -156,7 +179,12 @@ function BookMyDrop() {
       id: 2,
       title: t('trashDetails'),
       accContentDetail: () => (
-        <TrashDetails edit={edit} trashData={trashData} />
+        <TrashDetailsComponent
+          edit={edit}
+          trashData={trashData}
+          uploadedImages={uploadedImages}
+          onUploadFiles={onUploadFiles}
+        />
       ),
       tileIcon: TrashDetailsIcon
     },

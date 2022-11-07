@@ -1,17 +1,14 @@
+import React from 'react';
 import {
-  Box,
   Grid,
   InputAdornment,
   makeStyles,
-  TextareaAutosize,
   Theme,
   Typography,
   useTheme
 } from '@material-ui/core';
-import React from 'react';
 import { TextInputComponent } from 'src/components';
 import { useTranslation } from 'react-i18next';
-
 const useStyles = makeStyles((theme: Theme) => ({
   textStyle: {
     color: theme.Colors.deepGrey
@@ -35,10 +32,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   textarea: {
     resize: 'both',
     marginTop: '-50px'
+  },
+  spanStyle: {
+    fontWeight: theme.fontWeight.regular,
+    fontSize: theme.MetricsSizes.small_x,
+    color: theme.Colors.deepGrey
   }
 }));
 
-export const LeftContent = ({ edit, trashData }) => {
+export const TrashDetailsContent = ({ edit, trashData }) => {
   const theme = useTheme();
   const classes = useStyles();
   const { t } = useTranslation();
@@ -61,7 +63,7 @@ export const LeftContent = ({ edit, trashData }) => {
         <TextInputComponent
           inputLabel={t('category')}
           labelColor={theme.Colors.deepGrey}
-          textColor={theme.Colors.darkGrey}
+          textColor={theme.Colors.primary}
           backgroundColor={theme.Colors.lightWhiteGrey}
           value={getTrashValue()}
           borderColor={'transparent'}
@@ -75,16 +77,16 @@ export const LeftContent = ({ edit, trashData }) => {
           inputLabel={t('PICKUP.weight')}
           placeholderText={t('PICKUP.approxWeight')}
           value={edit.getValue('quantity_kg')}
-          onChange={(e) =>
-            edit.update({ quantity_kg: parseInt(e.target.value) })
-          }
+          onChange={(e) => edit.update({ quantity_kg: e.target.value })}
           labelColor={theme.Colors.deepGrey}
-          textColor={theme.Colors.lightBlack}
+          textColor={theme.Colors.primary}
           backgroundColor={theme.Colors.lightWhiteGrey}
           borderColor={'transparent'}
           inputHeight={theme.MetricsSizes.large_xxx}
           InputProps={{
-            endAdornment: <InputAdornment position="start">kg.</InputAdornment>,
+            endAdornment: (
+              <InputAdornment position="start">{'kg.'}</InputAdornment>
+            ),
             style: {
               backgroundColor: theme.Colors.lightWhiteGrey
             }
@@ -96,9 +98,7 @@ export const LeftContent = ({ edit, trashData }) => {
         <Grid item xs={12}>
           <Typography variant="h4" className={classes.textStyle}>
             {t('PICKUP.description')}
-          </Typography>
-          <Typography variant="subtitle2" color="primary">
-            (Optional)
+            <span className={classes.spanStyle}> (Optional)</span>
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -107,6 +107,7 @@ export const LeftContent = ({ edit, trashData }) => {
             onChange={(e) => edit.update({ description: e.target.value })}
             placeholder={t('PICKUP.anyInstructionsForOurPickupExecutive')}
             backgroundColor={theme.Colors.lightWhiteGrey}
+            textColor={theme.Colors.primary}
             inputHeight={'100%'}
             multiline
             minRows={6}

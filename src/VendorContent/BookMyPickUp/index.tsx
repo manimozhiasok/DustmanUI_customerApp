@@ -4,8 +4,10 @@ import { makeStyles } from '@material-ui/styles';
 import {
   ChooseCategoryComponent,
   Loader,
+  TrashDetailsComponent,
   UHAccordionComp,
-  UHPickYourAddressComp
+  UHPickYourAddressComp,
+  UHSelectYourPickUpComp
 } from 'src/components';
 import { Grid } from '@material-ui/core';
 import { ChooseCategoryIcon, PlusWhite, VectorIcon } from 'src/Assets/Images';
@@ -15,7 +17,6 @@ import { ScheduleYourPickupIcon } from 'src/Assets/Images';
 import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
-import TrashDetails from './TrashDetails';
 import SelectVehicle from './SelectVehicle';
 import ScheduleYourPickup from './ScheduleYourPickup';
 import { useEdit } from 'src/hooks/useEdit';
@@ -70,6 +71,7 @@ function BookMyPickup() {
   const { t } = useTranslation();
   const { vendorDetails, updateVendorInfo, vendorAddressDetails } =
     useVendorInfo();
+  const uploadedImages = edit.getValue('order_images');
 
   // const pickAddressFields = [
   //   'address_line1',
@@ -130,6 +132,37 @@ function BookMyPickup() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+  const onUploadFiles = async (event: any) => {
+    let formData = new FormData();
+    let selectedImages = event.target.files;
+    for (let key in selectedImages) {
+      formData.append('file', selectedImages[key]);
+    }
+    const uploadImageRes: any =
+      await API_SERVICES.imageUploadService.uploadImage(formData);
+    if (uploadImageRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (uploadImageRes?.data?.images.length) {
+        let imageData = [];
+        uploadImageRes?.data?.images.map((item) => {
+          imageData.push({ image_url: item.Location });
+        });
+        if (imageData?.length) {
+          edit.update({
+            order_images: [...uploadedImages, ...imageData]
+          });
+        }
+      }
+    }
+  };
+  const updateSelectedDate = (dateString: string, slot: string) => {
+    edit.update({
+      vendor_order_pickup_details: {
+        ...edit.edits.vendor_order_pickup_details,
+        pickup_time: dateString,
+        slot: slot
+      }
+    });
+  };
 
   const handleChangeAddress = (selectedAddressId: number) => {
     edit.update({
@@ -178,7 +211,12 @@ function BookMyPickup() {
       id: 2,
       title: t('trashDetails'),
       accContentDetail: () => (
-        <TrashDetails edit={edit} trashData={trashData} />
+        <TrashDetailsComponent
+          edit={edit}
+          trashData={trashData}
+          uploadedImages={uploadedImages}
+          onUploadFiles={onUploadFiles}
+        />
       ),
       tileIcon: TrashDetailsIcon
     },
@@ -191,7 +229,9 @@ function BookMyPickup() {
     {
       id: 4,
       title: t('scheduleYourPickup'),
-      accContentDetail: () => <ScheduleYourPickup edit={edit} />,
+      accContentDetail: () => (
+        <UHSelectYourPickUpComp updateSelectedDate={updateSelectedDate} />
+      ),
       tileIcon: ScheduleYourPickupIcon
     },
     {

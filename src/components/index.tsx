@@ -27,3 +27,4 @@ export { default as UHOrderModalComponent } from './UHOrderModalComponent';
 export { default as UHSelectComp } from './UHSelectComp';
 export { default as UHPickYourAddressComp } from './UHPickYourAddressComp';
 export { default as UHAddressModalComp } from './UHAddressModalComp';
+export { default as TrashDetailsComponent } from './TrashDetailsComponent';

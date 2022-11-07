@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import {
   ChooseCategoryComponent,
   Loader,
+  TrashDetailsComponent,
   UHAccordionComp,
   UHPickYourAddressComp,
   UHSelectYourPickUpComp
@@ -16,7 +17,6 @@ import { ScheduleYourPickupIcon } from 'src/Assets/Images';
 import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
-import TrashDetails from './TrashDetails';
 import SelectVehicle from './SelectVehicle';
 import OrderConfirmation from './OrderConfirmation';
 import OrderSuccess from './OrderSuccess';
@@ -61,6 +61,7 @@ function BookYourPickup() {
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
   const { userDetails, userAddressDetails, updateUserInfo } = useUserInfo();
+  const uploadedImages = edit.getValue('order_images');
 
   // const pickAddressFields = [
   //   'address_line1',
@@ -123,6 +124,28 @@ function BookYourPickup() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+  const onUploadFiles = async (event: any) => {
+    let formData = new FormData();
+    let selectedImages = event.target.files;
+    for (let key in selectedImages) {
+      formData.append('file', selectedImages[key]);
+    }
+    const uploadImageRes: any =
+      await API_SERVICES.imageUploadService.uploadImage(formData);
+    if (uploadImageRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (uploadImageRes?.data?.images.length) {
+        let imageData = [];
+        uploadImageRes?.data?.images.map((item) => {
+          imageData.push({ image_url: item.Location });
+        });
+        if (imageData?.length) {
+          edit.update({
+            order_images: [...uploadedImages, ...imageData]
+          });
+        }
+      }
+    }
+  };
 
   const updateSelectedDate = (dateString: string, slot: string) => {
     edit.update({
@@ -178,7 +201,12 @@ function BookYourPickup() {
       id: 2,
       title: t('trashDetails'),
       accContentDetail: () => (
-        <TrashDetails edit={edit} trashData={trashData} />
+        <TrashDetailsComponent
+          edit={edit}
+          trashData={trashData}
+          onUploadFiles={onUploadFiles}
+          uploadedImages={uploadedImages}
+        />
       ),
       tileIcon: SelectVehicleIcon
     },
@@ -192,7 +220,10 @@ function BookYourPickup() {
       id: 4,
       title: t('scheduleYourPickup'),
       accContentDetail: () => (
-        <UHSelectYourPickUpComp updateSelectedDate={updateSelectedDate} activeButtonColor={theme.Colors.secondary}/>
+        <UHSelectYourPickUpComp
+          updateSelectedDate={updateSelectedDate}
+          activeButtonColor={theme.Colors.secondary}
+        />
       ),
       tileIcon: ScheduleYourPickupIcon
     },
