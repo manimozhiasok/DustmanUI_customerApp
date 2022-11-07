@@ -30,10 +30,12 @@ function App() {
     if (userId !== null) {
       updateUserInfo(userId);
       setAuthState(AUTH_STATE.SIGNED_IN);
-    } else if (vendorId !== null) {
+    }
+    if (vendorId !== null) {
       updateVendorInfo(vendorId);
       setAuthState(AUTH_STATE.SIGNED_IN);
-    } else {
+    }
+    if (userId === null || vendorId === null) {
       setAuthState(AUTH_STATE.NOT_LOGGED_ID);
       navigateTo('/dustman', { replace: true });
     }
