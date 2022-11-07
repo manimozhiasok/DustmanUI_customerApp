@@ -39,12 +39,18 @@ type SelectAddressComp = {
   ) => void;
   addressData?: any[];
   handleChangeAddress?: (selectedAddressId: number) => void;
+  bgButtonClr?: string;
+  btnTextClr?: string;
+  imageIcon?: string;
 };
 
 const UHPickYourAddressComp = ({
   handleSaveButtonClick,
   addressData,
-  handleChangeAddress
+  handleChangeAddress,
+  bgButtonClr,
+  btnTextClr,
+  imageIcon
 }: SelectAddressComp) => {
   const theme = useTheme();
   const classes = useStyles();
@@ -105,10 +111,10 @@ const UHPickYourAddressComp = ({
         <Grid container item xs={12} justifyContent="center">
           <ButtonComp
             buttonText={'ADD NEW ADDRESS'}
-            backgroundColor={theme.Colors.white}
+            backgroundColor={bgButtonClr || theme.Colors.white}
             buttonFontSize={theme.MetricsSizes.small_xx + 1}
             variant="outlined"
-            buttonTextColor={theme.Colors.secondary}
+            buttonTextColor={btnTextClr || theme.Colors.secondary}
             buttonFontWeight={theme.fontWeight.bold}
             btnWidth={'190px'}
             style={{
@@ -116,7 +122,7 @@ const UHPickYourAddressComp = ({
               alignSelf: 'center',
               padding: theme.MetricsSizes.tiny_x
             }}
-            startIcon={<img src={Plus} />}
+            startIcon={<img src={imageIcon} />}
             onClickButton={handleAddNewItem}
           />
         </Grid>

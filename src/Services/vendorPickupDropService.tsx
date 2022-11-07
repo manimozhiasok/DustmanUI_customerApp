@@ -36,7 +36,7 @@ type vendorDropDetailsProp = {
     order_items: number[];
     description: string;
     order_images: any[];
-    user_type_id: number,
+    user_type_id: number;
     vendor_order_drop_details: {
       dustman_location_id: string | number;
       pickup_time: string;
@@ -48,7 +48,7 @@ type vendorDropDetailsProp = {
 };
 
 export const vendorPickupDropService = {
-  createPickup: async (
+  createPickupOrder: async (
     vendorId: number,
     { data, successMessage, failureMessage }: vendorPickupDetailsProp
   ) => {

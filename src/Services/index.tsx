@@ -10,6 +10,7 @@ import { vendorRegisterService } from './vendorRegisterService';
 import { vendorCustomerOrderService } from './vendorCustomerOrdersService';
 import { vendorPickupDropService } from './vendorPickupDropService';
 import { vendorMyOrderService } from './vendorMyOrdersService';
+import { vendorAddressService } from './vendorAddressService';
 
 export const API_SERVICES = {
   customerOrderService,
@@ -23,5 +24,6 @@ export const API_SERVICES = {
   vendorRegisterService,
   vendorCustomerOrderService,
   vendorPickupDropService,
-  vendorMyOrderService
+  vendorMyOrderService,
+  vendorAddressService
 };

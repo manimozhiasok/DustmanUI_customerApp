@@ -4,10 +4,11 @@ import { makeStyles } from '@material-ui/styles';
 import {
   ChooseCategoryComponent,
   Loader,
-  UHAccordionComp
+  UHAccordionComp,
+  UHPickYourAddressComp
 } from 'src/components';
 import { Grid } from '@material-ui/core';
-import { ChooseCategoryIcon, VectorIcon } from 'src/Assets/Images';
+import { ChooseCategoryIcon, PlusWhite, VectorIcon } from 'src/Assets/Images';
 import { TrashDetailsIcon } from 'src/Assets/Images';
 import { SelectVehicleIcon } from 'src/Assets/Images';
 import { ScheduleYourPickupIcon } from 'src/Assets/Images';
@@ -17,8 +18,6 @@ import { OrderSuccessIcon } from 'src/Assets/Images';
 import TrashDetails from './TrashDetails';
 import SelectVehicle from './SelectVehicle';
 import ScheduleYourPickup from './ScheduleYourPickup';
-import PickupAddress from './PickupAddress';
-import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
 import {
@@ -31,6 +30,7 @@ import { useTranslation } from 'react-i18next';
 import PickupPlace from './PickupPlace';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 import PickupOrderConfirmation from './PickupOrderConfirmation';
+import { VendorAddressData } from 'src/Services/vendorAddressService';
 
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
@@ -68,7 +68,8 @@ function BookMyPickup() {
   const [trashData, setTrashData] = useState([]);
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
-  const { vendorDetails } = useVendorInfo();
+  const { vendorDetails, updateVendorInfo, vendorAddressDetails } =
+    useVendorInfo();
 
   // const pickAddressFields = [
   //   'address_line1',
@@ -87,7 +88,7 @@ function BookMyPickup() {
       // }
       let orderData = { ...initialValues, ...edit.edits };
       const createVendorRes: any =
-        await API_SERVICES.vendorPickupDropService.createPickup(
+        await API_SERVICES.vendorPickupDropService.createPickupOrder(
           vendorDetails?.vendor_id,
           {
             data: orderData,
@@ -130,6 +131,34 @@ function BookMyPickup() {
     fetchData();
   }, [fetchData]);
 
+  const handleChangeAddress = (selectedAddressId: number) => {
+    edit.update({
+      order_address_id: selectedAddressId
+    });
+  };
+
+  const handleSaveButtonClick = async (
+    addressData: VendorAddressData,
+    modalClose: () => void
+  ) => {
+    const response: any = await API_SERVICES.vendorAddressService.createAddress(
+      vendorDetails?.vendor_id,
+      {
+        data: addressData,
+        successMessage: 'New address added successfully',
+        failureMessage: 'Failed to add new address'
+      }
+    );
+
+    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (response?.data?.address) {
+        let id = response?.data?.address?.vendor_id;
+        updateVendorInfo(id);
+        modalClose();
+      }
+    }
+  };
+
   const bookYourPickupAccordionContent = [
     {
       id: 1,
@@ -168,7 +197,16 @@ function BookMyPickup() {
     {
       id: 5,
       title: t('pickupAddress'),
-      accContentDetail: () => <PickupAddress />,
+      accContentDetail: () => (
+        <UHPickYourAddressComp
+          handleSaveButtonClick={handleSaveButtonClick}
+          addressData={vendorAddressDetails}
+          handleChangeAddress={handleChangeAddress}
+          bgButtonClr={theme.Colors.orangePrimary}
+          btnTextClr={theme.Colors.white}
+          imageIcon={PlusWhite}
+        />
+      ),
       tileIcon: PickupAddressIcon
     },
     {

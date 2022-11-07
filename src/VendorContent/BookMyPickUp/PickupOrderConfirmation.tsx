@@ -7,8 +7,8 @@ import {
 } from '@material-ui/core';
 import { ButtonComp, DialogContentDetails } from 'src/components';
 import { useTranslation } from 'react-i18next';
-import useUserInfo from 'src/hooks/useUserInfo';
 import { getDateFormat } from 'src/Utils';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -35,7 +35,7 @@ function PickupOrderConfirmation({ edit, handleButtonClick, trashData }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const { userAddressDetails, userDetails } = useUserInfo();
+  const { vendorDetails, vendorAddressDetails } = useVendorInfo();
   const timeSlotDetails = [
     {
       id: 1,
@@ -71,8 +71,8 @@ function PickupOrderConfirmation({ edit, handleButtonClick, trashData }) {
 
   const getAddressData =
     (edit.getValue('order_address_id') &&
-      userAddressDetails?.length &&
-      userAddressDetails.filter(
+      vendorAddressDetails?.length &&
+      vendorAddressDetails.filter(
         (item) => item.id === edit.getValue('order_address_id')
       )) ||
     [];
@@ -108,7 +108,7 @@ function PickupOrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.userName'),
-      value: userDetails?.first_name
+      value: vendorDetails?.contact_name
     },
     { content: t('category'), value: getTrashValue() },
 
@@ -118,7 +118,7 @@ function PickupOrderConfirmation({ edit, handleButtonClick, trashData }) {
     },
     {
       content: t('PICKUP.mobile'),
-      value: userDetails?.mobile_number ?? ''
+      value: getAddressData[0]?.mobile_number ?? ''
     }
   ];
 

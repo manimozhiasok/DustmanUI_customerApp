@@ -95,8 +95,16 @@ const UHOrderModalComponent = (props: Props) => {
   ];
 
   const orderVendorContent = [
-    { content: t('ORDER.vendorName'), value: 'vendorName' },
-    { content: t('ORDER.mobileNumber'), value: 'mobile number' }
+    {
+      content: t('ORDER.vendorName'),
+      value: orderData?.vendor_name || orderData.contact_name
+    },
+    {
+      content: t('ORDER.mobileNumber'),
+      value:
+        orderData?.vendor_mobile_number ||
+        orderData.vendor_profile_mobile_number
+    }
   ];
 
   return (

@@ -58,6 +58,7 @@ import confirmVendor from './confirmVendor.svg';
 import yetToConfirmVendor from './yetToConfirmVendor.svg';
 import UserAvatarIcon from './UserAvatarIcon.svg';
 import Plus from './Plus.svg';
+import PlusWhite from './PlusWhite.svg';
 
 export {
   DustmanLogoHorizontal,
@@ -118,5 +119,6 @@ export {
   UserAvatarIcon,
   Plus,
   RoundPattern,
-  DottedPattern
+  DottedPattern,
+  PlusWhite
 };

@@ -9,7 +9,7 @@ import {
   UHSelectYourPickUpComp
 } from 'src/components';
 import { Grid } from '@material-ui/core';
-import { ChooseCategoryIcon, VectorIcon } from 'src/Assets/Images';
+import { ChooseCategoryIcon, Plus, VectorIcon } from 'src/Assets/Images';
 import { TrashDetailsIcon } from 'src/Assets/Images';
 import { SelectVehicleIcon } from 'src/Assets/Images';
 import { ScheduleYourPickupIcon } from 'src/Assets/Images';
@@ -204,6 +204,7 @@ function BookYourPickup() {
           handleSaveButtonClick={handleSaveButtonClick}
           addressData={userAddressDetails}
           handleChangeAddress={handleChangeAddress}
+          imageIcon={Plus}
         />
       ),
       tileIcon: PickupAddressIcon

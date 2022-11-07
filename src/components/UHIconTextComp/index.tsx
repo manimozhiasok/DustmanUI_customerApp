@@ -15,10 +15,15 @@ const useStyles = makeStyles((theme: Theme) => {
       paddingLeft: theme.spacing(1.6)
     },
     blurText: {
-      filter: 'blur(3px)'
+      filter: 'blur(3px)',
+      marginTop: theme.MetricsSizes.small_xxx
     },
     clearText: {
       color: theme.Colors.darkGrey
+    },
+    imageAlign: {
+      display: 'flex',
+      flexDirection: 'column'
     }
   };
 });
@@ -52,11 +57,9 @@ const UHIconTextComp = (props: UHIconTextProps) => {
   return (
     <Grid container {...rest}>
       {icon && (
-        <Grid item>
-          {isCrown && (
-              <img src={CrownIcon} />
-          )}
-            <img src={icon} />
+        <Grid item className={classes.imageAlign}>
+          {isCrown && <img src={CrownIcon} width="16px" height="16px" />}
+          <img src={icon} />
         </Grid>
       )}
       <Grid
