@@ -27,7 +27,7 @@ const Footer = () => {
             <img className="sym" src={f1} alt="" />
           </a>
           <a href="https://www.instagram.com/accounts/login/">
-            <img className="sym" src={f2} alt="" />
+            <img className="sysm" src={f2} alt="" />
           </a>
           <a href="https://www.linkedin.com/">
             <img className="sym" src={f3} alt="" />
