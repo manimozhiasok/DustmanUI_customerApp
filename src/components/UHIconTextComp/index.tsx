@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme: Theme) => {
       paddingLeft: theme.spacing(1.6)
     },
     blurText: {
-      filter: 'blur(3px)',
-      marginTop: theme.MetricsSizes.small_xxx
+      filter: 'blur(5px)',
+      alignSelf: 'end'
     },
     clearText: {
       color: theme.Colors.darkGrey

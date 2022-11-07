@@ -18,13 +18,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(3, 12, 12, 16)
   },
   imageContainer: {
-    paddingLeft: theme.spacing(8)
+    paddingLeft: theme.spacing(8),
+    height: '100%'
   },
   addressContainer: {
     padding: theme.spacing(0, 0, 1, 0)
   },
   tabContainer: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    width: '100%'
+  },
+  tabRoot: {
+    fontSize: theme.MetricsSizes.small_xxx,
+    color: theme.Colors.mediumBlack,
+    fontWeight: theme.fontWeight.regular
+  },
+  selectedTab: {
+    fontWeight: theme.fontWeight.bold,
+    color: theme.Colors.orangePrimary
   }
 }));
 
@@ -54,48 +65,39 @@ function VendorHomePage() {
   };
 
   return (
-    <Grid className={classes.superOuterContainer}>
-      <Grid container>
-        <Grid
-          item
-          xs={selectedTab === tabItems[0]?.id ? 8 : 12}
-          className={classes.addressContainer}
-        >
-          <AddressDisplay />
-        </Grid>
-        <Grid
-          item
-          xs={
-            selectedTab === tabItems[2]?.id
-              ? 8
-              : 12 && selectedTab === tabItems[3]?.id
-              ? 8
-              : 12
-          }
-        >
-          <UHTabComponent
-            currentTabVal={selectedTab}
-            tabContent={tabItems}
-            orientation={ORIENTATION.HORIZONTAL}
-            tabIndicatorColor={theme.Colors.orangePrimary}
-            tabContainerClassName={classes.tabContainer}
-            renderTabContent={renderTabContent}
-            onTabChange={onTabChange}
-          />
-        </Grid>
-        {selectedTab === tabItems[2]?.id && (
-          <Grid item xs={4} className={classes.imageContainer}>
-            <img src={BookYourPageImage} alt="Image" />
-            <img src={BookYourPageImage} alt="Image" />
-          </Grid>
-        )}
-        {selectedTab === tabItems[3]?.id && (
-          <Grid item xs={4} className={classes.imageContainer}>
-            <img src={BookYourPageImage} alt="Image" />
-            <img src={BookYourPageImage} alt="Image" />
-          </Grid>
-        )}
+    <Grid container className={classes.superOuterContainer}>
+      <Grid item xs={12} className={classes.addressContainer}>
+        <AddressDisplay />
       </Grid>
+      <Grid
+        item
+        xs={
+          selectedTab === tabItems[2]?.id || selectedTab === tabItems[3]?.id
+            ? 8
+            : 12
+        }
+      >
+        <UHTabComponent
+          currentTabVal={selectedTab}
+          tabContent={tabItems}
+          orientation={ORIENTATION.HORIZONTAL}
+          tabIndicatorColor={theme.Colors.orangePrimary}
+          tabContainerClassName={classes.tabContainer}
+          renderTabContent={renderTabContent}
+          onTabChange={onTabChange}
+          variant="scrollable"
+          scrollButtons="auto"
+          tabClasses={{
+            root: classes.tabRoot,
+            selected: classes.selectedTab
+          }}
+        />
+      </Grid>
+      {(selectedTab === tabItems[2]?.id || selectedTab === tabItems[3]?.id) && (
+        <Grid item xs className={classes.imageContainer}>
+          <img src={BookYourPageImage} alt="Image" />
+        </Grid>
+      )}
     </Grid>
   );
 }

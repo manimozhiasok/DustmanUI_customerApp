@@ -22,17 +22,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
     paddingLeft: theme.spacing(8),
     position: 'sticky',
-    top: 0
+    top: 0,
+    height: '100%'
   },
   addressContainer: {
     padding: theme.spacing(0, 0, 1, 0)
   },
   tabContainer: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    width: '100%'
   },
   tabRoot: {
     fontSize: theme.MetricsSizes.small_xxx,
-    color: theme.Colors.mediumBlack
+    color: theme.Colors.mediumBlack,
+    fontWeight: theme.fontWeight.regular
   },
   selectedTab: {
     fontWeight: theme.fontWeight.bold,

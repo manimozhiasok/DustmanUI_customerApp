@@ -6,7 +6,8 @@ import {
   Divider,
   Theme,
   Grid,
-  useTheme
+  useTheme,
+  TabsProps
 } from '@material-ui/core';
 import { ORIENTATION } from 'src/Config/constant';
 
@@ -44,7 +45,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
   };
 });
 
-type Props = {
+interface Props extends TabsProps {
   tabContent: any[];
   onTabChange?: (val: any) => void;
   currentTabVal: any;
@@ -55,7 +56,7 @@ type Props = {
   isDivider?: boolean;
   tabContainerClassName?: any;
   tabContentClassName?: any;
-};
+}
 
 const UHTabComponent = (props: Props) => {
   const {
@@ -68,7 +69,8 @@ const UHTabComponent = (props: Props) => {
     tabClasses,
     isDivider = true,
     tabContainerClassName,
-    tabContentClassName
+    tabContentClassName,
+    ...rest
   } = props;
   const classes = useStyles({
     orientation,
@@ -94,6 +96,7 @@ const UHTabComponent = (props: Props) => {
           classes={{
             indicator: classes.indicator
           }}
+          {...rest}
         >
           {tabContent.length &&
             tabContent.map((item, index) => {

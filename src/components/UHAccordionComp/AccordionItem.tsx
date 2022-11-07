@@ -50,7 +50,7 @@ const useAccordionStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export type AccordionCompProps = AccordionProps & {
+export interface AccordionCompProps extends AccordionProps {
   accordionTitle?: React.ReactNode;
   disabled?: boolean;
   onOpen?: (id: string | number) => void;
@@ -68,7 +68,7 @@ export type AccordionCompProps = AccordionProps & {
   tileIcon?: any;
   accContentDetail: () => React.ReactNode;
   renderAccordionTitle: () => React.ReactNode;
-};
+}
 
 export const AccordionItem = (props) => {
   const {
