@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     marginTop: theme.spacing(2)
   },
+  boxMainContainer1: {
+    marginRight: theme.spacing(2)
+  },
   textContainer: {
     display: 'flex',
     flexDirection: 'column'
@@ -60,6 +63,9 @@ const SelectUserComp = ({
       {userTypeItems.map((item, index) => {
         return (
           <Grid className={classes.boxMainContainer} key={index}>
+            <Grid className={classes.boxMainContainer1}>
+              <img src={item.image_url} />
+            </Grid>
             <Grid className={classes.textContainer}>
               <Typography variant="h4" className={classes.textStyle}>
                 {`${item.name} User`}

@@ -16,13 +16,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(3, 12, 12, 16)
   },
   imageContainer: {
-    paddingLeft: theme.spacing(8)
+    paddingLeft: theme.spacing(8),
+    // position:"fixed",
+    // position:"sticky",
+    // position:"-webkit-sticky"
+    position: 'sticky',
+    top: 0
   },
   addressContainer: {
     padding: theme.spacing(0, 0, 1, 0)
   },
   tabContainer: {
     backgroundColor: 'transparent'
+  },
+  tabRoot: {
+    fontSize: theme.MetricsSizes.small_xxx,
+    color: theme.Colors.mediumBlack
+  },
+  selectedTab: {
+    fontWeight: theme.fontWeight.bold,
+    color: theme.Colors.blueMediumDark
   }
 }));
 
@@ -64,6 +77,7 @@ function HomePage() {
             tabContainerClassName={classes.tabContainer}
             renderTabContent={renderTabContent}
             onTabChange={onTabChange}
+            tabClasses={{root: classes.tabRoot,selected: classes.selectedTab}}
           />
         </Grid>
         {selectedTab === tabItems[0]?.id && (
