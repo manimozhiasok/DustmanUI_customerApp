@@ -173,7 +173,7 @@ const UHOrderModalComponent = (props: Props) => {
         </Grid>
         {/* <Grid item xs={6} className={classes.listStyle}>                // Future Use
             <UHIconTextComp isCrown={isCrown} icon={MapTrifold} value={'location'} />
-          </Grid> */}                 
+          </Grid> */}
         <Grid item xs className={classes.listStyle}>
           <UHIconTextComp icon={Scales} value={orderData?.quantity_kg} />
         </Grid>
@@ -260,7 +260,7 @@ const UHOrderModalComponent = (props: Props) => {
           <Grid item xs={12}>
             <DialogContentDetails
               contentDetails={orderVendorContent}
-              leftContentFontSize={theme.MetricsSizes.small_xxx}
+              leftContentFontSize={theme.MetricsSizes.small_xx}
               rightContentFontSize={theme.MetricsSizes.small_xxx}
               leftContentFontWeight={theme.fontWeight.regular}
               rightContentFontWeight={theme.fontWeight.medium}

@@ -5,21 +5,22 @@ import { UHTabComponent } from 'src/components';
 import BookYourPickup from 'src/content/BookYourPickup';
 import Profile from 'src/content/Profile';
 import OrdersPages from 'src/content/OrdersPage';
-import { BookYourPageImage } from 'src/Assets/Images';
+import {
+  BookYourPageImage,
+  RoundPattern,
+  DottedPattern
+} from 'src/Assets/Images';
 import { ORIENTATION } from 'src/Config/constant';
 
 const useStyles = makeStyles((theme: Theme) => ({
   superOuterContainer: {
-    background:
-      'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(14.66deg, #70B245 -27.51%, #FFFFFF 54.57%)',
+    background: '#e2e1e1',
+    // 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(14.66deg, #70B245 -27.51%, #FFFFFF 54.57%)',
     width: '100%',
     padding: theme.spacing(3, 12, 12, 16)
   },
   imageContainer: {
     paddingLeft: theme.spacing(8),
-    // position:"fixed",
-    // position:"sticky",
-    // position:"-webkit-sticky"
     position: 'sticky',
     top: 0
   },
@@ -55,11 +56,33 @@ function HomePage() {
 
   const renderTabContent = (tabVal?: any) => {
     const findActiveTab = tabItems.find(({ id }) => id === tabVal);
-    return <Grid>{findActiveTab ? findActiveTab.component() : null}</Grid>;
+    return (
+      <Grid
+      // style={{
+      //   paddingLeft: 50,
+      //   height: 729,
+      //   position: 'relative',
+      //   overflowY: selectedTab === tabItems[0]?.id ? 'scroll' : 'auto'
+      // }}
+      >
+        {findActiveTab ? findActiveTab.component() : null}
+      </Grid>
+    );
   };
 
   return (
-    <Grid className={classes.superOuterContainer}>
+    <Grid
+      className={classes.superOuterContainer}
+      style={{
+        backgroundImage:
+          selectedTab === tabItems[0]?.id
+            ? `url(${RoundPattern}), url(${DottedPattern})`
+            : 'none',
+        backgroundPositionY: '-6rem, 29rem',
+        backgroundPositionX: '80rem, right',
+        backgroundRepeat: ' no-repeat, no-repeat'
+      }}
+    >
       <Grid container>
         <Grid
           item
@@ -77,7 +100,10 @@ function HomePage() {
             tabContainerClassName={classes.tabContainer}
             renderTabContent={renderTabContent}
             onTabChange={onTabChange}
-            tabClasses={{root: classes.tabRoot,selected: classes.selectedTab}}
+            tabClasses={{
+              root: classes.tabRoot,
+              selected: classes.selectedTab
+            }}
           />
         </Grid>
         {selectedTab === tabItems[0]?.id && (

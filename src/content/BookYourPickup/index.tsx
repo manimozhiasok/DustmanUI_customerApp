@@ -180,13 +180,13 @@ function BookYourPickup() {
       accContentDetail: () => (
         <TrashDetails edit={edit} trashData={trashData} />
       ),
-      tileIcon: TrashDetailsIcon
+      tileIcon: SelectVehicleIcon
     },
     {
       id: 3,
       title: t('selectVehicle'),
       accContentDetail: () => <SelectVehicle edit={edit} />,
-      tileIcon: SelectVehicleIcon
+      tileIcon: TrashDetailsIcon
     },
     {
       id: 4,

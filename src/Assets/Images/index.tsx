@@ -18,6 +18,8 @@ import OrderConfirmationIcon from './OrderConfirmationIcon.svg';
 import OrderSuccessIcon from './OrderSuccessIcon.svg';
 import CheckImageVendor from './CheckImageVendor.svg';
 import VendorLoginImage from './VendorLoginImage.svg';
+import RoundPattern from './Vector3.svg';
+import DottedPattern from './Vector4.svg';
 
 import All from './All.svg';
 import Carton from './Carton.svg';
@@ -114,5 +116,7 @@ export {
   confirmVendor,
   yetToConfirmVendor,
   UserAvatarIcon,
-  Plus
+  Plus,
+  RoundPattern,
+  DottedPattern
 };
