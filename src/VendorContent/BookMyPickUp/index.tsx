@@ -90,7 +90,7 @@ function BookMyPickup() {
       // }
       let orderData = { ...initialValues, ...edit.edits };
       const createVendorRes: any =
-        await API_SERVICES.vendorPickupDropService.createPickupOrder(
+        await API_SERVICES.vendorPickupDropService.createVendorOrder(
           vendorDetails?.vendor_id,
           {
             data: orderData,
@@ -109,7 +109,7 @@ function BookMyPickup() {
   const fetchData = useCallback(async () => {
     try {
       const response: any =
-        await API_SERVICES.vendorPickupDropService.getAllTrashCategory(
+        await API_SERVICES.generalService.getAllTrashCategory(
           TRASH_CATEGORY_ID.vendorPickupTrash,
           USER_TYPE_ID.vendorPickup
         );
@@ -295,7 +295,11 @@ function BookMyPickup() {
       id: 4,
       title: t('scheduleYourPickup'),
       accContentDetail: () => (
-        <UHSelectYourPickUpComp updateSelectedDate={updateSelectedDate} />
+        <UHSelectYourPickUpComp
+          updateSelectedDate={updateSelectedDate}
+          activeTileColor={theme.Colors.orangePrimary}
+          activeButtonColor={theme.Colors.orangePrimary}
+        />
       ),
       tileIcon: ScheduleYourPickupIcon
     },

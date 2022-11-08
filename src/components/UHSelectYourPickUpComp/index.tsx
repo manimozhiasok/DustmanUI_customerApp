@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import Card from '@material-ui/core/Card';
 import { SlotButtonComp } from 'src/components';
 import { TimeSlotDetails } from 'src/components/SlotButtonComp';
@@ -31,10 +32,47 @@ const useStyles = makeStyles<Theme, Props>((theme) => {
       padding: theme.spacing(2, 0, 3, 0)
     },
     calendar: {
+      '&.react-calendar': {
+        maxWidth: '100%',
+        background: theme.Colors.white,
+        border: 'none',
+        borderRadius: theme.MetricsSizes.tiny_x
+      },
       '& .react-calendar__tile--active, .react-calendar__tile--now:enabled:hover, .react-calendar__tile--now:enabled:focus, .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus':
         {
           background: (props) => props.activeTileColor || theme.Colors.secondary
-        }
+        },
+      '& .react-calendar__tile:disabled': {
+        color: theme.Colors.lightGrey,
+        backgroundColor: 'transparent'
+      },
+      '& .react-calendar__month-view__weekdays': {
+        textAlign: 'center',
+        fontWeight: theme.fontWeight.mediumBold,
+        fontSize: '0.75em',
+        color: theme.Colors.slateBlueGrey,
+      },
+      '& .react-calendar__tile--now': {
+        background: theme.Colors.white
+      },
+      '& .react-calendar__month-view__days__day--weekend': {
+        color: theme.Colors.blueBerry,
+        fontSize: '14.2927px',
+        lineHeight: '17px',
+        textDecoration: 'none'
+      },
+      '& .react-calendar__navigation button:disabled': {
+        color: theme.Colors.lightGrey,
+        backgroundColor: 'transparent'
+      },
+      '& .react-calendar__navigation button': {
+        fontWeight: 700,
+        fontSize: '19.6524px',
+        color: theme.Colors.primary
+      },
+      '& abbr[title]': {
+        textDecoration: 'none !important'
+      }
     }
   };
 });

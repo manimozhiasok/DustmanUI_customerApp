@@ -92,6 +92,8 @@ declare module '@material-ui/core/styles' {
       orangePrimary: string;
       greyNobel: string;
       blueBlack: string;
+      blueBerry: string;
+      slateBlueGrey: string;
     };
     general: {
       borderRadiusSm: number;
@@ -203,6 +205,8 @@ declare module '@material-ui/core/styles' {
       blackPrimaryGrey: string;
       greyNobel: string;
       blueBlack: string;
+      blueBerry: string;
+      slateBlueGrey: string;
     };
     general: {
       borderRadiusSm: number;

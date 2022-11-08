@@ -13,7 +13,9 @@ const defaultColors = {
     dark: '#263238',
     200: '#010A44',
     a800: '#1C1C1E',
-    100: '#103D43'
+    100: '#103D43',
+    a700: '#454A5F',
+    a300: '#a6acc4'
   },
   GREEN: {
     900: '#6CB044',
@@ -115,7 +117,9 @@ const Colors = {
   greyAccent: defaultColors.GREY['a900'],
   whiteGreyLight: defaultColors.GREY['a400'],
   greyNobel: defaultColors.GREY['aa700'],
-  blueBlack: defaultColors.BLACK[600]
+  blueBlack: defaultColors.BLACK[600],
+  blueBerry: defaultColors.BLUE['a700'],
+  slateBlueGrey: defaultColors.BLUE['a300']
 };
 
 const fontWeight = {

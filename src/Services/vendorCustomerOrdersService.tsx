@@ -34,6 +34,7 @@ export const vendorCustomerOrderService = {
     //return vendorCustomerOrderCompleted.VendorCustomerOrderGet;
     return apiRequest(options);
   },
+  
   vendorBuyingOrder: async (
     vendorId: number,
     { data, successMessage, failureMessage }

@@ -48,26 +48,7 @@ type vendorDropDetailsProp = {
 };
 
 export const vendorPickupDropService = {
-  createPickupOrder: async (
-    vendorId: number,
-    { data, successMessage, failureMessage }: vendorPickupDetailsProp
-  ) => {
-    const options = await apiOptions({
-      url: `${Config.BASE_URL}/api/createVendorOrder/orderer/${vendorId}`,
-      method: 'post',
-      data: data
-    });
-    const toastMessageConfig = {
-      success: {
-        message: successMessage
-      },
-      failure: {
-        message: failureMessage
-      }
-    };
-    return apiRequest(options, toastMessageConfig);
-  },
-  createVendorOrderDrop: async (
+  createVendorOrder: async (
     vendorId: number,
     { data, successMessage, failureMessage }: vendorDropDetailsProp
   ) => {
@@ -86,7 +67,8 @@ export const vendorPickupDropService = {
     };
     return apiRequest(options, toastMessageConfig);
   },
-  replace: async (
+  
+  replaceOrder: async (
     id: number,
     { data, successMessage, failureMessage }: DefaultProp
   ) => {
@@ -106,41 +88,6 @@ export const vendorPickupDropService = {
     return apiRequest(options, toastMessageConfig);
   },
 
-  replacePickup: async (
-    id: number,
-    { data, successMessage, failureMessage }: DefaultProp
-  ) => {
-    const options = await apiOptions({
-      url: `${Config.BASE_URL}/api/replaceOrder/order/${id}`,
-      method: 'put',
-      data: data
-    });
-    const toastMessageConfig = {
-      success: {
-        message: successMessage
-      },
-      failure: {
-        message: failureMessage
-      }
-    };
-    return apiRequest(options, toastMessageConfig);
-  },
-  getDustmanLocation: async () => {
-    const options = await apiOptions({
-      url: `${Config.BASE_URL}/api/getDustmanLocation`,
-      method: 'get'
-    });
-    //return vendorDropOrder.vendorDropGet;
-    return apiRequest(options);
-  },
-
-  getAllTrashCategory: async (categoryTypeId: number, userTypeId: number) => {
-    const options = await apiOptions({
-      url: `${Config.BASE_URL}/api/categories/categoryType/${categoryTypeId}/UserType/${userTypeId}/categoryItems/getAllCategory`,
-      method: 'get'
-    });
-    return apiRequest(options);
-  },
   getAllPickupAddress: async (vendorId: number) => {
     const options = await apiOptions({
       url: `${Config.BASE_URL}/api/getAllCustomerVendorOrderAddresss/vendor/${vendorId}`,

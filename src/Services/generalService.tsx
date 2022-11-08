@@ -25,5 +25,13 @@ export const generalService = {
       method: 'get'
     });
     return apiRequest(options);
-  }
+  },
+
+  getAllTrashCategory: async (categoryTypeId: number, userTypeId: number) => {
+    const options = await apiOptions({
+      url: `${Config.BASE_URL}/api/categories/categoryType/${categoryTypeId}/UserType/${userTypeId}/categoryItems/getAllCategory`,
+      method: 'get'
+    });
+    return apiRequest(options);
+  },
 };

@@ -140,7 +140,7 @@ function OrdersPage() {
       let updateData = {
         status_id: CUSTOMER_ORDER_STATUS.Cancelled
       };
-      const response: any = await API_SERVICES.vendorPickupDropService.replace(
+      const response: any = await API_SERVICES.vendorPickupDropService.replaceOrder(
         orderId,
         {
           data: updateData,

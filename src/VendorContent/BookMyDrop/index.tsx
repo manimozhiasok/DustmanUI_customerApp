@@ -61,18 +61,17 @@ function BookMyDrop() {
   const theme = useTheme();
   const [loading, setLoading] = useState(true);
   const [trashData, setTrashData] = useState([]);
-  const [location, setLocation] = useState([]);
+  const [dustmanLocation, setDustmanLocation] = useState([]);
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
-
-  const { vendorAddressDetails, vendorDetails } = useVendorInfo();
+  const { vendorDetails } = useVendorInfo();
   const uploadedImages = edit.getValue('order_images');
 
   const handleVendorDropOrder = async () => {
     try {
       let orderData = { ...initialValues, ...edit.edits };
       const response: any =
-        await API_SERVICES.vendorPickupDropService.createVendorOrderDrop(
+        await API_SERVICES.vendorPickupDropService.createVendorOrder(
           vendorDetails?.vendor_id,
           {
             data: orderData,
@@ -91,11 +90,11 @@ function BookMyDrop() {
   const fetchData = useCallback(async () => {
     try {
       const response: any = await Promise.all([
-        API_SERVICES.vendorPickupDropService.getAllTrashCategory(
+        API_SERVICES.generalService.getAllTrashCategory(
           TRASH_CATEGORY_ID.vendorDropTrash,
           USER_TYPE_ID.vendorDrop
         ),
-        API_SERVICES.vendorPickupDropService.getDustmanLocation()
+        API_SERVICES.generalService.getDustmanLocation()
       ]);
       if (response[0]?.status < HTTP_STATUSES.BAD_REQUEST) {
         if (response[0]?.data?.categories) {
@@ -104,7 +103,7 @@ function BookMyDrop() {
       }
       if (response[1]?.status < HTTP_STATUSES.BAD_REQUEST) {
         if (response[1]?.data?.Location) {
-          setLocation(response[1].data.Location);
+          setDustmanLocation(response[1].data.Location);
         }
       }
     } catch (err) {
@@ -177,8 +176,8 @@ function BookMyDrop() {
 
   const getAddressData =
     (edit.getValue('vendor_order_drop_details')?.dustman_location_id &&
-      vendorAddressDetails?.length &&
-      vendorAddressDetails.filter(
+    dustmanLocation?.length &&
+    dustmanLocation.filter(
         (item) =>
           item.id ===
           edit.getValue('vendor_order_drop_details')?.dustman_location_id
@@ -222,11 +221,13 @@ function BookMyDrop() {
 
     {
       content: t('address'),
-      value: getAddressData[0]?.address ?? ''
+      value:
+        `${getAddressData[0]?.address_line1}, ${getAddressData[0]?.address_line2}, ${getAddressData[0]?.address_line3}, ${getAddressData[0]?.dustman_location}, ${getAddressData[0]?.city}` ??
+        ''
     },
     {
       content: t('PICKUP.mobile'),
-      value: getAddressData[0]?.mobile_number ?? ''
+      value: vendorDetails?.mobile_number ?? ''
     }
   ];
 
@@ -275,7 +276,7 @@ function BookMyDrop() {
       title: t('chooseDropLocation'),
       accContentDetail: () => (
         <ChooseDropLocation
-          data={location}
+          data={dustmanLocation}
           edit={edit}
           handleChangeAddress={handleChangeAddress}
         />
@@ -287,6 +288,7 @@ function BookMyDrop() {
       title: t('dropOrderConfirmation'),
       accContentDetail: () => (
         <OrderConfirmationComp
+          //edit={edit}
           handleButtonClick={handleVendorDropOrder}
           rightContent={rightContent}
           bgBtnColor={theme.Colors.orangePrimary}
