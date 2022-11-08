@@ -12,7 +12,11 @@ import { Plus } from 'src/Assets';
 import { ButtonComp, UHAddressModalComp } from 'src/components';
 import { AddressData } from 'src/Services/customerAddressService';
 
-const useStyles = makeStyles((theme: Theme) => {
+type styleProps = {
+  radioColor?: string;
+};
+
+const useStyles = makeStyles<Theme, styleProps>((theme: Theme) => {
   return {
     addressView: {
       color: theme.Colors.darkGrey,
@@ -28,6 +32,11 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     dividerStyle: {
       padding: theme.spacing(2, 0)
+    },
+    radioStyle: {
+      '&.MuiRadio-colorSecondary.Mui-checked': {
+        color: (props) => props.radioColor
+      }
     }
   };
 });
@@ -42,6 +51,7 @@ type SelectAddressComp = {
   bgButtonClr?: string;
   btnTextClr?: string;
   imageIcon?: string;
+  radioColor?: string;
 };
 
 const UHPickYourAddressComp = ({
@@ -50,10 +60,11 @@ const UHPickYourAddressComp = ({
   handleChangeAddress,
   bgButtonClr,
   btnTextClr,
+  radioColor,
   imageIcon
 }: SelectAddressComp) => {
   const theme = useTheme();
-  const classes = useStyles();
+  const classes = useStyles({ radioColor });
   const [openModal, setOpenModal] = useState({ open: false });
   const [selectedValue, setSelectedValue] = useState(0);
 
@@ -76,6 +87,7 @@ const UHPickYourAddressComp = ({
                 <Grid container key={index} alignItems="center">
                   <Grid item>
                     <Radio
+                      className={classes.radioStyle}
                       onChange={handleChange}
                       value={item.id}
                       checked={selectedValue === item.id}

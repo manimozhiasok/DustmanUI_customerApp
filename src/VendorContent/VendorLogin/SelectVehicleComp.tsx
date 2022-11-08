@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center'
   },
   textContainer1: {
-    paddingLeft: theme.spacing(3)
+    paddingLeft: theme.spacing(3),
+    fontWeight: theme.fontWeight.medium
   }
 }));
 
@@ -94,24 +95,24 @@ const SelectVehicleComp = ({
             className={classes.boxMainContainer}
             key={index}
             style={{
-              background:
-                selectedItemId === item.id
-                  ? 'linear-gradient(rgba(239, 71, 35, 0.2),rgba(246, 141, 31, 0.2))'
-                  : theme.Colors.whiteGrey
+              borderRadius: '8px',
+              background: isActive
+                ? 'linear-gradient(rgba(239, 71, 35, 0.2),rgba(246, 141, 31, 0.2))'
+                : theme.Colors.whiteGrey
             }}
           >
             <Grid className={classes.textContainer}>
               <img
                 src={item.image}
                 alt="images"
-                width={50}
-                height={50}
+                width={70}
+                height={70}
                 style={{
                   backgroundColor: 'white',
                   borderRadius: 50
                 }}
               />
-              <Typography className={classes.textContainer1}>
+              <Typography variant="h4" className={classes.textContainer1}>
                 {item.name}
               </Typography>
             </Grid>

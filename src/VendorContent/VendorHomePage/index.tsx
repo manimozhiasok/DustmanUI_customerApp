@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   imageContainer: {
     paddingLeft: theme.spacing(8),
+    position: 'sticky',
+    top: 0,
     height: '100%'
   },
   addressContainer: {

@@ -29,9 +29,9 @@ function AddressDisplay() {
       <Typography variant="subtitle2" className={classes.addressStyle}>
         {address}
       </Typography>
-      <Grid className={classes.iconStyle}>
+      {/* <Grid className={classes.iconStyle}>
         <ExpandMoreIcon />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

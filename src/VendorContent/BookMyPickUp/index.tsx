@@ -310,6 +310,7 @@ function BookMyPickup() {
           bgButtonClr={theme.Colors.orangePrimary}
           btnTextClr={theme.Colors.white}
           imageIcon={PlusWhite}
+          radioColor={theme.Colors.orangePrimary}
         />
       ),
       tileIcon: PickupAddressIcon

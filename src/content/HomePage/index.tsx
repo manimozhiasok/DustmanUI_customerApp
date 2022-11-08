@@ -59,18 +59,7 @@ function HomePage() {
 
   const renderTabContent = (tabVal?: any) => {
     const findActiveTab = tabItems.find(({ id }) => id === tabVal);
-    return (
-      <Grid
-      // style={{
-      //   paddingLeft: 50,
-      //   height: 729,
-      //   position: 'relative',
-      //   overflowY: selectedTab === tabItems[0]?.id ? 'scroll' : 'auto'
-      // }}
-      >
-        {findActiveTab ? findActiveTab.component() : null}
-      </Grid>
-    );
+    return <Grid>{findActiveTab ? findActiveTab.component() : null}</Grid>;
   };
 
   return (
@@ -81,6 +70,7 @@ function HomePage() {
           selectedTab === tabItems[0]?.id
             ? `url(${RoundPattern}), url(${DottedPattern})`
             : 'none',
+        backgroundAttachment: 'fixed',
         backgroundPositionY: '-6rem, 29rem',
         backgroundPositionX: '80rem, right',
         backgroundRepeat: ' no-repeat, no-repeat'

@@ -21,9 +21,7 @@ function App() {
   const { updateUserInfo } = useUserInfo();
   const { updateVendorInfo } = useVendorInfo();
   const navigateTo = useNavigate();
-  const location = useLocation();
 
-  console.log(location, 'location');
   const fetchData = async () => {
     const userId = await getCustomerId();
     const vendorId = await getVendorId();
