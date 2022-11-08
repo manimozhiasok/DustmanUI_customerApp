@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import {
   ChooseCategoryComponent,
   Loader,
+  OrderConfirmationComp,
   TrashDetailsComponent,
   UHAccordionComp,
   UHPickYourAddressComp,
@@ -18,11 +19,11 @@ import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
 import SelectVehicle from './SelectVehicle';
-import ScheduleYourPickup from './ScheduleYourPickup';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
 import {
   HTTP_STATUSES,
+  timeSlotDetails,
   TRASH_CATEGORY_ID,
   USER_TYPE_ID
 } from 'src/Config/constant';
@@ -30,9 +31,8 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import PickupPlace from './PickupPlace';
 import useVendorInfo from 'src/hooks/useVendorInfo';
-import PickupOrderConfirmation from './PickupOrderConfirmation';
 import { VendorAddressData } from 'src/Services/vendorAddressService';
-
+import { getDateFormat } from 'src/Utils';
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
     margin: theme.spacing(2.5, 0)
@@ -132,6 +132,7 @@ function BookMyPickup() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
   const onUploadFiles = async (event: any) => {
     let formData = new FormData();
     let selectedImages = event.target.files;
@@ -191,6 +192,70 @@ function BookMyPickup() {
       }
     }
   };
+  const getTrashValue = () => {
+    const data =
+      edit.getValue('order_items').length &&
+      edit.getValue('order_items').map((element) => {
+        return (
+          trashData.length &&
+          trashData.filter((list: { id: any }) => list.id === element)[0].name
+        );
+      });
+    return data.length ? data.toString() : '';
+  };
+
+  const getAddressData =
+    (edit.getValue('order_address_id') &&
+      vendorAddressDetails?.length &&
+      vendorAddressDetails.filter(
+        (item) => item.id === edit.getValue('order_address_id')
+      )) ||
+    [];
+
+  const getSlotValues = () => {
+    if (
+      edit.getValue('vendor_order_pickup_details')?.pickup_time &&
+      edit.getValue('vendor_order_pickup_details')?.slot
+    ) {
+      let data = `${
+        getDateFormat(edit.getValue('vendor_order_pickup_details').pickup_time)
+          .getDay
+      }, ${
+        getDateFormat(edit.getValue('vendor_order_pickup_details').pickup_time)
+          .getDate
+      } ${
+        getDateFormat(edit.getValue('vendor_order_pickup_details').pickup_time)
+          .getMonth
+      } ${
+        timeSlotDetails.find(
+          (item) =>
+            item.value === edit.getValue('vendor_order_pickup_details')?.slot
+        ).time
+      }`;
+      return data;
+    }
+  };
+
+  const rightContent = [
+    {
+      content: t('PICKUP.slot'),
+      value: getSlotValues()
+    },
+    {
+      content: t('PICKUP.userName'),
+      value: vendorDetails?.contact_name
+    },
+    { content: t('category'), value: getTrashValue() },
+
+    {
+      content: t('address'),
+      value: getAddressData[0]?.address ?? ''
+    },
+    {
+      content: t('PICKUP.mobile'),
+      value: getAddressData[0]?.mobile_number ?? ''
+    }
+  ];
 
   const bookYourPickupAccordionContent = [
     {
@@ -259,10 +324,11 @@ function BookMyPickup() {
       id: 7,
       title: t('pickupOrderConfirmation'),
       accContentDetail: () => (
-        <PickupOrderConfirmation
-          edit={edit}
+        <OrderConfirmationComp
+          rightContent={rightContent}
           handleButtonClick={handleCreateVendorOrder}
-          trashData={trashData}
+          bgBtnColor={theme.Colors.orangePrimary}
+          checkedIcon
         />
       ),
       tileIcon: OrderConfirmationIcon

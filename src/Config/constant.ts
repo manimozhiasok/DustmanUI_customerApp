@@ -92,3 +92,24 @@ export const ORIENTATION = {
   VERTICAL: 'vertical',
   HORIZONTAL: 'horizontal'
 };
+export const timeSlotDetails = [
+  {
+    id: 1,
+    text: 'Morning',
+    time: '9:00 AM  - 12:00 PM',
+    value: 'morning'
+  },
+  {
+    id: 2,
+    text: 'Noon',
+    time: '1:00 PM  - 4:00 PM',
+    value: 'afternoon'
+  },
+  {
+    id: 3,
+    text: 'Evening',
+    time: '4:00 PM  - 7:00 PM',
+    value: 'evening'
+  }
+];
+

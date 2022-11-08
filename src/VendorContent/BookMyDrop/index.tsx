@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import {
   ChooseCategoryComponent,
   Loader,
+  OrderConfirmationComp,
   TrashDetailsComponent,
   UHAccordionComp,
   UHSelectYourPickUpComp
@@ -20,6 +21,7 @@ import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
 import {
   HTTP_STATUSES,
+  timeSlotDetails,
   TRASH_CATEGORY_ID,
   USER_TYPE_ID
 } from 'src/Config/constant';
@@ -27,7 +29,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 import ChooseDropLocation from './ChooseDropLocation';
-import DropOrderConfirmation from './DropOrderConfirmation';
+import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
@@ -62,13 +64,14 @@ function BookMyDrop() {
   const [location, setLocation] = useState([]);
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
-  const { vendorDetails } = useVendorInfo();
+
+  const { vendorAddressDetails, vendorDetails } = useVendorInfo();
   const uploadedImages = edit.getValue('order_images');
 
   const handleVendorDropOrder = async () => {
     try {
       let orderData = { ...initialValues, ...edit.edits };
-      const recponse: any =
+      const response: any =
         await API_SERVICES.vendorPickupDropService.createVendorOrderDrop(
           vendorDetails?.vendor_id,
           {
@@ -77,7 +80,7 @@ function BookMyDrop() {
             failureMessage: 'Failed to do drop order '
           }
         );
-      if (recponse?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         edit.reset();
       }
     } catch (err) {
@@ -118,6 +121,7 @@ function BookMyDrop() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
   const onUploadFiles = async (event: any) => {
     let formData = new FormData();
     let selectedImages = event.target.files;
@@ -159,6 +163,72 @@ function BookMyDrop() {
       }
     });
   };
+  const getTrashValue = () => {
+    const data =
+      edit.getValue('order_items').length &&
+      edit.getValue('order_items').map((element) => {
+        return (
+          trashData.length &&
+          trashData.filter((list: { id: any }) => list.id === element)[0].name
+        );
+      });
+    return data.length ? data.toString() : '';
+  };
+
+  const getAddressData =
+    (edit.getValue('vendor_order_drop_details')?.dustman_location_id &&
+      vendorAddressDetails?.length &&
+      vendorAddressDetails.filter(
+        (item) =>
+          item.id ===
+          edit.getValue('vendor_order_drop_details')?.dustman_location_id
+      )) ||
+    [];
+
+  const getSlotValues = () => {
+    if (
+      edit.getValue('vendor_order_drop_details')?.pickup_time &&
+      edit.getValue('vendor_order_drop_details')?.slot
+    ) {
+      let data = `${
+        getDateFormat(edit.getValue('vendor_order_drop_details').pickup_time)
+          .getDay
+      }, ${
+        getDateFormat(edit.getValue('vendor_order_drop_details').pickup_time)
+          .getDate
+      } ${
+        getDateFormat(edit.getValue('vendor_order_drop_details').pickup_time)
+          .getMonth
+      } ${
+        timeSlotDetails.find(
+          (item) =>
+            item.value === edit.getValue('vendor_order_drop_details')?.slot
+        ).time
+      }`;
+      return data;
+    }
+  };
+
+  const rightContent = [
+    {
+      content: t('PICKUP.slot'),
+      value: getSlotValues()
+    },
+    {
+      content: t('PICKUP.userName'),
+      value: vendorDetails?.name
+    },
+    { content: t('category'), value: getTrashValue() },
+
+    {
+      content: t('address'),
+      value: getAddressData[0]?.address ?? ''
+    },
+    {
+      content: t('PICKUP.mobile'),
+      value: getAddressData[0]?.mobile_number ?? ''
+    }
+  ];
 
   const bookMyDropAccordionContent = [
     {
@@ -216,10 +286,11 @@ function BookMyDrop() {
       id: 6,
       title: t('dropOrderConfirmation'),
       accContentDetail: () => (
-        <DropOrderConfirmation
-          edit={edit}
+        <OrderConfirmationComp
           handleButtonClick={handleVendorDropOrder}
-          trashData={trashData}
+          rightContent={rightContent}
+          bgBtnColor={theme.Colors.orangePrimary}
+          checkedIcon
         />
       ),
       tileIcon: OrderConfirmationIcon

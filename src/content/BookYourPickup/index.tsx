@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import {
   ChooseCategoryComponent,
   Loader,
+  OrderConfirmationComp,
   TrashDetailsComponent,
   UHAccordionComp,
   UHPickYourAddressComp,
@@ -18,15 +19,18 @@ import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
 import SelectVehicle from './SelectVehicle';
-import OrderConfirmation from './OrderConfirmation';
-import OrderSuccess from './OrderSuccess';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
-import { HTTP_STATUSES, TRASH_CATEGORY_ID } from 'src/Config/constant';
+import {
+  HTTP_STATUSES,
+  timeSlotDetails,
+  TRASH_CATEGORY_ID
+} from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import useUserInfo from 'src/hooks/useUserInfo';
 import { AddressData } from 'src/Services/customerAddressService';
+import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
@@ -62,16 +66,6 @@ function BookYourPickup() {
   const { t } = useTranslation();
   const { userDetails, userAddressDetails, updateUserInfo } = useUserInfo();
   const uploadedImages = edit.getValue('order_images');
-
-  // const pickAddressFields = [
-  //   'address_line1',
-  //   'address_line2',
-  //   'address_line3',
-  //   'state',
-  //   'city',
-  //   'pincode',
-  //   'mobile_number'
-  // ];
 
   const handleCreateCustomerOrder = async () => {
     try {
@@ -124,6 +118,7 @@ function BookYourPickup() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
   const onUploadFiles = async (event: any) => {
     let formData = new FormData();
     let selectedImages = event.target.files;
@@ -183,6 +178,69 @@ function BookYourPickup() {
       }
     }
   };
+  const getTrashValue = () => {
+    const data =
+      edit.getValue('order_items').length &&
+      edit.getValue('order_items').map((element) => {
+        return (
+          trashData.length &&
+          trashData.filter((list: { id: any }) => list.id === element)[0].name
+        );
+      });
+    return data.length ? data.toString() : '';
+  };
+
+  const getAddressData =
+    (edit.getValue('order_address_id') &&
+      userAddressDetails?.length &&
+      userAddressDetails.filter(
+        (item) => item.id === edit.getValue('order_address_id')
+      )) ||
+    [];
+
+  const getSlotValues = () => {
+    if (
+      edit.getValue('customer_order_details')?.pickup_time &&
+      edit.getValue('customer_order_details')?.slot
+    ) {
+      let data = `${
+        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+          .getDay
+      }, ${
+        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+          .getDate
+      } ${
+        getDateFormat(edit.getValue('customer_order_details').pickup_time)
+          .getMonth
+      } ${
+        timeSlotDetails.find(
+          (item) => item.value === edit.getValue('customer_order_details')?.slot
+        ).time
+      }`;
+      return data;
+    }
+  };
+
+  const rightContent = [
+    {
+      content: t('PICKUP.slot'),
+      value: getSlotValues()
+    },
+    {
+      content: t('PICKUP.userName'),
+      value: userDetails?.first_name
+    },
+    { content: t('category'), value: getTrashValue() },
+
+    {
+      content: t('address'),
+      value: getAddressData[0]?.address ?? ''
+    },
+    {
+      content: t('PICKUP.mobile'),
+      value: getAddressData[0]?.mobile_number ?? ''
+    }
+  ];
 
   const bookYourPickupAccordionContent = [
     {
@@ -244,10 +302,9 @@ function BookYourPickup() {
       id: 6,
       title: t('orderConfirmation'),
       accContentDetail: () => (
-        <OrderConfirmation
-          edit={edit}
+        <OrderConfirmationComp
           handleButtonClick={handleCreateCustomerOrder}
-          trashData={trashData}
+          rightContent={rightContent}
         />
       ),
       tileIcon: OrderConfirmationIcon
