@@ -10,16 +10,18 @@ import { ButtonComp } from 'src/components';
 import { useTranslation } from 'react-i18next';
 import ArrowsLeftRight from '../../Assets/Images/ArrowsLeftRight.svg';
 import CopperImage from '../../Assets/Images/CopperImage.svg';
-import PickupImageText from './PickupImageText';
+import PickupPlaceComp from './PickupPlaceComp';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
     textAlign: 'center',
-    border: '1px dashed #D9D9D9',
+    border: '1px dashed ',
+    borderColor: '#D9D9D9',
     borderRadius: '16px',
     marginTop: theme.spacing(3),
-    height: '81px'
+    height: '81px',
+    width: '342px'
   },
   buttonContainer: {
     padding: theme.spacing(4, 26)
@@ -101,7 +103,7 @@ const PickupPlace = () => {
         {t('PICKUP.totalDistance')}{' '}
         <span style={{ color: theme.Colors.orangePrimary }}>{'45 Kms'}</span>
       </Typography>
-      <PickupImageText data={data} />
+      <PickupPlaceComp data={data} />
       <Grid
         container
         justifyContent="center"

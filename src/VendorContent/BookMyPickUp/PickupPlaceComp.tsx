@@ -19,15 +19,24 @@ const useStyles = makeStyles<Theme>((theme) => {
       borderRadius: '8px',
       width: '100%',
       marginBottom: theme.spacing(3),
-      padding: theme.spacing(1.5)
+      padding: theme.spacing(1.5),
+      alignItems: 'center'
     },
     contentContainer: {
       display: 'flex',
       flexDirection: 'column',
-      marginTop: theme.spacing(1)
+      marginTop: theme.spacing(1),
+      justifyContent: 'center'
     },
-    imageContainer: { paddingRight: theme.spacing(2) },
+    imageContainer: {
+      paddingRight: theme.spacing(2)
+    },
     subText: {
+      fontSize: theme.MetricsSizes.small_xxx,
+      fontWeight: theme.fontWeight.bold,
+      color: theme.Colors.darkGrey
+    },
+    subText2: {
       fontSize: theme.MetricsSizes.small_x,
       fontWeight: theme.fontWeight.bold,
       color: theme.Colors.darkGrey
@@ -39,12 +48,17 @@ const useStyles = makeStyles<Theme>((theme) => {
     },
     imageStyle: {
       width: '47px',
-      height: '47px'
+      height: '47px',
+      display: 'grid',
+      placeItems: 'center',
+      background:
+        'linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(copper-wire.png)',
+      borderRadius: '127.027px'
     }
   };
 });
 
-const PickupImageText = ({ data }: { data: any[] }) => {
+const PickupPlaceComp = ({ data }: { data: any[] }) => {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
@@ -82,7 +96,7 @@ const PickupImageText = ({ data }: { data: any[] }) => {
             </Grid>
             <Grid item>
               <Grid className={classes.status}>
-                <Typography className={classes.subText}>
+                <Typography className={classes.subText2}>
                   {item.price}
                 </Typography>
               </Grid>
@@ -93,4 +107,4 @@ const PickupImageText = ({ data }: { data: any[] }) => {
     </>
   );
 };
-export default PickupImageText;
+export default PickupPlaceComp;
