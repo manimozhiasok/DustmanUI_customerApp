@@ -29,3 +29,4 @@ export { default as UHPickYourAddressComp } from './UHPickYourAddressComp';
 export { default as UHAddressModalComp } from './UHAddressModalComp';
 export { default as TrashDetailsComponent } from './TrashDetailsComponent';
 export { default as OrderConfirmationComp } from './OrderConfirmationComp';
+export { default as SelectVehicleType } from './SelectVehicleType';

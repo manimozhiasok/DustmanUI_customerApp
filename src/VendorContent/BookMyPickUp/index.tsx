@@ -18,7 +18,6 @@ import { ScheduleYourPickupIcon } from 'src/Assets/Images';
 import { PickupAddressIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
-import SelectVehicle from './SelectVehicle';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
 import {
@@ -33,6 +32,7 @@ import PickupPlace from './PickupPlace';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 import { VendorAddressData } from 'src/Services/vendorAddressService';
 import { getDateFormat } from 'src/Utils';
+import VendorVehicleSelect from './VendorVehicleSelect';
 const useStyles = makeStyles((theme: Theme) => ({
   accordionStyle: {
     margin: theme.spacing(2.5, 0)
@@ -288,7 +288,7 @@ function BookMyPickup() {
     {
       id: 3,
       title: t('selectVehicle'),
-      accContentDetail: () => <SelectVehicle edit={edit} />,
+      accContentDetail: () => <VendorVehicleSelect edit={edit} />,
       tileIcon: SelectVehicleIcon
     },
     {
@@ -330,7 +330,7 @@ function BookMyPickup() {
       title: t('pickupOrderConfirmation'),
       accContentDetail: () => (
         <OrderConfirmationComp
-          rightContent={rightContent}
+          contentDetails={rightContent}
           handleButtonClick={handleCreateVendorOrder}
           bgBtnColor={theme.Colors.orangePrimary}
           checkedIcon

@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 function OrderConfirmationComp({
   handleButtonClick,
   bgBtnColor,
-  rightContent,
+  contentDetails,
   checkedIcon
 }: {
   handleButtonClick: () => void;
   bgBtnColor?: string;
-  rightContent: any[];
+  contentDetails: any[];
   checkedIcon?: boolean;
 }) {
   const classes = useStyles();
@@ -47,7 +47,7 @@ function OrderConfirmationComp({
 
   return (
     <Grid container direction="row">
-      <DialogContentDetails contentDetails={rightContent} />
+      <DialogContentDetails contentDetails={contentDetails} />
       <Grid container className={classes.outerContainer}>
         {checkedIcon && (
           <Grid item xs={12}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import SelectVehicleType from 'src/components/SelectVehicleType';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
+import { SelectVehicleType } from 'src/components';
 
 function SelectVehicle({ edit }) {
   const [dataContent, setDataContent] = useState([]);

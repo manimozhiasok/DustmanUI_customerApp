@@ -3,7 +3,7 @@ import SelectVehicleType from 'src/components/SelectVehicleType';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
 
-function SelectVehicle({ edit }) {
+function VendorVehicleSelect({ edit }) {
   const [dataContent, setDataContent] = useState([]);
 
   const fetchData = async () => {
@@ -37,4 +37,4 @@ function SelectVehicle({ edit }) {
   );
 }
 
-export default SelectVehicle;
+export default VendorVehicleSelect;

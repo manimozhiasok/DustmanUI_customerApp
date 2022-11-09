@@ -290,7 +290,7 @@ function BookMyDrop() {
         <OrderConfirmationComp
           //edit={edit}
           handleButtonClick={handleVendorDropOrder}
-          rightContent={rightContent}
+          contentDetails={rightContent}
           bgBtnColor={theme.Colors.orangePrimary}
           checkedIcon
         />

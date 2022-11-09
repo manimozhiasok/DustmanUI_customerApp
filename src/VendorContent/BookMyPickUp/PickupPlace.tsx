@@ -99,7 +99,7 @@ const PickupPlace = () => {
       </Grid>
       <Typography className={classes.distance}>
         {t('PICKUP.totalDistance')}{' '}
-        <span style={{ color: theme.Colors.secondary }}>{'45 Kms'}</span>
+        <span style={{ color: theme.Colors.orangePrimary }}>{'45 Kms'}</span>
       </Typography>
       <PickupImageText data={data} />
       <Grid
@@ -119,6 +119,7 @@ const PickupPlace = () => {
           onClickButton={() => {
             console.log('click');
           }}
+          backgroundColor={theme.Colors.orangePrimary}
         />
       </Grid>
     </>

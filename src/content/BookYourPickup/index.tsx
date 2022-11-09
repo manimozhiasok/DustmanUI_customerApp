@@ -21,7 +21,11 @@ import { OrderSuccessIcon } from 'src/Assets/Images';
 import SelectVehicle from './SelectVehicle';
 import { useEdit } from 'src/hooks/useEdit';
 import { API_SERVICES } from 'src/Services';
-import { HTTP_STATUSES, timeSlotDetails, TRASH_CATEGORY_ID } from 'src/Config/constant';
+import {
+  HTTP_STATUSES,
+  timeSlotDetails,
+  TRASH_CATEGORY_ID
+} from 'src/Config/constant';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import useUserInfo from 'src/hooks/useUserInfo';
@@ -300,7 +304,7 @@ function BookYourPickup() {
       accContentDetail: () => (
         <OrderConfirmationComp
           handleButtonClick={handleCreateCustomerOrder}
-          rightContent={rightContent}
+          contentDetails={rightContent}
         />
       ),
       tileIcon: OrderConfirmationIcon
