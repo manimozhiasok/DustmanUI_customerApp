@@ -25,7 +25,7 @@ type Props = {
   selectedTab: number;
 };
 
-const CustomerOrderDialog = (props: Props) => {
+const VendorOrderDialog = (props: Props) => {
   const { onClose, orderData, onCancelButtonClick, selectedTab } = props;
   const theme = useTheme();
   const classes = useStyles();
@@ -44,11 +44,13 @@ const CustomerOrderDialog = (props: Props) => {
         onCancelButtonClick={() => onCancelButtonClick(orderData?.order_id)}
         isBlur={orderData?.status_id === CUSTOMER_ORDER_STATUS.New}
         isCrown={orderData?.status_id === CUSTOMER_ORDER_STATUS.New}
-        isPendingOrder={orderData?.status_id !== CUSTOMER_ORDER_STATUS.Completed}
+        isPendingOrder={
+          orderData?.status_id !== CUSTOMER_ORDER_STATUS.Completed
+        }
         cancelButtonColor={theme.Colors.orangePrimary}
       />
     </DialogComp>
   );
 };
 
-export default CustomerOrderDialog;
+export default VendorOrderDialog;

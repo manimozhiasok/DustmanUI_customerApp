@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-import CustomerOrderDialog from './CustomerOrderDialog';
+import VendorOrderDialog from './vendorOrderDialog';
 import { API_SERVICES } from 'src/Services';
 import { useTranslation } from 'react-i18next';
 import useVendorInfo from 'src/hooks/useVendorInfo';
@@ -140,13 +140,11 @@ function OrdersPage() {
       let updateData = {
         status_id: CUSTOMER_ORDER_STATUS.Cancelled
       };
-      const response: any = await API_SERVICES.vendorPickupDropService.replaceOrder(
-        orderId,
-        {
+      const response: any =
+        await API_SERVICES.vendorPickupDropService.replaceOrder(orderId, {
           data: updateData,
           successMessage: 'Order cancelled successfully!'
-        }
-      );
+        });
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         onCancelClick();
         setModalOpen({ open: false });
@@ -279,7 +277,7 @@ function OrdersPage() {
         </Grid>
       </Grid>
       {modalOpen.open && (
-        <CustomerOrderDialog
+        <VendorOrderDialog
           onClose={() => setModalOpen({ open: false })}
           {...modalOpen}
           selectedTab={selectedTab}

@@ -24,7 +24,7 @@ type Props = {
   onCancelButtonClick?: (orderId: number) => void;
 };
 
-const CustomerOrderModal = (props: Props) => {
+const VendorOrderModal = (props: Props) => {
   const { onClose, orderData, onCancelButtonClick } = props;
   const theme = useTheme();
   const classes = useStyles();
@@ -56,4 +56,4 @@ const CustomerOrderModal = (props: Props) => {
   );
 };
 
-export default CustomerOrderModal;
+export default VendorOrderModal;

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-import CustomerOrderModal from './CustomerOrderModal';
+import VendorOrderModal from './vendorOrderModal';
 import { API_SERVICES } from 'src/Services';
 import { useTranslation } from 'react-i18next';
 import {
@@ -116,13 +116,11 @@ function OrdersPage() {
       let updateData = {
         status_id: 4
       };
-      const response: any = await API_SERVICES.customerOrderService.replace(
-        orderId,
-        {
+      const response: any =
+        await API_SERVICES.vendorMyOrderService.replaceOrder(orderId, {
           data: updateData,
           successMessage: 'Order cancelled successfully!'
-        }
-      );
+        });
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         onCancelClick();
         setModalOpen({ open: false });
@@ -214,7 +212,7 @@ function OrdersPage() {
         </Grid>
       </Grid>
       {modalOpen.open && (
-        <CustomerOrderModal
+        <VendorOrderModal
           onClose={() => setModalOpen({ open: false })}
           {...modalOpen}
           onCancelButtonClick={onClickCancelButton}
