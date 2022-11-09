@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => {
       fontWeight: (props) => props.rightContentFontWeight
     },
     rightContainer: {
-      marginLeft: theme.spacing(1)
+      marginLeft: theme.MetricsSizes.tiny_xxx
     }
   };
 });
@@ -58,7 +58,7 @@ const DialogContentDetails = ({
       {contentDetails.map((item: any, index: number) => {
         return (
           <Grid item container xs={12} key={index}>
-            <Grid item>
+            <Grid item xs={2}>
               <Typography variant="h4" className={classes.leftContentStyle}>
                 {item.content}:
               </Typography>

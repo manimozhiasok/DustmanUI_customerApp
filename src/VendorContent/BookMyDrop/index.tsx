@@ -11,9 +11,9 @@ import {
 } from 'src/components';
 import { Grid } from '@material-ui/core';
 import { ChooseCategoryIcon, VectorIcon } from 'src/Assets/Images';
-import { TrashDetailsIcon } from 'src/Assets/Images';
 import { ScheduleYourPickupIcon } from 'src/Assets/Images';
 import { PickupAddressIcon } from 'src/Assets/Images';
+import { SelectVehicleIcon } from 'src/Assets/Images';
 import { OrderConfirmationIcon } from 'src/Assets/Images';
 import { OrderSuccessIcon } from 'src/Assets/Images';
 import OrderSuccess from './OrderSuccess';
@@ -176,8 +176,8 @@ function BookMyDrop() {
 
   const getAddressData =
     (edit.getValue('vendor_order_drop_details')?.dustman_location_id &&
-    dustmanLocation?.length &&
-    dustmanLocation.filter(
+      dustmanLocation?.length &&
+      dustmanLocation.filter(
         (item) =>
           item.id ===
           edit.getValue('vendor_order_drop_details')?.dustman_location_id
@@ -257,7 +257,7 @@ function BookMyDrop() {
           onUploadFiles={onUploadFiles}
         />
       ),
-      tileIcon: TrashDetailsIcon
+      tileIcon: SelectVehicleIcon
     },
     {
       id: 3,

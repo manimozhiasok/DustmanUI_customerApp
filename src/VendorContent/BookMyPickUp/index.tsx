@@ -283,7 +283,7 @@ function BookMyPickup() {
           onUploadFiles={onUploadFiles}
         />
       ),
-      tileIcon: TrashDetailsIcon
+      tileIcon: SelectVehicleIcon
     },
     {
       id: 3,

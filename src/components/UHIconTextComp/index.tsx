@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     blurText: {
       filter: 'blur(5px)',
-      alignSelf: 'end'
+      alignSelf: 'end',
+      marginTop: '20px'
     },
     clearText: {
       color: theme.Colors.darkGrey
