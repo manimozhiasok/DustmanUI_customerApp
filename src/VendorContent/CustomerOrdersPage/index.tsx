@@ -219,8 +219,8 @@ function OrdersPage() {
                     }
                     buttonTwoText={
                       selectedTab === CUSTOMER_ORDER_STATUS.New
-                        ? 'BUY ORDER'
-                        : 'CANCEL'
+                        ? t('ORDER.buyOrder')
+                        : t('ORDER.cancelButton')
                     }
                     buttonTwoStyle={{
                       background: theme.Colors.orangePrimary,
@@ -266,7 +266,7 @@ function OrdersPage() {
         <Grid className={classes.buttonContainer}>
           {selectedTab === CUSTOMER_ORDER_STATUS.New ? (
             <ButtonComp
-              buttonText={'BUY ORDERS'}
+              buttonText={t('ORDER.buyAllOrder')}
               buttonFontSize={theme.MetricsSizes.small_xxx}
               backgroundColor={theme.Colors.orangePrimary}
               btnBorderRadius={105}

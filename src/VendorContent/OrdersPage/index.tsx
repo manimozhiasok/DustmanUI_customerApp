@@ -173,7 +173,8 @@ function OrdersPage() {
                       background: theme.Colors.orangePrimary
                     }}
                     buttonOneStyle={{
-                      border: '0.5px solid #F68B1F',
+                      border: '0.5px solid',
+                      borderColor: theme.Colors.greyDark,
                       color: theme.Colors.orangePrimary
                     }}
                   />

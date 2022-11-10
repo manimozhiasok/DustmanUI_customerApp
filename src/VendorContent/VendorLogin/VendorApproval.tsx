@@ -67,7 +67,7 @@ export const VendorApproval = (edit) => {
         </Grid>
       </Grid>
       <ButtonComp
-        buttonText={'Back to Home'}
+        buttonText={t('LOGIN.backToHome')}
         backgroundColor={theme.Colors.orangePrimary}
         btnBorderRadius={theme.MetricsSizes.tiny}
         onClickButton={handleBackToHomeButtonClick}

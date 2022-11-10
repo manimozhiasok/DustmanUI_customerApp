@@ -9,6 +9,7 @@ import CustomerOrdersPage from 'src/VendorContent/CustomerOrdersPage';
 import BookMyPickup from 'src/VendorContent/BookMyPickUp';
 import BookMyDrop from '../BookMyDrop';
 import VendorProfile from '../VendorProfile';
+import { t } from 'i18next';
 
 const useStyles = makeStyles((theme: Theme) => ({
   superOuterContainer: {
@@ -47,13 +48,13 @@ function VendorHomePage() {
   const tabItems = [
     {
       id: 1,
-      label: 'Customer Orders',
+      label: t('customerOrders'),
       component: () => <CustomerOrdersPage />
     },
-    { id: 2, label: 'My Orders', component: () => <OrdersPages /> },
-    { id: 3, label: 'Book my Pickup', component: () => <BookMyPickup /> },
-    { id: 4, label: 'Book my Drop', component: () => <BookMyDrop /> },
-    { id: 5, label: 'Profile', component: () => <VendorProfile /> }
+    { id: 2, label: t('HOME.myOrder'), component: () => <OrdersPages /> },
+    { id: 3, label: t('HOME.bookMyPickup'), component: () => <BookMyPickup /> },
+    { id: 4, label: t('HOME.bookMyDrop'), component: () => <BookMyDrop /> },
+    { id: 5, label: t('HOME.profile'), component: () => <VendorProfile /> }
   ];
   const [selectedTab, setSelectedTab] = useState(tabItems[0]?.id);
 

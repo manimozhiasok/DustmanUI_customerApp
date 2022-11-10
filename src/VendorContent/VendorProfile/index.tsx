@@ -149,7 +149,7 @@ const VendorProfile = () => {
     },
     {
       tabIcon: CompletedOrdersIcon,
-      label: 'Order Management',
+      label: t('PROFILE.orderManagement'),
       value: PROFILE_TAB_VALUES.orderManagement
     }
   ];

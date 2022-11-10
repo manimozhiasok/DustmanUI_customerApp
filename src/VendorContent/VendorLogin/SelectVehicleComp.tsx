@@ -82,9 +82,7 @@ const SelectVehicleComp = ({
 
   return (
     <Grid style={{ marginTop: theme.spacing(5) }}>
-      <Typography variant="h4">
-        Provide your available vehicle details to transport the trash.
-      </Typography>
+      <Typography variant="h4">{t('LOGIN.provideVehicleDetails')}</Typography>
       {vendorTypeItems.map((item, index) => {
         const findActiveImage: number = selectedItemId.length
           ? selectedItemId.findIndex((selId) => selId === item.id)

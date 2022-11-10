@@ -80,7 +80,9 @@
     "vehicleOwned": "Vehicle Owned",
     "pinCode": "Pincode",
     "registrationSuccessful": "Vendor Registration Successful",
-    "registrationConfirmation": "Your Registration was Successful"
+    "registrationConfirmation": "Your Registration was Successful",
+    "backToHome":"Back to Home",
+    "provideVehicleDetails":"  Provide your available vehicle details to transport the trash."
   },
 
   "PICKUP": {
@@ -108,6 +110,7 @@
     "pickUp": "PickUp",
     "totalDistance": "Total Distance",
     "trashCategoryPrice": "Trash Category Price"
+    
   },
 
   "Landing": {
@@ -124,7 +127,10 @@
     "completed": "Completed",
     "cancelCustomerOrder": "Are you sure want to cancel the order?",
     "new": "New",
-    "scheduled": "Scheduled"
+    "scheduled": "Scheduled",
+    "buyOrder":"BUY ORDER",
+    "buyAllOrder":"BUY ORDERS"
+   
   },
 
   "PROFILE": {
@@ -147,6 +153,14 @@
     "profileButton": "ADD NEW ADDRESS",
     "verify": "VERIFY",
     "havingTrouble": "Having Trouble ?",
-    "resendOTP": "Resend OTP"
+    "resendOTP": "Resend OTP",
+    "orderManagement":"Order Management"
+  },
+  "HOME":{
+    "bookMyPickup":"Book my Pickup",
+    "myOrder":"My Orders",
+    "bookMyDrop":"Book my Drop",
+    "profile":"Profile"
+
   }
 }
