@@ -16,6 +16,13 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       fontSize: theme.MetricsSizes.tiny_x,
       color: theme.Colors.blackGrey
     },
+    subText1: {
+      fontWeight: theme.fontWeight.regular,
+      fontSize: theme.MetricsSizes.tiny_x,
+      color: theme.Colors.blackGrey,
+      marginBootom: theme.spacing(2)
+      // marginBottom:"20px"
+    },
     heading: {
       fontSize: theme.MetricsSizes.small_x,
       fontWeight: theme.fontWeight.medium,
@@ -32,12 +39,17 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       color: theme.Colors.lightBlack
     },
     gridStyle: {
-      margin: theme.spacing(0.9),
+       margin: theme.spacing(1,0.5,1.75,1),
       background: theme.Colors.whiteGrey,
+      padding:theme.spacing(1,1,0.5,1),
       borderRadius: 5,
       width: 152,
       height: 82,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      position: 'relative'
+    },
+    gridAlign: {
+      // paddingTop:"5px"
     }
   })
 );
@@ -61,7 +73,7 @@ function SelectVehicleType({
   }, [selectedVal]);
 
   return (
-    <Grid container direction="row" spacing={2}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography className={classes.subHeading}>
           {t('vehicleChoose')}
@@ -70,8 +82,10 @@ function SelectVehicleType({
       {dataContent.map((item, index) => {
         return (
           <Grid
+            container 
             item
             className={classes.gridStyle}
+            alignItems="center"
             key={index}
             onClick={() => onClick(item.id)}
             style={{
@@ -85,31 +99,42 @@ function SelectVehicleType({
                   : 'none'
             }}
           >
-            <Typography className={classes.heading}>{item.name}</Typography>
-            <Grid
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                flexDirection: 'row'
-              }}
-            >
+            <Grid item xs={12} className={classes.gridAlign}>
+              <Typography className={classes.heading}>{item.name}</Typography>
               <Typography className={classes.subText}>{item.name}</Typography>
-
-              <img
-                src={item.image}
-                width={45}
-                height={45}
+            </Grid>
+            <Grid item xs={12}>
+              <Grid
                 style={{
                   background: theme.Colors.white,
                   borderRadius: 50,
-                  padding: theme.spacing(0, 0)
+                  height: '45px',
+                  width: '45px',
+                  padding: theme.spacing(0, 0),
+                  position: 'absolute',
+                  right: '10px',
+                  bottom:"20px"
+                }}
+              />
+              <img
+                src={item.image}
+                width={65}
+                height={40}
+                style={{
+                  // background: theme.Colors.white,
+                  // borderRadius: 50,
+                  padding: theme.spacing(0, 0),
+                  position: 'absolute',
+                   right: '10px',
+                   bottom:"20px"
                 }}
               />
             </Grid>
-
-            <Typography className={classes.subText}>
-              {item.description}
-            </Typography>
+            <Grid item xs={12}>
+              <Typography className={classes.subText1}>
+                {item.description}
+              </Typography>
+            </Grid>
           </Grid>
         );
       })}
