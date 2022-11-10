@@ -43,7 +43,7 @@
   "pickupAddress": "Pickup Address",
   "orderConfirmation": "Order Confirmation",
   "orders": "ORDER #",
-  "chooseDropLocation":"Choose Drop Location",
+  "chooseDropLocation": "Choose Drop Location",
   "dropOrderConfirmation": "Drop Order Confirmation",
   "orderCompleted": "Order Completed",
   "vendorDetails": "Vendor Details",
@@ -68,19 +68,19 @@
     "email": "Email",
     "continue": "Continue",
     "chooseUserType": "Choose User Type",
-    "companyName":"Company Name",
-    "gstNumber":"GST Number",
-    "mobileNumber":"Mobile Number",
-    "location":"Location",
-    "address":"Address",
-    "contactName":"Contact Name",
-    "website":"Website",
-    "landlineNumber":"Landline Number",
-    "establishedYear":"Established Year",
-    "vehicleOwned":"Vehicle Owned",
+    "companyName": "Company Name",
+    "gstNumber": "GST Number",
+    "mobileNumber": "Mobile Number",
+    "location": "Location",
+    "address": "Address",
+    "contactName": "Contact Name",
+    "website": "Website",
+    "landlineNumber": "Landline Number",
+    "establishedYear": "Established Year",
+    "vehicleOwned": "Vehicle Owned",
     "pinCode": "Pincode",
-    "registrationSuccessful":"Vendor Registration Successful",
-    "registrationConfirmation":"Your Registration was Successful"
+    "registrationSuccessful": "Vendor Registration Successful",
+    "registrationConfirmation": "Your Registration was Successful"
   },
 
   "PICKUP": {
@@ -105,9 +105,9 @@
     "goodToSee": "Yay! Good to see you here",
     "notified": "You will be notified when your order confirms",
     "trashPicture": "Choose your trash pictures",
-    "pickUp":"PickUp",
-    "totalDistance":"Total Distance",
-    "trashCategoryPrice":"Trash Category Price"
+    "pickUp": "PickUp",
+    "totalDistance": "Total Distance",
+    "trashCategoryPrice": "Trash Category Price"
   },
 
   "Landing": {
@@ -139,6 +139,8 @@
     "firstName": "FIRST NAME",
     "lastName": "LAST NAME",
     "edit": "EDIT",
+    "save": "SAVE",
+    "cancel": "CANCEL",
     "phoneNumber": "PHONE NUMBER",
     "emailAddress": "EMAIL ADDRESS",
     "profileAddress": "ADDRESS",

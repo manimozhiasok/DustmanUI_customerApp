@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Theme, Typography, useTheme } from '@material-ui/core';
 import {
@@ -7,7 +7,6 @@ import {
   ConfirmedOrdersIcon,
   AvatarCustomer
 } from 'src/Assets/Images';
-import ProfileAddressModel from './profileAddressModel';
 import { useTranslation } from 'react-i18next';
 import {
   HTTP_STATUSES,
@@ -19,6 +18,7 @@ import {
 import {
   ListItemCell,
   UHAccordionComp,
+  UHAddressModalComp,
   UHIconTextComp,
   UHSelectComp,
   UHTabComponent
@@ -31,6 +31,8 @@ import { UHIconTextProps } from 'src/components/UHIconTextComp';
 import { useNavigate } from 'react-router';
 import { API_SERVICES } from 'src/Services';
 import toast from 'react-hot-toast';
+import { useEdit } from 'src/hooks/useEdit';
+import { AddressData } from 'src/Services/customerAddressService';
 
 const useStyles = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -122,6 +124,15 @@ const RenderIconText = (props: RenderIconTextProp) => {
   );
 };
 
+type ProfileUpdateProp = {
+  language_id?: number;
+  user_type_id?: number;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  image_url?: string;
+};
+
 const Profile = () => {
   const classes = useStyles();
   const theme = useTheme();
@@ -134,6 +145,7 @@ const Profile = () => {
   const [openModal, setOpenModal] = useState<any>({
     open: false
   });
+  const fileInputRef = useRef(null);
 
   const staticContents = [
     { id: 1, text: t('PROFILE.help'), image: Help },
@@ -171,72 +183,113 @@ const Profile = () => {
     }
   ];
 
-  const onTabChange = (tabValue: any) => {
-    setSelectedTab(tabValue);
-  };
+  const handleUpdateProfileDetails = useCallback(
+    async (updatedData: ProfileUpdateProp, sucMessage?: string) => {
+      try {
+        let successMessage =
+          sucMessage ?? 'Account Profile updated successfully!';
+        const response: any =
+          await API_SERVICES.customerProfileService.updateCustomerProfile(
+            userDetails?.id,
+            { data: updatedData, successMessage }
+          );
+        if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+          if (response?.data?.profile) {
+            updateUserInfo(response.data.profile.customer_id);
+          }
+        }
+      } catch (e) {
+        console.log(e, '--profile update err--');
+      }
+    },
+    []
+  );
 
-  const handleChangeItem = async (selectedVal: number, type?: string) => {
+  const handleChangeFileUpload = async (event) => {
     try {
-      if (
-        selectedVal === userDetails?.user_type_id ||
-        selectedVal === userDetails?.language_id
-      ) {
-        return;
-      }
-      let data: { language_id?: number; user_type_id?: number } = {
-        user_type_id: selectedVal
-      };
-      let successMessage = 'UserType updated successfully';
-      if (type === 'language') {
-        data = {
-          language_id: selectedVal
-        };
-        successMessage = 'Language updated successfully';
-      }
-      const response: any =
-        await API_SERVICES.customerProfileService.updateCustomerProfile(
-          userDetails?.id,
-          { data, successMessage }
-        );
-      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-        if (response?.data?.profile) {
-          updateUserInfo(response.data.profile.customer_id);
+      const uploadedImg = event.target.files[0];
+      let formData = new FormData();
+      formData.append('file', uploadedImg);
+      const uploadImageRes: any =
+        await API_SERVICES.imageUploadService.uploadImage(formData);
+      if (uploadImageRes?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (uploadImageRes?.data?.images.length) {
+          let data = { image_url: uploadImageRes.data.images[0].Location };
+          let successMessage = 'Profile image updated successfully!';
+          handleUpdateProfileDetails(data, successMessage);
         }
       }
-    } catch (e) {
-      console.log(e, '--profile update err--');
+    } catch (err) {
+      toast.error(err);
     }
   };
 
-  const onClickEditIcon = () => {};
+  const handleAddNewAddress = () => {
+    setOpenModal({ open: true });
+  };
+
+  const handleAddressSaveButtonClick = async (
+    addressData: AddressData,
+    modalClose: () => void
+  ) => {
+    const response: any = await API_SERVICES.customerAddressService.create(
+      userDetails?.customer_id,
+      {
+        data: addressData,
+        successMessage: 'New address added successfully',
+        failureMessage: 'Failed to add new address'
+      }
+    );
+    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+      if (response?.data?.message) {
+        let id = response?.data?.message?.customer_id;
+        updateUserInfo(id);
+        modalClose();
+      }
+    }
+  };
 
   const accordionContent = [
     {
       id: 1,
-      accContentDetail: () => <ProfileContent />,
-      renderAccordionTitle: () => (
-        <ListItemCell
-          isEditIcon
-          onClickEditIcon={onClickEditIcon}
-          avatarImg={
-            userDetails?.image_url !== ''
-              ? userDetails?.image_url
-              : AvatarCustomer
-          }
-          title={userDetails?.first_name}
-          subTitle={userDetails?.email}
-          avatarClassNameStyles={classes.avatarStyle}
-          titleStyle={{
-            color: theme.Colors.mediumGrey,
-            fontWeight: theme.fontWeight.bold,
-            fontSize: theme.MetricsSizes.small_xxx + 1
-          }}
-          subTitleStyle={{
-            fontWeight: theme.fontWeight.regular,
-            fontSize: theme.MetricsSizes.tiny_xxx + 1,
-            color: theme.Colors.mediumBlack
-          }}
+      accContentDetail: () => (
+        <ProfileContent
+          handleSaveEdits={handleUpdateProfileDetails}
+          handleAddNewAddress={handleAddNewAddress}
         />
+      ),
+      renderAccordionTitle: () => (
+        <>
+          <ListItemCell
+            isEditIcon
+            onClickEditIcon={() => fileInputRef.current.click()}
+            avatarImg={
+              userDetails?.image_url !== ''
+                ? userDetails?.image_url
+                : AvatarCustomer
+            }
+            title={userDetails?.first_name}
+            subTitle={userDetails?.email}
+            avatarClassNameStyles={classes.avatarStyle}
+            titleStyle={{
+              color: theme.Colors.mediumGrey,
+              fontWeight: theme.fontWeight.bold,
+              fontSize: theme.MetricsSizes.small_xxx + 1
+            }}
+            subTitleStyle={{
+              fontWeight: theme.fontWeight.regular,
+              fontSize: theme.MetricsSizes.tiny_xxx + 1,
+              color: theme.Colors.mediumBlack
+            }}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            hidden
+            onChange={handleChangeFileUpload}
+          />
+        </>
       )
     }
   ];
@@ -257,9 +310,16 @@ const Profile = () => {
               <UHSelectComp
                 initialValue={userDetails?.language_id}
                 labelData={languageData}
-                handleChangeItem={(selectedVal) =>
-                  handleChangeItem(selectedVal, 'language')
-                }
+                handleChangeItem={(selectedVal) => {
+                  if (selectedVal === userDetails?.language_id) {
+                    return;
+                  }
+                  let data: ProfileUpdateProp = {
+                    language_id: selectedVal
+                  };
+                  let successMessage = 'Language updated successfully';
+                  handleUpdateProfileDetails(data, successMessage);
+                }}
               />
             )}
             style={{ alignItems: 'flex-start' }}
@@ -283,7 +343,16 @@ const Profile = () => {
               <UHSelectComp
                 initialValue={userDetails?.user_type_id}
                 labelData={userTypeData}
-                handleChangeItem={handleChangeItem}
+                handleChangeItem={(selectedVal) => {
+                  if (selectedVal === userDetails?.user_type_id) {
+                    return;
+                  }
+                  let data: ProfileUpdateProp = {
+                    user_type_id: selectedVal
+                  };
+                  let successMessage = 'UserType updated successfully';
+                  handleUpdateProfileDetails(data, successMessage);
+                }}
               />
             )}
             style={{ alignItems: 'flex-start' }}
@@ -372,14 +441,13 @@ const Profile = () => {
           tabContainerClassName={classes.tabContainer}
           renderTabContent={renderTabContent}
           tabContentClassName={classes.tabContentStyle}
-          onTabChange={onTabChange}
+          onTabChange={(tabValue: any) => setSelectedTab(tabValue)}
         />
       </Grid>
-      {openModal && (
-        <ProfileAddressModel
-          onClose={() => setOpenModal(false)}
-          open={openModal}
-          {...openModal}
+      {openModal.open && (
+        <UHAddressModalComp
+          onClose={() => setOpenModal({ open: false })}
+          handleSaveButtonClick={handleAddressSaveButtonClick}
         />
       )}
     </>

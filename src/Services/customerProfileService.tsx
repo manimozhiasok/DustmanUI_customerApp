@@ -27,6 +27,12 @@ type CustomerProfileUpdateProp = {
   failureMessage?: string;
 };
 
+type CustomerReplaceProp = {
+  data: { mobile_number: string; otp: string };
+  successMessage?: string;
+  failureMessage?: string;
+};
+
 export const customerProfileService = {
   create: async (
     customerId: number,
@@ -63,6 +69,26 @@ export const customerProfileService = {
     const options = await apiOptions({
       url: `${Config.BASE_URL}/api/updateCustomerProfile/${customerId}`,
       method: 'patch',
+      data: data
+    });
+    const toastMessageConfig = {
+      success: {
+        message: successMessage
+      },
+      failure: {
+        message: failureMessage
+      }
+    };
+    return apiRequest(options, toastMessageConfig);
+  },
+
+  replaceCustomer: async (
+    customerId: number,
+    { data, successMessage, failureMessage }: CustomerReplaceProp
+  ) => {
+    const options = await apiOptions({
+      url: `${Config.BASE_URL}/api/replaceCustomer/${customerId}`,
+      method: 'put',
       data: data
     });
     const toastMessageConfig = {

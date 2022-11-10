@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Avatar,
   Badge,
@@ -168,4 +169,4 @@ const ListItemCell = (props: Props) => {
     </Grid>
   );
 };
-export default ListItemCell;
+export default React.memo(ListItemCell);

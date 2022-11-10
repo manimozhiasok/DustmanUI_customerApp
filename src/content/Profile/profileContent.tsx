@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Button,
   Grid,
@@ -6,15 +7,16 @@ import {
   Typography,
   useTheme
 } from '@material-ui/core';
-import { useState } from 'react';
 import { ButtonComp, TextInputComponent } from 'src/components';
 import Plus from '../../Assets/Images/Plus.svg';
 import { useTranslation } from 'react-i18next';
-import OTPInput, { ResendOTP } from 'otp-input-react';
+import OTPInput from 'otp-input-react';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
 import useUserInfo from 'src/hooks/useUserInfo';
 import { useEdit } from 'src/hooks/useEdit';
+import { isOneTimePassWord, isPhoneNumber } from 'src/Utils';
+import toast from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: Theme) => ({
   buttonStyle: {
@@ -25,72 +27,173 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'none',
     background: 'none',
     padding: 0,
-    marginBottom: 12
+    marginBottom: theme.MetricsSizes.small_x,
+    display: 'flex',
+    alignItems: 'center'
+  },
+  cancelButtonStyle: {
+    color: theme.Colors.greyAccent,
+    border: 'none',
+    fontWeight: theme.fontWeight.bold,
+    fontSize: theme.MetricsSizes.small_xx,
+    textTransform: 'none',
+    background: 'none',
+    padding: 0,
+    marginBottom: theme.MetricsSizes.small_x
+  },
+  inputOtpStyle: {
+    borderRadius: 0,
+    borderBottom: '1px solid #6BB043',
+    background: 'transparent'
+  },
+  locTextStyle: {
+    color: theme.Colors.darkBlue,
+    fontWeight: theme.fontWeight.medium
   }
 }));
 
-const ProfileContent = ({
-  handleAddNewItem,
-  handleEditListItem
-}: {
+type Props = {
   handleEditListItem?: () => void;
-  handleAddNewItem?: () => void;
-}) => {
+  handleAddNewAddress?: () => void;
+  handleSaveEdits?: (data: any) => void;
+};
+
+const ProfileContent = ({
+  handleAddNewAddress,
+  handleEditListItem,
+  handleSaveEdits
+}: Props) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const classes = useStyles();
-  const { userDetails, userAddressDetails } = useUserInfo();
-  const [isEditable, setIsEditable] = useState<any>(true);
+  const { userDetails, userAddressDetails, updateUserInfo } = useUserInfo();
+  const [isError, setIsError] = useState(false);
+  const [isEdit, setIsEdit] = useState<number>(0);
+  const [isOtpField, setIsOtpField] = useState<boolean>(false);
   const [isText, setIsText] = useState(false);
 
   const initialValues = {
     first_name: userDetails?.first_name || '',
     last_name: userDetails?.last_name || '',
     email: userDetails?.email || '',
-    mobile_number: userDetails?.mobile_number || ''
+    mobile_number: userDetails?.mobile_number?.slice(2) || '',
+    new_mobile_number: '',
+    otp: ''
   };
   const edit = useEdit(initialValues);
 
-  const handleEdit = () => {
-    setIsEditable(true);
-  };
-
-  const OtpInputCard = ({ ...rest }) => {
-    const [OTP, setOTP] = useState('');
-    return (
-      <Grid>
-        <OTPInput value={OTP} onChange={setOTP} {...rest} />
-      </Grid>
-    );
-  };
-
-  const onUploadFiles = async (event: any) => {
-    let formData = new FormData();
-    let selectedImages = event.target.files;
-    for (let key in selectedImages) {
-      formData.append('file', selectedImages[key]);
+  const handleVerifyPhnOrResendOtp = async () => {
+    try {
+      if (edit.getValue('mobile_number') === initialValues.mobile_number) {
+        toast.error('New mobile number must be different from the current');
+        return;
+      }
+      if (
+        edit.getValue('mobile_number') &&
+        !isPhoneNumber(edit.getValue('mobile_number'))
+      ) {
+        setIsError(true);
+        return;
+      }
+      let data = {
+        phoneNumber: edit.getValue('mobile_number')
+      };
+      const response: any =
+        await API_SERVICES.customerRegisterService.generateOtp({
+          data,
+          successMessage: 'OTP sent successfully'
+        });
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data?.phoneNumber) {
+          edit.update({ new_mobile_number: response.data.phoneNumber });
+          setIsOtpField(true);
+        }
+      }
+    } catch (e) {
+      console.log(e, '--profile update err--');
     }
-    // const uploadImageRes: any =
-    //   await API_SERVICES.imageUploadService.uploadImage(formData);
-    // if (uploadImageRes?.status < HTTP_STATUSES.BAD_REQUEST) {
-    //   if (uploadImageRes?.data?.images.length) {
-    //     let imageData = [];
-    //     uploadImageRes?.data?.images.map((item) => {
-    //       imageData.push({ image_url: item.Location });
-    //     });
-    //     if (imageData?.length) {
-    //       // edit.update({
-    //       //   order_images: [...uploadedImages, ...imageData]
-    //       // });
-    //     }
-    //   }
-    // }
+  };
+
+  const handleVerifyOtp = async () => {
+    try {
+      if (!edit.getValue('otp') || !isOneTimePassWord(edit.getValue('otp'))) {
+        toast.error(
+          'Please enter your valid 6 digit otp sent to your mobile number'
+        );
+        return;
+      }
+      let data = {
+        mobile_number: edit.getValue('new_mobile_number'),
+        otp: edit.getValue('otp')
+      };
+      let successMessage = 'Phone number updated successfully!';
+      const response: any = API_SERVICES.customerProfileService.replaceCustomer(
+        userDetails?.customer_id,
+        { data, successMessage }
+      );
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        setIsEdit(0);
+        setIsOtpField(false);
+        updateUserInfo(userDetails?.customer_id);
+      }
+    } catch (e) {
+      console.log(e, '--profile update err--');
+    }
   };
 
   const handleChange = (event) => {
     edit.update({ [event.target.name]: event.target.value });
   };
 
+  const handleClickEditBtn = (editEvent: any) => {
+    edit.reset();
+    setIsEdit(parseInt(editEvent.currentTarget.id));
+  };
+
+  const handleClickSaveBtn = () => {
+    if (edit.edits && Object.keys(edit.edits).length === 0) {
+      setIsEdit(0);
+      return;
+    }
+    let data = { ...edit.edits };
+    handleSaveEdits(data);
+    setIsEdit(0);
+  };
+
+  const handleClickCancelBtn = () => {
+    edit.reset();
+    setIsEdit(0);
+    setIsOtpField(false);
+  };
+
+  const EditComp = ({ btnId }: { btnId?: number }) => {
+    return isEdit === btnId ? (
+      <>
+        <Button
+          id={btnId.toString()}
+          className={classes.cancelButtonStyle}
+          onClick={handleClickCancelBtn}
+        >
+          {t('PROFILE.cancel')}
+        </Button>
+        <Button
+          id={btnId.toString()}
+          className={classes.buttonStyle}
+          onClick={handleClickSaveBtn}
+        >
+          {t('PROFILE.save')}
+        </Button>
+      </>
+    ) : (
+      <Button
+        id={btnId.toString()}
+        className={classes.buttonStyle}
+        onClick={handleClickEditBtn}
+      >
+        {t('PROFILE.edit')}
+      </Button>
+    );
+  };
   return (
     <Grid container justifyContent="center" spacing={3}>
       <Grid item xs={12}>
@@ -99,19 +202,16 @@ const ProfileContent = ({
           inputLabelFont={theme.MetricsSizes.small_x}
           labelColor={theme.Colors.whiteGreyLight}
           variant="standard"
-          // autoFocus
           value={edit.getValue('first_name')}
           name="first_name"
           onChange={handleChange}
-          // disabled={isEditable}
-          iconEnd={
-            <Button
-              className={classes.buttonStyle}
-              onClick={() => setIsText(!isText)}
-            >
-              {!isText ? t('PROFILE.edit') : 'SAVE'}
-            </Button>
-          }
+          disabled={isEdit !== 1}
+          inputRef={(ele) => {
+            if (ele) {
+              ele.focus();
+            }
+          }}
+          iconEnd={<EditComp btnId={1} />}
         />
       </Grid>
       <Grid item xs={12}>
@@ -120,19 +220,16 @@ const ProfileContent = ({
           inputLabelFont={theme.MetricsSizes.small_x}
           labelColor={theme.Colors.whiteGreyLight}
           variant="standard"
-          // autoFocus
           onChange={handleChange}
           value={edit.getValue('last_name')}
+          inputRef={(ele) => {
+            if (ele) {
+              ele.focus();
+            }
+          }}
           name="last_name"
-          //disabled={isEditable}
-          iconEnd={
-            <Button
-              className={classes.buttonStyle}
-              onClick={() => setIsText(!isText)}
-            >
-              {!isText ? t('PROFILE.edit') : 'SAVE'}
-            </Button>
-          }
+          disabled={isEdit !== 2}
+          iconEnd={<EditComp btnId={2} />}
         />
       </Grid>
       <Grid item xs={12}>
@@ -141,19 +238,16 @@ const ProfileContent = ({
           inputLabelFont={theme.MetricsSizes.small_x}
           labelColor={theme.Colors.whiteGreyLight}
           variant="standard"
-          // autoFocus
           onChange={handleChange}
           value={edit.getValue('email')}
+          inputRef={(ele) => {
+            if (ele) {
+              ele.focus();
+            }
+          }}
           name="email"
-          // disabled={isEditable}
-          iconEnd={
-            <Button
-              className={classes.buttonStyle}
-              onClick={() => setIsText(!isText)}
-            >
-              {!isText ? t('PROFILE.edit') : 'SAVE'}
-            </Button>
-          }
+          disabled={isEdit !== 3}
+          iconEnd={<EditComp btnId={3} />}
         />
       </Grid>
       <Grid item xs={12}>
@@ -162,37 +256,49 @@ const ProfileContent = ({
           inputLabelFont={theme.MetricsSizes.small_x}
           labelColor={theme.Colors.whiteGreyLight}
           variant="standard"
-          // autoFocus
           onChange={handleChange}
           value={edit.getValue('mobile_number')}
           name="mobile_number"
-          //disabled={!isText}
+          inputRef={(ele) => {
+            if (ele) {
+              ele.focus();
+            }
+          }}
+          disabled={isEdit !== 4 || isOtpField}
           iconEnd={
-            <Button
-              className={classes.buttonStyle}
-              onClick={() => setIsText(!isText)}
-            >
-              {!isText ? t('PROFILE.edit') : 'SAVE'}
-            </Button>
+            isEdit !== 4 && (
+              <Button
+                id={'4'}
+                className={classes.buttonStyle}
+                onClick={handleClickEditBtn}
+              >
+                {t('PROFILE.edit')}
+              </Button>
+            )
           }
-        ></TextInputComponent>
-        {isText && (
-          <Grid style={{ marginTop: theme.MetricsSizes.tiny_xxx }}>
-            <Grid item xs={12}>
-              <OtpInputCard
-                inputClassName="bottom__border"
-                // autoFocus
-                OTPLength={6}
-                otpType="number"
-                disabled={false}
-                isInputNum
-                inputStyles={{
-                  border: 0,
-                  borderBottom: '1px solid #6BB043'
-                }}
-              />
-            </Grid>
-            <Grid container item xs={12} alignItems="center">
+          helperText={
+            ((isError && !edit.getValue('mobile_number')) ||
+              (isError &&
+                edit.getValue('mobile_number') &&
+                !isPhoneNumber(edit.getValue('mobile_number')))) &&
+            'Please enter your valid 10 digit mobile number'
+          }
+        />
+      </Grid>
+      {isEdit === 4 && isOtpField && (
+        <Grid item container xs={12}>
+          <Grid item xs={12}>
+            <OTPInput
+              OTPLength={6}
+              otpType="number"
+              autoFocus
+              inputClassName={classes.inputOtpStyle}
+              value={edit.getValue('otp')}
+              onChange={(val: any) => edit.update({ otp: val })}
+            />
+          </Grid>
+          <Grid container item xs={6} alignItems="center">
+            <Grid item>
               <Typography
                 variant="body1"
                 style={{
@@ -201,70 +307,100 @@ const ProfileContent = ({
               >
                 {t('PROFILE.havingTrouble')}
               </Typography>
+            </Grid>
+            <Grid item>
               <Button
                 className={classes.buttonStyle}
                 style={{
                   marginBottom: 0,
                   marginLeft: theme.MetricsSizes.tiny_x
                 }}
-                onClick={() => console.log('Resend clicked')}
+                onClick={handleVerifyPhnOrResendOtp}
               >
                 {t('PROFILE.resendOTP')}
               </Button>
             </Grid>
-            <Grid
-              item
-              container
-              style={{
-                display: 'flex',
-                marginTop: theme.MetricsSizes.small_xxx
-              }}
-            >
-              <Grid item xs={3}>
-                <ButtonComp
-                  buttonText={t('PROFILE.verify')}
-                  //onClickButton={() => setIsText(false)}
-                  btnBorderRadius={4}
-                  btnWidth={'167px'}
-                  height={'48px'}
-                  buttonFontSize={theme.MetricsSizes.small_xxx}
-                />
-              </Grid>
-
-              <Grid item xs={3}>
-                <ButtonComp
-                  buttonText={t('ORDER.cancelButton')}
-                  buttonTextColor={theme.Colors.secondary}
-                  backgroundColor={theme.Colors.white}
-                  variant="outlined"
-                  onClickButton={() => setIsText(false)}
-                  btnBorderRadius={4}
-                  btnWidth={'167px'}
-                  height={'48px'}
-                  buttonFontSize={theme.MetricsSizes.small_xxx}
-                />
-              </Grid>
-            </Grid>
           </Grid>
-        )}
-      </Grid>
-
-      <Grid item xs={12}>
-        <TextInputComponent
-          inputLabel={t('PROFILE.profileAddress')}
-          inputLabelFont={theme.MetricsSizes.small_x}
-          labelColor={theme.Colors.whiteGreyLight}
-          variant="standard"
-          //disabled={!isText}
-          iconEnd={
-            <Button
-              className={classes.buttonStyle}
-              onClick={handleEditListItem}
-            >
-              {t('PROFILE.edit')}
-            </Button>
-          }
-        />
+        </Grid>
+      )}
+      {isEdit === 4 && (
+        <Grid item xs={12} container>
+          <Grid item>
+            <ButtonComp
+              buttonText={isOtpField ? 'Verify OTP' : t('PROFILE.verify')}
+              onClickButton={
+                isOtpField ? handleVerifyOtp : handleVerifyPhnOrResendOtp
+              }
+              btnBorderRadius={4}
+              btnWidth={'167px'}
+              height={'48px'}
+              buttonFontSize={theme.MetricsSizes.small_xxx}
+              disabled={edit.edits && Object.keys(edit.edits).length === 0}
+            />
+          </Grid>
+          <Grid item>
+            <ButtonComp
+              buttonText={t('ORDER.cancelButton')}
+              style={{
+                border: '1px solid',
+                borderColor: theme.Colors.secondary,
+                marginLeft: theme.MetricsSizes.tiny_xx
+              }}
+              buttonTextColor={theme.Colors.secondary}
+              backgroundColor={theme.Colors.white}
+              variant="outlined"
+              onClickButton={handleClickCancelBtn}
+              btnBorderRadius={theme.MetricsSizes.tiny}
+              btnWidth={'167px'}
+              height={'48px'}
+              buttonFontSize={theme.MetricsSizes.small_xxx}
+            />
+          </Grid>
+        </Grid>
+      )}
+      <Grid container item xs={12}>
+        <Grid item xs={12}>
+          <Typography
+            style={{
+              fontSize: theme.MetricsSizes.small_x,
+              color: theme.Colors.whiteGreyLight
+            }}
+          >
+            {t('PROFILE.profileAddress')}
+          </Typography>
+        </Grid>
+        <Grid container item xs={12}>
+          {userAddressDetails?.length ? (
+            userAddressDetails.map((item, index) => {
+              return (
+                <Grid
+                  key={index}
+                  item
+                  xs={12}
+                  style={{ marginBottom: theme.spacing(5) }}
+                >
+                  <TextInputComponent
+                    variant="standard"
+                    disabled
+                    value={item?.address}
+                    iconEnd={
+                      <Button
+                        className={classes.buttonStyle}
+                        onClick={handleEditListItem}
+                      >
+                        {t('PROFILE.edit')}
+                      </Button>
+                    }
+                  />
+                </Grid>
+              );
+            })
+          ) : (
+            <Typography className={classes.locTextStyle}>
+              No address found!, Please add your addresses here.
+            </Typography>
+          )}
+        </Grid>
       </Grid>
       <Grid container item xs={12} justifyContent="center">
         <ButtonComp
@@ -276,15 +412,16 @@ const ProfileContent = ({
           buttonFontWeight={theme.fontWeight.bold}
           btnWidth={'190px'}
           style={{
-            marginTop: theme.MetricsSizes.small,
+            borderColor: theme.Colors.secondary,
+            borderRadius: theme.MetricsSizes.tiny,
             alignSelf: 'center',
             padding: theme.MetricsSizes.tiny_x
           }}
           startIcon={<img src={Plus} />}
-          onClickButton={handleAddNewItem}
+          onClickButton={handleAddNewAddress}
         />
       </Grid>
     </Grid>
   );
 };
-export default ProfileContent;
+export default React.memo(ProfileContent);
