@@ -227,7 +227,7 @@ function BookMyDrop() {
     },
     {
       content: t('PICKUP.mobile'),
-      value: vendorDetails?.mobile_number ?? ''
+      value: vendorDetails?.mobile_number?.slice(2) ?? ''
     }
   ];
 

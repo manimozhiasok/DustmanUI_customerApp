@@ -48,7 +48,7 @@
   "orderCompleted": "Order Completed",
   "vendorDetails": "Vendor Details",
   "pickupOrderConfirmation": "PickUp Order Confirmation",
-
+  "viewMap":"view Map",
   "LOGIN": {
     "loginAndAccept": "By clicking on Login, I accept the ",
     "termsAndCondition": "Terms & Conditions ",
@@ -109,7 +109,9 @@
     "trashPicture": "Choose your trash pictures",
     "pickUp": "PickUp",
     "totalDistance": "Total Distance",
-    "trashCategoryPrice": "Trash Category Price"
+    "trashCategoryPrice": "Trash Category Price",
+    "from":"From",
+    "to":"To"
     
   },
 

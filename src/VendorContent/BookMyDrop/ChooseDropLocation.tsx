@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import { locationIcon } from 'src/Assets';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) => {
 
 const ChooseDropLocation = ({ data, edit, handleChangeAddress }) => {
   const [selectedValue, setSelectedValue] = useState(0);
+  const { t } = useTranslation();
   const classes = useStyles();
 
   const handleChange = (event: any) => {
@@ -103,7 +105,9 @@ const ChooseDropLocation = ({ data, edit, handleChangeAddress }) => {
                     width={'20.38px'}
                     height={'18.75px'}
                   />
-                  <Typography className={classes.mapStyle}>view Map</Typography>
+                  <Typography className={classes.mapStyle}>
+                    {t('viewMap')}
+                  </Typography>
                 </Grid>
                 <Grid item xs={12}>
                   {index === data?.length - 1 ? null : (

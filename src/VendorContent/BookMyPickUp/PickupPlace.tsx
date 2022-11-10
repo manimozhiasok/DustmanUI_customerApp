@@ -82,7 +82,7 @@ const PickupPlace = () => {
         >
           <Grid item>
             <Typography className={classes.place}>
-              {t('from')}
+              {t('PICKUP.from')}
               <br />
               <span className={classes.placeName}>{'Ambattur'}</span>
             </Typography>
@@ -92,7 +92,7 @@ const PickupPlace = () => {
           </Grid>
           <Grid item>
             <Typography className={classes.place}>
-              {t('to')}
+              {t('PICKUP.to')}
               <br />
               <span className={classes.placeName}>{'Sriperumputhur'}</span>
             </Typography>

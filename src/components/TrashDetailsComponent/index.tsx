@@ -20,13 +20,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: theme.fontWeight.regular
   },
   iconStyle: {
-    color: '#828282',
+    color: theme.Colors.silverBlack,
     width: theme.MetricsSizes.large_xx * 2,
     height: theme.MetricsSizes.large_xx * 2
   },
   gridStyle: {
     marginTop: theme.spacing(3.5),
-    backgroundColor: '#e2e1e1',
+    backgroundColor: theme.Colors.lightGreyBlack,
     padding: theme.spacing(1, 0, 1, 0),
     borderRadius: theme.spacing(1)
   }
