@@ -4,10 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from 'src/App';
 import * as serviceWorker from 'src/serviceWorker';
-import { UserInfoProvider } from './dutmanui/contexts/UserContext';
+import { UserInfoProvider } from './dustmanUI/contexts/UserContext';
 import './Translations';
-import { LoginDrawerProvider } from 'src/dutmanui/contexts/LoginDrawerContext';
-import { VendorInfoProvider } from './dutmanui/contexts/VendorContext';
+import { LoginDrawerProvider } from 'src/dustmanUI/contexts/LoginDrawerContext';
+import { VendorInfoProvider } from './dustmanUI/contexts/VendorContext';
 
 ReactDOM.render(
   <HelmetProvider>

@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { useState } from 'react';
 import { ButtonComp, UHAddressModalComp } from 'src/components';
-import { AddressData } from 'src/dutmanui/Services/customerAddressService';
+import { AddressData } from 'src/dustmanUI/Services/customerAddressService';
 
 type styleProps = {
   radioColor?: string;

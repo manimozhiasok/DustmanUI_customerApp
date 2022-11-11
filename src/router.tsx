@@ -1,27 +1,27 @@
 import { Navigate } from 'react-router-dom';
 import { RouteObject } from 'react-router';
-import BaseLayout from 'src/dutmanui/layouts/BaseLayout';
-import HomePage from './dutmanui/content/HomePage';
-import CustomerLogin from './dutmanui/content/Login/CustomerLogin';
-import VerifyOtp from './dutmanui/content/Login/VerifyOtp';
-import CreateAccountSignUp from './dutmanui/content/Login/CreateAccountSignUp';
-import ChooseUserType from './dutmanui/content/Login/ChooseUserType';
+import BaseLayout from 'src/dustmanUI/layouts/BaseLayout';
+import HomePage from './dustmanUI/content/HomePage';
+import CustomerLogin from './dustmanUI/content/Login/CustomerLogin';
+import VerifyOtp from './dustmanUI/content/Login/VerifyOtp';
+import CreateAccountSignUp from './dustmanUI/content/Login/CreateAccountSignUp';
+import ChooseUserType from './dustmanUI/content/Login/ChooseUserType';
 import ApplicationRoute from './ApplicationRoute';
-import AboutUs from './dutmanui/WebContent/AboutUs';
-import Services from './dutmanui/WebContent/Services';
-import Gallery from './dutmanui/WebContent/Gallery';
-import ContactUs from './dutmanui/WebContent/ContactUs';
-import LandingPage from './dutmanui/WebContent/LandingPage';
-import Login from './dutmanui/content/Login';
+import AboutUs from './dustmanUI/WebContent/AboutUs';
+import Services from './dustmanUI/WebContent/Services';
+import Gallery from './dustmanUI/WebContent/Gallery';
+import ContactUs from './dustmanUI/WebContent/ContactUs';
+import LandingPage from './dustmanUI/WebContent/LandingPage';
+import Login from './dustmanUI/content/Login';
 //vendor route component
-import VendorLogin from './dutmanui/VendorContent/VendorLogin';
-import VendorPageLogin from './dutmanui/VendorContent/VendorLogin/VendorPageLogin';
+import VendorLogin from './dustmanUI/VendorContent/VendorLogin';
+import VendorPageLogin from './dustmanUI/VendorContent/VendorLogin/VendorPageLogin';
 import VendorApplicationRoute from './VendorApplicationRoute';
-import VendorHomePage from './dutmanui/VendorContent/VendorHomePage';
-import VendorCreateAccountSignUp from './dutmanui/VendorContent/VendorLogin/VendorCreateAccountSignUp';
-import VendorVerifyOtp from './dutmanui/VendorContent/VendorLogin/VendorVerifyOtp';
-import ChooseVehicleType from './dutmanui/VendorContent/VendorLogin/ChooseVehicleType';
-import { VendorApproval } from './dutmanui/VendorContent/VendorLogin/VendorApproval';
+import VendorHomePage from './dustmanUI/VendorContent/VendorHomePage';
+import VendorCreateAccountSignUp from './dustmanUI/VendorContent/VendorLogin/VendorCreateAccountSignUp';
+import VendorVerifyOtp from './dustmanUI/VendorContent/VendorLogin/VendorVerifyOtp';
+import ChooseVehicleType from './dustmanUI/VendorContent/VendorLogin/ChooseVehicleType';
+import { VendorApproval } from './dustmanUI/VendorContent/VendorLogin/VendorApproval';
 
 const routes: RouteObject[] = [
   {
