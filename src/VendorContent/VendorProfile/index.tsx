@@ -2,11 +2,19 @@ import React, { useRef, useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Theme, Typography, useTheme } from '@material-ui/core';
 import {
-  CompletedOrdersIcon,
-  PendingOrdersIcon,
-  ConfirmedOrdersIcon,
+  VendorHelp,
+  VendorAbout,
+  VendorSignOut,
+  VendorTranslate,
+  VendorSwitch,
+  pending,
+  Completed,
+  confirmed,
+  confirmedWhite,
+  pendingWhite,
+  completedWhite,
   AvatarCustomer
-} from 'src/Assets/Images';
+} from 'src/Assets';
 import { useTranslation } from 'react-i18next';
 import {
   HTTP_STATUSES,
@@ -24,24 +32,11 @@ import {
   UHTabComponent
 } from 'src/components';
 import ProfileContent from './ProfileContent';
-import {
-  VendorHelp,
-  VendorAbout,
-  VendorSignOut,
-  VendorTranslate,
-  VendorSwitch,
-  pending,
-  Completed,
-  confirmed,
-  confirmedWhite,
-  pendingWhite,
-  completedWhite
-} from 'src/Assets';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 import { ChevronRight, ExpandLess, ExpandMore } from '@material-ui/icons';
 import { UHIconTextProps } from 'src/components/UHIconTextComp';
 import { useNavigate } from 'react-router';
 import { API_SERVICES } from 'src/Services';
-import useVendorInfo from 'src/hooks/useVendorInfo';
 import toast from 'react-hot-toast';
 import { VendorAddressData } from 'src/Services/vendorAddressService';
 
@@ -218,8 +213,8 @@ const VendorProfile = () => {
             { data: updatedData, successMessage }
           );
         if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-          if (response?.data?.vendorProfile) {
-            updateVendorInfo(response.data.vendorProfile.vendor_id);
+          if (response?.data?.updatedData) {
+            updateVendorInfo(response.data.updatedData.vendor_id);
           }
         }
         return response;
@@ -385,11 +380,11 @@ const VendorProfile = () => {
             image={VendorSwitch}
             renderDetail={() => (
               <UHSelectComp
-                initialValue={vendorDetails.user_type}
+                initialValue={vendorDetails?.user_type}
                 labelData={userTypeData}
                 checkColor={theme.Colors.orangePrimary}
                 handleChangeItem={(selectedVal) => {
-                  if (selectedVal === vendorDetails.user_type) {
+                  if (selectedVal === vendorDetails?.user_type) {
                     return;
                   }
                   let data: ProfileUpdateProp = {

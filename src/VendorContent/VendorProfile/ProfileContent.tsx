@@ -13,10 +13,10 @@ import { useTranslation } from 'react-i18next';
 import OTPInput from 'otp-input-react';
 import { API_SERVICES } from 'src/Services';
 import { HTTP_STATUSES } from 'src/Config/constant';
+import useVendorInfo from 'src/hooks/useVendorInfo';
 import { useEdit } from 'src/hooks/useEdit';
 import { isOneTimePassWord, isPhoneNumber } from 'src/Utils';
 import toast from 'react-hot-toast';
-import useVendorInfo from 'src/hooks/useVendorInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   buttonStyle: {
@@ -75,9 +75,9 @@ const ProfileContent = ({
   const [isOtpField, setIsOtpField] = useState<boolean>(false);
 
   const initialValues = {
-    company_name: vendorDetails?.name || '',
-    first_name: vendorDetails?.contact_name || '',
-    email: vendorDetails?.email_id || '',
+    name: vendorDetails?.name || '',
+    contact_name: vendorDetails?.contact_name || '',
+    email_id: vendorDetails?.email_id || '',
     mobile_number: vendorDetails?.mobile_number?.slice(2) || '',
     new_mobile_number: '',
     otp: ''
@@ -130,9 +130,6 @@ const ProfileContent = ({
       };
       let successMessage = 'Phone number updated successfully!';
       let response: any = await handleVerifyOtpNumber(data, successMessage);
-
-      console.log(response, '.........');
-
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         setIsEdit(0);
         setIsOtpField(false);
@@ -206,8 +203,8 @@ const ProfileContent = ({
           labelColor={theme.Colors.whiteGreyLight}
           inputBorder={theme.Colors.orangePrimary}
           variant="standard"
-          value={edit.getValue('company_name')}
-          name="company_name"
+          value={edit.getValue('name')}
+          name="name"
           onChange={handleChange}
           disabled={isEdit !== 1}
           inputRef={(ele) => {
@@ -218,7 +215,6 @@ const ProfileContent = ({
           iconEnd={<EditComp btnId={1} />}
         />
       </Grid>
-
       <Grid item xs={12}>
         <TextInputComponent
           inputLabel={t('PROFILE.contactName')}
@@ -227,13 +223,13 @@ const ProfileContent = ({
           inputBorder={theme.Colors.orangePrimary}
           variant="standard"
           onChange={handleChange}
-          value={edit.getValue('first_name')}
+          value={edit.getValue('contact_name')}
           inputRef={(ele) => {
             if (ele) {
               ele.focus();
             }
           }}
-          name="first_name"
+          name="contact_name"
           disabled={isEdit !== 2}
           iconEnd={<EditComp btnId={2} />}
         />
@@ -246,13 +242,13 @@ const ProfileContent = ({
           inputBorder={theme.Colors.orangePrimary}
           variant="standard"
           onChange={handleChange}
-          value={edit.getValue('email')}
+          value={edit.getValue('email_id')}
           inputRef={(ele) => {
             if (ele) {
               ele.focus();
             }
           }}
-          name="email"
+          name="email_id"
           disabled={isEdit !== 3}
           iconEnd={<EditComp btnId={3} />}
         />

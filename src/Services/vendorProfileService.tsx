@@ -32,6 +32,7 @@ type VendorProfileUpdateProp = {
   data: {
     user_type?: number;
     language_id?: number;
+    order_management_id?: string;
     name?: string;
     full_address?: string;
     contact_name?: string;
