@@ -50,7 +50,7 @@ const useStyles = makeStyles<Theme, Props>((theme) => {
         textAlign: 'center',
         fontWeight: theme.fontWeight.mediumBold,
         fontSize: '0.75em',
-        color: theme.Colors.slateBlueGrey,
+        color: theme.Colors.slateBlueGrey
       },
       '& .react-calendar__tile--now': {
         background: theme.Colors.white
@@ -157,7 +157,7 @@ const UHSelectYourPickUpComp = ({
             next2Label={null}
             defaultView="month"
             calendarType="US"
-            minDate={new Date()}
+            minDate={new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)}
             showNeighboringMonth={false}
             className={classes.calendar}
           />
