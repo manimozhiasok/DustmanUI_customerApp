@@ -23,7 +23,13 @@ import {
   ConfirmedOrdersIcon,
   PendingOrdersIcon,
   confirmVendor,
-  YetToConfirm
+  YetToConfirm,
+  pending,
+  Completed,
+  confirmed,
+  confirmedWhite,
+  pendingWhite,
+  completedWhite
 } from 'src/Assets';
 
 import toast from 'react-hot-toast';
@@ -83,17 +89,28 @@ function OrdersPage() {
 
   const OrdersTabItems = [
     {
-      tabIcon: PendingOrdersIcon,
+      tabIcon: () =>
+        selectedTab == 1 ? <img src={pendingWhite} /> : <img src={pending} />,
       label: t('ORDER.new'),
       value: CUSTOMER_ORDER_STATUS.New
     },
     {
-      tabIcon: ConfirmedOrdersIcon,
+      tabIcon: () =>
+        selectedTab == 2 ? (
+          <img src={confirmedWhite} />
+        ) : (
+          <img src={confirmed} />
+        ),
       label: t('ORDER.scheduled'),
       value: CUSTOMER_ORDER_STATUS.Confirmed
     },
     {
-      tabIcon: CompletedOrdersIcon,
+      tabIcon: () =>
+        selectedTab == 3 ? (
+          <img src={completedWhite} />
+        ) : (
+          <img src={Completed} />
+        ),
       label: t('ORDER.completed'),
       value: CUSTOMER_ORDER_STATUS.Completed
     }

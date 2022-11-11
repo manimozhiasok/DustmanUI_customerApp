@@ -16,10 +16,13 @@ export type VendorDetails = {
   website: string;
   established_year: string;
   vehicle_owned: string;
+  order_management_id: string;
   status_id: number;
   location: string;
   pincode: string;
   image_url: string;
+  user_type: number;
+  map_url: string;
 };
 
 export type VendorInfo = {
@@ -34,7 +37,9 @@ const INITIAL_STATE: VendorInfo = {
     name: '',
     language_id: 0,
     gst: '',
+    map_url: '',
     full_address: '',
+    order_management_id: '',
     contact_name: '',
     mobile_number: '',
     landline_number: '',
@@ -46,7 +51,8 @@ const INITIAL_STATE: VendorInfo = {
     location: '',
     pincode: '',
     image_url: '',
-    vendor_id: 0
+    vendor_id: 0,
+    user_type: 0
   },
   updateVendorInfo: () => undefined,
   vendorAddressDetails: []

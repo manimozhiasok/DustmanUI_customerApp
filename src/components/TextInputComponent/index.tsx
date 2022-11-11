@@ -17,6 +17,7 @@ type StyleProps = {
   textColor?: string;
   inputTextWeight?: number;
   inputTextSize?: any;
+  inputBorder?: string;
 };
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -54,7 +55,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     '& .MuiInput-underline::after': {
       borderBottom: '0.5px solid',
-      borderBottomColor: theme.Colors.secondary
+      borderBottomColor: (props) => props.inputBorder || theme.Colors.secondary
     }
   },
   helperRoot: {
@@ -82,6 +83,7 @@ type Props = TextFieldProps & {
   inputTextWeight?: number;
   inputTextSize?: any;
   inputLabelFont?: number;
+  inputBorder?: string;
 };
 
 const TextInputComponent = (props: Props) => {
@@ -103,6 +105,7 @@ const TextInputComponent = (props: Props) => {
     inputTextWeight,
     inputTextSize,
     inputLabelFont,
+    inputBorder,
     ...rest
   } = props;
   const styles = useStyles({
@@ -113,7 +116,8 @@ const TextInputComponent = (props: Props) => {
     borderRadius: inputBorderRadius,
     textColor,
     inputTextWeight,
-    inputTextSize
+    inputTextSize,
+    inputBorder
   });
   return (
     <Grid className={styles.containerStyle}>

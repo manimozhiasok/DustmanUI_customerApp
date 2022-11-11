@@ -18,15 +18,17 @@ import {
   UHTabComponent
 } from 'src/components';
 import {
-  CompletedOrdersIcon,
-  ConfirmedOrdersIcon,
-  PendingOrdersIcon,
   yetToConfirmVendor,
-  confirmVendor
+  confirmVendor,
+  pending,
+  Completed,
+  confirmed,
+  confirmedWhite,
+  pendingWhite,
+  completedWhite
 } from 'src/Assets';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 import { getDateFormat } from 'src/Utils';
-import toast from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -77,24 +79,6 @@ function OrdersPage() {
     });
   };
 
-  const OrdersTabItems = [
-    {
-      tabIcon: PendingOrdersIcon,
-      label: t('ORDER.pending'),
-      value: CUSTOMER_ORDER_STATUS.Pending
-    },
-    {
-      tabIcon: ConfirmedOrdersIcon,
-      label: t('ORDER.scheduled'),
-      value: CUSTOMER_ORDER_STATUS.Confirmed
-    },
-    {
-      tabIcon: CompletedOrdersIcon,
-      label: t('ORDER.completed'),
-      value: CUSTOMER_ORDER_STATUS.Completed
-    }
-  ];
-
   const fetchData = useCallback(async () => {
     const response: any =
       await API_SERVICES.vendorMyOrderService.getVendorOrderByStatus(
@@ -107,6 +91,35 @@ function OrdersPage() {
       }
     }
   }, [selectedTab]);
+
+  const OrdersTabItems = [
+    {
+      tabIcon: () =>
+        selectedTab == 0 ? <img src={pendingWhite} /> : <img src={pending} />,
+      label: t('ORDER.pending'),
+      value: CUSTOMER_ORDER_STATUS.Pending
+    },
+    {
+      tabIcon: () =>
+        selectedTab == 2 ? (
+          <img src={confirmedWhite} />
+        ) : (
+          <img src={confirmed} />
+        ),
+      label: t('ORDER.scheduled'),
+      value: CUSTOMER_ORDER_STATUS.Confirmed
+    },
+    {
+      tabIcon: () =>
+        selectedTab == 3 ? (
+          <img src={completedWhite} />
+        ) : (
+          <img src={Completed} />
+        ),
+      label: t('ORDER.completed'),
+      value: CUSTOMER_ORDER_STATUS.Completed
+    }
+  ];
 
   const onClickCancelButton = (orderId: number) => {
     const onCancelClick = () => {
