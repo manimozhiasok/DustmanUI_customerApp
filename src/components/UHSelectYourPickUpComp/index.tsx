@@ -33,14 +33,17 @@ const useStyles = makeStyles<Theme, Props>((theme) => {
     },
     calendar: {
       '&.react-calendar': {
-        maxWidth: '100%',
+        width: '100%',
+        padding: theme.spacing(2),
         background: theme.Colors.white,
         border: 'none',
         borderRadius: theme.MetricsSizes.tiny_x
       },
       '& .react-calendar__tile--active, .react-calendar__tile--now:enabled:hover, .react-calendar__tile--now:enabled:focus, .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus':
         {
-          background: (props) => props.activeTileColor || theme.Colors.secondary
+          background: (props) =>
+            props.activeTileColor || theme.Colors.secondary,
+          borderRadius: '5.35976px'
         },
       '& .react-calendar__tile:disabled': {
         color: theme.Colors.lightGrey,
@@ -49,8 +52,8 @@ const useStyles = makeStyles<Theme, Props>((theme) => {
       '& .react-calendar__month-view__weekdays': {
         textAlign: 'center',
         fontWeight: theme.fontWeight.mediumBold,
-        fontSize: '0.75em',
-        color: theme.Colors.slateBlueGrey,
+        fontSize: '14.29px',
+        color: theme.Colors.slateBlueGrey
       },
       '& .react-calendar__tile--now': {
         background: theme.Colors.white

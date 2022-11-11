@@ -126,3 +126,24 @@ export const isValidPinCode = (number: string) => {
   const pinCodeExp = /^[1-9][0-9]{5}$/;
   return number?.match(pinCodeExp);
 };
+
+export const isLandline = (num) => {
+  const regExp = /^[0-9]{3,5}[-][0-9]{6,8}/;
+  return num?.match(regExp);
+};
+
+export const isYear = (val) => {
+  const regExp = /^[0-9]{4}$/;
+  return val?.match(regExp);
+};
+
+export const isGSTNumber = (val) => {
+  const regExp = /^[A-Z0-9]{15}?$/;
+  return val?.match(regExp);
+};
+
+export const isWebsiteName = (val) => {
+  const regExp =
+    /^[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+  return val?.match(regExp);
+};

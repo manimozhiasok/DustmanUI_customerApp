@@ -1,9 +1,9 @@
 import { ReactComponent as SunIcon } from './Sun.svg';
 import { ReactComponent as DateIcon } from './Date.svg';
 import { ReactComponent as PlaceMaker } from './PlaceMarker.svg';
-import PendingOrdersIcon from './PendingOrdersIcon.svg';
-import ConfirmedOrdersIcon from './ConfirmedOrdersIcon.svg';
-import CompletedOrdersIcon from './CompletedOrdersIcon.svg';
+import { ReactComponent as PendingOrdersIcon } from './PendingOrdersIcon.svg';
+import { ReactComponent as ConfirmedOrdersIcon } from './ConfirmedOrdersIcon.svg';
+import { ReactComponent as CompletedOrdersIcon } from './CompletedOrdersIcon.svg';
 import DustmanLogoHorizontal from './DustmanLogoHorizontal.svg';
 import LandingPageArc from './LandingPageArc.svg';
 import PatternDotted from './PatternDotted.svg';
@@ -59,8 +59,26 @@ import yetToConfirmVendor from './yetToConfirmVendor.svg';
 import UserAvatarIcon from './UserAvatarIcon.svg';
 import Plus from './Plus.svg';
 import PlusWhite from './PlusWhite.svg';
+import PlusOrange from './PlusOrange.svg';
+import VendorHelp from './VendorHelp.svg';
+import VendorSignOut from './VendorSignOut.svg';
+import VendorAbout from './VendorAbout.svg';
+import VendorSwitch from './VendorSwitch.svg';
+import VendorTranslate from './VendorTranslate.svg';
+import pending from './pending.png';
+import Completed from './completed.png';
+import confirmed from './Confirmed.png';
+import confirmedWhite from './confirmedWhite.png';
+import pendingWhite from './pendingWhite.png';
+import completedWhite from './completedWhite.png';
 
 export {
+  pending,
+  Completed,
+  confirmed,
+  completedWhite,
+  pendingWhite,
+  confirmedWhite,
   DustmanLogoHorizontal,
   LandingPageArc,
   PatternDotted,
@@ -120,5 +138,11 @@ export {
   Plus,
   RoundPattern,
   DottedPattern,
-  PlusWhite
+  PlusWhite,
+  PlusOrange,
+  VendorTranslate,
+  VendorSwitch,
+  VendorSignOut,
+  VendorAbout,
+  VendorHelp
 };

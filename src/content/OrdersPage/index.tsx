@@ -17,14 +17,20 @@ import {
   UHOrderPreviewComp,
   UHTabComponent
 } from 'src/components';
+import { getDateFormat } from 'src/Utils';
 import {
   CompletedOrdersIcon,
   Confirm,
   ConfirmedOrdersIcon,
   PendingOrdersIcon,
-  YetToConfirm
+  YetToConfirm,
+  pending,
+  Completed,
+  confirmed,
+  confirmedWhite,
+  pendingWhite,
+  completedWhite
 } from 'src/Assets';
-import { getDateFormat } from 'src/Utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
@@ -74,17 +80,28 @@ function OrdersPage() {
 
   const OrdersTabItems = [
     {
-      tabIcon: PendingOrdersIcon,
+      tabIcon: () =>
+        selectedTab == 1 ? <img src={pendingWhite} /> : <img src={pending} />,
       label: t('ORDER.pending'),
       value: CUSTOMER_ORDER_STATUS.New
     },
     {
-      tabIcon: ConfirmedOrdersIcon,
+      tabIcon: () =>
+        selectedTab == 2 ? (
+          <img src={confirmedWhite} />
+        ) : (
+          <img src={confirmed} />
+        ),
       label: t('ORDER.confirmed'),
       value: CUSTOMER_ORDER_STATUS.Confirmed
     },
     {
-      tabIcon: CompletedOrdersIcon,
+      tabIcon: () =>
+        selectedTab == 3 ? (
+          <img src={completedWhite} />
+        ) : (
+          <img src={Completed} />
+        ),
       label: t('ORDER.completed'),
       value: CUSTOMER_ORDER_STATUS.Completed
     }

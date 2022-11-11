@@ -10,7 +10,15 @@ import { useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useEdit } from 'src/hooks/useEdit';
 import { useState } from 'react';
-import { isValidEmail } from 'src/Utils';
+import {
+  isGSTNumber,
+  isLandline,
+  isPhoneNumber,
+  isValidEmail,
+  isValidPinCode,
+  isWebsiteName,
+  isYear
+} from 'src/Utils';
 import { TermsAndConditionComp } from 'src/content/Login/TermsAndConditionComp';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -32,7 +40,7 @@ const VendorCreateAccountSignUp = () => {
     gst: '',
     full_address: '',
     location: '',
-    map_location: ' ',
+    map_url: '',
     contact_name: '',
     mobile_number: '',
     landline_number: '',
@@ -40,9 +48,7 @@ const VendorCreateAccountSignUp = () => {
     website: '',
     established_year: '',
     vehicle_owned: [],
-    address_line1: '',
-    address_line2: '',
-    address_line3: '',
+    order_management_id: '',
     state: '',
     city: '',
     pincode: ''
@@ -65,7 +71,14 @@ const VendorCreateAccountSignUp = () => {
   const handleContinueClick = () => {
     if (
       !edit.allFilled(...RequiredFields) ||
-      !isValidEmail(edit.getValue('email_id'))
+      !isValidEmail(edit.getValue('email_id')) ||
+      !isPhoneNumber(edit.getValue('mobile_number')) ||
+      !isValidPinCode(edit.getValue('pincode')) ||
+      !isGSTNumber(edit.getValue('gst')) ||
+      !isLandline(edit.getValue('landline_number')) ||
+      !isValidEmail(edit.getValue('email_id')) ||
+      !isWebsiteName(edit.getValue('website')) ||
+      !isYear(edit.getValue('established_year'))
     ) {
       setIsError(true);
       return;
@@ -119,7 +132,11 @@ const VendorCreateAccountSignUp = () => {
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
           helperText={
-            isError && !edit.allFilled('gst') && 'Please Enter your last name'
+            ((isError && !edit.getValue('gst')) ||
+              (isError &&
+                edit.getValue('gst') &&
+                !isGSTNumber(edit.getValue('gst')))) &&
+            'Please enter your valid GST number'
           }
         />
         <TextInputComponent
@@ -130,9 +147,11 @@ const VendorCreateAccountSignUp = () => {
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
           helperText={
-            isError &&
-            !edit.allFilled('mobile_number') &&
-            'Please Enter your mobile number'
+            ((isError && !edit.getValue('mobile_number')) ||
+              (isError &&
+                edit.getValue('mobile_number') &&
+                !isPhoneNumber(edit.getValue('mobile_number')))) &&
+            'Please enter your valid mobile number'
           }
         />
         <TextInputComponent
@@ -182,7 +201,11 @@ const VendorCreateAccountSignUp = () => {
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
           helperText={
-            isError && !edit.allFilled('Pincode') && 'Please Enter your pincode'
+            ((isError && !edit.getValue('pincode')) ||
+              (isError &&
+                edit.getValue('pincode') &&
+                !isValidPinCode(edit.getValue('pincode')))) &&
+            'Please enter your valid pincode'
           }
         />
 
@@ -194,7 +217,11 @@ const VendorCreateAccountSignUp = () => {
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
           helperText={
-            isError && !edit.allFilled('website') && 'Please Enter your website'
+            ((isError && !edit.getValue('website')) ||
+              (isError &&
+                edit.getValue('website') &&
+                !isWebsiteName(edit.getValue('website')))) &&
+            'Please enter your website'
           }
         />
         <TextInputComponent
@@ -205,9 +232,11 @@ const VendorCreateAccountSignUp = () => {
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
           helperText={
-            isError &&
-            !edit.allFilled('landline_number') &&
-            'Please Enter your landline number'
+            ((isError && !edit.getValue('landline_number')) ||
+              (isError &&
+                edit.getValue('landline_number') &&
+                !isLandline(edit.getValue('landline_number')))) &&
+            'Please enter your valid landline number'
           }
         />
         <TextInputComponent
@@ -218,9 +247,11 @@ const VendorCreateAccountSignUp = () => {
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
           helperText={
-            isError &&
-            !edit.allFilled('established_year') &&
-            'Please Enter your established year'
+            ((isError && !edit.getValue('established_year')) ||
+              (isError &&
+                edit.getValue('established_year') &&
+                !isYear(edit.getValue('established_year')))) &&
+            'Please enter your established year'
           }
         />
         <ButtonComp

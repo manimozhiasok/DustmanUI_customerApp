@@ -5,7 +5,13 @@ import {
   CompletedOrdersIcon,
   PendingOrdersIcon,
   ConfirmedOrdersIcon,
-  AvatarCustomer
+  AvatarCustomer,
+  pending,
+  Completed,
+  confirmed,
+  confirmedWhite,
+  pendingWhite,
+  completedWhite
 } from 'src/Assets/Images';
 import { useTranslation } from 'react-i18next';
 import {
@@ -167,17 +173,28 @@ const Profile = () => {
 
   const OrdersTabItems = [
     {
-      tabIcon: PendingOrdersIcon,
+      tabIcon: () =>
+        selectedTab == 1 ? <img src={pendingWhite} /> : <img src={pending} />,
       label: t('PROFILE.account'),
       value: PROFILE_TAB_VALUES.myAccount
     },
     {
-      tabIcon: ConfirmedOrdersIcon,
+      tabIcon: () =>
+        selectedTab == 2 ? (
+          <img src={confirmedWhite} />
+        ) : (
+          <img src={confirmed} />
+        ),
       label: t('PROFILE.language'),
       value: PROFILE_TAB_VALUES.changeLanguage
     },
     {
-      tabIcon: CompletedOrdersIcon,
+      tabIcon: () =>
+        selectedTab == 3 ? (
+          <img src={completedWhite} />
+        ) : (
+          <img src={Completed} />
+        ),
       label: t('PROFILE.userType'),
       value: PROFILE_TAB_VALUES.changeUserType
     }

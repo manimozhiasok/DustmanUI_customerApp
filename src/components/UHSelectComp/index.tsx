@@ -7,8 +7,10 @@ import {
   Typography,
   useTheme
 } from '@material-ui/core';
-
-const useStyles = makeStyles((theme: Theme) => {
+type styleProps = {
+  checkColor?: string;
+};
+const useStyles = makeStyles<Theme, styleProps>((theme: Theme) => {
   return {
     radio: {
       alignSelf: 'flex-start'
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) => {
     },
     activeCheckIcon: {
       marginLeft: theme.MetricsSizes.regular_x,
+      color: (props) => props.checkColor || theme.Colors.secondary,
       width: 24,
       height: 24
     },
@@ -33,11 +36,17 @@ const useStyles = makeStyles((theme: Theme) => {
 type Props = {
   initialValue: number;
   handleChangeItem?: (selId: number) => void;
+  checkColor?: string;
   labelData: { label: string; value: number }[];
 };
-const UHSelectComp = ({ initialValue, handleChangeItem, labelData }: Props) => {
+const UHSelectComp = ({
+  initialValue,
+  handleChangeItem,
+  checkColor,
+  labelData
+}: Props) => {
   const [selectedItem, setSelectedItem] = useState<number>(0);
-  const classes = useStyles();
+  const classes = useStyles({ checkColor });
   const theme = useTheme();
 
   const onclickItem = (item?: { label: string; value: number }) => {
@@ -76,7 +85,7 @@ const UHSelectComp = ({ initialValue, handleChangeItem, labelData }: Props) => {
             </Grid>
             {selectedItem === item.value ? (
               <Grid item xs>
-                <Check color="secondary" className={classes.activeCheckIcon} />
+                <Check className={classes.activeCheckIcon} />
               </Grid>
             ) : null}
           </Grid>

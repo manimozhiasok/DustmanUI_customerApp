@@ -7,7 +7,8 @@ import {
   Theme,
   Grid,
   useTheme,
-  TabsProps
+  TabsProps,
+  Typography
 } from '@material-ui/core';
 import { ORIENTATION } from 'src/Config/constant';
 
@@ -40,7 +41,27 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
       minWidth: 202,
       minHeight: 48,
       textTransform: 'none',
-      opacity: 1
+      opacity: 1,
+      '& > span > div': {
+        '& > svg , path': {
+          fill: theme.Colors.navBlue
+        },
+        color: theme.Colors.navBlue
+      },
+      '&:active, &.active, &.Mui-selected': {
+        '& > span > div': {
+          '& > svg , path': {
+            fill: theme.Colors.white
+          },
+          color: theme.Colors.white
+        }
+      }
+    },
+    textStyle: {
+      marginLeft: theme.spacing(2)
+    },
+    ContainerStyle: {
+      marginRight: theme.MetricsSizes.tiny
     }
   };
 });
@@ -104,22 +125,11 @@ const UHTabComponent = (props: Props) => {
                 <Tab
                   label={
                     orientation === ORIENTATION.VERTICAL ? (
-                      <Grid
-                        container
-                        direction="row"
-                        className={classes.contentContainer}
-                      >
-                        {item?.tabIcon ? (
-                          <img
-                            src={item.tabIcon}
-                            alt="icon"
-                            style={{
-                              paddingRight: theme.spacing(2),
-                              marginLeft: theme.MetricsSizes.tiny
-                            }}
-                          />
-                        ) : null}
-                        {item?.label}
+                      <Grid container className={classes.ContainerStyle}>
+                        {item?.tabIcon ? item.tabIcon() : null}
+                        <Typography className={classes.textStyle}>
+                          {item?.label}
+                        </Typography>
                       </Grid>
                     ) : (
                       item.label
