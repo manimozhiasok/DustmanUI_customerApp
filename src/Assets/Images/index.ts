@@ -20,6 +20,7 @@ import CheckImageVendor from './CheckImageVendor.svg';
 import VendorLoginImage from './VendorLoginImage.svg';
 import RoundPattern from './Vector3.svg';
 import DottedPattern from './Vector4.svg';
+import CurrencySymbol from './CurrencySymbol.svg';
 
 import All from './All.svg';
 import Carton from './Carton.svg';
@@ -123,5 +124,6 @@ export {
   DottedPattern,
   PlusWhite,
   ArrowsLeftRight,
-  CopperImage
+  CopperImage,
+  CurrencySymbol
 };

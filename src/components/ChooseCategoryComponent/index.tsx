@@ -8,6 +8,7 @@ import {
   FormControlLabel,
   Typography
 } from '@material-ui/core';
+import { CurrencySymbol } from 'src/Assets';
 type StyleProps = {
   checkBoxColor: string;
 };
@@ -41,7 +42,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingTop: theme.spacing(1),
     textAlign: 'center',
     fontWeight: theme.fontWeight.medium,
-    color: theme.Colors.darkGrey
+    fontSize: theme.MetricsSizes.small_xx,
+    color: theme.Colors.blueBlack
+  },
+  price: {
+    fontWeight: theme.fontWeight.bold,
+    fontSize: theme.MetricsSizes.small_x,
+    color: theme.Colors.primary
+  },
+  priceAlign: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 }));
 
@@ -51,6 +62,7 @@ type Props = {
   activeBorderColor?: any;
   InitialItemVal?: any[];
   checkBoxColor?: string;
+  isPrice?: boolean;
 };
 
 function ChooseCategoryComponent({
@@ -58,7 +70,8 @@ function ChooseCategoryComponent({
   handleChangeItem,
   activeBorderColor,
   InitialItemVal,
-  checkBoxColor
+  checkBoxColor,
+  isPrice
 }: Props) {
   const classes = useStyles({ checkBoxColor });
   const theme = useTheme();
@@ -115,9 +128,19 @@ function ChooseCategoryComponent({
               value={item.name}
               labelPlacement="bottom"
               label={
-                <Typography className={classes.description}>
-                  {item.name}
-                </Typography>
+                <>
+                  <Typography className={classes.description}>
+                    {item.name}
+                  </Typography>
+                  {isPrice && (
+                    <Grid className={classes.priceAlign}>
+                      <img src={CurrencySymbol} alt="image" />
+                      <Typography className={classes.price}>
+                        {item.price}
+                      </Typography>
+                    </Grid>
+                  )}
+                </>
               }
               control={
                 <>

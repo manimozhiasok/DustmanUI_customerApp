@@ -242,6 +242,7 @@ function BookMyDrop() {
           handleChangeItem={handleTrashCatItems}
           activeBorderColor={theme.Colors.orangePrimary}
           checkBoxColor={theme.Colors.orangePrimary}
+          isPrice
         />
       ),
       tileIcon: ChooseCategoryIcon

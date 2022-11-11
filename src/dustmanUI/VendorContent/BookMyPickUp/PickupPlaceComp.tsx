@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { CurrencySymbol } from 'src/Assets';
 
 const useStyles = makeStyles<Theme>((theme) => {
   return {
@@ -39,7 +40,7 @@ const useStyles = makeStyles<Theme>((theme) => {
     subText2: {
       fontSize: theme.MetricsSizes.small_x,
       fontWeight: theme.fontWeight.bold,
-      color: theme.Colors.darkGrey
+      color: theme.Colors.primary
     },
     status: {
       display: 'flex',
@@ -96,6 +97,7 @@ const PickupPlaceComp = ({ data }: { data: any[] }) => {
             </Grid>
             <Grid item>
               <Grid className={classes.status}>
+                <img src={CurrencySymbol} alt="image" />
                 <Typography className={classes.subText2}>
                   {item.price}
                 </Typography>
