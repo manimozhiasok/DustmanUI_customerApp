@@ -56,12 +56,14 @@ type Props = {
   handleEditListItem?: () => void;
   handleAddNewAddress?: () => void;
   handleSaveEdits?: (data: any) => void;
+  handleVerifyOtpNumber?: (data: any, successMessage: string) => void;
 };
 
 const ProfileContent = ({
   handleAddNewAddress,
   handleEditListItem,
-  handleSaveEdits
+  handleSaveEdits,
+  handleVerifyOtpNumber
 }: Props) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -70,7 +72,6 @@ const ProfileContent = ({
   const [isError, setIsError] = useState(false);
   const [isEdit, setIsEdit] = useState<number>(0);
   const [isOtpField, setIsOtpField] = useState<boolean>(false);
-  const [isText, setIsText] = useState(false);
 
   const initialValues = {
     first_name: userDetails?.first_name || '',
@@ -127,14 +128,10 @@ const ProfileContent = ({
         otp: edit.getValue('otp')
       };
       let successMessage = 'Phone number updated successfully!';
-      const response: any = API_SERVICES.customerProfileService.replaceCustomer(
-        userDetails?.customer_id,
-        { data, successMessage }
-      );
+      let response: any = await handleVerifyOtpNumber(data, successMessage);
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         setIsEdit(0);
         setIsOtpField(false);
-        updateUserInfo(userDetails?.customer_id);
       }
     } catch (e) {
       console.log(e, '--profile update err--');
@@ -150,14 +147,16 @@ const ProfileContent = ({
     setIsEdit(parseInt(editEvent.currentTarget.id));
   };
 
-  const handleClickSaveBtn = () => {
+  const handleClickSaveBtn = async () => {
     if (edit.edits && Object.keys(edit.edits).length === 0) {
       setIsEdit(0);
       return;
     }
     let data = { ...edit.edits };
-    handleSaveEdits(data);
-    setIsEdit(0);
+    let response: any = await handleSaveEdits(data);
+    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+      setIsEdit(0);
+    }
   };
 
   const handleClickCancelBtn = () => {

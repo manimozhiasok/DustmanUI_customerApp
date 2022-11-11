@@ -123,7 +123,7 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
       <Grid
         container
         className={classes.outerContainer}
-        alignItems={isCheckBox ? 'center' : 'flex-start'}
+        alignItems="flex-start"
       >
         <Grid container item xs>
           <Grid item>
@@ -142,7 +142,7 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
               <Typography className={classes.category}>
                 {t('category')}:
                 <span className={classes.categoryText}>
-                  {orderItems?.order_items?.toString()}
+                  {orderItems?.order_items?.toString().split(',').join(', ')}
                 </span>
               </Typography>
               <Grid className={classes.imageAlign}>

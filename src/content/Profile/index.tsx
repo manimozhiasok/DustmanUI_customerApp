@@ -187,7 +187,7 @@ const Profile = () => {
     async (updatedData: ProfileUpdateProp, sucMessage?: string) => {
       try {
         let successMessage =
-          sucMessage ?? 'Account Profile updated successfully!';
+          sucMessage ?? 'Account detail updated successfully!';
         const response: any =
           await API_SERVICES.customerProfileService.updateCustomerProfile(
             userDetails?.id,
@@ -198,9 +198,29 @@ const Profile = () => {
             updateUserInfo(response.data.profile.customer_id);
           }
         }
+        return response;
       } catch (e) {
         console.log(e, '--profile update err--');
       }
+    },
+    []
+  );
+
+  const handleAddNewAddress = useCallback(() => {
+    setOpenModal({ open: true });
+  }, []);
+
+  const handleVerifyOtpNumber = useCallback(
+    async (data: any, successMessage: string) => {
+      const response: any =
+        await API_SERVICES.customerProfileService.replaceCustomer(
+          userDetails?.customer_id,
+          { data, successMessage }
+        );
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        updateUserInfo(response?.data?.customer.id);
+      }
+      return response;
     },
     []
   );
@@ -222,10 +242,6 @@ const Profile = () => {
     } catch (err) {
       toast.error(err);
     }
-  };
-
-  const handleAddNewAddress = () => {
-    setOpenModal({ open: true });
   };
 
   const handleAddressSaveButtonClick = async (
@@ -256,6 +272,7 @@ const Profile = () => {
         <ProfileContent
           handleSaveEdits={handleUpdateProfileDetails}
           handleAddNewAddress={handleAddNewAddress}
+          handleVerifyOtpNumber={handleVerifyOtpNumber}
         />
       ),
       renderAccordionTitle: () => (

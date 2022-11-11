@@ -11,7 +11,8 @@ import { TextInputComponent } from 'src/components';
 import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles((theme: Theme) => ({
   textStyle: {
-    color: theme.Colors.deepGrey
+    color: theme.Colors.deepGrey,
+    marginBottom: theme.MetricsSizes.tiny_xx
   },
   textAreaStyle: {
     fontSize: theme.MetricsSizes.small_x,
@@ -54,7 +55,7 @@ export const TrashDetailsContent = ({ edit, trashData }) => {
           trashData.filter((list) => list.id === element)[0].name
         );
       });
-    return data.length ? data.toString() : '';
+    return data.length ? data.toString().split(',').join(', ') : '';
   };
 
   return (

@@ -31,7 +31,7 @@ const ImageTextComponent = (props: Props) => {
 
   return (
     <Grid style={{ display: 'flex', alignItems: 'center' }}>
-      <Grid>{icon && <img src={icon} />}</Grid>
+      {icon && <img src={icon} />}
       <Grid>
         {value && (
           <Typography
