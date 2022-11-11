@@ -1,27 +1,27 @@
 import { Navigate } from 'react-router-dom';
 import { RouteObject } from 'react-router';
-import BaseLayout from 'src/layouts/BaseLayout';
-import HomePage from './content/HomePage';
-import CustomerLogin from './content/Login/CustomerLogin';
-import VerifyOtp from './content/Login/VerifyOtp';
-import CreateAccountSignUp from './content/Login/CreateAccountSignUp';
-import ChooseUserType from './content/Login/ChooseUserType';
+import BaseLayout from 'src/dutmanui/layouts/BaseLayout';
+import HomePage from './dutmanui/content/HomePage';
+import CustomerLogin from './dutmanui/content/Login/CustomerLogin';
+import VerifyOtp from './dutmanui/content/Login/VerifyOtp';
+import CreateAccountSignUp from './dutmanui/content/Login/CreateAccountSignUp';
+import ChooseUserType from './dutmanui/content/Login/ChooseUserType';
 import ApplicationRoute from './ApplicationRoute';
-import AboutUs from './WebContent/AboutUs';
-import Services from './WebContent/Services';
-import Gallery from './WebContent/Gallery';
-import ContactUs from './WebContent/ContactUs';
-import LandingPage from './WebContent/LandingPage';
-import Login from './content/Login';
+import AboutUs from './dutmanui/WebContent/AboutUs';
+import Services from './dutmanui/WebContent/Services';
+import Gallery from './dutmanui/WebContent/Gallery';
+import ContactUs from './dutmanui/WebContent/ContactUs';
+import LandingPage from './dutmanui/WebContent/LandingPage';
+import Login from './dutmanui/content/Login';
 //vendor route component
-import VendorLogin from './VendorContent/VendorLogin';
-import VendorPageLogin from './VendorContent/VendorLogin/VendorPageLogin';
+import VendorLogin from './dutmanui/VendorContent/VendorLogin';
+import VendorPageLogin from './dutmanui/VendorContent/VendorLogin/VendorPageLogin';
 import VendorApplicationRoute from './VendorApplicationRoute';
-import VendorHomePage from './VendorContent/VendorHomePage';
-import VendorCreateAccountSignUp from './VendorContent/VendorLogin/VendorCreateAccountSignUp';
-import VendorVerifyOtp from './VendorContent/VendorLogin/VendorVerifyOtp';
-import ChooseVehicleType from './VendorContent/VendorLogin/ChooseVehicleType';
-import { VendorApproval } from './VendorContent/VendorLogin/VendorApproval';
+import VendorHomePage from './dutmanui/VendorContent/VendorHomePage';
+import VendorCreateAccountSignUp from './dutmanui/VendorContent/VendorLogin/VendorCreateAccountSignUp';
+import VendorVerifyOtp from './dutmanui/VendorContent/VendorLogin/VendorVerifyOtp';
+import ChooseVehicleType from './dutmanui/VendorContent/VendorLogin/ChooseVehicleType';
+import { VendorApproval } from './dutmanui/VendorContent/VendorLogin/VendorApproval';
 
 const routes: RouteObject[] = [
   {

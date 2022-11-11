@@ -1,5 +1,5 @@
 import React from 'react';
-import { VendorInfoContext } from 'src/contexts/VendorContext';
+import { VendorInfoContext } from 'src/dutmanui/contexts/VendorContext';
 
 const useVendorInfo = () => {
   const vendorData = React.useContext(VendorInfoContext);

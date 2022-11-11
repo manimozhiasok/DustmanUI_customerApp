@@ -6,7 +6,7 @@ import DualActionButton from 'src/components/DualActionButton';
 import { useEdit } from 'src/hooks/useEdit';
 import toast from 'react-hot-toast';
 import { isPhoneNumber, isValidPinCode } from 'src/Utils';
-import { AddressData } from 'src/Services/customerAddressService';
+import { AddressData } from 'src/dutmanui/Services/customerAddressService';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
