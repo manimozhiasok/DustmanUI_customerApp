@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useTheme, Theme, makeStyles } from '@material-ui/core';
-import { LoginDrawerContext } from '../../contexts/LoginDrawerContext';
+import { LoginDrawerContext } from '../../../contexts/LoginDrawerContext';
 import { Pathname, useMatch, useNavigate } from 'react-router';
 import { Logo, DropDown, UserAvatarIcon } from 'src/Assets';
 import useVendorInfo from 'src/hooks/useVendorInfo';

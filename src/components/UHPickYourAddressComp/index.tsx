@@ -103,7 +103,7 @@ const UHPickYourAddressComp = ({
                     </Grid>
                     <Grid item xs={12}>
                       <Typography variant="h6" className={classes.addressView}>
-                        {item?.address}
+                        {`${item.address_line1} , ${item.address_line2} , ${item.address_line3} , ${item.city} , ${item.pincode}`}
                       </Typography>
                     </Grid>
                   </Grid>

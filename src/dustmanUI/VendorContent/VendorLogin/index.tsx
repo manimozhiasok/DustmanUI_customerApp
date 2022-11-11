@@ -4,7 +4,7 @@ import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import { Outlet, useLocation, useMatch, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { LoginDrawerContext } from 'src/dustmanUI/contexts/LoginDrawerContext';
+import { LoginDrawerContext } from 'src/contexts/LoginDrawerContext';
 import CloseIcon from '@material-ui/icons/Close';
 import { VendorLoginImage } from 'src/Assets';
 
