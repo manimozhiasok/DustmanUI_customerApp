@@ -61,7 +61,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
       marginLeft: theme.spacing(2)
     },
     ContainerStyle: {
-      marginRight: theme.MetricsSizes.tiny
+      marginLeft: theme.MetricsSizes.tiny
     }
   };
 });

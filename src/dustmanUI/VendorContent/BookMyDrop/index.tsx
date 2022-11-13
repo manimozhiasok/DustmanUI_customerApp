@@ -171,7 +171,7 @@ function BookMyDrop() {
           trashData.filter((list: { id: any }) => list.id === element)[0].name
         );
       });
-    return data.length ? data.toString() : '';
+    return data.length ? data.join(', ') : '';
   };
 
   const getAddressData =

@@ -28,28 +28,20 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       fontWeight: theme.fontWeight.medium,
       color: theme.Colors.rusticRed
     },
-    topHeading: {
-      fontWeight: theme.fontWeight.bold,
-      fontSize: theme.MetricsSizes.small_xxx,
-      color: theme.Colors.primary
-    },
     subHeading: {
       fontWeight: theme.fontWeight.regular,
       fontSize: theme.MetricsSizes.small_xxx,
       color: theme.Colors.lightBlack
     },
     gridStyle: {
-       margin: theme.spacing(1,0.5,1.75,1),
+      margin: theme.spacing(1, 0.5, 1.75, 1),
       background: theme.Colors.whiteGrey,
-      padding:theme.spacing(1,1,0.5,1),
+      padding: theme.spacing(1, 1, 0.5, 1),
       borderRadius: 5,
       width: 152,
       height: 82,
       cursor: 'pointer',
       position: 'relative'
-    },
-    gridAlign: {
-      // paddingTop:"5px"
     }
   })
 );
@@ -82,7 +74,7 @@ function SelectVehicleType({
       {dataContent.map((item, index) => {
         return (
           <Grid
-            container 
+            container
             item
             className={classes.gridStyle}
             alignItems="center"
@@ -99,7 +91,7 @@ function SelectVehicleType({
                   : 'none'
             }}
           >
-            <Grid item xs={12} className={classes.gridAlign}>
+            <Grid item xs={12}>
               <Typography className={classes.heading}>{item.name}</Typography>
               <Typography className={classes.subText}>{item.name}</Typography>
             </Grid>
@@ -113,7 +105,7 @@ function SelectVehicleType({
                   padding: theme.spacing(0, 0),
                   position: 'absolute',
                   right: '10px',
-                  bottom:"20px"
+                  bottom: '20px'
                 }}
               />
               <img
@@ -121,12 +113,10 @@ function SelectVehicleType({
                 width={65}
                 height={40}
                 style={{
-                  // background: theme.Colors.white,
-                  // borderRadius: 50,
                   padding: theme.spacing(0, 0),
                   position: 'absolute',
-                   right: '10px',
-                   bottom:"20px"
+                  right: '10px',
+                  bottom: '20px'
                 }}
               />
             </Grid>

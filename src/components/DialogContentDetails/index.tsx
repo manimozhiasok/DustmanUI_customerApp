@@ -58,7 +58,7 @@ const DialogContentDetails = ({
       {contentDetails.map((item: any, index: number) => {
         return (
           <Grid item container xs={12} key={index}>
-            <Grid item xs={2}>
+            <Grid item>
               <Typography variant="h4" className={classes.leftContentStyle}>
                 {item.content}:
               </Typography>

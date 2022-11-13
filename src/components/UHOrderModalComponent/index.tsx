@@ -90,7 +90,7 @@ const UHOrderModalComponent = (props: Props) => {
   ];
 
   const contentDetails = [
-    { content: t('category'), value: orderData?.order_items.toString() },
+    { content: t('category'), value: orderData?.order_items.join(', ') },
     { content: t('location'), value: orderData?.city }
   ];
 

@@ -142,7 +142,7 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
               <Typography className={classes.category}>
                 {t('category')}:
                 <span className={classes.categoryText}>
-                  {orderItems?.order_items?.toString().split(',').join(', ')}
+                  {orderItems?.order_items?.join(', ')}
                 </span>
               </Typography>
               <Grid className={classes.imageAlign}>

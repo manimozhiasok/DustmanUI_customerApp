@@ -55,7 +55,7 @@ export const TrashDetailsContent = ({ edit, trashData }) => {
           trashData.filter((list) => list.id === element)[0].name
         );
       });
-    return data.length ? data.toString().split(',').join(', ') : '';
+    return data.length ? data.join(', ') : '';
   };
 
   return (
