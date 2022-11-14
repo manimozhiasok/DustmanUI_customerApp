@@ -264,23 +264,48 @@ const VendorProfile = () => {
 
   const handleAddressSaveButtonClick = async (
     addressData: VendorAddressData,
-    modalClose: () => void
+    modalClose: () => void,
+    dialogType: string
   ) => {
-    const response: any = await API_SERVICES.vendorAddressService.createAddress(
-      vendorDetails?.vendor_id,
-      {
-        data: addressData,
-        successMessage: 'New address added successfully',
-        failureMessage: 'Failed to add new address'
+    if (dialogType === 'edit') {
+      const response: any =
+        await API_SERVICES.vendorAddressService.replaceVendorAddress(
+          addressData?.id,
+          {
+            data: addressData,
+            successMessage: 'Edit address  successfully',
+            failureMessage: 'Failed to add new address'
+          }
+        );
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data) {
+          let id = response?.data?.vendor_id;
+          updateVendorInfo(id);
+          modalClose();
+        }
       }
-    );
-    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.message) {
-        let id = response?.data?.message?.vendor_id;
-        updateVendorInfo(id);
-        modalClose();
+    } else {
+      const response: any =
+        await API_SERVICES.vendorAddressService.createAddress(
+          vendorDetails?.vendor_id,
+          {
+            data: addressData,
+            successMessage: 'New address added successfully',
+            failureMessage: 'Failed to add new address'
+          }
+        );
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data?.address) {
+          let id = response?.data?.address?.vendor_id;
+          updateVendorInfo(id);
+          modalClose();
+        }
       }
     }
+  };
+
+  const handleEditItem = async (item: any) => {
+    setOpenModal({ open: true, item: item, dialogType: 'edit' });
   };
 
   const accordionContent = [
@@ -291,7 +316,7 @@ const VendorProfile = () => {
           handleSaveEdits={handleUpdateProfileDetails}
           handleAddNewAddress={handleAddNewAddress}
           handleVerifyOtpNumber={handleVerifyOtpNumber}
-          handleEditListItem={() => setOpenModal({ open: true })}
+          handleEditListItem={handleEditItem}
         />
       ),
       renderAccordionTitle: () => (
@@ -492,6 +517,7 @@ const VendorProfile = () => {
         <UHAddressModalComp
           onClose={() => setOpenModal({ open: false })}
           handleSaveButtonClick={handleAddressSaveButtonClick}
+          {...openModal}
         />
       )}
     </>
