@@ -21,30 +21,37 @@ const useStyles = makeStyles((theme: Theme) => {
 
 type Props = {
   onClose: () => void;
+  dialogType?: string;
   handleSaveButtonClick: (
     data: AddressData,
-    modalCloseCallback: () => void
+    modalCloseCallback: () => void,
+    dialogType: string
   ) => void;
   modalTitle?: string;
+  openModal?: string;
+  item?: any;
 };
 
 const UHAddressModalComp = ({
   onClose,
   handleSaveButtonClick,
-  modalTitle
+  modalTitle,
+  item,
+  dialogType
 }: Props) => {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
   const [isError, setIsError] = useState(false);
   const initialAddressValues: AddressData = {
-    address_line1: '',
-    address_line2: '',
-    address_line3: '',
-    state: '',
-    city: '',
-    pincode: '',
-    mobile_number: ''
+    id: item?.id || '',
+    address_line1: item?.address_line1 || '',
+    address_line2: item?.address_line2 || '',
+    address_line3: item?.address_line3 || '',
+    state: item?.state || '',
+    city: item?.city || '',
+    pincode: item?.pincode || '',
+    mobile_number: item?.mobile_number || ''
   };
   const edit = useEdit(initialAddressValues);
   const RequiredFields = [
@@ -68,7 +75,7 @@ const UHAddressModalComp = ({
       return;
     }
     let data = { ...initialAddressValues, ...edit.edits };
-    handleSaveButtonClick(data, onClose);
+    handleSaveButtonClick(data, onClose, dialogType);
   };
 
   const renderAction = () => {

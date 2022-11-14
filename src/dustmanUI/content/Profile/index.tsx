@@ -260,24 +260,43 @@ const Profile = () => {
       toast.error(err);
     }
   };
-
   const handleAddressSaveButtonClick = async (
     addressData: AddressData,
-    modalClose: () => void
+    modalClose: () => void,
+    dialogType: any
   ) => {
-    const response: any = await API_SERVICES.customerAddressService.create(
-      userDetails?.customer_id,
-      {
-        data: addressData,
-        successMessage: 'New address added successfully',
-        failureMessage: 'Failed to add new address'
+    if (dialogType === 'edit') {
+      const response: any =
+        await API_SERVICES.customerAddressService.replaceAddress(
+          addressData?.id,
+          {
+            data: addressData,
+            successMessage: 'Edit address successfully',
+            failureMessage: 'Failed to add new address'
+          }
+        );
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data?.address) {
+          let id = response?.data?.address?.customer_id;
+          updateUserInfo(id);
+          modalClose();
+        }
       }
-    );
-    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.message) {
-        let id = response?.data?.message?.customer_id;
-        updateUserInfo(id);
-        modalClose();
+    } else {
+      const response: any = await API_SERVICES.customerAddressService.create(
+        userDetails?.customer_id,
+        {
+          data: addressData,
+          successMessage: 'New address added successfully',
+          failureMessage: 'Failed to add new address'
+        }
+      );
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data?.message) {
+          let id = response?.data?.message?.customer_id;
+          updateUserInfo(id);
+          modalClose();
+        }
       }
     }
   };
@@ -290,7 +309,9 @@ const Profile = () => {
           handleSaveEdits={handleUpdateProfileDetails}
           handleAddNewAddress={handleAddNewAddress}
           handleVerifyOtpNumber={handleVerifyOtpNumber}
-          handleEditListItem={() => setOpenModal({ open: true })}
+          handleEditListItem={(item) =>
+            setOpenModal({ open: true, item: item, dialogType: 'edit' })
+          }
         />
       ),
       renderAccordionTitle: () => (
@@ -483,6 +504,7 @@ const Profile = () => {
         <UHAddressModalComp
           onClose={() => setOpenModal({ open: false })}
           handleSaveButtonClick={handleAddressSaveButtonClick}
+          {...openModal}
         />
       )}
     </>
