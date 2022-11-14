@@ -290,6 +290,7 @@ const Profile = () => {
           handleSaveEdits={handleUpdateProfileDetails}
           handleAddNewAddress={handleAddNewAddress}
           handleVerifyOtpNumber={handleVerifyOtpNumber}
+          handleEditListItem={() => setOpenModal({ open: true })}
         />
       ),
       renderAccordionTitle: () => (

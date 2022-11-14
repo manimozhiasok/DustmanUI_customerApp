@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  handleEditListItem?: () => void;
+  handleEditListItem?: (item: any) => void;
   handleAddNewAddress?: () => void;
   handleSaveEdits?: (data: any) => void;
   handleVerifyOtpNumber?: (data: any, successMessage: string) => void;
@@ -387,12 +387,12 @@ const ProfileContent = ({
                   <TextInputComponent
                     variant="standard"
                     disabled
-                    value={item?.address}
+                    value={`${item.address_line1},${item.address_line2},${item.address_line3},${item.city},${item.state},${item.pincode}`}
                     inputBorder={theme.Colors.orangePrimary}
                     iconEnd={
                       <Button
                         className={classes.buttonStyle}
-                        onClick={handleEditListItem}
+                        onClick={() => handleEditListItem(item)}
                       >
                         {t('PROFILE.edit')}
                       </Button>

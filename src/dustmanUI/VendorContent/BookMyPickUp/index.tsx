@@ -249,7 +249,18 @@ function BookMyPickup() {
 
     {
       content: t('address'),
-      value: getAddressData[0]?.address ?? ''
+      value:
+        getAddressData[0]?.address_line1 +
+        ',' +
+        getAddressData[0]?.address_line2 +
+        ',' +
+        getAddressData[0]?.address_line3 +
+        ',' +
+        getAddressData[0]?.city +
+        ',' +
+        getAddressData[0]?.state +
+        ',' +
+        getAddressData[0]?.pincode
     },
     {
       content: t('PICKUP.mobile'),
