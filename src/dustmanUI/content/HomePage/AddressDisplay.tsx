@@ -23,7 +23,17 @@ function AddressDisplay() {
   const classes = useStyles();
   const theme = useTheme();
   const { userAddressDetails } = useUserInfo();
-  const address = userAddressDetails[0]?.address;
+  const address =
+    userAddressDetails[0]?.address_line1 +
+    ', ' +
+    userAddressDetails[0]?.address_line2 +
+    ', ' +
+    userAddressDetails[0]?.address_line3 +
+    ', ' +
+    userAddressDetails[0]?.city +
+    ', ' +
+    userAddressDetails[0]?.state;
+
   return (
     <Grid container direction="row">
       <PlaceMaker />

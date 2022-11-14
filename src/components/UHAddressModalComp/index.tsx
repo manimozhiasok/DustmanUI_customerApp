@@ -28,7 +28,6 @@ type Props = {
     dialogType: string
   ) => void;
   modalTitle?: string;
-  openModal?: string;
   item?: any;
 };
 
