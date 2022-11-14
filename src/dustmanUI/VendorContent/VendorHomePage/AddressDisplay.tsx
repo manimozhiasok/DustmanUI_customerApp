@@ -23,10 +23,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 function AddressDisplay() {
   const classes = useStyles();
   const theme = useTheme();
-  //const address = 'no 13, 4th cross street, sakthi nagar, kilambakkam';
   const { vendorAddressDetails } = useVendorInfo();
-  const address = vendorAddressDetails[0]?.address;
-  console.log(address);
+  const address =
+    vendorAddressDetails[0]?.address_line1 +
+    ', ' +
+    vendorAddressDetails[0]?.address_line2 +
+    ', ' +
+    vendorAddressDetails[0]?.address_line3 +
+    ', ' +
+    vendorAddressDetails[0]?.city +
+    ', ' +
+    vendorAddressDetails[0]?.state;
+
   return (
     <Grid container direction="row">
       <PlaceMaker />
