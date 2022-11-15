@@ -84,13 +84,17 @@ function OrdersPage() {
   const OrdersTabItems = [
     {
       tabIcon: () =>
-        selectedTab == 1 ? <img src={pendingWhite} /> : <img src={pending} />,
+        selectedTab == CUSTOMER_ORDER_STATUS.New ? (
+          <img src={pendingWhite} />
+        ) : (
+          <img src={pending} />
+        ),
       label: t('ORDER.pending'),
       value: CUSTOMER_ORDER_STATUS.New
     },
     {
       tabIcon: () =>
-        selectedTab == 2 ? (
+        selectedTab == CUSTOMER_ORDER_STATUS.Confirmed ? (
           <img src={confirmedWhite} />
         ) : (
           <img src={confirmed} />
@@ -100,7 +104,7 @@ function OrdersPage() {
     },
     {
       tabIcon: () =>
-        selectedTab == 3 ? (
+        selectedTab == CUSTOMER_ORDER_STATUS.Completed ? (
           <img src={completedWhite} />
         ) : (
           <img src={Completed} />

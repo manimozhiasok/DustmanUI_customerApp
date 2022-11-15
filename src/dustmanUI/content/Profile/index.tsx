@@ -174,13 +174,17 @@ const Profile = () => {
   const OrdersTabItems = [
     {
       tabIcon: () =>
-        selectedTab == 1 ? <img src={pendingWhite} /> : <img src={pending} />,
+        selectedTab == PROFILE_TAB_VALUES.myAccount ? (
+          <img src={pendingWhite} />
+        ) : (
+          <img src={pending} />
+        ),
       label: t('PROFILE.account'),
       value: PROFILE_TAB_VALUES.myAccount
     },
     {
       tabIcon: () =>
-        selectedTab == 2 ? (
+        selectedTab == PROFILE_TAB_VALUES.changeLanguage ? (
           <img src={confirmedWhite} />
         ) : (
           <img src={confirmed} />
@@ -190,7 +194,7 @@ const Profile = () => {
     },
     {
       tabIcon: () =>
-        selectedTab == 3 ? (
+        selectedTab == PROFILE_TAB_VALUES.changeUserType ? (
           <img src={completedWhite} />
         ) : (
           <img src={Completed} />

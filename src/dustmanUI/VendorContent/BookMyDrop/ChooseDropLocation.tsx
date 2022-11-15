@@ -13,27 +13,27 @@ import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: Theme) => {
   return {
-    radioLableStyle: {
-      fontSize: theme.MetricsSizes.small_xxx - 1,
+    radioLabelStyle: {
+      fontSize: theme.MetricsSizes.small_xxx,
       color: theme.Colors.blueDark,
-      fontWeight: theme.fontWeight.mediumBold,
-      paddingTop: theme.MetricsSizes.medium_xx
+      fontWeight: theme.fontWeight.bold,
+      paddingBottom: theme.MetricsSizes.small
     },
     leftContent: {
       color: theme.Colors.darkGrey,
-      fontWeight: theme.fontWeight.medium,
+      fontWeight: theme.fontWeight.regular,
       paddingLeft: theme.spacing(2.3)
     },
     radio: {
-      marginTop: theme.MetricsSizes.medium_xx,
-      marginRight: theme.MetricsSizes.tiny_xx,
+      marginBottom: theme.MetricsSizes.regular_x,
+      marginRight: theme.MetricsSizes.tiny,
       '&.MuiRadio-colorSecondary.Mui-checked': {
         color: theme.Colors.orangePrimary
       }
     },
     dividerStyle: {
       marginLeft: theme.MetricsSizes.small_xxx,
-      marginTop: theme.MetricsSizes.medium_xx
+      margin: theme.spacing(3, 0)
     },
     mapStyle: {
       fontSize: theme.MetricsSizes.tiny_xx,
@@ -44,8 +44,8 @@ const useStyles = makeStyles((theme: Theme) => {
       display: 'flex',
       alignContent: 'center',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: 'end',
+      justifyContent: 'space-evenly',
       paddingLeft: theme.MetricsSizes.regular
     }
   };
@@ -84,7 +84,7 @@ const ChooseDropLocation = ({ data, edit, handleChangeAddress }) => {
                       />
                     }
                     label={
-                      <Typography className={classes.radioLableStyle}>
+                      <Typography className={classes.radioLabelStyle}>
                         {item.dustman_location}
                       </Typography>
                     }
@@ -102,8 +102,8 @@ const ChooseDropLocation = ({ data, edit, handleChangeAddress }) => {
                 <Grid item xs={1} className={classes.imageStyle}>
                   <img
                     src={locationIcon}
-                    width={'20.38px'}
-                    height={'18.75px'}
+                    width={'30.38px'}
+                    height={'24.75px'}
                   />
                   <Typography className={classes.mapStyle}>
                     {t('viewMap')}
