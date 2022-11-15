@@ -14,6 +14,7 @@ import {
 } from 'src/Config/constant';
 import {
   ButtonComp,
+  Loader,
   UHConfirmModal,
   UHOrderPreviewComp,
   UHTabComponent
@@ -75,6 +76,7 @@ function OrdersPage() {
     CUSTOMER_ORDER_STATUS.New
   );
   const [orderDetails, setOrderDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState<any>({ open: false });
   const [confirmModal, setConfirmModal] = useState<any>({
     open: false
@@ -146,6 +148,8 @@ function OrdersPage() {
       }
     } catch (err) {
       toast.error(err?.message);
+    } finally {
+      setLoading(false);
     }
   }, [selectedTab, vendorDetails?.vendor_id]);
 
@@ -265,45 +269,49 @@ function OrdersPage() {
     fetchData();
   }, [fetchData]);
 
-  return (
-    <>
-      <Grid className={classes.outerContainer}>
-        <UHTabComponent
-          currentTabVal={selectedTab}
-          tabContent={OrdersTabItems}
-          orientation={ORIENTATION.VERTICAL}
-          tabClasses={{ selected: classes.selectedTabStyle }}
-          tabIndicatorColor={theme.Colors.primary}
-          isDivider={false}
-          tabContainerClassName={classes.tabContainer}
-          renderTabContent={renderTabContent}
-          tabContentClassName={classes.tabContentStyle}
-          onTabChange={onTabChange}
-        />
-        <Grid className={classes.buttonContainer}>
-          {selectedTab === CUSTOMER_ORDER_STATUS.New ? (
-            <ButtonComp
-              buttonText={t('ORDER.buyAllOrder')}
-              buttonFontSize={theme.MetricsSizes.small_xxx}
-              backgroundColor={theme.Colors.orangePrimary}
-              btnBorderRadius={105}
-              height={'48px'}
-              btnWidth={'217px'}
-            />
-          ) : null}
+  if (loading) {
+    return <Loader />;
+  } else {
+    return (
+      <>
+        <Grid className={classes.outerContainer}>
+          <UHTabComponent
+            currentTabVal={selectedTab}
+            tabContent={OrdersTabItems}
+            orientation={ORIENTATION.VERTICAL}
+            tabClasses={{ selected: classes.selectedTabStyle }}
+            tabIndicatorColor={theme.Colors.primary}
+            isDivider={false}
+            tabContainerClassName={classes.tabContainer}
+            renderTabContent={renderTabContent}
+            tabContentClassName={classes.tabContentStyle}
+            onTabChange={onTabChange}
+          />
+          <Grid className={classes.buttonContainer}>
+            {selectedTab === CUSTOMER_ORDER_STATUS.New ? (
+              <ButtonComp
+                buttonText={t('ORDER.buyAllOrder')}
+                buttonFontSize={theme.MetricsSizes.small_xxx}
+                backgroundColor={theme.Colors.orangePrimary}
+                btnBorderRadius={105}
+                height={'48px'}
+                btnWidth={'217px'}
+              />
+            ) : null}
+          </Grid>
         </Grid>
-      </Grid>
-      {modalOpen.open && (
-        <VendorOrderDialog
-          onClose={() => setModalOpen({ open: false })}
-          {...modalOpen}
-          selectedTab={selectedTab}
-          // onCancelButtonClick={onCancelOrderButton}
-        />
-      )}
-      {confirmModal.open && <UHConfirmModal {...confirmModal} />}
-    </>
-  );
+        {modalOpen.open && (
+          <VendorOrderDialog
+            onClose={() => setModalOpen({ open: false })}
+            {...modalOpen}
+            selectedTab={selectedTab}
+            // onCancelButtonClick={onCancelOrderButton}
+          />
+        )}
+        {confirmModal.open && <UHConfirmModal {...confirmModal} />}
+      </>
+    );
+  }
 }
 
 export default OrdersPage;

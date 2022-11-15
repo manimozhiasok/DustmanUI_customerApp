@@ -13,6 +13,7 @@ import {
   VENDOR_ORDER_STATUS
 } from 'src/Config/constant';
 import {
+  Loader,
   UHConfirmModal,
   UHOrderPreviewComp,
   UHTabComponent
@@ -29,6 +30,7 @@ import {
 } from 'src/Assets';
 import useVendorInfo from 'src/hooks/useVendorInfo';
 import { getDateFormat } from 'src/Utils';
+import toast from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
@@ -66,6 +68,7 @@ function OrdersPage() {
     VENDOR_ORDER_STATUS.Pending
   );
   const [orderDetails, setOrderDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState<any>({ open: false });
   const [confirmModal, setConfirmModal] = useState<any>({
     open: false
@@ -80,15 +83,21 @@ function OrdersPage() {
   };
 
   const fetchData = useCallback(async () => {
-    const response: any =
-      await API_SERVICES.vendorMyOrderService.getVendorOrderByStatus(
-        vendorDetails?.vendor_id,
-        selectedTab
-      );
-    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.orders) {
-        setOrderDetails(response.data.orders);
+    try {
+      const response: any =
+        await API_SERVICES.vendorMyOrderService.getVendorOrderByStatus(
+          vendorDetails?.vendor_id,
+          selectedTab
+        );
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data?.orders) {
+          setOrderDetails(response.data.orders);
+        }
       }
+    } catch (err) {
+      toast.error(err?.message);
+    } finally {
+      setLoading(false);
     }
   }, [selectedTab]);
 
@@ -207,34 +216,38 @@ function OrdersPage() {
     fetchData();
   }, [fetchData]);
 
-  return (
-    <>
-      <Grid className={classes.outerContainer}>
-        <Grid className={classes.contentContainer}>
-          <UHTabComponent
-            currentTabVal={selectedTab}
-            tabContent={OrdersTabItems}
-            orientation={ORIENTATION.VERTICAL}
-            tabClasses={{ selected: classes.selectedTabStyle }}
-            tabIndicatorColor={theme.Colors.primary}
-            isDivider={false}
-            tabContainerClassName={classes.tabContainer}
-            renderTabContent={renderTabContent}
-            tabContentClassName={classes.tabContentStyle}
-            onTabChange={onTabChange}
-          />
+  if (loading) {
+    return <Loader />;
+  } else {
+    return (
+      <>
+        <Grid className={classes.outerContainer}>
+          <Grid className={classes.contentContainer}>
+            <UHTabComponent
+              currentTabVal={selectedTab}
+              tabContent={OrdersTabItems}
+              orientation={ORIENTATION.VERTICAL}
+              tabClasses={{ selected: classes.selectedTabStyle }}
+              tabIndicatorColor={theme.Colors.primary}
+              isDivider={false}
+              tabContainerClassName={classes.tabContainer}
+              renderTabContent={renderTabContent}
+              tabContentClassName={classes.tabContentStyle}
+              onTabChange={onTabChange}
+            />
+          </Grid>
         </Grid>
-      </Grid>
-      {modalOpen.open && (
-        <VendorOrderModal
-          onClose={() => setModalOpen({ open: false })}
-          {...modalOpen}
-          onCancelButtonClick={onClickCancelButton}
-        />
-      )}
-      {confirmModal.open && <UHConfirmModal {...confirmModal} />}
-    </>
-  );
+        {modalOpen.open && (
+          <VendorOrderModal
+            onClose={() => setModalOpen({ open: false })}
+            {...modalOpen}
+            onCancelButtonClick={onClickCancelButton}
+          />
+        )}
+        {confirmModal.open && <UHConfirmModal {...confirmModal} />}
+      </>
+    );
+  }
 }
 
 export default OrdersPage;

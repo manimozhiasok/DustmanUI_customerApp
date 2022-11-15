@@ -13,6 +13,7 @@ import {
   ORIENTATION
 } from 'src/Config/constant';
 import {
+  Loader,
   UHConfirmModal,
   UHOrderPreviewComp,
   UHTabComponent
@@ -31,6 +32,7 @@ import {
   pendingWhite,
   completedWhite
 } from 'src/Assets';
+import toast from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outerContainer: {
@@ -70,6 +72,7 @@ function OrdersPage() {
     open: false
   });
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(true);
 
   const onClickViewDetails = (orderData: any) => {
     setModalOpen({
@@ -108,21 +111,27 @@ function OrdersPage() {
   ];
 
   const fetchData = useCallback(async () => {
-    let response: any;
-    if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
-      response = await API_SERVICES.orderService.getConfirmedCustomerOrders(
-        userDetails?.customer_id
-      );
-    } else {
-      response = await API_SERVICES.orderService.getCustomerOrderByStatus(
-        userDetails?.customer_id,
-        selectedTab
-      );
-    }
-    if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-      if (response?.data?.orders) {
-        setOrderDetails(response.data.orders);
+    try {
+      let response: any;
+      if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
+        response = await API_SERVICES.orderService.getConfirmedCustomerOrders(
+          userDetails?.customer_id
+        );
+      } else {
+        response = await API_SERVICES.orderService.getCustomerOrderByStatus(
+          userDetails?.customer_id,
+          selectedTab
+        );
       }
+      if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
+        if (response?.data?.orders) {
+          setOrderDetails(response.data.orders);
+        }
+      }
+    } catch (err) {
+      toast.error(err?.message);
+    } finally {
+      setLoading(false);
     }
   }, [selectedTab]);
 
@@ -206,32 +215,36 @@ function OrdersPage() {
     fetchData();
   }, [fetchData]);
 
-  return (
-    <>
-      <Grid className={classes.outerContainer}>
-        <UHTabComponent
-          currentTabVal={selectedTab}
-          tabContent={OrdersTabItems}
-          orientation={ORIENTATION.VERTICAL}
-          tabClasses={{ selected: classes.selectedTabStyle }}
-          tabIndicatorColor={theme.Colors.primary}
-          isDivider={false}
-          tabContainerClassName={classes.tabContainer}
-          renderTabContent={renderTabContent}
-          tabContentClassName={classes.tabContentStyle}
-          onTabChange={onTabChange}
-        />
-      </Grid>
-      {modalOpen.open && (
-        <CustomerOrderModal
-          onClose={() => setModalOpen({ open: false })}
-          {...modalOpen}
-          onCancelButtonClick={onClickCancelButton}
-        />
-      )}
-      {confirmModal.open && <UHConfirmModal {...confirmModal} />}
-    </>
-  );
+  if (loading) {
+    return <Loader />;
+  } else {
+    return (
+      <>
+        <Grid className={classes.outerContainer}>
+          <UHTabComponent
+            currentTabVal={selectedTab}
+            tabContent={OrdersTabItems}
+            orientation={ORIENTATION.VERTICAL}
+            tabClasses={{ selected: classes.selectedTabStyle }}
+            tabIndicatorColor={theme.Colors.primary}
+            isDivider={false}
+            tabContainerClassName={classes.tabContainer}
+            renderTabContent={renderTabContent}
+            tabContentClassName={classes.tabContentStyle}
+            onTabChange={onTabChange}
+          />
+        </Grid>
+        {modalOpen.open && (
+          <CustomerOrderModal
+            onClose={() => setModalOpen({ open: false })}
+            {...modalOpen}
+            onCancelButtonClick={onClickCancelButton}
+          />
+        )}
+        {confirmModal.open && <UHConfirmModal {...confirmModal} />}
+      </>
+    );
+  }
 }
 
 export default OrdersPage;
