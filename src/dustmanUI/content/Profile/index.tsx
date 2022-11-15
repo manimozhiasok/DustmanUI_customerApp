@@ -364,14 +364,14 @@ const Profile = () => {
             image={Translate}
             renderDetail={() => (
               <UHSelectComp
-                initialValue={userDetails?.language_id}
+                initialValue={[userDetails?.language_id]}
                 labelData={languageData}
-                handleChangeItem={(selectedVal) => {
-                  if (selectedVal === userDetails?.language_id) {
+                handleChangeItem={(selectedVal: number[]) => {
+                  if (selectedVal[0] === userDetails?.language_id) {
                     return;
                   }
                   let data: ProfileUpdateProp = {
-                    language_id: selectedVal
+                    language_id: selectedVal[0]
                   };
                   let successMessage = 'Language updated successfully';
                   handleUpdateProfileDetails(data, successMessage);
@@ -397,14 +397,14 @@ const Profile = () => {
             image={UserSwitch}
             renderDetail={() => (
               <UHSelectComp
-                initialValue={userDetails?.user_type_id}
+                initialValue={[userDetails?.user_type_id]}
                 labelData={userTypeData}
-                handleChangeItem={(selectedVal) => {
-                  if (selectedVal === userDetails?.user_type_id) {
+                handleChangeItem={(selectedVal: number[]) => {
+                  if (selectedVal[0] === userDetails?.user_type_id) {
                     return;
                   }
                   let data: ProfileUpdateProp = {
-                    user_type_id: selectedVal
+                    user_type_id: selectedVal[0]
                   };
                   let successMessage = 'UserType updated successfully';
                   handleUpdateProfileDetails(data, successMessage);

@@ -16,7 +16,7 @@ export type VendorDetails = {
   website: string;
   established_year: string;
   vehicle_owned: string;
-  order_management_id: string;
+  order_management_id: number[];
   status_id: number;
   location: string;
   pincode: string;
@@ -39,7 +39,7 @@ const INITIAL_STATE: VendorInfo = {
     gst: '',
     map_url: '',
     full_address: '',
-    order_management_id: '',
+    order_management_id: [],
     contact_name: '',
     mobile_number: '',
     landline_number: '',
@@ -95,7 +95,7 @@ export const VendorInfoProvider = ({ children }: Props) => {
       updateVendorInfo: updateVendorDetails,
       vendorAddressDetails: vendorAddresses
     };
-  }, [vendorDetails, updateVendorDetails]);
+  }, [vendorDetails, updateVendorDetails, vendorAddresses]);
 
   return (
     <VendorInfoContext.Provider value={contextValue}>

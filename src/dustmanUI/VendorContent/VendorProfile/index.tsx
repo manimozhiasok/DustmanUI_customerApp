@@ -39,6 +39,7 @@ import { useNavigate } from 'react-router';
 import { API_SERVICES } from 'src/dustmanUI/Services';
 import toast from 'react-hot-toast';
 import { VendorAddressData } from 'src/dustmanUI/Services/vendorAddressService';
+import { UH_SELECT_TYPE } from 'src/components/UHSelectComp';
 
 const useStyles = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -138,6 +139,7 @@ type ProfileUpdateProp = {
   contact_name?: string;
   email_id?: string;
   image_url?: string;
+  order_management_id?: string;
 };
 
 const VendorProfile = () => {
@@ -254,7 +256,7 @@ const VendorProfile = () => {
         if (uploadImageRes?.data?.images.length) {
           let data = { image_url: uploadImageRes.data.images[0].Location };
           let successMessage = 'Profile image updated successfully!';
-          handleUpdateProfileDetails(data, successMessage);
+          await handleUpdateProfileDetails(data, successMessage);
         }
       }
     } catch (err) {
@@ -369,15 +371,15 @@ const VendorProfile = () => {
             image={VendorTranslate}
             renderDetail={() => (
               <UHSelectComp
-                initialValue={vendorDetails?.language_id}
+                initialValue={[vendorDetails?.language_id]}
                 labelData={languageData}
                 checkColor={theme.Colors.orangePrimary}
                 handleChangeItem={(selectedVal) => {
-                  if (selectedVal === vendorDetails?.language_id) {
+                  if (selectedVal[0] === vendorDetails?.language_id) {
                     return;
                   }
                   let data: ProfileUpdateProp = {
-                    language_id: selectedVal
+                    language_id: selectedVal[0]
                   };
                   let successMessage = 'Language updated successfully';
                   handleUpdateProfileDetails(data, successMessage);
@@ -406,17 +408,15 @@ const VendorProfile = () => {
             image={VendorSwitch}
             renderDetail={() => (
               <UHSelectComp
-                initialValue={vendorDetails?.user_type}
+                type={UH_SELECT_TYPE.multiple}
+                initialValue={vendorDetails?.order_management_id}
                 labelData={userTypeData}
                 checkColor={theme.Colors.orangePrimary}
                 handleChangeItem={(selectedVal) => {
-                  if (selectedVal === vendorDetails?.user_type) {
-                    return;
-                  }
                   let data: ProfileUpdateProp = {
-                    user_type: selectedVal
+                    order_management_id: selectedVal.toString()
                   };
-                  let successMessage = 'UserType updated successfully';
+                  let successMessage = 'Order Management updated successfully';
                   handleUpdateProfileDetails(data, successMessage);
                 }}
               />

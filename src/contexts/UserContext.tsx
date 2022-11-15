@@ -73,7 +73,7 @@ export const UserInfoProvider = ({ children }: Props) => {
       updateUserInfo: updateUserDetails,
       userAddressDetails: userAddresses
     };
-  }, [userDetails, updateUserDetails]);
+  }, [userDetails, updateUserDetails, userAddresses]);
 
   return (
     <UserInfoContext.Provider value={contextValue}>

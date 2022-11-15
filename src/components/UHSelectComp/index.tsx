@@ -33,26 +33,58 @@ const useStyles = makeStyles<Theme, styleProps>((theme: Theme) => {
   };
 });
 
+export const UH_SELECT_TYPE = {
+  single: 'single',
+  multiple: 'multiple'
+};
+
 type Props = {
-  initialValue: number;
-  handleChangeItem?: (selId: number) => void;
+  initialValue: number[];
+  handleChangeItem?: (selId: number[]) => void;
   checkColor?: string;
   labelData: { label: string; value: number }[];
+  type?: string;
 };
 const UHSelectComp = ({
   initialValue,
   handleChangeItem,
   checkColor,
-  labelData
+  labelData,
+  type = UH_SELECT_TYPE.single
 }: Props) => {
-  const [selectedItem, setSelectedItem] = useState<number>(0);
+  const [selectedItem, setSelectedItem] = useState<number[]>([]);
   const classes = useStyles({ checkColor });
   const theme = useTheme();
 
-  const onclickItem = (item?: { label: string; value: number }) => {
-    setSelectedItem(item.value);
+  const onChangeItems = (Items: number[]) => {
     if (handleChangeItem) {
-      handleChangeItem(item.value);
+      handleChangeItem(Items);
+    } else {
+      setSelectedItem(Items);
+    }
+  };
+
+  const isSelectedItem = (selVal: number) => {
+    const filterItems = selectedItem.filter(
+      (selectedItem) => selVal !== selectedItem
+    );
+    if (filterItems.length < selectedItem.length) {
+      onChangeItems(filterItems);
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const onclickItem = (item?: { label: string; value: number }) => {
+    if (type === UH_SELECT_TYPE.multiple) {
+      if (!!isSelectedItem(item.value)) {
+        return;
+      }
+      onChangeItems([...selectedItem, item.value]);
+    }
+    if (type === UH_SELECT_TYPE.single) {
+      onChangeItems([item.value]);
     }
   };
 
@@ -63,6 +95,10 @@ const UHSelectComp = ({
   return (
     <Grid container spacing={2}>
       {labelData.map((item, index) => {
+        const findActiveSelItem: number = selectedItem.findIndex(
+          (selItem) => selItem === item.value
+        );
+        const isActive: boolean = findActiveSelItem !== -1;
         return (
           <Grid
             item
@@ -83,7 +119,7 @@ const UHSelectComp = ({
                 {item.label}
               </Typography>
             </Grid>
-            {selectedItem === item.value ? (
+            {isActive ? (
               <Grid item xs>
                 <Check className={classes.activeCheckIcon} />
               </Grid>
