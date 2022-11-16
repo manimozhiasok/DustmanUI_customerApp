@@ -34,6 +34,7 @@ function NavBar() {
 
   const handleClickNavItem = (url: Pathname) => {
     navigateTo(url);
+    document.getElementById('login-list').classList.remove('show');
   };
 
   const navigationToHome = () => {
