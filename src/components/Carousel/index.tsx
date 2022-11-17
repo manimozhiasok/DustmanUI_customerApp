@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   gridStyle: {
     paddingLeft: theme.spacing(0.5),
-    paddingTop: theme.spacing(0.9)
   },
   carouselStyle: {
     width: '100%',

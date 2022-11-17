@@ -10,14 +10,31 @@ const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
     justifyContent: 'center',
     display: 'flex',
-    flexDirection: 'column',
-    gap: theme.spacing(2),
     alignItems: 'center',
     width: '100%',
     height: '225px',
+    position: 'relative',
     fontSize: theme.MetricsSizes.small_xx,
     color: theme.Colors.darkGrey,
-    fontWeight: theme.fontWeight.regular
+    fontWeight: theme.fontWeight.regular,
+    paddingBottom: theme.MetricsSizes.tiny
+  },
+  iconTextStyle: {
+    alignContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'absolute',
+    gap: theme.spacing(2),
+    color: theme.Colors.whiteLightGrey,
+  },
+  iconText: {
+    alignContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'absolute',
+    gap: theme.spacing(2),
   },
   iconStyle: {
     color: theme.Colors.silverBlack,
@@ -27,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   gridStyle: {
     marginTop: theme.spacing(3.5),
     backgroundColor: theme.Colors.lightGreyBlack,
-    padding: theme.spacing(1, 0, 1, 0),
     borderRadius: theme.spacing(1)
   }
 }));
@@ -49,6 +65,7 @@ function TrashDetailsComponent({
   const theme = useTheme();
   const { t } = useTranslation();
   const length = uploadedImages.length;
+  const showPicture = uploadedImages[0];
 
   return (
     <Grid container spacing={2} justifyContent="center">
@@ -58,15 +75,25 @@ function TrashDetailsComponent({
       <Grid item xs={6}>
         <Grid className={classes.gridStyle}>
           <Grid className={classes.imageContainer}>
-            <ButtonComp
-              iconImage={<AddPhotoAlternate className={classes.iconStyle} />}
-              backgroundColor={'transparent'}
-              onBrowseButtonClick={onUploadFiles}
-              btnWidth={theme.MetricsSizes.large_xxx}
-              height={theme.MetricsSizes.xl_large}
-              isBrowseButton
-            />
-            {t('PICKUP.trashPicture')}
+            {showPicture && (
+              <img
+                src={showPicture.image_url}
+                width="100%"
+                height={'100%'}
+                style={{ borderRadius: theme.spacing(1) }}
+              />
+            )}
+            <Grid className={showPicture ? classes.iconTextStyle : classes.iconText}>
+              <ButtonComp
+                iconImage={<AddPhotoAlternate className={classes.iconStyle} />}
+                backgroundColor={'transparent'}
+                onBrowseButtonClick={onUploadFiles}
+                btnWidth={theme.MetricsSizes.large_xxx}
+                height={theme.MetricsSizes.xl_large}
+                isBrowseButton
+              />
+              {t('PICKUP.trashPicture')}
+            </Grid>
           </Grid>
           <CarouselContent data={uploadedImages} show={4} length={length} />
         </Grid>
