@@ -52,6 +52,11 @@ font-family: 'Inter', sans-serif;
     font-size: 16px;
     display: flex;
     justify-content: space-between;
+    /* position: fixed;
+      top: 0; */
+        top: 0;
+        position: sticky;
+        z-index: 2000;
 }
 
 .navigation-bar {
@@ -284,6 +289,7 @@ footer .sysm {
     font-size: 16px;
     line-height: 26px;
     letter-spacing: -0.01em;
+    opacity: 0.8;
     /* padding-right: 3rem; */
 }
 
@@ -303,11 +309,13 @@ footer .sysm {
     opacity: 0.8;
 }
 
-.f3 p {
+.f3 p,
+.f3>p>a{
     font-weight: 400;
     font-size: 16px;
     line-height: 26px;
     letter-spacing: -0.01em;
+    color: #FFFFFF;
     opacity: 0.8;
 }
 
@@ -325,13 +333,28 @@ footer .sysm {
     font-weight: 400;
     font-size: 16px;
     line-height: 26px;
+    opacity: 0.8;
 }
 
 .f4 .contact {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 0.5em;
-    grid-template-rows: 2rem 2rem;
+    display: flex;
+        flex-direction: column;
+    }
+    
+    span {
+        padding-left: 1rem;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+        color: #6CB044;
+        opacity: 0.8;
+        text-decoration: none !important;
+        border: none;
+    }
+    
+    a {
+        text-decoration: none;
 }
 
 .copyright {
@@ -354,6 +377,20 @@ footer .sysm {
     letter-spacing: -0.01em;
     color: #f9f9f9;
     opacity: 0.8;
+}
+.top {
+    position: absolute;
+    margin-top: -6rem;
+    text-decoration: none;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-left: 93%;
+    background-color: var(--blue);
+    padding: 1rem 2rem;
+    border-radius: 50%;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    color: var(--white);
+    /* padding: -0.5rem; */
 }
 
 /* Home Page Style */
@@ -394,15 +431,28 @@ footer .sysm {
     flex-direction: column;
 }
 
-.home-pic1 {
+.home-pic1-box {
     position: relative;
+    /* background: url("images/stock.png"); */  
     width: 813px;
-    height: 631px;
+height: 624px;
 }
 
-.home-pic2 {
+.home-pic2-box {
     position: absolute;
     margin-top: 32rem;
+    margin-top: 32rem;
+        width: 500px;
+        height: 204px;
+        padding: 50px 50px 28px 60px;
+    }
+    
+    .home-pic2-text {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: -0.01em;
+        color: #FFFFFF;
 }
 
 .home-subtitle {
@@ -476,6 +526,10 @@ footer .sysm {
     text-align: center;
     letter-spacing: -0.01em;
     color: #010a44;
+    /* position: relative; */
+}
+.img-iconbox1-round {
+     /* position: relative;  */
 }
 
 .landing3 {
@@ -534,16 +588,47 @@ footer .sysm {
     justify-content: space-between;
     align-items: center;
     padding: 100px;
+    gap: 2rem;
+}
+.home-left {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.image-top {
+    object-fit: cover;
+    width: 100%;
+}
+
+.image-bottom {
+    /* display: flex; */
+    /* object-fit: cover; */
+    /* gap: 3rem; */
+    /* justify-content: space-between; */
+}
+
+.image-bottom>p {
+    /* font-family: 'Space Grotesk';
+font-weight: 700;
+font-size: 16.8px;
+line-height: 22px;
+color: #17161A; */
 }
 
 .cap1 {
     position: relative;
+    width: 100%;
+        padding: 1rem 3rem;
 }
 
 .cap2 {
     position: absolute;
-    margin-left: -9rem;
-    margin-top: 1rem;
+    width: 60px;
+        height: 31px;
+        left: 19.5rem;
+        margin-top: 2rem;
 }
 
 .home-right {
@@ -618,6 +703,32 @@ color: #333333;
 .wrapper_right {
     margin-top: 3rem;
     object-fit: cover;
+    animation: fadeIn 5s;
+    }
+    
+        .img-container-size {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+    
+        .img-container-size img {
+            object-fit: cover;
+            width: 100%;
+        }
+    
+    .img-iconbox1-certificate {
+        position: absolute;
+        margin-left: 0.9rem;
+        margin-top: -50rem;
+        width: 32.5px;
+        height: 25px;
+        object-fit: cover;
+    
+    }
+    
+    .img-iconbox1-certificate>img {
+        position: sticky;
 }
 
 .item h3 {
@@ -840,11 +951,14 @@ color: #333333;
 .about1 {
     width: 100%;
     height: 400px;
+    /* background-image: url("images/about.png"); */
+        object-fit: cover;
 }
 
 .about-page1 {
     padding: 50px 100px;
     background: #ffffff;
+    
 }
 
 .about-title {
@@ -1024,6 +1138,7 @@ height: 394px; */
     gap: 5rem;
     margin-bottom: 0;
     background: #d9d9d9;
+    background: rgb(217, 217, 217, 0.2);
     /*opacity: 0.2; */
 }
 
@@ -1114,22 +1229,39 @@ height: 394px; */
     /* background-image: url(/src/Assets/WebImages/Vector5.svg), url(/src/Assets/WebImages/Vector6.png); */
     background-image: url(/src/Assets/WebImages/Vector3.svg), url(/src/Assets/WebImages/Vector4.png);
     background-repeat: no-repeat, no-repeat;
-    background-position-y: 100px, 825px;
+    background-position-y: 100px, 880px;
     background-position-x: 200px, 100px;
     padding: 100px;
-    display: flex;
-    justify-content: space-between;
-    gap: 5rem;
-    padding-left: 20rem;
+    padding-right: 50px;
+    
+    }
+    
+    .about-page6-box {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 3rem;
+        padding-bottom: 100px;
+        /* padding-top: 5rem; */
+    }
+    
+    .about-ph-image-outer {
+        /* width: 65%;  */
+        width: 480px;
+        height: 480px;
+        margin-top: 11rem;
+        margin-left: 14.5rem;
 }
 
 .about-ph-image {
-    object-fit: contain;
-    padding-left: 1.75rem;
-    padding-top: 11.5rem;
+    object-fit: cover;
+        width: 100%;
+    
+        /* margin-top: 11rem;
+      margin-left: 14rem; */
 }
 
 .about-ph-text {
+    /* width: 35%; */
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -1188,6 +1320,10 @@ height: 394px; */
     text-align: center;
     letter-spacing: -0.01em;
     color: #010a44;
+}
+.round>img {
+    /* width: 60px;
+  height: 60x; */
 }
 
 /* Other Services Page */
@@ -1256,7 +1392,7 @@ h1 {
     border: 1px solid #dfdfdf;
     padding: 2rem;
     margin-top: 0;
-    border-radius: 10px;
+    border-radius: 22px;
 
     background: #ffffff;
 }
@@ -1293,6 +1429,23 @@ h1 {
     letter-spacing: -0.02em;
     color: #64607d;
     margin-top: 1rem;
+}
+.wooden-recycling {
+    position: relative;
+    background: #ffffff;
+    box-shadow: 0px 64px 194px rgba(0, 0, 0, 0.1);
+
+}
+
+.wooden-recycling:before {
+    content: "";
+    position: absolute;
+    left: 135px;
+    top: 0;
+    /* height: 9px; */
+    width: 106px;
+    border-radius: 0px 0px 16px 16px;
+    border-top: 9px solid #6CB044;
 }
 
 .other-page2 {
@@ -1378,6 +1531,7 @@ td:nth-child(2) {
 .gallery-pic {
     width: 100%;
     height: 400px;
+    /* background-image: url("images/gallery.png"); */
 }
 
 .gallery-page {
@@ -1440,7 +1594,7 @@ td:nth-child(2) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));
 }
 
 .gallery-pictures {
@@ -1472,6 +1626,7 @@ td:nth-child(2) {
 .contact-pic {
     width: 100%;
     height: 400px;
+    /* background-image: url("images/contact-pic.png"); */
 }
 
 .contact-page1 {
@@ -1526,7 +1681,7 @@ form .input-box .details {
     display: block;
     color: #5a524c;
     font-weight: 400;
-    font-size: 13.5134px;
+    font-size: 15px;
     line-height: 24px;
     margin-bottom: 1rem;
 }
@@ -1565,6 +1720,11 @@ form .button input {
     font-size: 16px;
     color: #ffffff;
 }
+.contact-page2 {
+    object-fit: cover;
+    width: 100%;
+    height: 600px;
+}
 
 .map {
     width: 100%;
@@ -1576,7 +1736,7 @@ form .button input {
 .contact-map {
     position: absolute;
     margin-left: -45rem;
-    margin-top: 18rem;
+    margin-top: 16rem;
     width: 620px;
     height: 475px;
 }
@@ -1755,9 +1915,10 @@ form .button input {
         position: relative;
     }
 
-    .home-pic2 {
+        .home-pic2-box{
         width: 60%;
         position: absolute;
+        background: #11294C;
         margin-top: 40rem;
     }
 
