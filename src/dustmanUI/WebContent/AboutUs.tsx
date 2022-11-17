@@ -23,7 +23,13 @@ import {
   iconbox1,
   iconbox2,
   iconbox3,
-  iconbox4
+  iconbox4,
+  aboutPhone,
+  tnpcbImg,
+  Certificate,
+  staffMem,
+  bankSupport,
+  vehicleType
 } from 'src/Assets';
 import { useNavigate } from 'react-router';
 import './website.css';
@@ -47,7 +53,7 @@ function AboutUs() {
             We have started DUSTMAN WASTE MANAGEMENT & RECYCLING PVT LTD, with
             experience of 7 years in this business. Over the years, We have
             gained sufficient experience and established ourselves as an
-            effective E Waste Management Company. We have all certifications for
+            effective E-Waste Management Company. We have all certifications for
             recycling and scrap vendor activities.
           </p>
           <p>
@@ -112,7 +118,7 @@ function AboutUs() {
         <div className="about-box">
           <p>
             “We have been getting ready to recycle more E-Waste by investing in
-            infrastructure, prividing grants to local government and working
+            infrastructure, providing grants to local government and working
             with industry”
           </p>
         </div>
@@ -277,10 +283,14 @@ function AboutUs() {
         </div>
       </div>
       <div className="about-page6">
-        <img className="about-ph-image" src={aboutPh} alt="" />
+          <div className="about-page6-box">
+        <div className="about-ph-image-outer">
+            <img className="about-ph-image" src={aboutPhone} alt=""/>
+        </div>
+      
         <div className="about-ph-text">
           <h5>Mobile apps</h5>
-          {/* <h1>Book your<br>pickup from<br>our App</h1> */}
+          <h1>Book your<br></br>pickup from<br></br>our App</h1>
           <p>
             Dedicated mobile app for Customers and Vendors. Download the app for
             exclusive deals and ease of booking.
@@ -290,26 +300,28 @@ function AboutUs() {
             <img className="play-btn-img" src={app1} alt="" />
           </div>
         </div>
+        </div>
       </div>
 
       <div className="landing2">
         <div className="round">
-          <img src={iconbox1} alt="" />
+            <div className="img-container-size">
+              <img className="img-iconbox1-round" src={tnpcbImg} alt=""/><div className="img-iconbox1-certificate"><img src={Certificate} alt=""/></div></div>
           <p>TNPCB Approved</p>
         </div>
 
         <div className="round">
-          <img src={iconbox2} alt="" />
+          <img src={staffMem} alt="" />
           <p>50+ Staff Members</p>
         </div>
 
         <div className="round">
-          <img src={iconbox3} alt="" />
+          <img src={bankSupport} alt="" />
           <p>Bank Support</p>
         </div>
 
         <div className="round">
-          <img src={iconbox4} alt="" />
+          <img src={vehicleType} alt="" />
           <p>All Vehicle Types</p>
         </div>
       </div>

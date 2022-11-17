@@ -19,7 +19,8 @@ function ContactUs() {
   };
   return (
     <>
-      <img className="contact-pic" src={contactPic} alt="" />
+         <div className="contact-pic"></div>
+     {/* <img class="contact-pic" src="images/contact-pic.png" alt="">  */}
       <section>
         <div className="contact-page1">
           <div className="side-head">

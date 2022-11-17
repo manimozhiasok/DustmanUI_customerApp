@@ -70,6 +70,17 @@ import g10 from './g10.png';
 import g11 from './g11.png';
 import g12 from './g12.png';
 import about from './about.png';
+import  aboutPhone  from './aboutPhone.png';
+import tnpcbImg from './tnpcbImg.png';
+import Certificate from './Certificate.png';
+import staffMem from './staffMem.png';
+import bankSupport from './bankSupport.png';
+import  vehicleType from './vehicleType.png';
+import factoryImg from './factoryImg.png';
+import mail1 from './mail.png';
+import phonePh from './phonePh.png';
+import knowMore from './knowMore.png';
+import ourRangeImg from './ourRangeImg.png';
 export {
   btn2,
   home1,
@@ -142,5 +153,17 @@ export {
   g10,
   g11,
   g12,
-  about
+  about,
+  aboutPhone,
+  tnpcbImg,
+  Certificate,
+  staffMem,
+  bankSupport,
+  vehicleType,
+  factoryImg,
+  mail1,
+  phonePh,
+  knowMore,
+  ourRangeImg
+
 };
