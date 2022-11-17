@@ -81,6 +81,8 @@ import phonePh from './phonePh.png';
 import knowMore from './knowMore.png';
 import ourRangeImg from './ourRangeImg.png';
 import contactBack from './contactBack.png';
+import contactPic from './contact-pic.png';
+
 export {
   btn2,
   home1,
@@ -164,5 +166,6 @@ export {
   phonePh,
   knowMore,
   ourRangeImg,
-  contactBack
+  contactBack,
+  contactPic
 };
