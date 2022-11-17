@@ -161,6 +161,7 @@ const UHSelectYourPickUpComp = ({
             defaultView="month"
             calendarType="US"
             minDate={new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)}
+            maxDate= {new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}
             showNeighboringMonth={false}
             className={classes.calendar}
           />
