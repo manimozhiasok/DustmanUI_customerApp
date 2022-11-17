@@ -1,7 +1,7 @@
 import { ClassNames } from '@emotion/react';
 import { useTheme, Grid } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { logo1, mail, ph, f1, f2, f3, mail1, phonePh } from 'src/Assets';
+import { logo1, mail, ph, f1, f2, f3 } from 'src/Assets';
 const useStyles = makeStyles((theme: Theme) => ({
   footerContainer: {
     height: 100,
@@ -16,9 +16,6 @@ const Footer = () => {
 
   return (
     <footer>
-      <a href="#top" className="top">
-        &#x2191;
-      </a>
       <div className="f1">
         <img src={logo1} alt="" />
         <p>
@@ -54,23 +51,26 @@ const Footer = () => {
       </div>
 
       <div className="f3">
-          <h5 className="work-enquiries">Work Enquiries</h5>
-                <p>Interested in working with us?<br></br>
-                <a href = "mailto: info@dustman.io, hello@dustman.io">hello@dustman.io</a>
-                </p>
+        <h5>Work Enquiries</h5>
+        <p>
+          Interested in working with us?
+          <br />
+          hello@dustman.io
+        </p>
       </div>
 
       <div className="f4">
         <h5>Stay in touch</h5>
         <div className="contact">
-               <a href = "mailto: info@dustman.io, hello@dustman.io">
-                        <img src={mail1} alt=""/><span>info@dustman.io</span>
-                    </a>
-             
-                <a href = "tel: +918939877444">
-                    <img src={phonePh} alt=""/><span>+91 89398 77444</span>
-                </a>
-                </div>
+          <a href="mailto: info@dustman.io">
+            <img src={mail} alt="" />
+          </a>
+          <p>info@dustman.io</p>
+          <a href="callto: +918939877444">
+            <img src={ph} alt="" />
+          </a>
+          <p>+91 89398 77444</p>
+        </div>
       </div>
 
       <div className="copyright">

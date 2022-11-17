@@ -1,16 +1,14 @@
 import React from 'react';
 
 import {
-  // contactPic,
+  contactPic,
   contact,
   client1,
   client2,
   client3,
   client4,
   client5,
-  client6,
-  
-  contactBack
+  client6
 } from 'src/Assets';
 import './website.css';
 import { useNavigate } from 'react-router';
@@ -21,10 +19,7 @@ function ContactUs() {
   };
   return (
     <>
-      <div className="contact-pic">
-        <img src={contactBack} alt="" />
-      </div>
-      {/* <img className="contact-pic" src="images/contact-pic.png" alt="">   */}
+      <img className="contact-pic" src={contactPic} alt="" />
       <section>
         <div className="contact-page1">
           <div className="side-head">

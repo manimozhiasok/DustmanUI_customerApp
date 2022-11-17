@@ -2,7 +2,6 @@ import React from 'react';
 import {
   aboutPh,
   app3,
-  bankSupport,
   btn2,
   client1,
   client2,
@@ -12,7 +11,6 @@ import {
   client6,
   contactArrow,
   DropDown,
-  factoryImg,
   google3,
   home1,
   home2,
@@ -22,15 +20,10 @@ import {
   iconbox2,
   iconbox3,
   iconbox4,
-  knowMore,
   Logo,
   logo3x,
-  ourRangeImg,
-  staffMem,
   stock,
-  stock1,
-  tnpcbImg,
-  vehicleType
+  stock1
 } from 'src/Assets';
 import './website.css';
 function Home() {
@@ -141,32 +134,32 @@ function Home() {
               Leader in electrical Waste Management & Recycling Solutions
             </p>
             <a href="about.html">
-              <img className="knowmore-btn" src={knowMore} alt="" />
+              <img className="knowmore-btn" src={btn2} alt="" />
             </a>
           </div>
           <div className="home-pic">
             <img className="home-pic1" src={stock} alt="" />
-            <img className="home-pic2" src={ourRangeImg} alt="" />
+            <img className="home-pic2" src={stock1} alt="" />
           </div>
         </div>
         <div className="landing2">
           <div className="round">
-            <img src={tnpcbImg} alt="" />
+            <img src={iconbox1} alt="" />
             <p>TNPCB Approved</p>
           </div>
 
           <div className="round">
-            <img src={staffMem} alt="" />
+            <img src={iconbox2} alt="" />
             <p>50+ Staff Members</p>
           </div>
 
           <div className="round">
-            <img src={bankSupport} alt="" />
+            <img src={iconbox3} alt="" />
             <p>Bank Support</p>
           </div>
 
           <div className="round">
-            <img src={vehicleType} alt="" />
+            <img src={iconbox4} alt="" />
             <p>All Vehicle Types</p>
           </div>
         </div>
@@ -176,7 +169,7 @@ function Home() {
           <p className="home-title1">Why Dustman</p>
           <div className="home-why">
             <div>
-              <img src={factoryImg} alt="" />
+              <img src={home1} alt="" />
               <h3>Specialised Recycling</h3>
               <p>
                 Our state-of-art recycling facility to provide sustainable and

@@ -52,8 +52,7 @@ function Gallery() {
 
   return (
     <div>
-      <div className="gallery-pic"></div>
-      {/* <img class="gallery-pic" src="images/gallery.png" alt="" />  */}
+      <img className="gallery-pic" src={gallery} alt="" />
       <section>
         <div className="gallery-page">
           <div className="side-head">
@@ -69,8 +68,8 @@ function Gallery() {
                   Show All
                 </li>
                 <li data-filter="Facilities">Facilities</li>
-                <li data-filter="Wooden Recycling Unit">
-                  Wooden Recycling Unit
+                <li data-filter="Woodern Recycling Unit">
+                  Woodern Recycling Unit
                 </li>
                 <li data-filter="Plastic Recycling Unit">
                   Plastic Recycling Unit
@@ -94,14 +93,14 @@ function Gallery() {
               </div>
               <div
                 className="gallery-pictures"
-                data-category="Wooden Recycling Unit"
+                data-category="Woodern Recycling Unit"
               >
                 <img src={g4} alt="" />
                 <h3 className="pic-title">Making Door's</h3>
               </div>
               <div
                 className="gallery-pictures"
-                data-category="Wooden Recycling Unit"
+                data-category="Woodern Recycling Unit"
               >
                 <img src={g5} alt="" />
                 <h3 className="pic-title">Making Furniture's</h3>
