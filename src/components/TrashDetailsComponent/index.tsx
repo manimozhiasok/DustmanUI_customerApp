@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     position: 'absolute',
     gap: theme.spacing(2),
-    color: theme.Colors.whiteLightGrey,
+    color: theme.Colors.whiteLightGrey
   },
   iconText: {
     alignContent: 'center',
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     position: 'absolute',
-    gap: theme.spacing(2),
+    gap: theme.spacing(2)
   },
   iconStyle: {
     color: theme.Colors.silverBlack,
@@ -64,8 +64,6 @@ function TrashDetailsComponent({
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
-  const length = uploadedImages.length;
-  const showPicture = uploadedImages[0];
 
   return (
     <Grid container spacing={2} justifyContent="center">
@@ -75,15 +73,19 @@ function TrashDetailsComponent({
       <Grid item xs={6}>
         <Grid className={classes.gridStyle}>
           <Grid className={classes.imageContainer}>
-            {showPicture && (
+            {uploadedImages?.length && uploadedImages[0] ? (
               <img
-                src={showPicture.image_url}
+                src={uploadedImages[0].image_url}
                 width="100%"
                 height={'100%'}
                 style={{ borderRadius: theme.spacing(1) }}
               />
-            )}
-            <Grid className={showPicture ? classes.iconTextStyle : classes.iconText}>
+            ) : null}
+            <Grid
+              className={
+                uploadedImages[0] ? classes.iconTextStyle : classes.iconText
+              }
+            >
               <ButtonComp
                 iconImage={<AddPhotoAlternate className={classes.iconStyle} />}
                 backgroundColor={'transparent'}
@@ -95,7 +97,7 @@ function TrashDetailsComponent({
               {t('PICKUP.trashPicture')}
             </Grid>
           </Grid>
-          <CarouselContent data={uploadedImages} show={4} length={length} />
+          <CarouselContent data={uploadedImages.slice(1)} show={4} />
         </Grid>
       </Grid>
     </Grid>

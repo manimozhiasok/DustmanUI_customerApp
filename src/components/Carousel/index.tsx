@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     opacity: 1.0
   },
   gridStyle: {
-    paddingLeft: theme.spacing(0.5),
+    paddingLeft: theme.spacing(0.5)
   },
   carouselStyle: {
     width: '100%',
@@ -65,7 +65,6 @@ type CarouselProp = {
   children: any;
   show?: any;
   currentIndex?: any;
-  length?: any;
 };
 export const Carousel = (props: CarouselProp) => {
   const { children, show, currentIndex } = props;
@@ -85,9 +84,10 @@ export const Carousel = (props: CarouselProp) => {
   );
 };
 
-const CarouselContent = ({ data, show, length }: any) => {
+const CarouselContent = ({ data, show }: any) => {
   const classes = useStyles();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const length = data?.length;
 
   const handleNextClick = () => {
     if (currentIndex < length) {
@@ -113,18 +113,20 @@ const CarouselContent = ({ data, show, length }: any) => {
           <ArrowForwardIcon fontSize={'small'} className={classes.iconStyle} />
         </IconButton>
       </Grid>
-      <Carousel show={show} currentIndex={currentIndex} length={length}>
-        {data.map((item: { image_url: string }, index: React.Key) => {
-          return (
-            <Grid key={index} className={classes.gridStyle}>
-              <img
-                src={item.image_url}
-                alt="image not found"
-                className={classes.imageStyle}
-              />
-            </Grid>
-          );
-        })}
+      <Carousel show={show} currentIndex={currentIndex}>
+        {data?.length
+          ? data?.map((item: { image_url: string }, index: React.Key) => {
+              return (
+                <Grid key={index} className={classes.gridStyle}>
+                  <img
+                    src={item.image_url}
+                    alt="image not found"
+                    className={classes.imageStyle}
+                  />
+                </Grid>
+              );
+            })
+          : null}
       </Carousel>
     </Grid>
   );

@@ -65,7 +65,6 @@ function BookYourPickup() {
   const edit = useEdit(initialValues);
   const { t } = useTranslation();
   const { userDetails, userAddressDetails, updateUserInfo } = useUserInfo();
-  const uploadedImages = edit.getValue('order_images');
 
   const handleCreateCustomerOrder = async () => {
     try {
@@ -135,7 +134,7 @@ function BookYourPickup() {
         });
         if (imageData?.length) {
           edit.update({
-            order_images: [...uploadedImages, ...imageData]
+            order_images: [...edit.getValue('order_images'), ...imageData]
           });
         }
       }
@@ -274,7 +273,7 @@ function BookYourPickup() {
           edit={edit}
           trashData={trashData}
           onUploadFiles={onUploadFiles}
-          uploadedImages={uploadedImages}
+          uploadedImages={edit.getValue('order_images')}
         />
       ),
       tileIcon: SelectVehicleIcon
