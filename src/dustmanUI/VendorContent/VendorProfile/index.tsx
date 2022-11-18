@@ -140,6 +140,7 @@ type ProfileUpdateProp = {
   email_id?: string;
   image_url?: string;
   order_management_id?: string;
+  deposit_id?: string;
 };
 
 const VendorProfile = () => {
@@ -174,6 +175,10 @@ const VendorProfile = () => {
     { label: 'Commercial', value: USER_TYPE_ID.commercial },
     { label: 'Industry', value: USER_TYPE_ID.industry }
   ];
+  const depositData = [
+    { label: 'Yes', value: 1 },
+    { label: 'No', value: 2 }
+  ];
 
   const OrdersTabItems = [
     {
@@ -205,6 +210,16 @@ const VendorProfile = () => {
         ),
       label: 'Order Management',
       value: PROFILE_TAB_VALUES.orderManagement
+    },
+    {
+      tabIcon: () =>
+        selectedTab == PROFILE_TAB_VALUES.Deposit ? (
+          <img src={completedWhite} />
+        ) : (
+          <img src={Completed} />
+        ),
+      label: 'Deposit',
+      value: PROFILE_TAB_VALUES.Deposit
     }
   ];
 
@@ -432,6 +447,37 @@ const VendorProfile = () => {
             image={VendorSwitch}
             text={t('PROFILE.orderManagement')}
           />
+        )
+    },
+    {
+      id: 4,
+      accordionSummaryClassName:
+        selectedTab === PROFILE_TAB_VALUES.Deposit
+          ? classes.accordionSummaryExpanded
+          : classes.accordionSummary,
+      expanded: selectedTab === PROFILE_TAB_VALUES.Deposit,
+      renderAccordionTitle: () =>
+        selectedTab === PROFILE_TAB_VALUES.Deposit ? (
+          <RenderIconText
+            image={VendorSwitch}
+            renderDetail={() => (
+              <UHSelectComp
+                initialValue={vendorDetails?.order_management_id}
+                labelData={depositData}
+                checkColor={theme.Colors.orangePrimary}
+                handleChangeItem={(selectedVal) => {
+                  let data: ProfileUpdateProp = {
+                    deposit_id: selectedVal.toString()
+                  };
+                  let successMessage = 'Deposit updated successfully';
+                  handleUpdateProfileDetails(data, successMessage);
+                }}
+              />
+            )}
+            style={{ alignItems: 'flex-start' }}
+          />
+        ) : (
+          <RenderIconText image={VendorSwitch} text={'Deposit'} />
         )
     }
   ];
