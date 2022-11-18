@@ -300,7 +300,7 @@ const VendorProfile = () => {
         );
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
         if (response?.data) {
-          let id = response?.data?.vendor_id;
+          let id = response?.data?.address?.vendor_id;
           updateVendorInfo(id);
           modalClose();
         }
