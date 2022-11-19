@@ -83,6 +83,7 @@ export const TrashDetailsContent = ({ edit, trashData }) => {
           textColor={theme.Colors.primary}
           backgroundColor={theme.Colors.lightWhiteGrey}
           borderColor={'transparent'}
+          type="number"
           inputHeight={theme.MetricsSizes.large_xxx}
           InputProps={{
             endAdornment: (

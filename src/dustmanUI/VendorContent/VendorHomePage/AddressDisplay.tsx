@@ -24,16 +24,11 @@ function AddressDisplay() {
   const classes = useStyles();
   const theme = useTheme();
   const { vendorAddressDetails } = useVendorInfo();
-  const address =
-    vendorAddressDetails[0]?.address_line1 +
-    ', ' +
-    vendorAddressDetails[0]?.address_line2 +
-    ', ' +
-    vendorAddressDetails[0]?.address_line3 +
-    ', ' +
-    vendorAddressDetails[0]?.city +
-    ', ' +
-    vendorAddressDetails[0]?.state;
+  const address = vendorAddressDetails.length
+    ? `${vendorAddressDetails[0]?.address_line1}, ${vendorAddressDetails[0]?.address_line2}, 
+  ${vendorAddressDetails[0]?.address_line3}, ${vendorAddressDetails[0]?.city}, 
+  ${vendorAddressDetails[0]?.state}, ${vendorAddressDetails[0]?.pincode}`
+    : '';
 
   return (
     <Grid container direction="row">
