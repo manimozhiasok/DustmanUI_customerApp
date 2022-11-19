@@ -221,9 +221,9 @@ function BookMyDrop() {
 
     {
       content: t('address'),
-      value:
-        `${getAddressData[0]?.address_line1}, ${getAddressData[0]?.address_line2}, ${getAddressData[0]?.address_line3}, ${getAddressData[0]?.dustman_location}, ${getAddressData[0]?.city}` ??
-        ''
+      value: getAddressData.length
+        ? `${getAddressData[0]?.address_line1}, ${getAddressData[0]?.address_line2}, ${getAddressData[0]?.address_line3}, ${getAddressData[0]?.dustman_location}, ${getAddressData[0]?.city}`
+        : ''
     },
     {
       content: t('PICKUP.mobile'),
