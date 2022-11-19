@@ -142,7 +142,7 @@ type ProfileUpdateProp = {
 const Profile = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const { userAddressDetails, userDetails, updateUserInfo } = useUserInfo();
+  const { updateLoggedInUser, userDetails, updateUserInfo } = useUserInfo();
   const navigateTo = useNavigate();
   const [selectedTab, setSelectedTab] = useState<number>(
     PROFILE_TAB_VALUES.myAccount
@@ -442,6 +442,7 @@ const Profile = () => {
   const handleClick = (id: number) => {
     if (id === 3) {
       localStorage.removeItem('customerId');
+      updateLoggedInUser('');
       navigateTo('/dustman', { replace: true });
       toast.success('User logged out successfully!');
     }

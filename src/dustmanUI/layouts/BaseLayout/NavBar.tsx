@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useTheme, Theme, makeStyles } from '@material-ui/core';
 import { LoginDrawerContext } from '../../../contexts/LoginDrawerContext';
 import { Pathname, useMatch, useNavigate } from 'react-router';
@@ -15,7 +15,7 @@ function NavBar() {
   const { toggleLoginDrawer, isLoginDrawerOpen } =
     useContext(LoginDrawerContext);
   const { vendorDetails } = useVendorInfo();
-  const { userDetails } = useUserInfo();
+  const { userDetails, loggedInUser, updateLoggedInUser } = useUserInfo();
 
   const handleCustomerButtonClick = () => {
     toggleLoginDrawer();
@@ -47,6 +47,32 @@ function NavBar() {
   const contactUs = useMatch('dustman/contact-us');
   const customerHome = useMatch('/dustman/customer-home/customer-info');
   const vendorHome = useMatch('/dustman/vendor-home/vendor-info');
+
+  useEffect(() => {
+    if (customerHome && userDetails?.customer_id !== 0) {
+      updateLoggedInUser(customerHome?.pathname);
+    }
+    if (vendorHome && vendorDetails?.vendor_id !== 0) {
+      updateLoggedInUser(vendorHome?.pathname);
+    }
+  }, [
+    userDetails?.customer_id,
+    customerHome,
+    vendorHome,
+    vendorDetails?.vendor_id
+  ]);
+
+  const onClickCustomerProfile = () => {
+    if (!customerHome && loggedInUser !== '') {
+      navigateTo(loggedInUser, { replace: true });
+    }
+  };
+
+  const onClickVendorProfile = () => {
+    if (!vendorHome && loggedInUser !== '') {
+      navigateTo(loggedInUser, { replace: true });
+    }
+  };
 
   return (
     <>
@@ -103,21 +129,27 @@ function NavBar() {
             </li>
           </ul>
           <div className="empty"></div>
-          {customerHome || vendorHome ? (
-            <div>
-              {(customerHome && (
-                <ListItemCell
-                  avatarImg={userDetails?.image_url || UserAvatarIcon}
-                  title={userDetails?.first_name}
-                  titleStyle={{ fontSize: theme.MetricsSizes.small_xxx }}
-                />
-              )) ||
-                (vendorHome && (
+          {customerHome || vendorHome || loggedInUser !== '' ? (
+            <div style={{ cursor: 'pointer' }}>
+              {((customerHome ||
+                loggedInUser === '/dustman/customer-home/customer-info') && (
+                <div onClick={onClickCustomerProfile}>
                   <ListItemCell
-                    avatarImg={vendorDetails?.image_url || UserAvatarIcon}
-                    title={vendorDetails?.contact_name}
+                    avatarImg={userDetails?.image_url || UserAvatarIcon}
+                    title={userDetails?.first_name}
                     titleStyle={{ fontSize: theme.MetricsSizes.small_xxx }}
                   />
+                </div>
+              )) ||
+                ((vendorHome ||
+                  loggedInUser === '/dustman/vendor-home/vendor-info') && (
+                  <div onClick={onClickVendorProfile}>
+                    <ListItemCell
+                      avatarImg={vendorDetails?.image_url || UserAvatarIcon}
+                      title={vendorDetails?.contact_name}
+                      titleStyle={{ fontSize: theme.MetricsSizes.small_xxx }}
+                    />
+                  </div>
                 ))}
             </div>
           ) : (

@@ -18,6 +18,8 @@ export type UserInfo = {
   userDetails: UserDetails;
   updateUserInfo: (id: number) => void;
   userAddressDetails: any[];
+  loggedInUser: string;
+  updateLoggedInUser: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const INITIAL_STATE: UserInfo = {
@@ -33,7 +35,9 @@ const INITIAL_STATE: UserInfo = {
     mobile_number: ''
   },
   updateUserInfo: () => undefined,
-  userAddressDetails: []
+  userAddressDetails: [],
+  loggedInUser: '',
+  updateLoggedInUser: () => undefined
 };
 
 export const UserInfoContext = React.createContext({
@@ -50,6 +54,9 @@ export const UserInfoProvider = ({ children }: Props) => {
   );
   const [userAddresses, setUserAddresses] = useState<any>(
     INITIAL_STATE.userAddressDetails
+  );
+  const [loginUserUrl, setLoginUserUrl] = useState<string>(
+    INITIAL_STATE.loggedInUser
   );
 
   const updateUserDetails = async (id: number) => {
@@ -71,9 +78,11 @@ export const UserInfoProvider = ({ children }: Props) => {
     return {
       userDetails: userDetails,
       updateUserInfo: updateUserDetails,
-      userAddressDetails: userAddresses
+      userAddressDetails: userAddresses,
+      loggedInUser: loginUserUrl,
+      updateLoggedInUser: setLoginUserUrl
     };
-  }, [userDetails, updateUserDetails, userAddresses]);
+  }, [userDetails, updateUserDetails, userAddresses, loginUserUrl]);
 
   return (
     <UserInfoContext.Provider value={contextValue}>

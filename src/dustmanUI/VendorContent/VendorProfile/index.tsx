@@ -40,6 +40,7 @@ import { API_SERVICES } from 'src/dustmanUI/Services';
 import toast from 'react-hot-toast';
 import { VendorAddressData } from 'src/dustmanUI/Services/vendorAddressService';
 import { UH_SELECT_TYPE } from 'src/components/UHSelectComp';
+import useUserInfo from 'src/hooks/useUserInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   mainContainer: {
@@ -148,6 +149,7 @@ const VendorProfile = () => {
   const theme = useTheme();
   const { vendorAddressDetails, vendorDetails, updateVendorInfo } =
     useVendorInfo();
+  const { updateLoggedInUser } = useUserInfo();
   const navigateTo = useNavigate();
   const [selectedTab, setSelectedTab] = useState<number>(
     PROFILE_TAB_VALUES.myAccount
@@ -502,6 +504,7 @@ const VendorProfile = () => {
     if (id === 3) {
       localStorage.removeItem('vendorId');
       navigateTo('/dustman', { replace: true });
+      updateLoggedInUser('');
       toast.success('User logged out successfully!');
     }
   };
