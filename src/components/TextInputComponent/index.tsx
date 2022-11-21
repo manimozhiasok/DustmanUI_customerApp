@@ -63,6 +63,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontSize: theme.MetricsSizes.small_x,
     fontWeight: theme.fontWeight.medium
   },
+  required: {
+    color: theme.Colors.redPrimary,
+    fontWeight: theme.fontWeight.bold
+  },
   containerStyle: { display: 'flex', flexDirection: 'column' }
 }));
 
@@ -84,6 +88,7 @@ type Props = TextFieldProps & {
   inputTextSize?: any;
   inputLabelFont?: number;
   inputBorder?: string;
+  required?: boolean;
 };
 
 const TextInputComponent = (props: Props) => {
@@ -106,6 +111,7 @@ const TextInputComponent = (props: Props) => {
     inputTextSize,
     inputLabelFont,
     inputBorder,
+    required = false,
     ...rest
   } = props;
   const styles = useStyles({
@@ -133,6 +139,7 @@ const TextInputComponent = (props: Props) => {
           }}
         >
           {inputLabel}
+          {required && <span className={styles.required}>&nbsp;*</span>}
         </Typography>
       )}
       <TextField

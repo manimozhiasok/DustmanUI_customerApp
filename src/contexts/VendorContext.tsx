@@ -39,7 +39,7 @@ const INITIAL_STATE: VendorInfo = {
     gst: '',
     map_url: '',
     full_address: '',
-    order_management_id: [1, 2, 3],
+    order_management_id: [],
     contact_name: '',
     mobile_number: '',
     landline_number: '',

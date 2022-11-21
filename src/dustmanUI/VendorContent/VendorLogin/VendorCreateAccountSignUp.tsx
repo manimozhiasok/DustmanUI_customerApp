@@ -48,7 +48,7 @@ const VendorCreateAccountSignUp = () => {
     website: '',
     established_year: '',
     vehicle_owned: [],
-    order_management_id: '',
+    order_management_id: '1, 2, 3',
     state: '',
     city: '',
     pincode: ''
@@ -56,29 +56,56 @@ const VendorCreateAccountSignUp = () => {
   const edit = useEdit(initialValues);
   const RequiredFields = [
     'name',
-    'gst',
     'mobile_number',
-    'email_id',
     'location',
     'full_address',
-    'pincode',
-    'contact_name',
-    'website',
-    'landline_number',
-    'established_year'
+    'pincode'
   ];
+  const companyNameError = isError && !edit.allFilled('name');
+  const locationError = isError && !edit.allFilled('location');
+  const addressError = isError && !edit.allFilled('full_address');
+  const pinCodeError =
+    (isError && !edit.allFilled('pincode')) ||
+    (isError &&
+      edit.allFilled('pincode') &&
+      !isValidPinCode(edit.getValue('pincode')));
+  const mobileError =
+    (isError && !edit.allFilled('mobile_number')) ||
+    (isError &&
+      edit.allFilled('mobile_number') &&
+      !isPhoneNumber(edit.getValue('mobile_number')));
+  const EstYearError =
+    isError &&
+    edit.getValue('established_year') &&
+    !isYear(edit.getValue('established_year'));
+  const gstError =
+    isError && edit.allFilled('gst') && !isGSTNumber(edit.getValue('gst'));
+  const websiteError =
+    isError &&
+    edit.allFilled('website') &&
+    !isWebsiteName(edit.getValue('website'));
+  const landlineError =
+    isError &&
+    edit.allFilled('landline_number') &&
+    !isLandline(edit.getValue('landline_number'));
+  const emailError =
+    isError &&
+    edit.allFilled('email_id') &&
+    !isValidEmail(edit.getValue('email_id'));
 
   const handleContinueClick = () => {
     if (
       !edit.allFilled(...RequiredFields) ||
-      !isValidEmail(edit.getValue('email_id')) ||
       !isPhoneNumber(edit.getValue('mobile_number')) ||
       !isValidPinCode(edit.getValue('pincode')) ||
-      !isGSTNumber(edit.getValue('gst')) ||
-      !isLandline(edit.getValue('landline_number')) ||
-      !isValidEmail(edit.getValue('email_id')) ||
-      !isWebsiteName(edit.getValue('website')) ||
-      !isYear(edit.getValue('established_year'))
+      (edit.allFilled('email_id') &&
+        !isValidEmail(edit.getValue('email_id'))) ||
+      (edit.allFilled('established_year') &&
+        !isYear(edit.getValue('established_year'))) ||
+      (edit.allFilled('gst') && !isGSTNumber(edit.getValue('gst'))) ||
+      (edit.allFilled('landline_number') &&
+        !isLandline(edit.getValue('landline_number'))) ||
+      (edit.allFilled('website') && !isWebsiteName(edit.getValue('website')))
     ) {
       setIsError(true);
       return;
@@ -107,9 +134,8 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ name: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          helperText={
-            isError && !edit.allFilled('name') && 'Please Enter your name'
-          }
+          isError={companyNameError}
+          helperText={companyNameError && 'Please enter your company name'}
         />
         <TextInputComponent
           inputHeight={66}
@@ -118,11 +144,6 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ contact_name: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          helperText={
-            isError &&
-            !edit.allFilled('contact_name') &&
-            'Please Enter your contact name'
-          }
         />
         <TextInputComponent
           inputHeight={66}
@@ -131,28 +152,21 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ gst: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          helperText={
-            ((isError && !edit.getValue('gst')) ||
-              (isError &&
-                edit.getValue('gst') &&
-                !isGSTNumber(edit.getValue('gst')))) &&
-            'Please enter your valid GST number'
-          }
+          helperText={gstError && 'Please enter your valid GST number'}
         />
         <TextInputComponent
           inputHeight={66}
           placeholderText={t('LOGIN.mobileNumber')}
           value={edit.getValue('mobile_number')}
-          onChange={(e) => edit.update({ mobile_number: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          helperText={
-            ((isError && !edit.getValue('mobile_number')) ||
-              (isError &&
-                edit.getValue('mobile_number') &&
-                !isPhoneNumber(edit.getValue('mobile_number')))) &&
-            'Please enter your valid mobile number'
-          }
+          onChange={(e) => {
+            if (Number(e.target.value) || e.target.value === '') {
+              edit.update({ mobile_number: e.target.value });
+            }
+          }}
+          helperText={mobileError && 'Please enter your valid mobile number'}
+          isError={mobileError}
         />
         <TextInputComponent
           inputHeight={66}
@@ -161,11 +175,7 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ email_id: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          helperText={
-            ((isError && !edit.allFilled('email_id')) ||
-              (isError && !isValidEmail(edit.getValue('email_id')))) &&
-            'Please Enter your valid email address'
-          }
+          helperText={emailError && 'Please enter your valid email id'}
         />
         <TextInputComponent
           inputHeight={66}
@@ -174,11 +184,8 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ location: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          helperText={
-            isError &&
-            !edit.allFilled('location') &&
-            'Please Enter your location'
-          }
+          isError={locationError}
+          helperText={locationError && 'Please enter your location'}
         />
         <TextInputComponent
           inputHeight={66}
@@ -187,26 +194,22 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ full_address: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          helperText={
-            isError &&
-            !edit.allFilled('full_address') &&
-            'Please Enter your full address'
-          }
+          isError={addressError}
+          helperText={addressError && 'Please enter your address detail'}
         />
         <TextInputComponent
           inputHeight={66}
           placeholderText={t('LOGIN.pinCode')}
           value={edit.getValue('pincode')}
-          onChange={(e) => edit.update({ pincode: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          helperText={
-            ((isError && !edit.getValue('pincode')) ||
-              (isError &&
-                edit.getValue('pincode') &&
-                !isValidPinCode(edit.getValue('pincode')))) &&
-            'Please enter your valid pincode'
-          }
+          onChange={(e) => {
+            if (Number(e.target.value) || e.target.value === '') {
+              edit.update({ pincode: e.target.value });
+            }
+          }}
+          helperText={pinCodeError && 'Please enter your valid pincode'}
+          isError={pinCodeError}
         />
 
         <TextInputComponent
@@ -216,13 +219,7 @@ const VendorCreateAccountSignUp = () => {
           onChange={(e) => edit.update({ website: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
-          helperText={
-            ((isError && !edit.getValue('website')) ||
-              (isError &&
-                edit.getValue('website') &&
-                !isWebsiteName(edit.getValue('website')))) &&
-            'Please enter your website'
-          }
+          helperText={websiteError && 'Please enter your valid website'}
         />
         <TextInputComponent
           inputHeight={66}
@@ -232,26 +229,22 @@ const VendorCreateAccountSignUp = () => {
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
           helperText={
-            ((isError && !edit.getValue('landline_number')) ||
-              (isError &&
-                edit.getValue('landline_number') &&
-                !isLandline(edit.getValue('landline_number')))) &&
-            'Please enter your valid landline number'
+            landlineError && 'Please enter your valid landline number'
           }
         />
         <TextInputComponent
           inputHeight={66}
           placeholderText={t('LOGIN.establishedYear')}
           value={edit.getValue('established_year')}
-          onChange={(e) => edit.update({ established_year: e.target.value })}
           inputBorderRadius={0}
           textColor={theme.Colors.primary}
+          onChange={(e) => {
+            if (Number(e.target.value) || e.target.value === '') {
+              edit.update({ established_year: e.target.value });
+            }
+          }}
           helperText={
-            ((isError && !edit.getValue('established_year')) ||
-              (isError &&
-                edit.getValue('established_year') &&
-                !isYear(edit.getValue('established_year')))) &&
-            'Please enter your established year'
+            EstYearError && 'Please enter your valid established year'
           }
         />
         <ButtonComp
