@@ -26,8 +26,6 @@ const useStyles = makeStyles<Theme, StyleProp>((theme: Theme) =>
       background: theme.Colors.whiteLightGrey
     },
     contentContainer: {
-      display: 'flex',
-      flexDirection: 'column',
       marginTop: theme.spacing(1),
       marginLeft: theme.spacing(2)
     },
@@ -42,12 +40,10 @@ const useStyles = makeStyles<Theme, StyleProp>((theme: Theme) =>
       gap: theme.spacing(2)
     },
     category: {
-      fontSize: theme.MetricsSizes.small_x,
-      paddingTop: theme.spacing(0.4)
+      fontSize: theme.MetricsSizes.small_x
     },
     categoryText: {
       color: theme.Colors.mediumGrey,
-      fontWeight: theme.fontWeight.medium,
       marginLeft: theme.MetricsSizes.tiny
     },
     imageAlign: {
@@ -133,32 +129,38 @@ const UHOrderPreviewComp = (props: OrderCompProp) => {
               className={classes.imageStyle}
             />
           </Grid>
-          <Grid item className={classes.contentContainer}>
-            <Typography className={classes.subText}>
-              {t('orders')}
-              {orderItems?.id}
-            </Typography>
-            <Grid style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography className={classes.category}>
-                {t('category')}:
-                <span className={classes.categoryText}>
-                  {orderItems?.order_items?.join(', ')}
-                </span>
+          <Grid item xs container className={classes.contentContainer}>
+            <Grid item xs={12}>
+              <Typography className={classes.subText}>
+                {t('orders')}
+                {orderItems?.id}
               </Typography>
-              <Grid className={classes.imageAlign}>
+            </Grid>
+            <Grid item xs={12} container alignItems="flex-start">
+              <Grid item xs={6} container alignItems="baseline">
+                <Grid item>
+                  <Typography variant="subtitle2">{t('category')}:</Typography>
+                </Grid>
+                <Grid item xs>
+                  <Typography variant="body2" className={classes.categoryText}>
+                    {orderItems?.order_items?.join(', ')}
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs className={classes.imageAlign}>
                 <ImageTextComponent
                   icon={weightIcon}
                   value={`${orderItems?.quantity_kg} Kg`}
                 />
               </Grid>
-              <Grid className={classes.imageAlign}>
+              <Grid item xs className={classes.imageAlign}>
                 <ImageTextComponent
                   icon={locationIcon}
                   value={orderItems?.city}
                 />
               </Grid>
             </Grid>
-            <Grid className={classes.buttonAlign}>
+            <Grid item xs={12} className={classes.buttonAlign}>
               {isButtonOne ? (
                 <ButtonComp
                   buttonText={buttonOneText || 'VIEW DETAILS'}

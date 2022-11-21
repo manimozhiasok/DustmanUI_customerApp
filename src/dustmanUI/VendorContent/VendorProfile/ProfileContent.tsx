@@ -55,8 +55,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 type Props = {
   handleEditListItem?: (item: any) => void;
   handleAddNewAddress?: () => void;
-  handleSaveEdits?: (data: any) => void;
-  handleVerifyOtpNumber?: (data: any, successMessage: string) => void;
+  handleSaveEdits?: (data: any) => Promise<void>;
+  handleVerifyOtpNumber?: (data: any, successMessage: string) => Promise<void>;
 };
 
 const ProfileContent = ({

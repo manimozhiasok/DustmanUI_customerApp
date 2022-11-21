@@ -251,6 +251,7 @@ const VendorProfile = () => {
   const handleAddNewAddress = useCallback(() => {
     setOpenModal({ open: true });
   }, []);
+
   const handleVerifyOtpNumber = useCallback(
     async (data: any, successMessage: string) => {
       const response: any =
