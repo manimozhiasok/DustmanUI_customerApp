@@ -260,7 +260,7 @@ const VendorProfile = () => {
           { data, successMessage }
         );
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-        updateVendorInfo(response?.data?.vendor.id);
+        updateVendorInfo(response?.data?.id);
       }
       return response;
     },

@@ -80,11 +80,11 @@ export const VendorInfoProvider = ({ children }: Props) => {
     if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
       if (response?.data?.vendorProfile) {
         setVendorDetails((prev: VendorDetails) => {
-          return { ...prev, ...response.data.vendorProfile };
+          return { ...prev, ...response?.data?.vendorProfile };
         });
       }
       if (response?.data?.address) {
-        setVendorAddresses(response.data.address);
+        setVendorAddresses(response?.data?.address);
       }
     }
   };
