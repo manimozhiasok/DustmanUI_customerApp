@@ -133,6 +133,8 @@ function OrdersPage() {
           await API_SERVICES.vendorCustomerOrderService.getCustomerOrderByVendorLocation(
             vendorDetails?.vendor_id
           );
+          console.log('res', response);
+          
       } else if (selectedTab === CUSTOMER_ORDER_STATUS.Confirmed) {
         response =
           await API_SERVICES.vendorCustomerOrderService.getAllVendorScheduledOrder(

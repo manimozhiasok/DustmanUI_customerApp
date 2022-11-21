@@ -5,7 +5,7 @@ import {
   vendorCustomerOrder,
   vendorCustomerOrderCompleted,
   vendorCustomerOrderScheduled
-} from './vendorCustomerOrderStub';
+} from './Stub/VendorAppStub';
 
 export const vendorCustomerOrderService = {
   getCustomerOrderByVendorLocation: async (vendorId: number) => {
@@ -34,7 +34,7 @@ export const vendorCustomerOrderService = {
     //return vendorCustomerOrderCompleted.VendorCustomerOrderGet;
     return apiRequest(options);
   },
-  
+
   vendorBuyingOrder: async (
     vendorId: number,
     { data, successMessage, failureMessage }

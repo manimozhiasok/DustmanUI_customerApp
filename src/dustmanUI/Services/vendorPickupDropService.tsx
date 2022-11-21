@@ -1,7 +1,7 @@
 import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
-import { vendorDropOrder, vendorPickupAddress } from './vendorDropOrderStub';
+import { vendorDropOrder, vendorPickupAddress } from './Stub/VendorAppStub';
 
 export type DefaultProp = {
   data: any;

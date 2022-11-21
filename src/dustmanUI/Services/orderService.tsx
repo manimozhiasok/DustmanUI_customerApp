@@ -1,7 +1,7 @@
 import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
-import { OrderData } from './orderServiceSub';
+import { OrderData } from './Stub/VendorAppStub';
 
 type OrderServiceProp = {
   data: {
