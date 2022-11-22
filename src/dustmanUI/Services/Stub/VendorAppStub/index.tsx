@@ -4,6 +4,8 @@ import { vendorCustomerOrderScheduled } from './vendorCustomerOrderScheduledStub
 import { vendorCustomerOrderCompleted } from './vendorCustomerOrderCompletedStub';
 import { vendorDropOrder } from './vendorDropOrderStub';
 import { vendorPickupAddress } from './vendorPickupAddressStub';
+import { ProfileData } from './vendorProfileStub';
+import { generateOtpData, createData } from './vendorProfileStub'
 
 export {
   OrderData,
@@ -11,5 +13,8 @@ export {
   vendorCustomerOrderScheduled,
   vendorCustomerOrderCompleted,
   vendorDropOrder,
-  vendorPickupAddress
+  vendorPickupAddress,
+  ProfileData,
+  generateOtpData,
+  createData
 };

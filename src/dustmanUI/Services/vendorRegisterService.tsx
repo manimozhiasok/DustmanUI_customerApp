@@ -1,6 +1,7 @@
 import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
+import { generateOtpData, ProfileData } from './Stub';
 
 export type GenerateOtpProp = {
   data: {
@@ -38,7 +39,8 @@ export const vendorRegisterService = {
         message: failureMessage
       }
     };
-    return apiRequest(options, toastMessageConfig);
+    //return apiRequest(options, toastMessageConfig);
+    return generateOtpData.mobileNumberGet
   },
 
   verifyOtp: async ({
@@ -59,6 +61,7 @@ export const vendorRegisterService = {
         message: failureMessage
       }
     };
-    return apiRequest(options, toastMessageConfig);
+    //return apiRequest(options, toastMessageConfig);
+    return ProfileData.profileServiceCreate
   }
 };

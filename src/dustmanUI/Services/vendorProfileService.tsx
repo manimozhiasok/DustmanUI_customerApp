@@ -1,6 +1,7 @@
 import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
+import { ProfileData } from './Stub';
 
 type VendorCreateProp = {
   data: {
@@ -66,7 +67,8 @@ export const vendorProfileService = {
         message: failureMessage
       }
     };
-    return apiRequest(options, toastMessageConfig);
+    return ProfileData.profileServiceCreate
+    //return apiRequest(options, toastMessageConfig);
   },
 
   getProfileByVendorId: async (id: number) => {
@@ -74,7 +76,8 @@ export const vendorProfileService = {
       url: `${Config.BASE_URL}/api/getVendorProfileByVendorId/vendor/${id}`,
       method: 'get'
     });
-    return apiRequest(options);
+    //return apiRequest(options);
+    return ProfileData.profileServiceCreate
   },
 
   updateVendorProfile: async (
