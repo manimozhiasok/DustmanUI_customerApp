@@ -239,7 +239,7 @@ const Profile = () => {
           { data, successMessage }
         );
       if (response?.status < HTTP_STATUSES.BAD_REQUEST) {
-        updateUserInfo(response?.data?.customer.id);
+        updateUserInfo(response?.data?.customer?.id);
       }
       return response;
     },
