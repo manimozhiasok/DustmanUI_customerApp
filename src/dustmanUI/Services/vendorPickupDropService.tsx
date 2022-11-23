@@ -1,7 +1,7 @@
 import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
-import { vendorDropOrder } from './Stub/VendorAppStub';
+import { PickupDropData } from './Stub/VendorAppStub';
 
 export type DefaultProp = {
   data: any;
@@ -65,7 +65,8 @@ export const vendorPickupDropService = {
         message: failureMessage
       }
     };
-    return apiRequest(options, toastMessageConfig);
+    // return apiRequest(options, toastMessageConfig);
+    return PickupDropData.PickupDropGet;
   },
   
   replaceOrder: async (

@@ -23,7 +23,7 @@ export const ProfileData = {
         updated_at: '2022-11-21T10:18:34.351Z',
         vehicle_owned: [2, 3],
         vendor_id: 88,
-        website: 'www.name.com'
+        website: 'www.vendor.com'
       },
       address: [
         {
@@ -31,8 +31,9 @@ export const ProfileData = {
           vendor_id: 4,
           address_line1: '1/88,Street',
           address_line2: 'landmark',
-          address_line3: 'Koyembadu,TamilNadu',
+          address_line3: 'Koyembadu',
           city: 'Thiruvarur',
+          state: 'TamilNadu',
           pincode: '610223',
           mobile_number: '9629629952',
           created_at: '2022-11-02T07:43:56.075Z',
@@ -43,8 +44,9 @@ export const ProfileData = {
           vendor_id: 4,
           address_line1: '1/88,Street',
           address_line2: 'landmark',
-          address_line3: 'Koyembadu,TamilNadu',
+          address_line3: 'Koyembadu',
           city: 'Thiruvarur',
+          state: 'TamilNadu',
           pincode: '610223',
           mobile_number: '9629629952',
           created_at: '2022-11-02T07:43:56.075Z',

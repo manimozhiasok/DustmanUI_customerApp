@@ -5,6 +5,7 @@ import { vendorCustomerOrderCompleted } from './vendorCustomerOrderCompletedStub
 import { vendorDropOrder } from './vendorDropOrderStub';
 import { ProfileData } from './vendorProfileStub';
 import { generateOtpData, createData } from './vendorProfileStub';
+import { PickupDropData } from './VendorPickupDropStub'
 
 export {
   OrderData,
@@ -14,5 +15,6 @@ export {
   vendorDropOrder,
   ProfileData,
   generateOtpData,
-  createData
+  createData,
+  PickupDropData
 };
