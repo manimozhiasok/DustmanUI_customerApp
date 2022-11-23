@@ -1,6 +1,7 @@
 import { apiOptions } from 'src/Utils/apiOptions';
 import { apiRequest } from 'src/Utils/apiRequest';
 import { Config } from 'src/Config';
+import { trashData } from './Stub';
 
 export const generalService = {
   getAllVehicles: async () => {
@@ -32,6 +33,7 @@ export const generalService = {
       url: `${Config.BASE_URL}/api/categories/categoryType/${categoryTypeId}/UserType/${userTypeId}/categoryItems/getAllCategory`,
       method: 'get'
     });
-    return apiRequest(options);
+    //return apiRequest(options);
+    return trashData.trashDataGet;
   },
 };

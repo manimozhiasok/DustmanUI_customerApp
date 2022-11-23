@@ -1,6 +1,7 @@
 export const vendorCustomerOrderScheduled = {
-    VendorCustomerOrderGet: {
-      data: [
+  VendorCustomerOrderGet: {
+    data: {
+      orders: [
         {
           id: 3,
           order_type_id: 1,
@@ -65,7 +66,8 @@ export const vendorCustomerOrderScheduled = {
           order_items: ['e waste', 'plastic'],
           order_images: ['image1', 'image2']
         }
-      ],
-      status: 200
-    }
-  };
+      ]
+    },
+    status: 200
+  }
+};

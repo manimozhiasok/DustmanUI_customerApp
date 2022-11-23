@@ -24,7 +24,33 @@ export const ProfileData = {
         vehicle_owned: [2, 3],
         vendor_id: 88,
         website: 'www.name.com'
-      }
+      },
+      address: [
+        {
+          id: 1,
+          vendor_id: 4,
+          address_line1: '1/88,Street',
+          address_line2: 'landmark',
+          address_line3: 'Koyembadu,TamilNadu',
+          city: 'Thiruvarur',
+          pincode: '610223',
+          mobile_number: '9629629952',
+          created_at: '2022-11-02T07:43:56.075Z',
+          updated_at: '2022-11-02T07:43:56.075Z'
+        },
+        {
+          id: 2,
+          vendor_id: 4,
+          address_line1: '1/88,Street',
+          address_line2: 'landmark',
+          address_line3: 'Koyembadu,TamilNadu',
+          city: 'Thiruvarur',
+          pincode: '610223',
+          mobile_number: '9629629952',
+          created_at: '2022-11-02T07:43:56.075Z',
+          updated_at: '2022-11-02T07:43:56.075Z'
+        }
+      ]
     }
   }
 };

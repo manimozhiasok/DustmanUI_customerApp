@@ -13,8 +13,8 @@ export const vendorCustomerOrderService = {
       url: `${Config.BASE_URL}/api/getOrderByVendorLocation/vendor/${vendorId}`,
       method: 'get'
     });
-    //return vendorCustomerOrder.VendorCustomerOrderGet;
-    return apiRequest(options);
+    return vendorCustomerOrder.VendorCustomerOrderGet;
+    //return apiRequest(options);
   },
 
   getAllVendorScheduledOrder: async (vendorId: number) => {
@@ -22,8 +22,8 @@ export const vendorCustomerOrderService = {
       url: `${Config.BASE_URL}/api/getAllVendorScheduledOrders/vendor/${vendorId}`,
       method: 'get'
     });
-    //return vendorCustomerOrderScheduled.VendorCustomerOrderGet;
-    return apiRequest(options);
+    return vendorCustomerOrderScheduled.VendorCustomerOrderGet;
+    //return apiRequest(options);
   },
 
   getAllVendorCompletedOrder: async (vendorId: number) => {
@@ -31,8 +31,8 @@ export const vendorCustomerOrderService = {
       url: `${Config.BASE_URL}/api/getAllVendorCompletedOrders/vendor/${vendorId}`,
       method: 'get'
     });
-    //return vendorCustomerOrderCompleted.VendorCustomerOrderGet;
-    return apiRequest(options);
+    return vendorCustomerOrderCompleted.VendorCustomerOrderGet;
+    //return apiRequest(options);
   },
 
   vendorBuyingOrder: async (
