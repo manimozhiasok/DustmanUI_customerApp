@@ -1,1 +1,2 @@
-export * from './VendorAppStub'
+export * from './VendorAppStub';
+export * from './CustomerAppStub'
